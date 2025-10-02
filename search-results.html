@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Tìm Kiếm - StuShare</title> 
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* CSS dành riêng cho trang kết quả tìm kiếm */
+        .search-results-page {
+            padding: 40px 0 80px 0;
+        }
+        .search-result-item {
+            display: flex;
+            align-items: flex-start;
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+            color: inherit;
+            margin-bottom: 20px;
+        }
+        .search-result-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
+        }
+        .result-icon {
+            font-size: 1.8rem;
+            margin-right: 20px;
+            width: 30px;
+            text-align: center;
+            color: var(--text-color);
+        }
+        .result-icon.fa-file-powerpoint { color: #D24726; }
+        .result-icon.fa-file-pdf { color: #D93025; }
+        .result-icon.fa-file-word { color: #4285F4; }
+        .result-icon.fa-link { color: #6e6e6e; }
+        .result-icon.fa-video { color: #ff0000; }
+        .result-icon.fa-book { color: var(--accent-color); } /* Màu cho icon môn học */
+
+        .result-info {
+            flex-grow: 1;
+        }
+        .result-info h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .result-info .result-path {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 8px;
+        }
+        .result-info .result-path .highlight {
+            background-color: #fff8c4;
+            font-weight: 600;
+        }
+        #search-summary {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        #no-results {
+            text-align: center;
+            padding: 40px;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Kết Quả Tìm Kiếm</h1>
+            </div>
+        </section>
+
+        <section class="filter-bar">
+            <div class="container">
+                <input type="text" id="searchInput" placeholder="Nhập lại từ khóa để tìm kiếm...">
+            </div>
+        </section>
+
+        <section class="search-results-page">
+            <div class="container">
+                <p id="search-summary"></p>
+                <div id="results-container"></div>
+                <div id="no-results" style="display: none;">
+                    <h3>Không tìm thấy kết quả nào</h3>
+                    <p>Vui lòng thử với một từ khóa khác.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/assets/js/layout.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('results-container');
+        const noResultsDiv = document.getElementById('no-results');
+        const searchSummary = document.getElementById('search-summary');
+
+        const iconMap = {
+            'powerpoint': 'fas fa-file-powerpoint', 'pdf': 'fas fa-file-pdf',
+            'word': 'fas fa-file-word', 'link': 'fas fa-link', 'video': 'fas fa-video',
+            'subject': 'fas fa-book' /* Icon cho môn học */
+        };
+
+        // 1. Tải dữ liệu tìm kiếm
+        const response = await fetch('/assets/js/search-data.json');
+        const allDocuments = await response.json();
+
+        /**
+         * Chuẩn hóa chuỗi tiếng Việt để tìm kiếm không dấu.
+         * Ví dụ: "Xác Suất Thống Kê" -> "xac suat thong ke"
+         */
+        function normalizeVietnamese(str) {
+            if (!str) return '';
+            return str
+                .toLowerCase()
+                .normalize("NFD") // Tách dấu ra khỏi chữ
+                .replace(/[\u0300-\u036f]/g, "") // Xóa các ký tự dấu
+                .replace(/đ/g, "d"); // Chuyển 'đ' thành 'd'
+        }
+
+        function performSearch() {
+            const rawQuery = searchInput.value.trim();
+            const normalizedQuery = normalizeVietnamese(rawQuery);
+
+            if (!normalizedQuery) {
+                resultsContainer.innerHTML = '';
+                noResultsDiv.style.display = 'none';
+                searchSummary.textContent = '';
+                return;
+            }
+
+            const results = allDocuments
+                .map(doc => {
+                    let score = 0;
+                    const normalizedTitle = normalizeVietnamese(doc.title);
+                    const normalizedPath = normalizeVietnamese(doc.path);
+                    const normalizedKeywords = normalizeVietnamese(doc.keywords);
+
+                    // Tính điểm cho tiêu đề (quan trọng nhất)
+                    if (normalizedTitle.includes(normalizedQuery)) {
+                        if (normalizedTitle === normalizedQuery) score += 10; // Khớp chính xác
+                        else if (normalizedTitle.startsWith(normalizedQuery)) score += 5; // Bắt đầu bằng
+                        else score += 3; // Có chứa
+                    }
+
+                    // Tính điểm cho từ khóa
+                    if (normalizedKeywords.includes(normalizedQuery)) {
+                        score += 2;
+                    }
+
+                    // Tính điểm cho đường dẫn
+                    if (normalizedPath.includes(normalizedQuery)) {
+                        score += 1;
+                    }
+
+                    return { ...doc, score };
+                })
+                .filter(doc => doc.score > 0) // Lọc những kết quả có điểm
+                .sort((a, b) => b.score - a.score); // Sắp xếp điểm từ cao đến thấp
+
+            searchSummary.innerHTML = `Tìm thấy <strong>${results.length}</strong> kết quả cho từ khóa "<strong>${rawQuery}</strong>"`;
+            resultsContainer.innerHTML = '';
+
+            if (results.length === 0) {
+                noResultsDiv.style.display = 'block';
+            } else {
+                noResultsDiv.style.display = 'none';
+                results.forEach(doc => {
+                    const iconClass = iconMap[doc.type] || 'fas fa-file';
+                    const itemHTML = `
+                        <a href="${doc.url}" class="search-result-item">
+                            <i class="${iconClass} result-icon"></i>
+                            <div class="result-info">
+                                <h3>${doc.title}</h3>
+                                <p class="result-path">${doc.path.replace(/>/g, '›')}</p>
+                            </div>
+                        </a>
+                    `;
+                    resultsContainer.innerHTML += itemHTML;
+                });
+            }
+        }
+
+        // 2. Lấy từ khóa từ URL và thực hiện tìm kiếm
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialQuery = urlParams.get('q');
+        if (initialQuery) {
+            searchInput.value = initialQuery;
+            performSearch();
+        }
+
+        // 3. Gắn sự kiện tìm kiếm
+        searchInput.addEventListener('input', performSearch);
+    });
+    </script>
+</body>
+</html>

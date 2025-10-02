@@ -1,0 +1,52 @@
+<header class="header">
+    <div class="container">
+        <a href="/index.html" class="logo">
+   <img src="/assets/images/logo_ngang.jpg" alt="StuShare Logo">
+        </a>
+ 
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/truong-dai-hoc.html">Tài Liệu Trường Đại Học & Học Viện</a></li>
+            </ul>
+        </nav>
+
+        <button class="mobile-nav-toggle" aria-label="Mở menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <script>
+  (function () {
+    function onReady(fn){ 
+  if (document.readyState !== 'loading') fn();
+      else document.addEventListener('DOMContentLoaded', fn);
+    }
+    onReady(function () {
+      const header = document.querySelector('.header');
+      if (!header) return;
+      
+      // --- PHẦN 1: LOGIC CUỘN CHUỘT (GIỮ NGUYÊN) ---
+      function toggle() {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+      toggle();
+      window.addEventListener('scroll', toggle, { passive: true });
+      
+      // --- PHẦN 2: LOGIC CHO NÚT MENU DI ĐỘNG (BỔ SUNG) ---
+      const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+      if (mobileNavToggle) {
+          mobileNavToggle.addEventListener('click', function() {
+              header.classList.toggle('mobile-nav-open');
+          });
+      }
+    });
+  })();
+ </script>
+
+</header>

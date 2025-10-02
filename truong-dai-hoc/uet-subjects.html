@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Môn học - Đại học Công nghệ (UET) - StuShare</title>
+    <link rel="stylesheet" href="/style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="has-fixed-breadcrumb">
+
+    <div id="header-placeholder"></div>
+
+    <div id="breadcrumb-placeholder"></div>
+
+    <main>
+        <section class="university-hero">
+            <div class="container">
+                <img src="https://upload.wikimedia.org/wikipedia/vi/thumb/b/bf/Logo_HUET.svg/186px-Logo_HUET.svg.png?20200610051238" alt="Logo UET" class="university-hero-logo">
+                <div class="university-hero-info">
+                    <h1>Trường Đại học Công nghệ - Đại học Quốc gia Hà Nội</h1>
+                    <p>Khám phá tài liệu các môn học chuyên ngành.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="filter-bar">
+            <div class="container">
+                <input type="text" id="subjectSearchInput" placeholder="Tìm kiếm môn học, ví dụ: Cấu trúc dữ liệu, Lập trình C++...">
+            </div>
+        </section>
+
+        <section class="subjects-list">
+            <div class="container">
+                <h2 class="faculty-title">Khoa Công nghệ Thông tin</h2>
+                <div class="subject-grid">
+                    <a href="/truong-dai-hoc/uet-subjects/cntt-csdl.html" class="subject-card">
+                        <i class="fas fa-database"></i>
+                        <h3>Cơ sở dữ liệu</h3>
+                        <p class="subject-code">INT2202</p>
+                    </a>
+                    <a href="/truong-dai-hoc/uet-subjects/cntt-ktmt.html" class="subject-card">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Kiến trúc máy tính</h3>
+                        <p class="subject-code">INT2212</p>
+                    </a>
+                    <a href="/truong-dai-hoc/uet-subjects/cntt-xstk.html" class="subject-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Xác suất thống kê</h3>
+                        <p class="subject-code">INT1101</p>
+                    </a>
+					<a href="/truong-dai-hoc/uet-subjects/cntt-ctdlgt.html" class="subject-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Cấu Trúc Dữ Liệu và Giải Thuật</h3>
+                        <p class="subject-code">INT2210</p>
+                    </a>
+                    <!-- Môn Lập trình hướng đối tượng -->
+                    <a href="/truong-dai-hoc/uet-subjects/cntt-lthdt.html" class="subject-card">
+                        <i class="fas fa-object-group"></i>
+                        <h3>Lập trình hướng đối tượng</h3>
+                        <p class="subject-code">INT2204</p>
+                    </a>
+                </div>
+
+                <h2 class="faculty-title">Khoa Điện tử Viễn thông</h2>
+                <div class="subject-grid">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+
+    <script>
+        // Chức năng tìm kiếm môn học
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('subjectSearchInput');
+            const subjectCards = document.querySelectorAll('.subject-card');
+            const subjectGrids = document.querySelectorAll('.subject-grid');
+            const facultyTitles = document.querySelectorAll('.faculty-title');
+
+            function filterSubjects() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                subjectCards.forEach(function (card) {
+                    const subjectName = card.querySelector('h3').textContent.toLowerCase(); const subjectCode = card.querySelector('p').textContent.toLowerCase();
+
+                    if (subjectName.includes(searchTerm) || subjectCode.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                subjectGrids.forEach(function(grid) {
+                    const facultyTitle = grid.previousElementSibling; if (facultyTitle && facultyTitle.classList.contains('faculty-title')) {
+                        const visibleCardsInGrid = grid.querySelectorAll('.subject-card[style*="display: flex"]');
+                        
+                        if (visibleCardsInGrid.length === 0 && searchTerm) {
+                            facultyTitle.style.display = 'none';
+                        } else {
+                            facultyTitle.style.display = 'block';
+                        }
+                    }
+                });
+            }
+
+            // Đọc tham số từ URL khi trang tải
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('q');
+            if (searchQuery) {
+                searchInput.value = searchQuery;
+                filterSubjects();
+            }
+
+            // Gắn sự kiện tìm kiếm
+            searchInput.addEventListener('input', filterSubjects);
+        });
+    </script>
+   <script src="/assets/js/layout.js"></script> 
+</body>
+</html>

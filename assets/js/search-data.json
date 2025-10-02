@@ -1,0 +1,380 @@
+[
+    {
+        "title": "C1.pptx",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/c1-viewer.html",
+        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
+        "keywords": "c1 mo dau chuong 1 co so du lieu csdl"
+    },
+    {
+        "title": "C2_1.pptx",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/c2-1-viewer.html",
+        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
+        "keywords": "c2 chuong 2 mo hinh du lieu thuc the lien ket er"
+    },
+    {
+        "title": "C2_2.pptx",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/c2-2-viewer.html",
+        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
+        "keywords": "c2 chuong 2 mo hinh du lieu thuc the lien ket er"
+    },
+    {
+        "title": "TH_CSDL_Jul_2025.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/thuchanh-csdl-viewer.html",
+        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
+        "keywords": "thuc hanh co so du lieu csdl"
+    },
+    {
+        "title": "classicmodels",
+        "type": "link",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/classicmodels-viewer.html",
+        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
+        "keywords": "thuc hanh co so du lieu csdl mysql sample database"
+    },
+    {
+        "title": "[TH] Template Nộp Bài Tập.docx",
+        "type": "word",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/th-template-viewer.html",
+        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
+        "keywords": "thuc hanh nop bai tap template mau"
+    },
+    {
+        "title": "Mô tả DB classicmodels.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/tai_lieu_a4_viewer.html",
+        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
+        "keywords": "mo ta db classicmodels csdl"
+    },
+    {
+        "title": "Tuần 1: Biến cố và xác suất của biến cố (P1)",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-xstk/slides/le-sy-vinh-documents/xac-suat-thong-ke-week-1-viewer.html",
+        "path": "UET > Xác suất thống kê > GS. Lê Sỹ Vinh",
+        "keywords": "xstk tuan 1 bien co xac suat"
+    },
+    {
+        "title": "Tuần 2: Biến cố và xác suất của biến cố (P2)",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-xstk/slides/le-sy-vinh-documents/xac-suat-thong-ke-week-2-viewer.html",
+        "path": "UET > Xác suất thống kê > GS. Lê Sỹ Vinh",
+        "keywords": "xstk tuan 2 bien co xac suat"
+    },
+    {
+        "title": "Tuần 3: Đại lượng ngẫu nhiên rời rạc",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-xstk/slides/le-sy-vinh-documents/xac-suat-thong-ke-week-3-viewer.html",
+        "path": "UET > Xác suất thống kê > GS. Lê Sỹ Vinh",
+        "keywords": "xstk tuan 3 dai luong ngau nhien roi rac"
+    },
+    {
+        "title": "Giáo trình Kiến trúc máy tính",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/giao_trinh.html",
+        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
+        "keywords": "ktmt giao trinh"
+    },
+    {
+        "title": "Slide giới thiệu Kiến trúc máy tính",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_gioi_thieu.html",
+        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
+        "keywords": "ktmt slide gioi thieu"
+    },
+    {
+        "title": "Slide chương 1 Kiến trúc máy tính",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_chuong1.html",
+        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
+        "keywords": "ktmt chuong 1"
+    },
+    {
+        "title": "Bài tập tuần 1 Kiến trúc máy tính",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_1.html",
+        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
+        "keywords": "ktmt bai tap tuan 1"
+    },
+    {
+        "title": "Hướng dẫn sử dụng phần mềm EasyEDA",
+        "type": "video",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/huong_dan_su_dung_phan_mem.html",
+        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
+        "keywords": "ktmt easyeda huong dan"
+    },
+    {
+        "title": "Link tải phần mềm mô phỏng EasyEDA",
+        "type": "link",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Link_tai_phan_mem_mo_phong_EasyEDA.html",
+        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
+        "keywords": "ktmt easyeda link tai"
+    },
+    {
+        "title": "Môn học: Cơ sở dữ liệu",
+        "type": "subject",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-csdl.html",
+        "path": "UET > Khoa Công nghệ Thông tin",
+        "keywords": "mon hoc co so du lieu int2202"
+    },
+    {
+        "title": "Môn học: Kiến trúc máy tính",
+        "type": "subject",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ktmt.html",
+        "path": "UET > Khoa Công nghệ Thông tin",
+        "keywords": "mon hoc kien truc may tinh int2212"
+    },
+    {
+        "title": "Môn học: Xác suất thống kê",
+        "type": "subject",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-xstk.html",
+        "path": "UET > Khoa Công nghệ Thông tin",
+        "keywords": "mon hoc xac suat thong ke int1101"
+    },
+    {
+        "title": "Sách Algorithms 4th Ed",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "sach algorithms 4th ed ctdlgt cau truc du lieu giai thuat"
+    },
+    {
+        "title": "Bài giảng Union-Find (Disjoint Set Union)",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-union-find-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "union find disjoint set union dsu ctdlgt cau truc du lieu giai thuat kruskal"
+    },
+    {
+        "title": "Chuẩn bị môi trường lập trình Java – Hướng dẫn cài OpenJDK, IntelliJ, Git Bash trên Windows",
+        "type": "link",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/chuan-bi-moi-truong-lap-trinh-java-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "chuan bi moi truong lap trinh java openjdk intellij git bash windows ctdlgt"
+    },
+    {
+        "title": "Bài giảng Giới thiệu – Môn Cấu trúc dữ liệu & Giải thuật (Java)",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-gioi-thieu-ctdlgt-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "bai giang gioi thieu mo dau ctdlgt cau truc du lieu giai thuat java"
+    },
+    {
+        "title": "Bài giảng: Phân tích thuật toán – Running time, mô hình toán học & bộ nhớ",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-phan-tich-thuat-toan-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "phan tich thuat toan analysis of algorithms running time do phuc tap bo nho 3-sum"
+    },
+    {
+        "title": "Bài tập ôn tập: Phân tích thuật toán",
+        "type": "word",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-on-tap-phan-tich-thuat-toan.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "bai tap on tap phan tich thuat toan do phuc tap ctdlgt"
+    },
+    {
+        "title": "Bài giảng: Stack and Queue I (Array)",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-array-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "stack queue ngan xep hang doi array ctdlgt"
+    },
+    {
+        "title": "Bài giảng: Stack and Queue II (Linked List)",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-linked-list-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "stack queue ngan xep hang doi linked list danh sach lien ket ctdlgt"
+    },
+    {
+        "title": "Bài tập: Stack and Queue",
+        "type": "link",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-stack-queue-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "bai tap stack queue ngan xep hang doi ctdlgt"
+    },
+    {
+        "title": "Bài tập về nhà: Linked List (HackerRank)",
+        "type": "link",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/btvn-linked-list-hackerrank-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "btvn bai tap ve nha linked list danh sach lien ket hackerrank ctdlgt"
+    },
+    {
+        "title": "Bài giảng: Elementary Sorts – Selection, Insertion, Shell Sort",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-elementary-sorts-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "elementary sorts sap xep co ban selection sort insertion sort shell sort ctdlgt"
+    },
+    {
+        "title": "Bài giảng: Mergesort - Sắp xếp trộn",
+        "type": "powerpoint",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "mergesort sap xep tron top-down bottom-up ctdlgt"
+    },
+    {
+        "title": "Bài tập: Elementary Sorts & Mergesort",
+        "type": "link",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-elementary-mergesort-viewer.html",
+        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
+        "keywords": "bai tap elementary sorts mergesort sap xep co ban sap xep tron ctdlgt"
+    },
+    {
+        "title": "Môn học: Lập trình hướng đối tượng",
+        "type": "subject",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt.html",
+        "path": "UET > Khoa Công nghệ Thông tin",
+        "keywords": "mon hoc lap trinh huong doi tuong int2204 oop"
+    },
+    {
+        "title": "Giảng viên: TS. Nguyễn Đức Anh",
+        "type": "teacher",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh.html",
+        "path": "UET > Lập trình hướng đối tượng",
+        "keywords": "giang vien ts nguyen duc anh lap trinh huong doi tuong oop"
+    },
+    {
+        "title": "0.1 - Policy.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.1-Policy-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "policy quy dinh mon hoc lthdt oop int2204"
+    },
+    {
+        "title": "0 - Project Management Programs.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0-Project-Management-Programs-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "project management programs quan ly du an lthdt oop"
+    },
+    {
+        "title": "0.2 - Project Management Programs.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.2-Project-Management-Programs-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "project management programs quan ly du an lthdt oop"
+    },
+    {
+        "title": "0.3 - GitHub.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.3-GitHub-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "github huong dan git lthdt oop"
+    },
+    {
+        "title": "1-Giới thiệu Java_modified.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/1-Gioi-thieu-Java-modified-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "gioi thieu java lthdt oop int2204"
+    },
+    {
+        "title": "2.2_KhaiNiem_HuongDoiTuong_modified.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.2-KhaiNiem-HuongDoiTuong-modified-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "khai niem huong doi tuong oop lthdt int2204"
+    },
+    {
+        "title": "2.1- JDK JVM JRE JIT.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.1-JDK-JVM-JRE-JIT-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "jdk jvm jre jit java lthdt oop int2204"
+    },
+    {
+        "title": "3_LopDoiTuong_Java_modified.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/3-LopDoiTuong-Java-modified-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "lop doi tuong class object java lthdt oop int2204"
+    },
+    {
+        "title": "4_HieuThem_Java-1.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/4-HieuThem-Java-1-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "hieu them java 1 lthdt oop int2204"
+    },
+    {
+        "title": "5_HieuThem_Java-2.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/5-HieuThem-Java-2-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "hieu them java 2 lthdt oop int2204"
+    },
+    {
+        "title": "6-OOP_ThuaKe.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/6-OOP_ThuaKe-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "oop thua ke inheritance java lthdt int2204"
+    },
+    {
+        "title": "7-OOP_Dahinh.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/7-OOP_Dahinh-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "oop da hinh polymorphism java lthdt int2204"
+    },
+    {
+        "title": "8 - Exceptions v2.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/8-Exceptions-v2-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "exceptions xu ly ngoai le java lthdt oop int2204"
+    },
+    {
+        "title": "9 - IOStreams v2.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/9-IOStreams-v2-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "io streams luong vao ra java lthdt oop int2204"
+    },
+    {
+        "title": "10 - Generic v4.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/10-Generic-v4-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "generic java lthdt oop int2204"
+    },
+    {
+        "title": "11_Data structures-15-8 v3.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/11-Data-structures-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "data structures cau truc du lieu java lthdt oop int2204"
+    },
+    {
+        "title": "Design Patterns-new2.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/Design-Patterns-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "design patterns mau thiet ke java lthdt oop int2204"
+    },
+    {
+        "title": "13-Mot so ngôn ngữ OOP-new.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/13-Mot-so-ngon-ngu-OOP-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "mot so ngon ngu oop c++ python lthdt int2204"
+    },
+    {
+        "title": "14-Ôn tập.pdf",
+        "type": "pdf",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/14-On-tap-viewer.html",
+        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
+        "keywords": "on tap cuoi ky lthdt oop int2204"
+    },
+    {
+        "title": "Slide Bài giảng: Lập trình hướng đối tượng",
+        "type": "subject",
+        "url": "/truong-dai-hoc/uet-subjects/cntt-lthdt/slides.html",
+        "path": "UET > Lập trình hướng đối tượng",
+        "keywords": "slide bai giang lap trinh huong doi tuong oop int2204"
+    }
+]

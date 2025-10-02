@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Danh Sách Các Trường - StuShare</title> 
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body> 
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Khám Phá Tài Liệu Theo Trường</h1>
+                <p>Chọn trường của bạn từ danh sách dưới đây để bắt đầu.</p>
+            </div>
+        </section>
+
+        <section class="filter-bar">
+            <div class="container">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm tên trường, ví dụ: Bách khoa, Công nghệ, PTIT...">
+            </div>
+        </section>
+
+        <section class="university-list">
+            <div class="container">
+
+                <h2 class="region-title">Các trường Đại học & Học viện ở Miền Bắc</h2>
+                <div class="university-grid">
+                    <a href="/truong-dai-hoc/uet-subjects.html" class="university-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/vi/thumb/b/bf/Logo_HUET.svg/186px-Logo_HUET.svg.png?20200610051238" alt="Logo trường" class="university-logo">
+                        <div class="university-info">
+                            <h3>Trường Đại học Công nghệ - Đại học Quốc gia Hà Nội</h3>
+                            <p>VNU-UET</p>
+                        </div>
+                    </a>
+                </div>
+
+                <h2 class="region-title">Các trường Đại học & Học viện ở Miền Trung</h2>
+                <div class="university-grid">
+                    <!-- Chưa có trường nào -->
+                </div>
+
+                <h2 class="region-title">Các trường Đại học & Học viện ở Miền Nam</h2>
+                <div class="university-grid">
+                    <!-- Chưa có trường nào -->
+                </div>
+
+                <!-- Phần đang cập nhật và kêu gọi đóng góp (ĐÃ CẬP NHẬT) -->
+                <div class="updating-section">
+                    <h3 style="font-size:1.35rem; color:var(--primary-color); margin-bottom:12px;">
+                        <i class="fas fa-spinner fa-pulse" style="margin-right:8px;"></i>
+                        Các trường khác đang được cập nhật!
+                    </h3>
+                    <p style="font-size:1.05rem; color:#444; margin-bottom:25px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Bạn có tài liệu học tập của trường mình? Hãy chung tay xây dựng một cộng đồng lớn mạnh hơn cho sinh viên Việt Nam!
+                    </p>
+                    <a href="/index.html#upload-section" class="btn-contribute">
+                        <i class="fas fa-upload" style="margin-right: 8px;"></i> Đóng góp ngay
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const universityCards = document.querySelectorAll('.university-card');
+            const universityGrids = document.querySelectorAll('.university-grid');
+            const regionTitles = document.querySelectorAll('.region-title');
+
+            // --- HÀM LỌC ĐƯỢỢC TÁCH RIÊNG ---
+            function filterUniversities() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                universityCards.forEach(function (card) {
+                    const universityName = card.querySelector('h3').textContent.toLowerCase(); // Giữ nguyên
+                    const universityAcronym = card.querySelector('p').textContent.toLowerCase();
+
+                    if (universityName.includes(searchTerm) || universityAcronym.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                universityGrids.forEach(function(grid) {
+                    const regionTitle = grid.previousElementSibling;
+                    if (regionTitle && regionTitle.classList.contains('region-title')) {
+                        const visibleCardsInGrid = grid.querySelectorAll('.university-card[style*="display: flex"]');
+                        if (visibleCardsInGrid.length === 0 && searchTerm) { // Chỉ ẩn nếu đang có tìm kiếm
+                            regionTitle.style.display = 'none';
+                        } else {
+                            regionTitle.style.display = 'block';
+                        }
+                    }
+                });
+            }
+
+            // --- LOGIC MỚI: ĐỌC THAM SỐ TỪ URL ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('q');
+            if (searchQuery) {
+                searchInput.value = searchQuery; // Tự động điền vào ô tìm kiếm
+                filterUniversities(); // Và thực hiện lọc ngay
+            }
+
+            searchInput.addEventListener('input', filterUniversities);
+        });
+    </script>
+
+   <script src="/assets/js/layout.js"></script>
+</body>
+</html>

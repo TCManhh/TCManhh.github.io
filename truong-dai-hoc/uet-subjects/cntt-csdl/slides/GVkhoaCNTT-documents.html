@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Tài liệu - GV Khoa Công Nghệ Thông Tin - StuHub</title>
+ <link rel="stylesheet" href="/style.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <!-- Thanh công cụ dùng chung -->
+  <div id="header-placeholder"></div>
+
+  <!-- Breadcrumb nếu cần -->
+  <div id="breadcrumb-placeholder"></div>
+
+    <main>
+        <section class="university-hero">
+            <div class="container">
+                <i class="fas fa-book-reader subject-hero-icon"></i>
+                <div class="university-hero-info">
+                    <h1>Tài liệu giảng dạy - GV Khoa Công Nghệ Thông Tin</h1>
+                    <p>Môn học: Cơ sở dữ liệu (Khoa Công nghệ Thông tin)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="document-list-container">
+            <div class="container">
+                
+                <div class="document-section active">
+                    <div class="section-header">
+                        <i class="fas fa-chevron-down"></i>
+                        <h3>C1-Mở đầu</h3>
+                    </div>
+                    <div class="section-content">
+                        <a href="/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/c1-viewer.html" class="document-item">
+                            <i class="fas fa-file-powerpoint"></i>
+                            <span>C1.pptx</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-section">
+                    <div class="section-header">
+                        <i class="fas fa-chevron-down"></i>
+                        <h3>C2 - Mô hình dữ liệu Thực thể - Liên kết (ER)</h3>
+                    </div>
+                    <div class="section-content">
+                        <a href="/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/c2-1-viewer.html" class="document-item">
+                            <i class="fas fa-file-powerpoint"></i>
+                            <span>C2_1.pptx</span>
+                        </a>
+                        <a href="/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/c2-2-viewer.html" class="document-item">
+                            <i class="fas fa-file-powerpoint"></i>
+                            <span>C2_2.pptx</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-section">
+                    <div class="section-header">
+                        <i class="fas fa-chevron-down"></i>
+                        <h3>Thực hành</h3>
+                    </div>
+                    <div class="section-content">
+                        <!-- Tiêu đề con cho nhóm tài liệu -->
+                        <div class="sub-heading">Tài liệu & Dữ liệu mẫu</div>
+                        <a href="/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/thuchanh-csdl-viewer.html" class="document-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>TH_CSDL_Jul_2025.pdf</span>
+                        </a>
+                         <a href="/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/tai_lieu_a4_viewer.html" class="document-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Mô tả DB classicmodels.pdf</span>
+                        </a>
+                        <a href="/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/classicmodels-viewer.html" class="document-item">
+                            <i class="fas fa-link"></i>
+                            <span>Dữ liệu mẫu: classicmodels</span>
+                        </a>
+
+                        <!-- Tiêu đề con cho nhóm template -->
+                        <div class="sub-heading">Template</div>
+                        <a href="/truong-dai-hoc/uet-subjects/cntt-csdl/slides/GVkhoaCNTT-documents/th-template-viewer.html" class="document-item">
+                            <i class="fas fa-file-word"></i>
+                            <span>[TH] Template Nộp Bài Tập.docx</span>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Phần cuối trang dùng chung -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sectionHeaders = document.querySelectorAll('.section-header');
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const parentSection = this.parentElement;
+                    parentSection.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+ <script src="/assets/js/layout.js"></script>
+</body>
+</html>

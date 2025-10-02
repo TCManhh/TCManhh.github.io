@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình chiếu: CSDL Classicmodels - StuShare</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="has-fixed-breadcrumb">
+    <div id="header-placeholder"></div>
+    <div id="breadcrumb-placeholder"></div>
+
+    <main>
+        <section class="document-viewer-section">
+            <div class="presentation-container">
+                <div class="iframe-controls">
+                    <button class="iframe-nav-btn" id="iframe-home" title="Về trang chủ của website"><i class="fas fa-home"></i></button>
+                    <a href="#" id="iframe-open-new-tab" class="iframe-nav-btn" target="_blank" rel="noopener noreferrer" title="Mở trong tab mới"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="presentation-wrapper">
+                    <iframe id="website-iframe" src="https://www.mysqltutorial.org/mysql-sample-database.aspx" loading="lazy" referrerpolicy="no-referrer" allowfullscreen title="CSDL Classicmodels"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/assets/js/layout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.getElementById('website-iframe');
+            const homeBtn = document.getElementById('iframe-home');
+            const openNewTabBtn = document.getElementById('iframe-open-new-tab');
+            const originalSrc = iframe.src;
+
+            // Nút Home: Tải lại địa chỉ gốc của iframe
+            homeBtn.addEventListener('click', () => { iframe.src = originalSrc; });
+
+            // Nút Mở tab mới: Gán link của iframe cho nút
+            openNewTabBtn.href = originalSrc;
+        });
+    </script>
+</body>
+</html>
