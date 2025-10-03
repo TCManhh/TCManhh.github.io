@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <!-- Thanh công cụ dùng chung -->
     <div id="header-placeholder"></div>
 
     <main>
@@ -57,7 +56,6 @@
             <div class="container">
                 <h2>Khám Phá Tài Liệu Mới</h2>
                 <div class="document-bento-grid">
-                    <!-- Tài liệu nổi bật 1: Bài giảng Mergesort -->
                     <a href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html" class="document-card card-large">
                         <div class="document-card-content">
                             <div>
@@ -74,7 +72,6 @@
                             </div>
                         </div>
                     </a>
-                     <!-- Tài liệu nổi bật 2: Bài tập Stack & Queue -->
                      <a href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-stack-queue-viewer.html" class="document-card">
                          <div class="document-card-content">
                             <div class="document-icon doc"><i class="fas fa-edit"></i></div>
@@ -85,7 +82,6 @@
                             </div>
                         </div>
                     </a>
-                     <!-- Tài liệu nổi bật 3: Sách Algorithms 4th Ed -->
                      <a href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html" class="document-card">
                         <div class="document-card-content">
                            <div class="document-icon pdf"><i class="fas fa-file-pdf"></i></div>
@@ -157,11 +153,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let allDocuments = [];
 
     // Tải dữ liệu tìm kiếm một lần
-    fetch('/assets/js/search-data.json')
-  .then(response => response.json())
-        .then(data => {
-            allDocuments = data;
-        });
+    (async () => {
+        const tryUrls = ['assets/js/search-data.json', '/assets/js/search-data.json'];
+        for (const url of tryUrls) {
+            try { allDocuments = await (await fetch(url)).json(); break; } catch (e) { /* continue */ }
+        }
+        if (allDocuments.length === 0) console.error("Could not load search data for suggestions.");
+    })();
 
     // Bản đồ icon
     const iconMap = {
@@ -170,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'subject': 'fas fa-book'
     };
 
-    // Hàm chuẩn hóa tiếng Việt (giữ nguyên)
+    // Hàm chuẩn hóa tiếng Việt
     function normalizeVietnamese(str) {
         if (!str) return '';
         return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
@@ -194,21 +192,59 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Thuật toán tìm kiếm và sắp xếp (tương tự trang search-results)
-        const results = allDocuments.map(doc => {
+        const results = allDocuments
+        .map(doc => {
             let score = 0;
-            const normalizedTitle = normalizeVietnamese(doc.title);
-            if (normalizedTitle.includes(normalizedQuery)) {
-                if (normalizedTitle === normalizedQuery) score += 10;
-                else if (normalizedTitle.startsWith(normalizedQuery)) score += 5;
-                else score += 3;
+            const normalizedTitle    = normalizeVietnamese(doc.title || '');
+            const normalizedPath     = normalizeVietnamese(doc.path  || '');
+            const normalizedKeywords = normalizeVietnamese(doc.keywords || '');
+            const combinedText       = `${normalizedTitle} ${normalizedKeywords} ${normalizedPath}`;
+
+            const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
+
+            const matched = queryTokens.filter(t => combinedText.includes(t)).length;
+            const ratio   = queryTokens.length ? matched / queryTokens.length : 0;
+
+            const titleHasAllTokens = queryTokens.every(t => normalizedTitle.includes(t));
+            const passesTokenRule =
+              (queryTokens.length >= 3 && ratio >= 0.6) ||
+              (queryTokens.length <= 2 && titleHasAllTokens);
+
+            if (passesTokenRule) {
+              score += matched;
+              if (titleHasAllTokens) {
+                score += 10;
+              }
+              if (normalizedTitle.includes(normalizedQuery)) {
+                score += 5;
+              }
             }
             if (normalizeVietnamese(doc.keywords).includes(normalizedQuery)) score += 2;
             if (normalizeVietnamese(doc.path).includes(normalizedQuery)) score += 1;
             return { ...doc, score };
         })
         .filter(doc => doc.score > 0)
-        .sort((a, b) => b.score - a.score)
+        .sort((a, b) => {
+            // --- LOGIC SẮP XẾP MỚI ---
+            
+            // Ưu tiên 1: Môn học (subject) luôn lên đầu
+            const isASubject = a.type === 'subject';
+            const isBSubject = b.type === 'subject';
+            if (isASubject && !isBSubject) return -1;
+            if (!isASubject && isBSubject) return 1;
+
+            // Ưu tiên 2: Tài liệu bài giảng
+            const lectureMaterialTypes = ['powerpoint', 'pdf', 'word', 'video', 'link'];
+            const isALecture = lectureMaterialTypes.includes(a.type);
+            const isBLecture = lectureMaterialTypes.includes(b.type);
+            if (!isASubject && !isBSubject) {
+                if (isALecture && !isBLecture) return -1;
+                if (!isALecture && isBLecture) return 1;
+            }
+
+            // Ưu tiên 3: Điểm số liên quan
+            return b.score - a.score;
+        })
         .slice(0, 6); // Lấy 6 kết quả hàng đầu
 
         if (results.length > 0) {
@@ -219,8 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <i class="${iconClass} suggestion-icon"></i>
                         <div class="suggestion-info">
                             <span class="suggestion-title">${doc.title}</span>
-                            <span class="suggestion-path">${doc.path.replace(/>/g, '›')}</span>
-                        </div>
+                            </div>
                     </a>`;
             }).join('');
             suggestionsContainer.style.display = 'block';
@@ -257,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==================================
     // --- PHẦN 2: SCRIPT UPLOAD FORM ---
     // ==================================
+    // ... (phần script upload giữ nguyên, không thay đổi)
     const fileInput = document.getElementById('file-upload');
     const uploadForm = document.getElementById('upload-form');
     const statusDiv = document.getElementById('upload-status');
@@ -266,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const formFields = document.querySelector('.form-fields');
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyV3FasM4ecK7O6Li0lM6_v3q76eQtUEGjHh6ao_vg_Bh6uy_XflxjEEqC3EduZ-UA7/exec";
 
-    // Validation elements
     const universityInput = document.getElementById('university');
     const subjectInput = document.getElementById('subject');
     const teacherInput = document.getElementById('teacher');
@@ -275,7 +310,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const teacherError = document.getElementById('teacher-error');
     const inputsToValidate = [universityInput, subjectInput, teacherInput];
 
-    // Popup functions
     const successPopup = document.getElementById('success-popup');
     const popupCloseBtn = document.getElementById('popup-close-btn');
     const popupImage = successPopup.querySelector('img');
@@ -345,7 +379,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
-    // Event listeners
     if(popupCloseBtn) { popupCloseBtn.addEventListener('click', hidePopup); }
     if(successPopup) { successPopup.addEventListener('click', function(event) { if (event.target === successPopup) { hidePopup(); } }); }
     
@@ -419,7 +452,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-  <!-- Tải layout chung (header, footer, breadcrumb) --> 
   <script src="/assets/js/layout.js"></script> 
 </body>
 </html>

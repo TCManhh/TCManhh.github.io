@@ -1,380 +1,1325 @@
 [
-    {
-        "title": "C1.pptx",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c1-viewer.html",
-        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
-        "keywords": "c1 mo dau chuong 1 co so du lieu csdl"
-    },
-    {
-        "title": "C2_1.pptx",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c2-1-viewer.html",
-        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
-        "keywords": "c2 chuong 2 mo hinh du lieu thuc the lien ket er"
-    },
-    {
-        "title": "C2_2.pptx",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c2-2-viewer.html",
-        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
-        "keywords": "c2 chuong 2 mo hinh du lieu thuc the lien ket er"
-    },
-    {
-        "title": "TH_CSDL_Jul_2025.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/thuchanh-csdl-viewer.html",
-        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
-        "keywords": "thuc hanh co so du lieu csdl"
-    },
-    {
-        "title": "classicmodels",
-        "type": "link",
-        "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/classicmodels-viewer.html",
-        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
-        "keywords": "thuc hanh co so du lieu csdl mysql sample database"
-    },
-    {
-        "title": "[TH] Template Nộp Bài Tập.docx",
-        "type": "word",
-        "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/th-template-viewer.html",
-        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
-        "keywords": "thuc hanh nop bai tap template mau"
-    },
-    {
-        "title": "Mô tả DB classicmodels.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/tai_lieu_a4_viewer.html",
-        "path": "UET > Cơ sở dữ liệu > GV Khoa CNTT",
-        "keywords": "mo ta db classicmodels csdl"
-    },
-    {
-        "title": "Tuần 1: Biến cố và xác suất của biến cố (P1)",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents/xac-suat-thong-ke-week-1-viewer.html",
-        "path": "UET > Xác suất thống kê > GS. Lê Sỹ Vinh",
-        "keywords": "xstk tuan 1 bien co xac suat"
-    },
-    {
-        "title": "Tuần 2: Biến cố và xác suất của biến cố (P2)",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents/xac-suat-thong-ke-week-2-viewer.html",
-        "path": "UET > Xác suất thống kê > GS. Lê Sỹ Vinh",
-        "keywords": "xstk tuan 2 bien co xac suat"
-    },
-    {
-        "title": "Tuần 3: Đại lượng ngẫu nhiên rời rạc",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents/xac-suat-thong-ke-week-3-viewer.html",
-        "path": "UET > Xác suất thống kê > GS. Lê Sỹ Vinh",
-        "keywords": "xstk tuan 3 dai luong ngau nhien roi rac"
-    },
-    {
-        "title": "Giáo trình Kiến trúc máy tính",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/giao_trinh.html",
-        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
-        "keywords": "ktmt giao trinh"
-    },
-    {
-        "title": "Slide giới thiệu Kiến trúc máy tính",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_gioi_thieu.html",
-        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
-        "keywords": "ktmt slide gioi thieu"
-    },
-    {
-        "title": "Slide chương 1 Kiến trúc máy tính",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_chuong1.html",
-        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
-        "keywords": "ktmt chuong 1"
-    },
-    {
-        "title": "Bài tập tuần 1 Kiến trúc máy tính",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_1.html",
-        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
-        "keywords": "ktmt bai tap tuan 1"
-    },
-    {
-        "title": "Hướng dẫn sử dụng phần mềm EasyEDA",
-        "type": "video",
-        "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/huong_dan_su_dung_phan_mem.html",
-        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
-        "keywords": "ktmt easyeda huong dan"
-    },
-    {
-        "title": "Link tải phần mềm mô phỏng EasyEDA",
-        "type": "link",
-        "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Link_tai_phan_mem_mo_phong_EasyEDA.html",
-        "path": "UET > Kiến trúc máy tính > PGS.TS. Nguyễn Trí Thành",
-        "keywords": "ktmt easyeda link tai"
-    },
-    {
-        "title": "Môn học: Cơ sở dữ liệu",
-        "type": "subject",
-        "url": "/truong-dai-hoc/uet/cntt-csdl.html",
-        "path": "UET > Khoa Công nghệ Thông tin",
-        "keywords": "mon hoc co so du lieu int2202"
-    },
-    {
-        "title": "Môn học: Kiến trúc máy tính",
-        "type": "subject",
-        "url": "/truong-dai-hoc/uet/cntt-ktmt.html",
-        "path": "UET > Khoa Công nghệ Thông tin",
-        "keywords": "mon hoc kien truc may tinh int2212"
-    },
-    {
-        "title": "Môn học: Xác suất thống kê",
-        "type": "subject",
-        "url": "/truong-dai-hoc/uet/cntt-xstk.html",
-        "path": "UET > Khoa Công nghệ Thông tin",
-        "keywords": "mon hoc xac suat thong ke int1101"
-    },
-    {
-        "title": "Sách Algorithms 4th Ed",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "sach algorithms 4th ed ctdlgt cau truc du lieu giai thuat"
-    },
-    {
-        "title": "Bài giảng Union-Find (Disjoint Set Union)",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-union-find-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "union find disjoint set union dsu ctdlgt cau truc du lieu giai thuat kruskal"
-    },
-    {
-        "title": "Chuẩn bị môi trường lập trình Java – Hướng dẫn cài OpenJDK, IntelliJ, Git Bash trên Windows",
-        "type": "link",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/chuan-bi-moi-truong-lap-trinh-java-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "chuan bi moi truong lap trinh java openjdk intellij git bash windows ctdlgt"
-    },
-    {
-        "title": "Bài giảng Giới thiệu – Môn Cấu trúc dữ liệu & Giải thuật (Java)",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-gioi-thieu-ctdlgt-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "bai giang gioi thieu mo dau ctdlgt cau truc du lieu giai thuat java"
-    },
-    {
-        "title": "Bài giảng: Phân tích thuật toán – Running time, mô hình toán học & bộ nhớ",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-phan-tich-thuat-toan-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "phan tich thuat toan analysis of algorithms running time do phuc tap bo nho 3-sum"
-    },
-    {
-        "title": "Bài tập ôn tập: Phân tích thuật toán",
-        "type": "word",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-on-tap-phan-tich-thuat-toan.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "bai tap on tap phan tich thuat toan do phuc tap ctdlgt"
-    },
-    {
-        "title": "Bài giảng: Stack and Queue I (Array)",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-array-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "stack queue ngan xep hang doi array ctdlgt"
-    },
-    {
-        "title": "Bài giảng: Stack and Queue II (Linked List)",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-linked-list-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "stack queue ngan xep hang doi linked list danh sach lien ket ctdlgt"
-    },
-    {
-        "title": "Bài tập: Stack and Queue",
-        "type": "link",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-stack-queue-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "bai tap stack queue ngan xep hang doi ctdlgt"
-    },
-    {
-        "title": "Bài tập về nhà: Linked List (HackerRank)",
-        "type": "link",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/btvn-linked-list-hackerrank-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "btvn bai tap ve nha linked list danh sach lien ket hackerrank ctdlgt"
-    },
-    {
-        "title": "Bài giảng: Elementary Sorts – Selection, Insertion, Shell Sort",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-elementary-sorts-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "elementary sorts sap xep co ban selection sort insertion sort shell sort ctdlgt"
-    },
-    {
-        "title": "Bài giảng: Mergesort - Sắp xếp trộn",
-        "type": "powerpoint",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "mergesort sap xep tron top-down bottom-up ctdlgt"
-    },
-    {
-        "title": "Bài tập: Elementary Sorts & Mergesort",
-        "type": "link",
-        "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-elementary-mergesort-viewer.html",
-        "path": "UET > Cấu Trúc Dữ Liệu và Giải Thuật > TS. Trần Thị Minh Châu",
-        "keywords": "bai tap elementary sorts mergesort sap xep co ban sap xep tron ctdlgt"
-    },
-    {
-        "title": "Môn học: Lập trình hướng đối tượng",
-        "type": "subject",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt.html",
-        "path": "UET > Khoa Công nghệ Thông tin",
-        "keywords": "mon hoc lap trinh huong doi tuong int2204 oop"
-    },
-    {
-        "title": "Giảng viên: TS. Nguyễn Đức Anh",
-        "type": "teacher",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh.html",
-        "path": "UET > Lập trình hướng đối tượng",
-        "keywords": "giang vien ts nguyen duc anh lap trinh huong doi tuong oop"
-    },
-    {
-        "title": "0.1 - Policy.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.1-Policy-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "policy quy dinh mon hoc lthdt oop int2204"
-    },
-    {
-        "title": "0 - Project Management Programs.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0-Project-Management-Programs-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "project management programs quan ly du an lthdt oop"
-    },
-    {
-        "title": "0.2 - Project Management Programs.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.2-Project-Management-Programs-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "project management programs quan ly du an lthdt oop"
-    },
-    {
-        "title": "0.3 - GitHub.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.3-GitHub-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "github huong dan git lthdt oop"
-    },
-    {
-        "title": "1-Giới thiệu Java_modified.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/1-Gioi-thieu-Java-modified-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "gioi thieu java lthdt oop int2204"
-    },
-    {
-        "title": "2.2_KhaiNiem_HuongDoiTuong_modified.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.2-KhaiNiem-HuongDoiTuong-modified-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "khai niem huong doi tuong oop lthdt int2204"
-    },
-    {
-        "title": "2.1- JDK JVM JRE JIT.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.1-JDK-JVM-JRE-JIT-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "jdk jvm jre jit java lthdt oop int2204"
-    },
-    {
-        "title": "3_LopDoiTuong_Java_modified.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/3-LopDoiTuong-Java-modified-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "lop doi tuong class object java lthdt oop int2204"
-    },
-    {
-        "title": "4_HieuThem_Java-1.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/4-HieuThem-Java-1-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "hieu them java 1 lthdt oop int2204"
-    },
-    {
-        "title": "5_HieuThem_Java-2.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/5-HieuThem-Java-2-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "hieu them java 2 lthdt oop int2204"
-    },
-    {
-        "title": "6-OOP_ThuaKe.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/6-OOP_ThuaKe-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "oop thua ke inheritance java lthdt int2204"
-    },
-    {
-        "title": "7-OOP_Dahinh.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/7-OOP_Dahinh-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "oop da hinh polymorphism java lthdt int2204"
-    },
-    {
-        "title": "8 - Exceptions v2.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/8-Exceptions-v2-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "exceptions xu ly ngoai le java lthdt oop int2204"
-    },
-    {
-        "title": "9 - IOStreams v2.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/9-IOStreams-v2-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "io streams luong vao ra java lthdt oop int2204"
-    },
-    {
-        "title": "10 - Generic v4.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/10-Generic-v4-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "generic java lthdt oop int2204"
-    },
-    {
-        "title": "11_Data structures-15-8 v3.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/11-Data-structures-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "data structures cau truc du lieu java lthdt oop int2204"
-    },
-    {
-        "title": "Design Patterns-new2.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/Design-Patterns-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "design patterns mau thiet ke java lthdt oop int2204"
-    },
-    {
-        "title": "13-Mot so ngôn ngữ OOP-new.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/13-Mot-so-ngon-ngu-OOP-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "mot so ngon ngu oop c++ python lthdt int2204"
-    },
-    {
-        "title": "14-Ôn tập.pdf",
-        "type": "pdf",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/14-On-tap-viewer.html",
-        "path": "UET > Lập trình hướng đối tượng > TS. Nguyễn Đức Anh",
-        "keywords": "on tap cuoi ky lthdt oop int2204"
-    },
-    {
-        "title": "Slide Bài giảng: Lập trình hướng đối tượng",
-        "type": "subject",
-        "url": "/truong-dai-hoc/uet/cntt-lthdt/slides.html",
-        "path": "UET > Lập trình hướng đối tượng",
-        "keywords": "slide bai giang lap trinh huong doi tuong oop int2204"
-    }
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents.html",
+    "title": "GV Khoa Công Nghệ Thông Tin",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > GV Khoa Công Nghệ Thông Tin",
+    "headings": "GV Khoa Công Nghệ Thông Tin Slide Bài giảng Tài liệu học tập Ghi chú",
+    "tags": [
+      "page"
+    ],
+    "keywords": "GV Khoa Công Nghệ Thông Tin Cơ sở dữ liệu page",
+    "type": "page",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/c1-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/c1-viewer.html",
+    "title": "C1.pptx",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > C1.pptx",
+    "headings": "C1.pptx",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "C1.pptx Cơ sở dữ liệu pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/c2-1-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/c2-1-viewer.html",
+    "title": "C2_1.pptx",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > C2_1.pptx",
+    "headings": "C2_1.pptx",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "C2_1.pptx Cơ sở dữ liệu pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/c2-2-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/c2-2-viewer.html",
+    "title": "C2_2.pptx",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > C2_2.pptx",
+    "headings": "C2_2.pptx",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "C2_2.pptx Cơ sở dữ liệu pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/classicmodels-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/classicmodels-viewer.html",
+    "title": "CSDL Classicmodels",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > CSDL Classicmodels",
+    "headings": "CSDL Classicmodels",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "CSDL Classicmodels Cơ sở dữ liệu pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/tai_lieu_a4_viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/tai_lieu_a4_viewer.html",
+    "title": "Mô tả DB classicmodels.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > Mô tả DB classicmodels.pdf",
+    "headings": "Mô tả DB classicmodels.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "Mô tả DB classicmodels.pdf Cơ sở dữ liệu pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/th-template-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/th-template-viewer.html",
+    "title": "[TH] Template Nộp Bài Tập.docx",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > [TH] Template Nộp Bài Tập.docx",
+    "headings": "[TH] Template Nộp Bài Tập.docx",
+    "tags": [
+      "word"
+    ],
+    "keywords": "[TH] Template Nộp Bài Tập.docx Cơ sở dữ liệu word",
+    "type": "word",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-csdl/slides/thuchanh-csdl-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-csdl/slides/thuchanh-csdl-viewer.html",
+    "title": "TH_CSDL_Jul_2025.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cơ sở dữ liệu > Slide Bài giảng > TH_CSDL_Jul_2025.pdf",
+    "headings": "TH_CSDL_Jul_2025.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "TH_CSDL_Jul_2025.pdf Cơ sở dữ liệu pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cơ sở dữ liệu",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-elementary-sorts-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-elementary-sorts-viewer.html",
+    "title": "Bài giảng: Elementary Sorts",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài giảng: Elementary Sorts",
+    "headings": "Bài giảng: Elementary Sorts",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài giảng: Elementary Sorts Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-gioi-thieu-ctdlgt-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-gioi-thieu-ctdlgt-viewer.html",
+    "title": "Bài giảng: Giới thiệu",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài giảng: Giới thiệu",
+    "headings": "Bài giảng: Giới thiệu",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài giảng: Giới thiệu Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html",
+    "title": "Bài giảng: Mergesort",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài giảng: Mergesort",
+    "headings": "Bài giảng: Mergesort",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài giảng: Mergesort Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-phan-tich-thuat-toan-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-phan-tich-thuat-toan-viewer.html",
+    "title": "Bài giảng: Phân tích thuật toán",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài giảng: Phân tích thuật toán",
+    "headings": "Bài giảng: Phân tích thuật toán",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài giảng: Phân tích thuật toán Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-array-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-array-viewer.html",
+    "title": "Bài giảng: Stack and Queue I: Array",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài giảng: Stack and Queue I: Array",
+    "headings": "Bài giảng: Stack and Queue I: Array",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài giảng: Stack and Queue I: Array Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-linked-list-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-stack-queue-linked-list-viewer.html",
+    "title": "Bài giảng: Stack and Queue II : Linked List",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài giảng: Stack and Queue II : Linked List",
+    "headings": "Bài giảng: Stack and Queue II : Linked List",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài giảng: Stack and Queue II : Linked List Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-union-find-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-union-find-viewer.html",
+    "title": "Bài giảng Union-Find",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài giảng Union-Find",
+    "headings": "Bài giảng Union-Find",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài giảng Union-Find Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-elementary-mergesort-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-elementary-mergesort-viewer.html",
+    "title": "Bài tập: Elementary Sorts & Mergesort",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài tập: Elementary Sorts & Mergesort",
+    "headings": "Bài tập: Elementary Sorts & Mergesort",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "Bài tập: Elementary Sorts & Mergesort Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-on-tap-phan-tich-thuat-toan.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-on-tap-phan-tich-thuat-toan.html",
+    "title": "Bài tập ôn tập: Phân tích thuật toán",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài tập ôn tập: Phân tích thuật toán",
+    "headings": "Bài tập ôn tập: Phân tích thuật toán",
+    "tags": [
+      "page"
+    ],
+    "keywords": "Bài tập ôn tập: Phân tích thuật toán Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau page",
+    "type": "page",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-stack-queue-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-stack-queue-viewer.html",
+    "title": "Bài tập: Stack and Queue",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Bài tập: Stack and Queue",
+    "headings": "Bài tập: Stack and Queue",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "Bài tập: Stack and Queue Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/btvn-linked-list-hackerrank-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/btvn-linked-list-hackerrank-viewer.html",
+    "title": "BTVN: Linked List (HackerRank)",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > BTVN: Linked List (HackerRank)",
+    "headings": "BTVN: Linked List (HackerRank)",
+    "tags": [
+      "link"
+    ],
+    "keywords": "BTVN: Linked List (HackerRank) Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau link",
+    "type": "link",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/chuan-bi-moi-truong-lap-trinh-java-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/chuan-bi-moi-truong-lap-trinh-java-viewer.html",
+    "title": "Chuẩn bị môi trường lập trình Java",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Chuẩn bị môi trường lập trình Java",
+    "headings": "Chuẩn bị môi trường lập trình Java",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "Chuẩn bị môi trường lập trình Java Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html",
+    "title": "Sách Algorithms 4th Ed",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Sách Algorithms 4th Ed",
+    "headings": "Sách Algorithms 4th Ed",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Sách Algorithms 4th Ed Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "TS Tran Thi Minh Chau",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/algs4-website-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/algs4-website-viewer.html",
+    "title": "Trang web sách Algorithms 4th Ed",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > Trang web sách Algorithms 4th Ed",
+    "headings": "Trang web sách Algorithms 4th Ed",
+    "tags": [
+      "link"
+    ],
+    "keywords": "Trang web sách Algorithms 4th Ed Cấu Trúc Dữ Liệu và Giải Thuật link",
+    "type": "link",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Cong_cu_thuc_hanh_ve_mach.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Cong_cu_thuc_hanh_ve_mach.html",
+    "title": "Công cụ thực hành vẽ mạch",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Công cụ thực hành vẽ mạch",
+    "headings": "Công cụ thực hành vẽ mạch",
+    "tags": [
+      "page"
+    ],
+    "keywords": "Công cụ thực hành vẽ mạch Kiến trúc máy tính PGS TS NguyenTriThanh page",
+    "type": "page",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Link_tai_phan_mem_mo_phong_EasyEDA.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Link_tai_phan_mem_mo_phong_EasyEDA.html",
+    "title": "Link tải phần mềm mô phỏng EasyEDA",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Link tải phần mềm mô phỏng EasyEDA",
+    "headings": "Link tải phần mềm mô phỏng EasyEDA",
+    "tags": [
+      "link"
+    ],
+    "keywords": "Link tải phần mềm mô phỏng EasyEDA Kiến trúc máy tính PGS TS NguyenTriThanh link",
+    "type": "link",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_1.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_1.html",
+    "title": "Bài tập tuần 1",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Bài tập tuần 1",
+    "headings": "Bài tập tuần 1",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài tập tuần 1 Kiến trúc máy tính PGS TS NguyenTriThanh powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_2.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_2.html",
+    "title": "Bài tập tuần 2",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Bài tập tuần 2",
+    "headings": "Bài tập tuần 2",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài tập tuần 2 Kiến trúc máy tính PGS TS NguyenTriThanh powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_3.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/bai_tap_tuan_3.html",
+    "title": "Bài tập tuần 3",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Bài tập tuần 3",
+    "headings": "Bài tập tuần 3",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Bài tập tuần 3 Kiến trúc máy tính PGS TS NguyenTriThanh powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/giao_trinh.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/giao_trinh.html",
+    "title": "Giáo trình",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Giáo trình",
+    "headings": "Giáo trình",
+    "tags": [
+      "textbook"
+    ],
+    "keywords": "Giáo trình Kiến trúc máy tính PGS TS NguyenTriThanh textbook",
+    "type": "textbook",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "textbook",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/huong_dan_su_dung_phan_mem.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/huong_dan_su_dung_phan_mem.html",
+    "title": "Hướng dẫn sử dụng phần mềm",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Hướng dẫn sử dụng phần mềm",
+    "headings": "Hướng dẫn sử dụng phần mềm",
+    "tags": [
+      "page"
+    ],
+    "keywords": "Hướng dẫn sử dụng phần mềm Kiến trúc máy tính PGS TS NguyenTriThanh page",
+    "type": "page",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/huong_dan_su_dung_phan_mem_logisim.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/huong_dan_su_dung_phan_mem_logisim.html",
+    "title": "Hướng dẫn sử dụng phần mềm logisim",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Hướng dẫn sử dụng phần mềm logisim",
+    "headings": "Hướng dẫn sử dụng phần mềm logisim",
+    "tags": [
+      "page"
+    ],
+    "keywords": "Hướng dẫn sử dụng phần mềm logisim Kiến trúc máy tính PGS TS NguyenTriThanh page",
+    "type": "page",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_chuong1.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_chuong1.html",
+    "title": "Slide chương 1",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Slide chương 1",
+    "headings": "Slide chương 1",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Slide chương 1 Kiến trúc máy tính PGS TS NguyenTriThanh powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_chuong2.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_chuong2.html",
+    "title": "Slide chương 2",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Slide chương 2",
+    "headings": "Slide chương 2",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Slide chương 2 Kiến trúc máy tính PGS TS NguyenTriThanh powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_gioi_thieu.html",
+    "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/slide_gioi_thieu.html",
+    "title": "Slide giới thiệu",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Kiến trúc máy tính > Slide Bài giảng > PGS.TS. Nguyễn Trí Thành > Slide giới thiệu",
+    "headings": "Slide giới thiệu",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Slide giới thiệu Kiến trúc máy tính PGS TS NguyenTriThanh powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Kiến trúc máy tính",
+    "courseCode": null,
+    "lecturer": "PGS TS NguyenTriThanh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.1-Policy-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.1-Policy-viewer.html",
+    "title": "0.1 - Policy.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 0.1 - Policy.pdf",
+    "headings": "0.1 - Policy.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "0.1 - Policy.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.2-Project-Management-Programs-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.2-Project-Management-Programs-viewer.html",
+    "title": "0.2 - Project Management Programs.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 0.2 - Project Management Programs.pdf",
+    "headings": "0.2 - Project Management Programs.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "0.2 - Project Management Programs.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.3-GitHub-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0.3-GitHub-viewer.html",
+    "title": "0.3 - GitHub.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 0.3 - GitHub.pdf",
+    "headings": "0.3 - GitHub.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "0.3 - GitHub.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0-Project-Management-Programs-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/0-Project-Management-Programs-viewer.html",
+    "title": "0 - Project Management Programs.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 0 - Project Management Programs.pdf",
+    "headings": "0 - Project Management Programs.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "0 - Project Management Programs.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/1-Gioi-thieu-Java-modified-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/1-Gioi-thieu-Java-modified-viewer.html",
+    "title": "1-Giới thiệu Java_modified.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 1-Giới thiệu Java_modified.pdf",
+    "headings": "1-Giới thiệu Java_modified.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "1-Giới thiệu Java_modified.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/10-Generic-v4-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/10-Generic-v4-viewer.html",
+    "title": "10 - Generic v4.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 10 - Generic v4.pdf",
+    "headings": "10 - Generic v4.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "10 - Generic v4.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/11-Data-structures-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/11-Data-structures-viewer.html",
+    "title": "11_Data structures-15-8 v3.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 11_Data structures-15-8 v3.pdf",
+    "headings": "11_Data structures-15-8 v3.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "11_Data structures-15-8 v3.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/13-Mot-so-ngon-ngu-OOP-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/13-Mot-so-ngon-ngu-OOP-viewer.html",
+    "title": "13-Mot so ngôn ngữ OOP-new.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 13-Mot so ngôn ngữ OOP-new.pdf",
+    "headings": "13-Mot so ngôn ngữ OOP-new.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "13-Mot so ngôn ngữ OOP-new.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/14-On-tap-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/14-On-tap-viewer.html",
+    "title": "14-Ôn tập.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 14-Ôn tập.pdf",
+    "headings": "14-Ôn tập.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "14-Ôn tập.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.1-JDK-JVM-JRE-JIT-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.1-JDK-JVM-JRE-JIT-viewer.html",
+    "title": "2.1- JDK JVM JRE JIT.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 2.1- JDK JVM JRE JIT.pdf",
+    "headings": "2.1- JDK JVM JRE JIT.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "2.1- JDK JVM JRE JIT.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.2-KhaiNiem-HuongDoiTuong-modified-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/2.2-KhaiNiem-HuongDoiTuong-modified-viewer.html",
+    "title": "2.2_KhaiNiem_HuongDoiTuong_modified.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 2.2_KhaiNiem_HuongDoiTuong_modified.pdf",
+    "headings": "2.2_KhaiNiem_HuongDoiTuong_modified.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "2.2_KhaiNiem_HuongDoiTuong_modified.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/3-LopDoiTuong-Java-modified-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/3-LopDoiTuong-Java-modified-viewer.html",
+    "title": "3_LopDoiTuong_Java_modified.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 3_LopDoiTuong_Java_modified.pdf",
+    "headings": "3_LopDoiTuong_Java_modified.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "3_LopDoiTuong_Java_modified.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/4-HieuThem-Java-1-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/4-HieuThem-Java-1-viewer.html",
+    "title": "4_HieuThem_Java-1.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 4_HieuThem_Java-1.pdf",
+    "headings": "4_HieuThem_Java-1.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "4_HieuThem_Java-1.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/5-HieuThem-Java-2-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/5-HieuThem-Java-2-viewer.html",
+    "title": "5_HieuThem_Java-2.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 5_HieuThem_Java-2.pdf",
+    "headings": "5_HieuThem_Java-2.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "5_HieuThem_Java-2.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/6-OOP_ThuaKe-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/6-OOP_ThuaKe-viewer.html",
+    "title": "6-OOP_ThuaKe.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 6-OOP_ThuaKe.pdf",
+    "headings": "6-OOP_ThuaKe.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "6-OOP_ThuaKe.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/7-OOP_Dahinh-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/7-OOP_Dahinh-viewer.html",
+    "title": "7-OOP_Dahinh.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 7-OOP_Dahinh.pdf",
+    "headings": "7-OOP_Dahinh.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "7-OOP_Dahinh.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/8-Exceptions-v2-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/8-Exceptions-v2-viewer.html",
+    "title": "8 - Exceptions v2.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 8 - Exceptions v2.pdf",
+    "headings": "8 - Exceptions v2.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "8 - Exceptions v2.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/9-IOStreams-v2-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/9-IOStreams-v2-viewer.html",
+    "title": "9 - IOStreams v2.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > 9 - IOStreams v2.pdf",
+    "headings": "9 - IOStreams v2.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "9 - IOStreams v2.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/Design-Patterns-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-lthdt/slides/TS_Nguyen_Duc_Anh/Design-Patterns-viewer.html",
+    "title": "Design Patterns-new2.pdf",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Lập trình hướng đối tượng > Slide Bài giảng > TS. Nguyễn Đức Anh > Design Patterns-new2.pdf",
+    "headings": "Design Patterns-new2.pdf",
+    "tags": [
+      "pdf"
+    ],
+    "keywords": "Design Patterns-new2.pdf Lập trình hướng đối tượng TS Nguyen Duc Anh pdf",
+    "type": "pdf",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Lập trình hướng đối tượng",
+    "courseCode": null,
+    "lecturer": "TS Nguyen Duc Anh",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html",
+    "title": "GS. Lê Sỹ Vinh",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > GS. Lê Sỹ Vinh",
+    "headings": "GS. Lê Sỹ Vinh Slide Bài giảng Tài liệu học tập",
+    "tags": [
+      "page"
+    ],
+    "keywords": "GS. Lê Sỹ Vinh Xác suất thống kê page",
+    "type": "page",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": null
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-1-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-1-viewer.html",
+    "title": "Tuần 1: Biến cố và xác suất của biến cố (P1)",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 1: Biến cố và xác suất của biến cố (P1)",
+    "headings": "Tuần 1: Biến cố và xác suất của biến cố (P1)",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 1: Biến cố và xác suất của biến cố (P1) Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-10-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-10-viewer.html",
+    "title": "Tuần 10: Phân tích tương quan & Hồi quy",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 10: Phân tích tương quan & Hồi quy",
+    "headings": "Tuần 10: Phân tích tương quan & Hồi quy",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 10: Phân tích tương quan & Hồi quy Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-11-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-11-viewer.html",
+    "title": "Tuần 11: Công thức Bayes",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 11: Công thức Bayes",
+    "headings": "Tuần 11: Công thức Bayes",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 11: Công thức Bayes Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-2-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-2-viewer.html",
+    "title": "Tuần 2: Biến cố và xác suất của biến cố (P2)",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 2: Biến cố và xác suất của biến cố (P2)",
+    "headings": "Tuần 2: Biến cố và xác suất của biến cố (P2)",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 2: Biến cố và xác suất của biến cố (P2) Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-3-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-3-viewer.html",
+    "title": "Tuần 3: Đại lượng ngẫu nhiên rời rạc",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 3: Đại lượng ngẫu nhiên rời rạc",
+    "headings": "Tuần 3: Đại lượng ngẫu nhiên rời rạc",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 3: Đại lượng ngẫu nhiên rời rạc Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-5-6-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-5-6-viewer.html",
+    "title": "Tuần 5 & 6: Đại lượng ngẫu nhiên liên tục",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 5 & 6: Đại lượng ngẫu nhiên liên tục",
+    "headings": "Tuần 5 & 6: Đại lượng ngẫu nhiên liên tục",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 5 & 6: Đại lượng ngẫu nhiên liên tục Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-6-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-6-viewer.html",
+    "title": "Tuần 6: Luật số lớn & Định lý giới hạn trung tâm",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 6: Luật số lớn & Định lý giới hạn trung tâm",
+    "headings": "Tuần 6: Luật số lớn & Định lý giới hạn trung tâm",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 6: Luật số lớn & Định lý giới hạn trung tâm Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-7-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-7-viewer.html",
+    "title": "Tuần 7: Giới thiệu thống kê & Khoảng tin cậy",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 7: Giới thiệu thống kê & Khoảng tin cậy",
+    "headings": "Tuần 7: Giới thiệu thống kê & Khoảng tin cậy",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 7: Giới thiệu thống kê & Khoảng tin cậy Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-8-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-8-viewer.html",
+    "title": "Tuần 8: Kiểm định giả thuyết",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 8: Kiểm định giả thuyết",
+    "headings": "Tuần 8: Kiểm định giả thuyết",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 8: Kiểm định giả thuyết Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-9-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-xstk/slides/xac-suat-thong-ke-week-9-viewer.html",
+    "title": "Tuần 9: Kiểm định – P-value",
+    "description": "",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Xác suất thống kê > Slide Bài giảng > Tuần 9: Kiểm định – P-value",
+    "headings": "Tuần 9: Kiểm định – P-value",
+    "tags": [
+      "powerpoint"
+    ],
+    "keywords": "Tuần 9: Kiểm định – P-value Xác suất thống kê powerpoint",
+    "type": "powerpoint",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Xác suất thống kê",
+    "courseCode": null,
+    "lecturer": "",
+    "lastmod": "2025-10-03",
+    "ogImage": "",
+    "entityType": "slide",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  }
 ]

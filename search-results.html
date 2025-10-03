@@ -116,12 +116,17 @@
         };
 
         // 1. Tải dữ liệu tìm kiếm
-        const response = await fetch('/assets/js/search-data.json');
-        const allDocuments = await response.json();
+        const allDocuments = await (async () => {
+            const tryUrls = ['assets/js/search-data.json', '/assets/js/search-data.json'];
+            for (const url of tryUrls) {
+                try { return await (await fetch(url)).json(); } catch (e) { /* continue */ }
+            }
+            console.error("Could not load search data from any provided URL.");
+            return [];
+        })();
 
         /**
          * Chuẩn hóa chuỗi tiếng Việt để tìm kiếm không dấu.
-         * Ví dụ: "Xác Suất Thống Kê" -> "xac suat thong ke"
          */
         function normalizeVietnamese(str) {
             if (!str) return '';
@@ -135,42 +140,71 @@
         function performSearch() {
             const rawQuery = searchInput.value.trim();
             const normalizedQuery = normalizeVietnamese(rawQuery);
-
+ 
             if (!normalizedQuery) {
                 resultsContainer.innerHTML = '';
                 noResultsDiv.style.display = 'none';
                 searchSummary.textContent = '';
                 return;
             }
-
+ 
+            // Tách query thành các token
+            const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
+ 
             const results = allDocuments
-                .map(doc => {
-                    let score = 0;
-                    const normalizedTitle = normalizeVietnamese(doc.title);
-                    const normalizedPath = normalizeVietnamese(doc.path);
-                    const normalizedKeywords = normalizeVietnamese(doc.keywords);
+              .map(doc => {
+                let score = 0;
+                const normalizedTitle    = normalizeVietnamese(doc.title || '');
+                const normalizedPath     = normalizeVietnamese(doc.path  || '');
+                const normalizedKeywords = normalizeVietnamese(doc.keywords || '');
+                const combinedText       = `${normalizedTitle} ${normalizedKeywords} ${normalizedPath}`;
 
-                    // Tính điểm cho tiêu đề (quan trọng nhất)
-                    if (normalizedTitle.includes(normalizedQuery)) {
-                        if (normalizedTitle === normalizedQuery) score += 10; // Khớp chính xác
-                        else if (normalizedTitle.startsWith(normalizedQuery)) score += 5; // Bắt đầu bằng
-                        else score += 3; // Có chứa
-                    }
+                const matched = queryTokens.filter(t => combinedText.includes(t)).length;
+                const ratio   = queryTokens.length ? matched / queryTokens.length : 0;
 
-                    // Tính điểm cho từ khóa
-                    if (normalizedKeywords.includes(normalizedQuery)) {
-                        score += 2;
-                    }
+                const titleHasAllTokens = queryTokens.every(t => normalizedTitle.includes(t));
+                const passesTokenRule =
+                  (queryTokens.length >= 3 && ratio >= 0.6) ||
+                  (queryTokens.length <= 2 && titleHasAllTokens);
 
-                    // Tính điểm cho đường dẫn
-                    if (normalizedPath.includes(normalizedQuery)) {
-                        score += 1;
-                    }
+                if (passesTokenRule) {
+                  score += matched;
+                  if (titleHasAllTokens) {
+                    score += 10;
+                  }
+                  if (normalizedTitle.includes(normalizedQuery)) {
+                    score += 5;
+                  }
+                }
+ 
+                if (normalizedKeywords.includes(normalizedQuery)) score += 2;
+                if (normalizedPath.includes(normalizedQuery))     score += 1;
+ 
+                return { ...doc, score };
+              })
+              .filter(r => r.score > 0)
+              .sort((a, b) => {
+                  // --- LOGIC SẮP XẾP MỚI ---
+                  
+                  // Ưu tiên 1: Môn học (subject) luôn lên đầu
+                  const isASubject = a.type === 'subject';
+                  const isBSubject = b.type === 'subject';
+                  if (isASubject && !isBSubject) return -1; // a lên trước
+                  if (!isASubject && isBSubject) return 1;  // b lên trước
 
-                    return { ...doc, score };
-                })
-                .filter(doc => doc.score > 0) // Lọc những kết quả có điểm
-                .sort((a, b) => b.score - a.score); // Sắp xếp điểm từ cao đến thấp
+                  // Ưu tiên 2: Tài liệu bài giảng (slides, pdf, etc.)
+                  const lectureMaterialTypes = ['powerpoint', 'pdf', 'word', 'video', 'link'];
+                  const isALecture = lectureMaterialTypes.includes(a.type);
+                  const isBLecture = lectureMaterialTypes.includes(b.type);
+                  // Chỉ áp dụng luật này khi không so sánh với Môn học
+                  if (!isASubject && !isBSubject) {
+                      if (isALecture && !isBLecture) return -1; // a lên trước
+                      if (!isALecture && isBLecture) return 1;  // b lên trước
+                  }
+
+                  // Ưu tiên 3: Nếu cùng loại, sắp xếp theo điểm số liên quan
+                  return b.score - a.score;
+              });
 
             searchSummary.innerHTML = `Tìm thấy <strong>${results.length}</strong> kết quả cho từ khóa "<strong>${rawQuery}</strong>"`;
             resultsContainer.innerHTML = '';
@@ -186,8 +220,7 @@
                             <i class="${iconClass} result-icon"></i>
                             <div class="result-info">
                                 <h3>${doc.title}</h3>
-                                <p class="result-path">${doc.path.replace(/>/g, '›')}</p>
-                            </div>
+                                </div>
                         </a>
                     `;
                     resultsContainer.innerHTML += itemHTML;
@@ -195,7 +228,7 @@
             }
         }
 
-        // 2. Lấy từ khóa từ URL và thực hiện tìm kiếm
+        // Lấy từ khóa từ URL và thực hiện tìm kiếm
         const urlParams = new URLSearchParams(window.location.search);
         const initialQuery = urlParams.get('q');
         if (initialQuery) {
@@ -203,7 +236,7 @@
             performSearch();
         }
 
-        // 3. Gắn sự kiện tìm kiếm
+        // Gắn sự kiện tìm kiếm
         searchInput.addEventListener('input', performSearch);
     });
     </script>
