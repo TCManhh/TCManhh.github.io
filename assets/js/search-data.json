@@ -420,48 +420,6 @@
     "parentEntityUrl": null
   },
   {
-    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html",
-    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html",
-    "title": "Sách Algorithms 4th Ed",
-    "description": "",
-    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Sách Algorithms 4th Ed",
-    "headings": "Sách Algorithms 4th Ed",
-    "tags": [
-      "powerpoint"
-    ],
-    "keywords": "Sách Algorithms 4th Ed Cấu Trúc Dữ Liệu và Giải Thuật TS Tran Thi Minh Chau powerpoint",
-    "type": "powerpoint",
-    "university": "Đại học Công nghệ - ĐHQGHN",
-    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
-    "courseCode": null,
-    "lecturer": "TS Tran Thi Minh Chau",
-    "lastmod": "2025-10-03",
-    "ogImage": "",
-    "entityType": "slide",
-    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau.html"
-  },
-  {
-    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/algs4-website-viewer.html",
-    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/algs4-website-viewer.html",
-    "title": "Trang web sách Algorithms 4th Ed",
-    "description": "",
-    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Slide Bài giảng > TS. Trần Thị Minh Châu > Trang web sách Algorithms 4th Ed",
-    "headings": "Trang web sách Algorithms 4th Ed",
-    "tags": [
-      "link"
-    ],
-    "keywords": "Trang web sách Algorithms 4th Ed Cấu Trúc Dữ Liệu và Giải Thuật link",
-    "type": "link",
-    "university": "Đại học Công nghệ - ĐHQGHN",
-    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
-    "courseCode": null,
-    "lecturer": "",
-    "lastmod": "2025-10-03",
-    "ogImage": "",
-    "entityType": "page",
-    "parentEntityUrl": null
-  },
-  {
     "id": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Cong_cu_thuc_hanh_ve_mach.html",
     "url": "/truong-dai-hoc/uet/cntt-ktmt/slides/PGS_TS_NguyenTriThanh/Cong_cu_thuc_hanh_ve_mach.html",
     "title": "Công cụ thực hành vẽ mạch",
@@ -1321,5 +1279,49 @@
     "ogImage": "",
     "entityType": "slide",
     "parentEntityUrl": "/truong-dai-hoc/uet/cntt-xstk/slides/le-sy-vinh-documents.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach/sach-algorithms-4th-ed-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach/sach-algorithms-4th-ed-viewer.html",
+    "title": "Sách Algorithms 4th Ed",
+    "description": "Sách Algorithms, 4th Edition của Robert Sedgewick và Kevin Wayne.",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Giáo trình & Sách > Sách Algorithms 4th Ed",
+    "headings": "Sách Algorithms 4th Ed",
+    "tags": [
+      "textbook",
+      "pdf"
+    ],
+    "keywords": "Sách Algorithms 4th Ed, Giáo trình, Cấu Trúc Dữ Liệu và Giải Thuật, Sedgewick, Wayne, textbook, pdf",
+    "type": "textbook",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": "INT2210",
+    "lecturer": "",
+    "lastmod": "2025-10-04",
+    "ogImage": "",
+    "entityType": "textbook",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach.html"
+  },
+  {
+    "id": "/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach/website-algorithms-4th-ed-viewer.html",
+    "url": "/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach/website-algorithms-4th-ed-viewer.html",
+    "title": "Trang web sách Algorithms 4th Ed",
+    "description": "Trang web chính thức của sách Algorithms, 4th Edition với các tài nguyên, mã nguồn và bài tập.",
+    "path": "Trang chủ > Tài Liệu Trường Đại học & Học viện > Trường Đại học Công nghệ > Cấu Trúc Dữ Liệu và Giải Thuật > Giáo trình & Sách > Trang web sách Algorithms 4th Ed",
+    "headings": "Trang web sách Algorithms 4th Ed",
+    "tags": [
+      "link",
+      "website"
+    ],
+    "keywords": "Trang web sách Algorithms 4th Ed, Cấu Trúc Dữ Liệu và Giải Thuật, Sedgewick, Wayne, link, website",
+    "type": "link",
+    "university": "Đại học Công nghệ - ĐHQGHN",
+    "courseName": "Cấu Trúc Dữ Liệu và Giải Thuật",
+    "courseCode": "INT2210",
+    "lecturer": "",
+    "lastmod": "2025-10-04",
+    "ogImage": "",
+    "entityType": "page",
+    "parentEntityUrl": "/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach.html"
   }
 ]
