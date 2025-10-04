@@ -1,255 +1,371 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StuHub - Chia Sẻ Tri Thức, Kiến Tạo Tương Lai</title> 
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StuHub - Chia Sẻ Tri Thức, Kiến Tạo Tương Lai</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
     <div id="header-placeholder"></div>
 
     <main>
-        <section class="hero-section">
-            <div class="hero-overlay"></div>
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Chia Sẻ Tri Thức<br>Kiến Tạo Tương Lai</h1>
-                    <p>Nền tảng tìm kiếm và chia sẻ tài liệu học tập dành cho toàn&nbsp;thể&nbsp;sinh&nbsp;viên&nbsp;Việt&nbsp;Nam.</p>
-                    <div class="search-wrapper">
-                        <div class="search-bar">
-                            <input type="text" id="main-search-input" placeholder="Tìm kiếm tài liệu, môn học, đề thi..." autocomplete="off">
-                            <button type="submit" id="main-search-button"><i class="fas fa-search"></i></button>
-                        </div>
-                        <div id="search-suggestions"></div>
-                    </div>
-                    <div class="hero-cta">
-                        <span>Hoặc</span>
-                        <a href="#upload-section" class="btn btn-upload"><i class="fas fa-upload"></i> Tải Lên Tài Liệu</a>
-                    </div>
-                </div>
+      <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container">
+          <div class="hero-content">
+            <h1>Chia Sẻ Tri Thức<br />Kiến Tạo Tương Lai</h1>
+            <p>
+              Nền tảng tìm kiếm và chia sẻ tài liệu học tập dành cho
+              toàn&nbsp;thể&nbsp;sinh&nbsp;viên&nbsp;Việt&nbsp;Nam.
+            </p>
+            <div class="search-wrapper">
+              <div class="search-bar">
+                <input
+                  type="text"
+                  id="main-search-input"
+                  placeholder="Tìm kiếm tài liệu, môn học, đề thi..."
+                  autocomplete="off"
+                />
+                <button type="submit" id="main-search-button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <div id="search-suggestions"></div>
             </div>
-        </section>
-
-        <section class="features-section">
-            <div class="container">
-                <div class="feature-item">
-                    <div class="feature-icon"><i class="fas fa-book-open"></i></div>
-                    <h3>Tài Liệu Đa Dạng</h3>
-                    <p>Hàng ngàn tài liệu từ sách, giáo trình đến đề thi được cập nhật liên tục.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon"><i class="fas fa-users"></i></div>
-                    <h3>Cộng Đồng Năng Động</h3>
-                    <p>Tham gia cộng đồng sinh viên ham học hỏi, cùng nhau tiến bộ.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon"><i class="fas fa-cloud-arrow-up"></i></div>
-                    <h3>Chia Sẻ Dễ Dàng</h3>
-                    <p>Chia sẻ tài liệu của bạn đến với mọi người chỉ với vài cú nhấp chuột.</p>
-                </div>
+            <div class="hero-cta">
+              <span>Hoặc</span>
+              <a href="#upload-section" class="btn btn-upload"
+                ><i class="fas fa-upload"></i> Tải Lên Tài Liệu</a
+              >
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <section class="documents-section">
-            <div class="container">
-                <h2>Khám Phá Tài Liệu Mới</h2>
-                <div class="document-bento-grid">
-                    <a href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html" class="document-card card-large">
-                        <div class="document-card-content">
-                            <div>
-                                <div class="document-icon ppt"><i class="fas fa-file-powerpoint"></i></div>
-                                <div class="document-info">
-                                    <h3>Bài giảng: Mergesort - Sắp xếp trộn</h3>
-                                    <p>Giảng viên: TS. Trần Thị Minh Châu</p>
-                                    <span class="tag">CTDL & Giải thuật</span>
-                                </div>
-                            </div>
-                            <div class="document-stats">
-                                <span><i class="fas fa-download"></i> 2,150</span>
-                                <span><i class="fas fa-calendar-alt"></i> 24/09/2025</span>
-                            </div>
-                        </div>
-                    </a>
-                     <a href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-stack-queue-viewer.html" class="document-card">
-                         <div class="document-card-content">
-                            <div class="document-icon doc"><i class="fas fa-edit"></i></div>
-                            <div class="document-info">
-                                <h3>Bài tập: Stack and Queue</h3>
-                                <p>ĐH Công nghệ - ĐHQGHN</p>
-                                <span class="tag">Bài tập</span>
-                            </div>
-                        </div>
-                    </a>
-                     <a href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html" class="document-card">
-                        <div class="document-card-content">
-                           <div class="document-icon pdf"><i class="fas fa-file-pdf"></i></div>
-                           <div class="document-info">
-                               <h3>Sách Algorithms 4th Ed</h3>
-                               <p>Sedgewick & Wayne</p>
-                               <span class="tag">Giáo trình</span>
-                           </div>
-                       </div>
-                   </a>
-                </div>
-                 <div class="view-all-link">
-                    <a href="/truong-dai-hoc.html" class="btn btn-secondary">Xem tất cả tài liệu <i class="fas fa-arrow-right"></i></a>
-                </div>
+      <section class="features-section">
+        <div class="container">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+            <h3>Tài Liệu Đa Dạng</h3>
+            <p>
+              Hàng ngàn tài liệu từ sách, giáo trình đến đề thi được cập nhật
+              liên tục.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-users"></i></div>
+            <h3>Cộng Đồng Năng Động</h3>
+            <p>Tham gia cộng đồng sinh viên ham học hỏi, cùng nhau tiến bộ.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-cloud-arrow-up"></i>
             </div>
-        </section>
+            <h3>Chia Sẻ Dễ Dàng</h3>
+            <p>
+              Chia sẻ tài liệu của bạn đến với mọi người chỉ với vài cú nhấp
+              chuột.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <section id="upload-section" class="upload-section">
-             <div class="container">
-                <h2>Chung Tay Xây Dựng Cộng Đồng Tri Thức</h2>
-                <p>Mỗi tài liệu bạn chia sẻ là một đóng góp quý giá cho cộng đồng.</p>
-                <form id="upload-form" class="upload-box">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Kéo và thả tệp hoặc nhấp để chọn tệp</p>
-                    <span>Hỗ trợ các định dạng PDF, DOCX, PPTX,...</span>
-                    <label for="file-upload" class="btn btn-primary">Chọn Tệp (Có thể chọn nhiều)</label>
-                    <input type="file" id="file-upload" required style="display: none;" multiple>
-                    
-                    <div class="form-fields" style="display: none; margin-top: 20px; text-align: left;">
-                        <input type="text" id="university" name="university" placeholder="Tên trường đại học..." required>
-                        <span class="error-message" id="university-error"></span>
+      <section class="documents-section">
+        <div class="container">
+          <h2>Khám Phá Tài Liệu Mới</h2>
+          <div class="document-bento-grid">
+            <a
+              href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html"
+              class="document-card card-large"
+            >
+              <div class="document-card-content">
+                <div>
+                  <div class="document-icon ppt">
+                    <i class="fas fa-file-powerpoint"></i>
+                  </div>
+                  <div class="document-info">
+                    <h3>Bài giảng: Mergesort - Sắp xếp trộn</h3>
+                    <p>Giảng viên: TS. Trần Thị Minh Châu</p>
+                    <span class="tag">CTDL & Giải thuật</span>
+                  </div>
+                </div>
+                <div class="document-stats">
+                  <span><i class="fas fa-download"></i> 2,150</span>
+                  <span><i class="fas fa-calendar-alt"></i> 24/09/2025</span>
+                </div>
+              </div>
+            </a>
+            <a
+              href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-tap-stack-queue-viewer.html"
+              class="document-card"
+            >
+              <div class="document-card-content">
+                <div class="document-icon doc"><i class="fas fa-edit"></i></div>
+                <div class="document-info">
+                  <h3>Bài tập: Stack and Queue</h3>
+                  <p>ĐH Công nghệ - ĐHQGHN</p>
+                  <span class="tag">Bài tập</span>
+                </div>
+              </div>
+            </a>
+            <a
+              href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/tuan-1-viewer.html"
+              class="document-card"
+            >
+              <div class="document-card-content">
+                <div class="document-icon pdf">
+                  <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="document-info">
+                  <h3>Sách Algorithms 4th Ed</h3>
+                  <p>Sedgewick & Wayne</p>
+                  <span class="tag">Giáo trình</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="view-all-link">
+            <a href="/truong-dai-hoc.html" class="btn btn-secondary"
+              >Xem tất cả tài liệu <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </section>
 
-                        <input type="text" id="subject" name="subject" placeholder="Tên môn học..." required>
-                        <span class="error-message" id="subject-error"></span>
-                        
-                        <input type="text" id="teacher" name="teacher" placeholder="Tên giảng viên hoặc khoa..." required>
-                        <span class="error-message" id="teacher-error"></span>
+      <section id="upload-section" class="upload-section">
+        <div class="container">
+          <h2>Chung Tay Xây Dựng Cộng Đồng Tri Thức</h2>
+          <p>Mỗi tài liệu bạn chia sẻ là một đóng góp quý giá cho cộng đồng.</p>
+          <form id="upload-form" class="upload-box">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Kéo và thả tệp hoặc nhấp để chọn tệp</p>
+            <span>Hỗ trợ các định dạng PDF, DOCX, PPTX,...</span>
+            <label for="file-upload" class="btn btn-primary"
+              >Chọn Tệp (Có thể chọn nhiều)</label
+            >
+            <input
+              type="file"
+              id="file-upload"
+              required
+              style="display: none"
+              multiple
+            />
 
-                        <textarea id="description" name="description" placeholder="Mô tả ngắn về tài liệu..." rows="3"></textarea>
-                        
-                        <button type="submit" class="btn btn-primary" id="submit-btn" style="width: 100%; margin-top: 10px;">
-                            <i class="fas fa-upload"></i> Tải Lên
-                        </button>
-                    </div>
-                    
-                    <div id="upload-status" style="margin-top: 20px;"></div>
-                </form>
+            <div
+              class="form-fields"
+              style="display: none; margin-top: 20px; text-align: left"
+            >
+              <input
+                type="text"
+                id="university"
+                name="university"
+                placeholder="Tên trường đại học..."
+                required
+              />
+              <span class="error-message" id="university-error"></span>
+
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Tên môn học..."
+                required
+              />
+              <span class="error-message" id="subject-error"></span>
+
+              <input
+                type="text"
+                id="teacher"
+                name="teacher"
+                placeholder="Tên giảng viên hoặc khoa..."
+                required
+              />
+              <span class="error-message" id="teacher-error"></span>
+
+              <textarea
+                id="description"
+                name="description"
+                placeholder="Mô tả ngắn về tài liệu..."
+                rows="3"
+              ></textarea>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="submit-btn"
+                style="width: 100%; margin-top: 10px"
+              >
+                <i class="fas fa-upload"></i> Tải Lên
+              </button>
             </div>
-        </section>
+
+            <div id="upload-status" style="margin-top: 20px"></div>
+          </form>
+        </div>
+      </section>
     </main>
 
     <div id="footer-placeholder"></div>
-        <div id="success-popup" class="popup-overlay">
-            <div class="popup-content">
-                <button id="popup-close-btn" class="popup-close">&times;</button>
-                <img src="https://i.pinimg.com/originals/c3/00/45/c30045e7f17b6a7114b537651a1a7a42.gif" alt="Mèo đa tạ">
-                <h3>Đa tạ sư huynh!</h3>
-            </div>
-        </div>
+    <div id="success-popup" class="popup-overlay">
+      <div class="popup-content">
+        <button id="popup-close-btn" class="popup-close">&times;</button>
+        <img
+          src="https://i.pinimg.com/originals/c3/00/45/c30045e7f17b6a7114b537651a1a7a42.gif"
+          alt="Mèo đa tạ"
+        />
+        <h3>Đa tạ sư huynh!</h3>
+      </div>
+    </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // =======================================================
-    // --- PHẦN 1: SCRIPT CHO THANH TÌM KIẾM VÀ GỢI Ý ---
-    // =======================================================
-    const searchInput = document.getElementById('main-search-input');
-    const searchButton = document.getElementById('main-search-button');
-    const suggestionsContainer = document.getElementById('search-suggestions');
-    let allDocuments = [];
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // =======================================================
+        // --- PHẦN 1: SCRIPT CHO THANH TÌM KIẾM VÀ GỢI Ý ---
+        // =======================================================
+        const searchInput = document.getElementById("main-search-input");
+        const searchButton = document.getElementById("main-search-button");
+        const suggestionsContainer =
+          document.getElementById("search-suggestions");
+        let allDocuments = [];
 
-    // Tải dữ liệu tìm kiếm một lần
-    (async () => {
-        const tryUrls = ['assets/js/search-data.json', '/assets/js/search-data.json'];
-        for (const url of tryUrls) {
-            try { allDocuments = await (await fetch(url)).json(); break; } catch (e) { /* continue */ }
-        }
-        if (allDocuments.length === 0) console.error("Could not load search data for suggestions.");
-    })();
-
-    // Bản đồ icon
-    const iconMap = {
-        'powerpoint': 'fas fa-file-powerpoint', 'pdf': 'fas fa-file-pdf',
-        'word': 'fas fa-file-word', 'link': 'fas fa-link', 'video': 'fas fa-video',
-        'subject': 'fas fa-book'
-    };
-
-    // Hàm chuẩn hóa tiếng Việt
-    function normalizeVietnamese(str) {
-        if (!str) return '';
-        return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
-    }
-
-    // Hàm thực hiện chuyển trang khi nhấn nút hoặc Enter
-    function performSearch() {
-        const query = searchInput.value.trim();
-        if (query) {
-            window.location.href = `/search-results.html?q=${encodeURIComponent(query)}`;
-        }
-    }
-    
-    // Hàm hiển thị gợi ý
-    function showSuggestions() {
-        const rawQuery = searchInput.value.trim();
-        const normalizedQuery = normalizeVietnamese(rawQuery);
-
-        if (!normalizedQuery) {
-            suggestionsContainer.style.display = 'none';
-            return;
-        }
-
-        const results = allDocuments
-        .map(doc => {
-            let score = 0;
-            const normalizedTitle    = normalizeVietnamese(doc.title || '');
-            const normalizedPath     = normalizeVietnamese(doc.path  || '');
-            const normalizedKeywords = normalizeVietnamese(doc.keywords || '');
-            const combinedText       = `${normalizedTitle} ${normalizedKeywords} ${normalizedPath}`;
-
-            const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
-
-            const matched = queryTokens.filter(t => combinedText.includes(t)).length;
-            const ratio   = queryTokens.length ? matched / queryTokens.length : 0;
-
-            const titleHasAllTokens = queryTokens.every(t => normalizedTitle.includes(t));
-            const passesTokenRule =
-              (queryTokens.length >= 3 && ratio >= 0.6) ||
-              (queryTokens.length <= 2 && titleHasAllTokens);
-
-            if (passesTokenRule) {
-              score += matched;
-              if (titleHasAllTokens) {
-                score += 10;
-              }
-              if (normalizedTitle.includes(normalizedQuery)) {
-                score += 5;
-              }
+        // Tải dữ liệu tìm kiếm một lần
+        (async () => {
+          const tryUrls = [
+            "assets/js/search-data.json",
+            "/assets/js/search-data.json",
+          ];
+          for (const url of tryUrls) {
+            try {
+              allDocuments = await (await fetch(url)).json();
+              break;
+            } catch (e) {
+              /* continue */
             }
-            if (normalizeVietnamese(doc.keywords).includes(normalizedQuery)) score += 2;
-            if (normalizeVietnamese(doc.path).includes(normalizedQuery)) score += 1;
-            return { ...doc, score };
-        })
-        .filter(doc => doc.score > 0)
-        .sort((a, b) => {
-            // --- LOGIC SẮP XẾP MỚI ---
-            
-            // Ưu tiên 1: Môn học (subject) luôn lên đầu
-            const isASubject = a.type === 'subject';
-            const isBSubject = b.type === 'subject';
-            if (isASubject && !isBSubject) return -1;
-            if (!isASubject && isBSubject) return 1;
+          }
+          if (allDocuments.length === 0)
+            console.error("Could not load search data for suggestions.");
+        })();
 
-            // Ưu tiên 2: Tài liệu bài giảng
-            const lectureMaterialTypes = ['powerpoint', 'pdf', 'word', 'video', 'link'];
-            const isALecture = lectureMaterialTypes.includes(a.type);
-            const isBLecture = lectureMaterialTypes.includes(b.type);
-            if (!isASubject && !isBSubject) {
+        // Bản đồ icon
+        const iconMap = {
+          powerpoint: "fas fa-file-powerpoint",
+          pdf: "fas fa-file-pdf",
+          word: "fas fa-file-word",
+          link: "fas fa-link",
+          video: "fas fa-video",
+          subject: "fas fa-book",
+        };
+
+        // Hàm chuẩn hóa tiếng Việt
+        function normalizeVietnamese(str) {
+          if (!str) return "";
+          return str
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d");
+        }
+
+        // Hàm thực hiện chuyển trang khi nhấn nút hoặc Enter
+        function performSearch() {
+          const query = searchInput.value.trim();
+          if (query) {
+            window.location.href = `/search-results.html?q=${encodeURIComponent(
+              query
+            )}`;
+          }
+        }
+
+        // Hàm hiển thị gợi ý
+        function showSuggestions() {
+          const rawQuery = searchInput.value.trim();
+          const normalizedQuery = normalizeVietnamese(rawQuery);
+
+          if (!normalizedQuery) {
+            suggestionsContainer.style.display = "none";
+            return;
+          }
+
+          const results = allDocuments
+            .map((doc) => {
+              let score = 0;
+              const normalizedTitle = normalizeVietnamese(doc.title || "");
+              const normalizedPath = normalizeVietnamese(doc.path || "");
+              const normalizedKeywords = normalizeVietnamese(
+                doc.keywords || ""
+              );
+              const combinedText = `${normalizedTitle} ${normalizedKeywords} ${normalizedPath}`;
+
+              const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
+
+              const matched = queryTokens.filter((t) =>
+                combinedText.includes(t)
+              ).length;
+              const ratio = queryTokens.length
+                ? matched / queryTokens.length
+                : 0;
+
+              const titleHasAllTokens = queryTokens.every((t) =>
+                normalizedTitle.includes(t)
+              );
+              const passesTokenRule =
+                (queryTokens.length >= 3 && ratio >= 0.6) ||
+                (queryTokens.length <= 2 && titleHasAllTokens);
+
+              if (passesTokenRule) {
+                score += matched;
+                if (titleHasAllTokens) {
+                  score += 10;
+                }
+                if (normalizedTitle.includes(normalizedQuery)) {
+                  score += 5;
+                }
+              }
+              if (normalizeVietnamese(doc.keywords).includes(normalizedQuery))
+                score += 2;
+              if (normalizeVietnamese(doc.path).includes(normalizedQuery))
+                score += 1;
+              return { ...doc, score };
+            })
+            .filter((doc) => doc.score > 0)
+            .sort((a, b) => {
+              // --- LOGIC SẮP XẾP MỚI ---
+
+              // Ưu tiên 1: Môn học (subject) luôn lên đầu
+              const isASubject = a.type === "subject";
+              const isBSubject = b.type === "subject";
+              if (isASubject && !isBSubject) return -1;
+              if (!isASubject && isBSubject) return 1;
+
+              // Ưu tiên 2: Tài liệu bài giảng
+              const lectureMaterialTypes = [
+                "powerpoint",
+                "pdf",
+                "word",
+                "video",
+                "link",
+              ];
+              const isALecture = lectureMaterialTypes.includes(a.type);
+              const isBLecture = lectureMaterialTypes.includes(b.type);
+              if (!isASubject && !isBSubject) {
                 if (isALecture && !isBLecture) return -1;
                 if (!isALecture && isBLecture) return 1;
-            }
+              }
 
-            // Ưu tiên 3: Điểm số liên quan
-            return b.score - a.score;
-        })
-        .slice(0, 6); // Lấy 6 kết quả hàng đầu
+              // Ưu tiên 3: Điểm số liên quan
+              return b.score - a.score;
+            })
+            .slice(0, 6); // Lấy 6 kết quả hàng đầu
 
-        if (results.length > 0) {
-            suggestionsContainer.innerHTML = results.map(doc => {
-                const iconClass = iconMap[doc.type] || 'fas fa-file';
+          if (results.length > 0) {
+            suggestionsContainer.innerHTML = results
+              .map((doc) => {
+                const iconClass = iconMap[doc.type] || "fas fa-file";
                 return `
                     <a href="${doc.url}" class="suggestion-item">
                         <i class="${iconClass} suggestion-icon"></i>
@@ -257,201 +373,246 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span class="suggestion-title">${doc.title}</span>
                             </div>
                     </a>`;
-            }).join('');
-            suggestionsContainer.style.display = 'block';
-        } else {
-            suggestionsContainer.style.display = 'none';
+              })
+              .join("");
+            suggestionsContainer.style.display = "block";
+          } else {
+            suggestionsContainer.style.display = "none";
+          }
         }
-    }
 
-    // Gắn sự kiện
-    searchButton.addEventListener('click', performSearch);
-    searchInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
+        // Gắn sự kiện
+        searchButton.addEventListener("click", performSearch);
+        searchInput.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
             performSearch();
-        }
-    });
-    searchInput.addEventListener('input', showSuggestions);
-
-    // Ẩn gợi ý khi click ra ngoài
-    document.addEventListener('click', function(event) {
-        const isClickInside = searchInput.contains(event.target) || suggestionsContainer.contains(event.target);
-        if (!isClickInside) {
-            suggestionsContainer.style.display = 'none';
-        }
-    });
-
-    // Ẩn gợi ý khi người dùng cuộn trang
-    window.addEventListener('scroll', function() {
-        if (suggestionsContainer.style.display === 'block') {
-            suggestionsContainer.style.display = 'none';
-        }
-    }, { passive: true });
-
-
-    // ==================================
-    // --- PHẦN 2: SCRIPT UPLOAD FORM ---
-    // ==================================
-    // ... (phần script upload giữ nguyên, không thay đổi)
-    const fileInput = document.getElementById('file-upload');
-    const uploadForm = document.getElementById('upload-form');
-    const statusDiv = document.getElementById('upload-status');
-    const submitBtn = document.getElementById('submit-btn');
-    const uploadBoxText = document.querySelector('.upload-box > p');
-    const originalUploadText = uploadBoxText.textContent;
-    const formFields = document.querySelector('.form-fields');
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyV3FasM4ecK7O6Li0lM6_v3q76eQtUEGjHh6ao_vg_Bh6uy_XflxjEEqC3EduZ-UA7/exec";
-
-    const universityInput = document.getElementById('university');
-    const subjectInput = document.getElementById('subject');
-    const teacherInput = document.getElementById('teacher');
-    const universityError = document.getElementById('university-error');
-    const subjectError = document.getElementById('subject-error');
-    const teacherError = document.getElementById('teacher-error');
-    const inputsToValidate = [universityInput, subjectInput, teacherInput];
-
-    const successPopup = document.getElementById('success-popup');
-    const popupCloseBtn = document.getElementById('popup-close-btn');
-    const popupImage = successPopup.querySelector('img');
-    const popupText = successPopup.querySelector('h3');
-    const popupOptions = [ 
-        { text: "Đa tạ sư huynh!", imageUrl: "https://i.pinimg.com/236x/27/10/92/2710921c9b5c92e7ddc40925c3373b35.jpg" }, 
-        { text: "Tài liệu vip quá hai ơi!", imageUrl: "https://i.pinimg.com/236x/76/c8/8c/76c88cf777792e85badbbd8e002a2082.jpg" }, 
-        { text: "Bắn Tym <3", imageUrl: "https://i.pinimg.com/474x/2a/e6/5f/2ae65f442640ad7baf112f65fad61530.jpg" }, 
-        { text: "Uầy!", imageUrl: "https://cdn2.fptshop.com.vn/unsafe/meme_da_ta_16_4e907df585.jpg" } 
-    ];
-
-    function showPopup() { 
-        if (successPopup && popupImage && popupText) { 
-            const randomIndex = Math.floor(Math.random() * popupOptions.length); 
-            const selectedPopup = popupOptions[randomIndex]; 
-            popupText.textContent = selectedPopup.text; 
-            popupImage.src = selectedPopup.imageUrl; 
-            successPopup.classList.add('active'); 
-        } 
-    }
-    function hidePopup() { 
-        if (successPopup) { 
-            successPopup.classList.remove('active'); 
-        } 
-    }
-
-    function readFileAsBase64(file) { 
-        return new Promise((resolve, reject) => { 
-            const reader = new FileReader(); 
-            reader.onload = () => { 
-                const fileData = reader.result; 
-                const fileInfo = { fileName: file.name, mimeType: file.type, file: fileData }; 
-                resolve(fileInfo); 
-            }; 
-            reader.onerror = (error) => reject(error); 
-            reader.readAsDataURL(file); 
-        }); 
-    }
-    
-    function validateForm() {
-        let isValid = true;
-        universityInput.classList.remove('input-error');
-        universityError.classList.remove('active');
-        subjectInput.classList.remove('input-error');
-        subjectError.classList.remove('active');
-        teacherInput.classList.remove('input-error');
-        teacherError.classList.remove('active');
-
-        if (universityInput.value.trim() === '') {
-            universityInput.classList.add('input-error');
-            universityError.textContent = 'Vui lòng nhập tên trường.';
-            universityError.classList.add('active');
-            isValid = false;
-        }
-        if (subjectInput.value.trim() === '') {
-            subjectInput.classList.add('input-error');
-            subjectError.textContent = 'Vui lòng nhập tên môn học.';
-            subjectError.classList.add('active');
-            isValid = false;
-        }
-        if (teacherInput.value.trim() === '') {
-            teacherInput.classList.add('input-error');
-            teacherError.textContent = 'Vui lòng nhập tên giảng viên/khoa.';
-            teacherError.classList.add('active');
-            isValid = false;
-        }
-        return isValid;
-    }
-
-    if(popupCloseBtn) { popupCloseBtn.addEventListener('click', hidePopup); }
-    if(successPopup) { successPopup.addEventListener('click', function(event) { if (event.target === successPopup) { hidePopup(); } }); }
-    
-    fileInput.addEventListener('change', function() { 
-        if (fileInput.files.length > 0) { 
-            uploadBoxText.textContent = `${fileInput.files.length} tệp đã được chọn`; 
-            if (formFields) { formFields.style.display = 'block'; } 
-        } else { 
-            uploadBoxText.textContent = originalUploadText; 
-            if (formFields) { formFields.style.display = 'none'; } 
-        } 
-    });
-    
-    inputsToValidate.forEach(input => {
-        input.addEventListener('input', () => {
-            if (input.value.trim() !== '') {
-                input.classList.remove('input-error');
-                const errorSpan = document.getElementById(`${input.id}-error`);
-                if (errorSpan) {
-                    errorSpan.classList.remove('active');
-                }
-            }
+          }
         });
-    });
+        searchInput.addEventListener("input", showSuggestions);
 
-    uploadForm.addEventListener('submit', async function(event) {
-        event.preventDefault();
-        
-        const isFormValid = validateForm();
-        if (!isFormValid) {
-            return;
+        // Ẩn gợi ý khi click ra ngoài
+        document.addEventListener("click", function (event) {
+          const isClickInside =
+            searchInput.contains(event.target) ||
+            suggestionsContainer.contains(event.target);
+          if (!isClickInside) {
+            suggestionsContainer.style.display = "none";
+          }
+        });
+
+        // Ẩn gợi ý khi người dùng cuộn trang
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (suggestionsContainer.style.display === "block") {
+              suggestionsContainer.style.display = "none";
+            }
+          },
+          { passive: true }
+        );
+
+        // ==================================
+        // --- PHẦN 2: SCRIPT UPLOAD FORM ---
+        // ==================================
+        // ... (phần script upload giữ nguyên, không thay đổi)
+        const fileInput = document.getElementById("file-upload");
+        const uploadForm = document.getElementById("upload-form");
+        const statusDiv = document.getElementById("upload-status");
+        const submitBtn = document.getElementById("submit-btn");
+        const uploadBoxText = document.querySelector(".upload-box > p");
+        const originalUploadText = uploadBoxText.textContent;
+        const formFields = document.querySelector(".form-fields");
+        const SCRIPT_URL =
+          "https://script.google.com/macros/s/AKfycbyV3FasM4ecK7O6Li0lM6_v3q76eQtUEGjHh6ao_vg_Bh6uy_XflxjEEqC3EduZ-UA7/exec";
+
+        const universityInput = document.getElementById("university");
+        const subjectInput = document.getElementById("subject");
+        const teacherInput = document.getElementById("teacher");
+        const universityError = document.getElementById("university-error");
+        const subjectError = document.getElementById("subject-error");
+        const teacherError = document.getElementById("teacher-error");
+        const inputsToValidate = [universityInput, subjectInput, teacherInput];
+
+        const successPopup = document.getElementById("success-popup");
+        const popupCloseBtn = document.getElementById("popup-close-btn");
+        const popupImage = successPopup.querySelector("img");
+        const popupText = successPopup.querySelector("h3");
+        const popupOptions = [
+          {
+            text: "Đa tạ sư huynh!",
+            imageUrl:
+              "https://i.pinimg.com/236x/27/10/92/2710921c9b5c92e7ddc40925c3373b35.jpg",
+          },
+          {
+            text: "Tài liệu vip quá hai ơi!",
+            imageUrl:
+              "https://i.pinimg.com/236x/76/c8/8c/76c88cf777792e85badbbd8e002a2082.jpg",
+          },
+          {
+            text: "Bắn Tym <3",
+            imageUrl:
+              "https://i.pinimg.com/474x/2a/e6/5f/2ae65f442640ad7baf112f65fad61530.jpg",
+          },
+          {
+            text: "Uầy!",
+            imageUrl:
+              "https://cdn2.fptshop.com.vn/unsafe/meme_da_ta_16_4e907df585.jpg",
+          },
+        ];
+
+        function showPopup() {
+          if (successPopup && popupImage && popupText) {
+            const randomIndex = Math.floor(Math.random() * popupOptions.length);
+            const selectedPopup = popupOptions[randomIndex];
+            popupText.textContent = selectedPopup.text;
+            popupImage.src = selectedPopup.imageUrl;
+            successPopup.classList.add("active");
+          }
+        }
+        function hidePopup() {
+          if (successPopup) {
+            successPopup.classList.remove("active");
+          }
         }
 
-        const files = fileInput.files;
-        if (files.length > 0) {
+        function readFileAsBase64(file) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const fileData = reader.result;
+              const fileInfo = {
+                fileName: file.name,
+                mimeType: file.type,
+                file: fileData,
+              };
+              resolve(fileInfo);
+            };
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+          });
+        }
+
+        function validateForm() {
+          let isValid = true;
+          universityInput.classList.remove("input-error");
+          universityError.classList.remove("active");
+          subjectInput.classList.remove("input-error");
+          subjectError.classList.remove("active");
+          teacherInput.classList.remove("input-error");
+          teacherError.classList.remove("active");
+
+          if (universityInput.value.trim() === "") {
+            universityInput.classList.add("input-error");
+            universityError.textContent = "Vui lòng nhập tên trường.";
+            universityError.classList.add("active");
+            isValid = false;
+          }
+          if (subjectInput.value.trim() === "") {
+            subjectInput.classList.add("input-error");
+            subjectError.textContent = "Vui lòng nhập tên môn học.";
+            subjectError.classList.add("active");
+            isValid = false;
+          }
+          if (teacherInput.value.trim() === "") {
+            teacherInput.classList.add("input-error");
+            teacherError.textContent = "Vui lòng nhập tên giảng viên/khoa.";
+            teacherError.classList.add("active");
+            isValid = false;
+          }
+          return isValid;
+        }
+
+        if (popupCloseBtn) {
+          popupCloseBtn.addEventListener("click", hidePopup);
+        }
+        if (successPopup) {
+          successPopup.addEventListener("click", function (event) {
+            if (event.target === successPopup) {
+              hidePopup();
+            }
+          });
+        }
+
+        fileInput.addEventListener("change", function () {
+          if (fileInput.files.length > 0) {
+            uploadBoxText.textContent = `${fileInput.files.length} tệp đã được chọn`;
+            if (formFields) {
+              formFields.style.display = "block";
+            }
+          } else {
+            uploadBoxText.textContent = originalUploadText;
+            if (formFields) {
+              formFields.style.display = "none";
+            }
+          }
+        });
+
+        inputsToValidate.forEach((input) => {
+          input.addEventListener("input", () => {
+            if (input.value.trim() !== "") {
+              input.classList.remove("input-error");
+              const errorSpan = document.getElementById(`${input.id}-error`);
+              if (errorSpan) {
+                errorSpan.classList.remove("active");
+              }
+            }
+          });
+        });
+
+        uploadForm.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const isFormValid = validateForm();
+          if (!isFormValid) {
+            return;
+          }
+
+          const files = fileInput.files;
+          if (files.length > 0) {
             submitBtn.disabled = true;
             statusDiv.innerHTML = `<p style="color: blue;">Đang chuẩn bị tải lên ${files.length} tệp...</p>`;
 
             try {
-                const filePromises = Array.from(files).map(readFileAsBase64);
-                const filesArray = await Promise.all(filePromises);
-                const payload = { 
-                    files: filesArray, 
-                    university: universityInput.value, 
-                    subject: subjectInput.value, 
-                    teacher: teacherInput.value, 
-                    description: document.getElementById('description').value 
-                };
-                
-                statusDiv.innerHTML = `<p style="color: blue;">Đang tải lên ${files.length} tệp...</p>`;
-                
-                const response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
-                const data = await response.json();
-                
-                if (data.status === 'success') {
-                    showPopup(); 
-                    statusDiv.innerHTML = ''; 
-                } else {
-                    statusDiv.innerHTML = `<p style="color: red;">Lỗi: ${data.message}</p>`;
-                }
+              const filePromises = Array.from(files).map(readFileAsBase64);
+              const filesArray = await Promise.all(filePromises);
+              const payload = {
+                files: filesArray,
+                university: universityInput.value,
+                subject: subjectInput.value,
+                teacher: teacherInput.value,
+                description: document.getElementById("description").value,
+              };
+
+              statusDiv.innerHTML = `<p style="color: blue;">Đang tải lên ${files.length} tệp...</p>`;
+
+              const response = await fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify(payload),
+              });
+              const data = await response.json();
+
+              if (data.status === "success") {
+                showPopup();
+                statusDiv.innerHTML = "";
+              } else {
+                statusDiv.innerHTML = `<p style="color: red;">Lỗi: ${data.message}</p>`;
+              }
             } catch (error) {
-                console.error('Lỗi khi xử lý tệp:', error);
-                statusDiv.innerHTML = '<p style="color: red;">Đã xảy ra lỗi khi đọc tệp.</p>';
+              console.error("Lỗi khi xử lý tệp:", error);
+              statusDiv.innerHTML =
+                '<p style="color: red;">Đã xảy ra lỗi khi đọc tệp.</p>';
             } finally {
-                uploadForm.reset(); 
-                submitBtn.disabled = false;
-                uploadBoxText.textContent = originalUploadText;
-                if (formFields) { formFields.style.display = 'none'; }
+              uploadForm.reset();
+              submitBtn.disabled = false;
+              uploadBoxText.textContent = originalUploadText;
+              if (formFields) {
+                formFields.style.display = "none";
+              }
             }
-        }
-    });
-});
-</script>
-  <script src="/assets/js/layout.js"></script> 
-</body>
+          }
+        });
+      });
+    </script>
+    <script src="/assets/js/layout.js"></script>
+  </body>
 </html>
