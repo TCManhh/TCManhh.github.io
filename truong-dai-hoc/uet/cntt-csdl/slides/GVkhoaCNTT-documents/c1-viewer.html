@@ -63,6 +63,13 @@
                   required
                 ></textarea>
               </div>
+              <input
+                type="text"
+                id="hp-website"
+                name="website"
+                autocomplete="off"
+                style="display: none"
+              />
               <div class="form-actions">
                 <button type="button" class="btn btn-secondary cancel-btn">
                   Hủy
@@ -99,12 +106,28 @@
     <div id="footer-placeholder"></div>
     <script src="/assets/js/layout.js"></script>
 
+    <script>
+      let FORM_STARTED_AT = Date.now(); // đo thời gian điền form
+    </script>
+
     <!-- SCRIPT LOGIC BÌNH LUẬN ĐÃ ĐƯỢC NÂNG CẤP TOÀN BỘ -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const SCRIPT_URL =
-          "https://script.google.com/macros/s/AKfycbz2TAIf09WEzNNAw6feVfAwHOkMJKYU49QmnA55c791E4u9GYyAM0ZF7V2Bw7GhZVls/exec"; // QUAN TRỌNG
+          "https://script.google.com/macros/s/AKfycbxGdIvBCFFCQGvX0bJxdrIMVz3uP5mZ9L7pEper1YiGQMp2HOtXwCMXNjCfJ7MD0exA/exec"; // QUAN TRỌNG
         const PAGE_ID = window.location.pathname.replace(/[^a-zA-Z0-9]/g, "_");
+
+        // === DEVICE ID MANAGEMENT ===
+        function ensureDeviceId() {
+          let uid = localStorage.getItem("ss_device_id");
+          if (!uid) {
+            uid =
+              "d_" + Date.now() + "_" + Math.random().toString(36).slice(2, 9);
+            localStorage.setItem("ss_device_id", uid);
+          }
+          return uid;
+        }
+        const DEVICE_ID = ensureDeviceId();
 
         // === STATE QUẢN LÝ TRẠNG THÁI ===
         const state = { raw: [], tree: [], page: 1, pageSize: 10 };
@@ -163,7 +186,7 @@
           el.toast.textContent = msg;
           el.toast.style.background = isSuccess ? "#28a745" : "#dc3545";
           el.toast.classList.add("show");
-          setTimeout(() => el.toast.classList.remove("show"), 2500);
+          setTimeout(() => el.toast.classList.remove("show"), 10000);
         };
 
         // --- NEW: Hàm tạo màu sắc động cho Avatar ---
@@ -224,10 +247,14 @@
                 </div>
                 <div class="body">${body}</div>
                 <div class="actions">
-                  <button class="action-btn like-btn">
-                    <i class="far fa-thumbs-up"></i></button
-                  ><button class="action-btn dislike-btn">
-                    <i class="far fa-thumbs-down"></i></button
+                  <button class="action-btn like-btn" data-cid="${cid}">
+                    <i class="far fa-thumbs-up"></i><span class="like-count" style="margin-left: 4px;">${
+                      comment.like_count || 0
+                    }</span></button
+                  ><button class="action-btn dislike-btn" data-cid="${cid}">
+                    <i class="far fa-thumbs-down"></i><span class="dislike-count" style="margin-left: 4px;">${
+                      comment.dislike_count || 0
+                    }</span></button
                   >${replyButtonHTML}
                 </div>
                 <div class="reply-form-container" id="reply-form-for-${cid}"></div>
@@ -306,17 +333,48 @@
           document.body.appendChild(s);
         }
 
-        async function postComment(payload) {
+        async function postComment({ name, comment, parent_id }) {
+          const body = new URLSearchParams({
+            name,
+            comment,
+            page_id: PAGE_ID,
+            comment_id: generateCommentId(),
+            parent_id: parent_id || "",
+            device_id: DEVICE_ID,
+            website: document.getElementById("hp-website")?.value || "",
+            form_started_at: String(FORM_STARTED_AT),
+          });
+
           const response = await fetch(SCRIPT_URL, {
             method: "POST",
             headers: {
               "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
             },
-            body: new URLSearchParams(payload).toString(),
+            body,
           });
           const result = await response.json();
           if (!result.success)
             throw new Error(result.error || "Gửi bình luận thất bại.");
+        }
+
+        async function postReaction({ comment_id, reaction }) {
+          const body = new URLSearchParams({
+            action: "react",
+            page_id: PAGE_ID,
+            comment_id,
+            device_id: DEVICE_ID, // mỗi thiết bị 1 phiếu (tính lần cuối)
+            reaction, // 'like' | 'dislike'
+          });
+          const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+            body,
+          });
+          const result = await response.json();
+          if (!result.success)
+            throw new Error(result.error || "Gửi phản ứng thất bại.");
         }
 
         // --- Main Form Logic ---
@@ -361,8 +419,6 @@
             await postComment({
               name: el.nameInput.value,
               comment: el.commentInput.value,
-              page_id: PAGE_ID,
-              comment_id: generateCommentId(),
               parent_id: null,
             });
             resetMainForm();
@@ -373,6 +429,40 @@
           } finally {
             el.submitBtn.disabled = false;
             el.submitBtn.innerHTML = "Bình luận";
+          }
+        });
+
+        // --- Like/Dislike Logic ---
+        el.container.addEventListener("click", async (e) => {
+          const likeBtn = e.target.closest(".like-btn");
+          const dislikeBtn = e.target.closest(".dislike-btn");
+
+          if (likeBtn) {
+            try {
+              await postReaction({
+                comment_id: likeBtn.dataset.cid,
+                reaction: "like",
+              });
+              showToast("Đã thích!");
+              loadComments();
+            } catch (error) {
+              showToast(`Lỗi: ${error.message}`, false);
+            }
+            return;
+          }
+
+          if (dislikeBtn) {
+            try {
+              await postReaction({
+                comment_id: dislikeBtn.dataset.cid,
+                reaction: "dislike",
+              });
+              showToast("Đã không thích!");
+              loadComments();
+            } catch (error) {
+              showToast(`Lỗi: ${error.message}`, false);
+            }
+            return;
           }
         });
 
@@ -444,8 +534,6 @@
               await postComment({
                 name: el.nameInput.value,
                 comment: replyTextarea.value,
-                page_id: PAGE_ID,
-                comment_id: generateCommentId(),
                 parent_id: parentId,
               });
               showToast("Đã gửi trả lời!");
@@ -462,6 +550,45 @@
           state.page++;
           reRenderWithControls();
         });
+
+        // --- Real-time Counter Updates ---
+        function refreshReactionCountersOnly(payload) {
+          // payload: {success:true,data:[{comment_id, like_count, dislike_count, ...}]}
+          if (!payload?.success || !Array.isArray(payload.data)) return;
+          const byId = {};
+          payload.data.forEach((c) => (byId[c.comment_id] = c));
+          // duyệt tất cả ".actions" hiện có
+          document.querySelectorAll(".actions").forEach((act) => {
+            const likeBtn = act.querySelector(".like-btn");
+            const dislikeBtn = act.querySelector(".dislike-btn");
+            if (!likeBtn || !dislikeBtn) return;
+            const cid = likeBtn.dataset.cid || dislikeBtn.dataset.cid;
+            const rec = byId[cid];
+            if (!rec) return;
+            const lc = act.querySelector(".like-count");
+            const dc = act.querySelector(".dislike-count");
+            if (lc) lc.textContent = Number(rec.like_count || 0);
+            if (dc) dc.textContent = Number(rec.dislike_count || 0);
+          });
+        }
+
+        async function pollCounts() {
+          try {
+            const cb = "poll_cb_" + Date.now();
+            // dùng JSONP như loadComments
+            window[cb] = function (resp) {
+              refreshReactionCountersOnly(resp);
+              delete window[cb];
+            };
+            const s = document.createElement("script");
+            s.src = `${SCRIPT_URL}?page_id=${encodeURIComponent(
+              PAGE_ID
+            )}&callback=${cb}`;
+            s.onerror = () => delete window[cb];
+            document.body.appendChild(s);
+          } catch (_) {}
+        }
+        setInterval(pollCounts, 15000); // 15s
 
         // === INITIAL LOAD ===
         loadComments();

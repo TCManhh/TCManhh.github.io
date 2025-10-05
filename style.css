@@ -2143,7 +2143,9 @@ body.viewer-wide .document-viewer {
 .thread-item .action-btn:hover {
   background-color: #f0f0f0;
 }
-.thread-item .action-btn .likes-count {
+.thread-item .action-btn .likes-count,
+.thread-item .action-btn .like-count,
+.thread-item .action-btn .dislike-count {
   font-size: 0.8rem;
   margin-left: 4px;
   color: #606060;
@@ -4191,4 +4193,11 @@ body.viewer-wide .document-viewer {
   color: #fff;
   cursor: pointer;
   flex-shrink: 0;
+}
+.toast {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.toast.show {
+  opacity: 1;
 }
