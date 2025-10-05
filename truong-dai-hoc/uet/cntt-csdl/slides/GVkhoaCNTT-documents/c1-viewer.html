@@ -45,26 +45,32 @@
           </div>
 
           <form id="comment-form" class="comment-main-form">
-            <div class="form-row">
-              <input
-                type="text"
-                id="comment-name"
-                placeholder="Tên hiển thị"
-                required
-              />
-            </div>
-            <div class="form-row">
-              <textarea
-                id="comment-text"
-                placeholder="Chia sẻ điều bạn nghĩ..."
-                rows="4"
-                required
-              ></textarea>
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i> Gửi bình luận
-              </button>
+            <div class="avatar" id="main-form-avatar">?</div>
+            <div class="form-content">
+              <div class="form-row">
+                <input
+                  type="text"
+                  id="comment-name"
+                  placeholder="Thêm tên của bạn..."
+                  required
+                />
+              </div>
+              <div class="form-row">
+                <textarea
+                  id="comment-text"
+                  placeholder="Chia sẻ điều bạn nghĩ..."
+                  rows="1"
+                  required
+                ></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-secondary cancel-btn">
+                  Hủy
+                </button>
+                <button type="submit" class="btn btn-primary" disabled>
+                  Bình luận
+                </button>
+              </div>
             </div>
           </form>
 
@@ -85,28 +91,23 @@
             </button>
           </div>
 
-          <!-- Toast -->
           <div id="comments-toast" class="toast"></div>
         </div>
       </section>
     </main>
 
     <div id="footer-placeholder"></div>
-
     <script src="/assets/js/layout.js"></script>
+
+    <!-- SCRIPT LOGIC BÌNH LUẬN ĐÃ ĐƯỢC NÂNG CẤP TOÀN BỘ -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const SCRIPT_URL =
-          "https://script.google.com/macros/s/AKfycbzfgGSk0BsMdN1x8ggwr1OBVKZ4N5BhQP7rjkKK5MevPsoy2vaLUW8KR79G3k0S-yIC/exec"; // QUAN TRỌNG
+          "https://script.google.com/macros/s/AKfycbz2TAIf09WEzNNAw6feVfAwHOkMJKYU49QmnA55c791E4u9GYyAM0ZF7V2Bw7GhZVls/exec"; // QUAN TRỌNG
         const PAGE_ID = window.location.pathname.replace(/[^a-zA-Z0-9]/g, "_");
 
         // === STATE QUẢN LÝ TRẠNG THÁI ===
-        const state = {
-          raw: [], // danh sách comment phẳng từ server
-          tree: [], // dạng cây
-          page: 1,
-          pageSize: 10, // mỗi lần hiển thị 10 comment gốc (replies vẫn hiển thị đầy đủ)
-        };
+        const state = { raw: [], tree: [], page: 1, pageSize: 10 };
 
         // === DOM ELEMENTS ===
         const el = {
@@ -114,14 +115,21 @@
           form: document.getElementById("comment-form"),
           nameInput: document.getElementById("comment-name"),
           commentInput: document.getElementById("comment-text"),
+          formActions: document.querySelector(
+            ".comment-main-form .form-actions"
+          ),
+          mainAvatar: document.getElementById("main-form-avatar"),
+          submitBtn: document.querySelector(
+            '.comment-main-form button[type="submit"]'
+          ),
+          cancelBtn: document.querySelector(".comment-main-form .cancel-btn"),
           loadMore: document.getElementById("comments-load-more"),
           toast: document.getElementById("comments-toast"),
         };
 
         // === HELPER FUNCTIONS ===
         const formatTimeAgo = (dateInput) => {
-          const date =
-            dateInput instanceof Date ? dateInput : new Date(dateInput);
+          const date = new Date(dateInput);
           if (isNaN(date.getTime())) return "";
           const now = new Date();
           const seconds = Math.round((now - date) / 1000);
@@ -129,10 +137,9 @@
           const minutes = Math.round(seconds / 60);
           const hours = Math.round(minutes / 60);
           const days = Math.round(hours / 24);
-          if (seconds < 60) return `${seconds} giây trước`;
           if (minutes < 60) return `${minutes} phút trước`;
           if (hours < 24) return `${hours} giờ trước`;
-          return `${days} ngày trước`;
+          return `${Math.round(hours / 24)} ngày trước`;
         };
 
         const generateCommentId = () =>
@@ -141,22 +148,38 @@
         const escapeHTML = (str) =>
           String(str).replace(
             /[&<>"']/g,
-            (match) =>
+            (m) =>
               ({
                 "&": "&amp;",
                 "<": "&lt;",
                 ">": "&gt;",
                 '"': "&quot;",
                 "'": "&#39;",
-              }[match])
+              }[m])
           );
 
-        const showToast = (msg, ok = true) => {
+        const showToast = (msg, isSuccess = true) => {
           if (!el.toast) return;
           el.toast.textContent = msg;
-          el.toast.style.background = ok ? "#1e7e34" : "#b02a37";
+          el.toast.style.background = isSuccess ? "#28a745" : "#dc3545";
           el.toast.classList.add("show");
-          setTimeout(() => el.toast.classList.remove("show"), 1800);
+          setTimeout(() => el.toast.classList.remove("show"), 2500);
+        };
+
+        // --- NEW: Hàm tạo màu sắc động cho Avatar ---
+        const nameToColor = (name) => {
+          let hash = 0;
+          for (let i = 0; i < name.length; i++) {
+            hash = name.charCodeAt(i) + ((hash << 5) - hash);
+          }
+          const h = hash % 360;
+          return `hsl(${h}, 70%, 60%)`;
+        };
+
+        // --- NEW: Hàm tạo màu ngẫu nhiên cho avatar mặc định ---
+        const getRandomColor = () => {
+          const h = Math.floor(Math.random() * 360);
+          return `hsl(${h}, 70%, 60%)`;
         };
 
         // === CORE LOGIC: DATA PROCESSING & RENDERING ===
@@ -177,38 +200,58 @@
           return tree;
         };
 
-        const createCommentHTML = (
-          comment,
-          { isLast = false, depth = 0 } = {}
-        ) => {
+        const createCommentHTML = (comment, level = 1) => {
           const author = escapeHTML(comment.name || "Ẩn danh");
           const initial = author.charAt(0).toUpperCase();
+          const avatarColor = nameToColor(author);
           const timeDisplay = formatTimeAgo(comment.timestamp);
           const body = escapeHTML(comment.comment || "").replace(/\n/g, "<br>");
           const cid = escapeHTML(comment.comment_id);
-          const depthClass = depth > 0 ? `depth-${Math.min(depth, 3)}` : "";
-          return `<div class="thread-item ${depthClass} ${
-            isLast ? "is-last" : ""
-          }"><div class="avatar">${initial}</div><div class="col"><div class="meta"><span class="author">${author}</span><span class="time">${timeDisplay}</span></div><div class="body">${body}</div><div class="actions"><button class="action-btn reply-btn" data-comment-id="${cid}"><i class="far fa-comment-dots"></i> Reply</button></div><div class="reply-form-container" id="reply-form-for-${cid}"></div><div class="replies" id="replies-to-${cid}"></div></div></div>`;
+
+          // --- NEW: Ẩn nút trả lời nếu đã đạt cấp 4 ---
+          const replyButtonHTML =
+            level < 4
+              ? `<button class="reply-btn-text reply-btn" data-comment-id="${cid}">Trả lời</button>`
+              : "";
+
+          return `
+            <div class="thread-item">
+              <div class="avatar" style="background-color: ${avatarColor};">${initial}</div>
+              <div class="col">
+                <div class="meta">
+                  <span class="author">${author}</span>
+                  <span class="time">${timeDisplay}</span>
+                </div>
+                <div class="body">${body}</div>
+                <div class="actions">
+                  <button class="action-btn like-btn">
+                    <i class="far fa-thumbs-up"></i></button
+                  ><button class="action-btn dislike-btn">
+                    <i class="far fa-thumbs-down"></i></button
+                  >${replyButtonHTML}
+                </div>
+                <div class="reply-form-container" id="reply-form-for-${cid}"></div>
+                <div class="replies" id="replies-to-${cid}"></div>
+              </div>
+            </div>`;
         };
 
-        const renderCommentList = (comments, container, depth = 0) => {
-          const list = (comments || [])
+        const renderCommentList = (comments, container, level = 1) => {
+          const sorted = comments
             .slice()
-            .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
           const frag = document.createDocumentFragment();
-          list.forEach((c, idx) => {
-            const isLast = idx === list.length - 1;
+          sorted.forEach((c) => {
             const wrapper = document.createElement("div");
             wrapper.className = "thread";
-            wrapper.innerHTML = createCommentHTML(c, { isLast, depth });
+            wrapper.innerHTML = createCommentHTML(c, level);
             frag.appendChild(wrapper);
-            if (Array.isArray(c.replies) && c.replies.length) {
+            if (Array.isArray(c.replies) && c.replies.length && level < 4) {
               const repliesContainer = wrapper.querySelector(
                 `#replies-to-${c.comment_id}`
               );
               if (repliesContainer)
-                renderCommentList(c.replies, repliesContainer, depth + 1);
+                renderCommentList(c.replies, repliesContainer, level + 1);
             }
           });
           container.innerHTML = "";
@@ -216,13 +259,12 @@
         };
 
         const reRenderWithControls = () => {
-          // Sắp xếp các bình luận gốc theo thời gian từ cũ nhất đến mới nhất
           const sorted = state.tree
             .slice()
-            .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
           const end = state.page * state.pageSize;
-          const slice = sorted.slice(0, end);
-          renderCommentList(slice, el.container);
+          renderCommentList(sorted.slice(0, end), el.container);
+          renderCommentList(sorted.slice(0, end), el.container, 1);
           el.loadMore.style.display =
             sorted.length > end ? "inline-block" : "none";
         };
@@ -237,7 +279,7 @@
 
             if (state.raw.length === 0) {
               el.container.innerHTML =
-                "<p>Chưa có bình luận nào. Hãy là người đầu tiên!</p>";
+                "&lt;p&gt;Chưa có bình luận nào. Hãy là người đầu tiên!&lt;/p&gt;";
               el.loadMore.style.display = "none";
               return;
             }
@@ -249,14 +291,15 @@
 
         async function loadComments() {
           el.container.innerHTML =
-            '<div class="comment-skeleton"></div><div class="comment-skeleton"></div>';
+            '<div class="comment-loader">Đang tải bình luận<span>.</span><span>.</span><span>.</span></div>';
           const s = document.createElement("script");
           s.src = `${SCRIPT_URL}?page_id=${encodeURIComponent(
             PAGE_ID
           )}&callback=renderCommentsJSONP`;
           s.onerror = () => {
+            s.remove();
             el.container.innerHTML =
-              '<p style="color:red;">Lỗi tải bình luận (JSONP request thất bại).</p>';
+              '&lt;p style="color:red;"&gt;Lỗi kết nối đến máy chủ bình luận.&lt;/p&gt;';
             s.remove();
           };
           s.onload = () => s.remove();
@@ -276,13 +319,44 @@
             throw new Error(result.error || "Gửi bình luận thất bại.");
         }
 
+        // --- Main Form Logic ---
+        const handleFormInteraction = () => {
+          el.formActions.style.display = "flex";
+          el.commentInput.rows = 2;
+        };
+
+        const resetMainForm = () => {
+          el.form.reset();
+          el.formActions.style.display = "none";
+          el.submitBtn.disabled = true;
+          el.commentInput.rows = 1;
+          updateMainAvatar("?");
+        };
+
+        const updateMainAvatar = (name) => {
+          const initial = name.charAt(0).toUpperCase();
+          el.mainAvatar.textContent = initial;
+          el.mainAvatar.style.backgroundColor =
+            name === "?" ? getRandomColor() : nameToColor(name);
+          el.mainAvatar.style.color =
+            name === "?" ? "var(--dark-color)" : "#fff";
+        };
+
+        el.nameInput.addEventListener("input", () =>
+          updateMainAvatar(el.nameInput.value || "?")
+        );
+        el.commentInput.addEventListener("input", () => {
+          el.submitBtn.disabled = el.commentInput.value.trim() === "";
+        });
+        el.commentInput.addEventListener("focus", handleFormInteraction);
+        el.nameInput.addEventListener("focus", handleFormInteraction);
+        el.cancelBtn.addEventListener("click", resetMainForm);
+
         el.form.addEventListener("submit", async (e) => {
           e.preventDefault();
-          const submitButton = el.form.querySelector("button");
-          const originalText = submitButton.innerHTML;
-          submitButton.disabled = true;
-          submitButton.innerHTML =
-            '<i class="fas fa-spinner fa-pulse"></i> Đang gửi...';
+          const originalText = el.submitBtn.innerHTML;
+          el.submitBtn.disabled = true;
+          el.submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Đang tải lên...`;
           try {
             await postComment({
               name: el.nameInput.value,
@@ -291,17 +365,18 @@
               comment_id: generateCommentId(),
               parent_id: null,
             });
-            el.form.reset();
+            resetMainForm();
             showToast("Đã gửi bình luận!");
             loadComments();
           } catch (error) {
             showToast(`Lỗi: ${error.message}`, false);
           } finally {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
+            el.submitBtn.disabled = false;
+            el.submitBtn.innerHTML = "Bình luận";
           }
         });
 
+        // --- Reply Form Logic ---
         el.container.addEventListener("click", (e) => {
           const replyBtn = e.target.closest(".reply-btn");
           if (!replyBtn) return;
@@ -309,49 +384,88 @@
           const container = document.getElementById(
             `reply-form-for-${parentId}`
           );
+
+          // Đóng tất cả các form trả lời khác đang mở
+          document.querySelectorAll(".reply-form-container").forEach((c) => {
+            if (c.id !== container.id) c.innerHTML = "";
+          });
+
           if (container.innerHTML) {
             container.innerHTML = "";
             return;
           }
-          container.innerHTML = `<form class="reply-box" data-parent-id="${parentId}"><textarea placeholder="Viết câu trả lời..." required></textarea><button type="submit"><i class="fas fa-paper-plane"></i></button></form>`;
-          container.querySelector("textarea").focus();
+
+          const currentUserName = el.nameInput.value;
+          const userInitial = (currentUserName || "?").charAt(0).toUpperCase();
+          const avatarColor = currentUserName
+            ? nameToColor(currentUserName)
+            : "var(--light-color)";
+          const textColor = currentUserName ? "#fff" : "var(--dark-color)";
+
+          container.innerHTML = `
+            <div class="reply-box">
+              <div class="avatar" style="background-color: ${avatarColor}; color: ${textColor};">${userInitial}</div>
+              <div class="form-content">
+                <form data-parent-id="${parentId}">
+                  <textarea placeholder="Viết câu trả lời..." required rows="1"></textarea>
+                  <div class="form-actions" style="display: flex;">
+                     <button type="button" class="btn btn-secondary cancel-reply-btn">Hủy</button>
+                     <button type="submit" class="btn btn-primary">Trả lời</button>
+                  </div>
+                </form>
+              </div>
+            </div>`;
+
+          const replyForm = container.querySelector("form");
+          const replyTextarea = replyForm.querySelector("textarea");
+          replyTextarea.focus();
+
           container
-            .querySelector(".reply-box")
-            .addEventListener("submit", async (event) => {
-              event.preventDefault();
-              const form = event.target,
-                textarea = form.querySelector("textarea"),
-                button = form.querySelector("button");
-              if (!el.nameInput.value.trim()) {
-                alert("Vui lòng nhập tên của bạn ở form bình luận chính.");
-                el.nameInput.focus();
-                return;
-              }
-              button.disabled = true;
-              try {
-                await postComment({
-                  name: el.nameInput.value,
-                  comment: textarea.value,
-                  page_id: PAGE_ID,
-                  comment_id: generateCommentId(),
-                  parent_id: parentId,
-                });
-                showToast("Đã gửi trả lời!");
-                loadComments();
-              } catch (error) {
-                showToast(`Lỗi: ${error.message}`, false);
-                button.disabled = false;
-              }
+            .querySelector(".cancel-reply-btn")
+            .addEventListener("click", () => {
+              container.innerHTML = "";
             });
+
+          replyForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            if (!el.nameInput.value.trim()) {
+              showToast(
+                "Vui lòng nhập tên của bạn ở khung bình luận chính.",
+                false
+              );
+              el.nameInput.focus();
+              return;
+            }
+            const button = replyForm.querySelector("button[type='submit']");
+            button.disabled = true;
+            const originalReplyText = button.innerHTML;
+            button.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`;
+            try {
+              await postComment({
+                name: el.nameInput.value,
+                comment: replyTextarea.value,
+                page_id: PAGE_ID,
+                comment_id: generateCommentId(),
+                parent_id: parentId,
+              });
+              showToast("Đã gửi trả lời!");
+              loadComments();
+            } catch (error) {
+              showToast(`Lỗi: ${error.message}`, false);
+              button.disabled = false;
+              button.innerHTML = originalReplyText;
+            }
+          });
         });
 
         el.loadMore.addEventListener("click", () => {
-          state.page += 1;
+          state.page++;
           reRenderWithControls();
         });
 
         // === INITIAL LOAD ===
         loadComments();
+        updateMainAvatar("?"); // Đặt màu ngẫu nhiên cho avatar khi tải trang
       });
     </script>
   </body>
