@@ -8,7 +8,7 @@
   --light-color: #f4f4f4;
   --text-color: #555;
   --border-color: #ddd;
-  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Giữ lại để tương thích ngược */
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   --border-radius: 8px;
   --header-height: 75px;
   --breadcrumb-height: 41px;
@@ -956,8 +956,8 @@ body {
   border-top: 1px solid var(--border-color);
   display: flex;
   gap: 20px;
-  font-size: 0.9rem; /* A11y: Increase contrast */
-  color: #555;
+  font-size: 0.9rem;
+  color: #777;
 }
 .view-all-link {
   text-align: center;
@@ -980,8 +980,7 @@ body {
   max-width: 800px;
 }
 .upload-section h2 {
-  color: var(--dark-color); /* A11y: Đảm bảo là H2 */
-  font-size: var(--font-size-h2);
+  color: var(--dark-color);
 }
 .upload-section > .container > p {
   margin-bottom: 30px;
@@ -1662,13 +1661,10 @@ body.viewer-wide .document-viewer {
   transform: translateY(0); /* Hiện ra khi hover */
 }
 
-/* A11y: Fix contrast for tags */
-.tag {
-  background-color: #e0efff;
-  color: #0056b3;
-  font-weight: 600;
-}
-.document-stats {
+/* 4. Cải tiến khu vực kêu gọi đóng góp */
+.updating-section {
+  margin-top: 60px !important;
+  text-align: center;
   background-color: var(--light-color) !important;
   border: 2px dashed var(--border-color) !important;
   border-radius: var(--border-radius) !important;
@@ -1706,6 +1702,11 @@ body.viewer-wide .document-viewer {
 @media (max-width: 768px) {
   .university-info h3 {
     min-height: auto; /* Bỏ min-height trên mobile */
+  }
+}
+/* --- FIX: Đồng bộ màu icon cho nút đóng góp --- */
+.updating-section .btn-contribute i {
+  color: #fff;
 }
 /* =================================================================== */
 /* --- PHẦN 9: CSS CHO TRÌNH CHIẾU SLIDE (PRESENTATION) --- */
@@ -2419,23 +2420,9 @@ body.viewer-wide .document-viewer {
   }
 }
 
-/*
-  Performance: Add font-display: swap to Font Awesome to prevent FOIT.
-  This rule targets the font-face definitions loaded from the CDN.
-*/
-@font-face {
-  font-family: "Font Awesome 6 Free";
-  font-display: swap;
-}
-
-/*
-  Performance: Add font-display: swap to Font Awesome to prevent FOIT.
-  This rule targets the font-face definitions loaded from the CDN.
-*/
-@font-face {
-  font-family: "Font Awesome 6 Free";
-  font-display: swap;
-}
+/* =================================================================== */
+/* --- PHẦN 18: TỐI ƯU HÓA KHOẢNG TRẮNG CHO DI ĐỘNG --- */
+/* =================================================================== */
 
 /* =================================================================== */
 /* --- PHẦN 13: CSS CHO NÚT HÀNH ĐỘNG TRANG VIEWER --- */
@@ -2648,11 +2635,6 @@ body {
   color: var(--text-color);
 }
 
-/* Hero H2 should be a section title */
-.features-section .section-title {
-  margin-bottom: 60px;
-}
-
 a {
   color: var(--primary-color);
   transition: color 0.3s ease;
@@ -2666,11 +2648,6 @@ a:hover {
   font-size: var(--font-size-large);
   margin-bottom: 40px;
   opacity: 0.9;
-}
-/* Features section H2 should not be sr-only */
-.features-section h2:not(.sr-only) {
-  font-size: var(--font-size-h2);
-  text-align: center;
 }
 
 /* OPTIONAL: If you want hero H1 slightly larger than normal h1 */
@@ -2920,6 +2897,10 @@ body {
 .hero-section p {
   font-size: var(--font-size-large);
   margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* --- Search Bar & Suggestions --- */
 .search-wrapper {
   position: relative;
   max-width: 650px;
@@ -3068,15 +3049,7 @@ body {
   box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
 }
 .feature-item h3 {
-  font-size: var(--font-size-h3);
-}
-
-/* A11y: Ensure H2 titles in sections are visible and styled correctly */
-.features-section h2:not(.sr-only),
-.documents-section h2:not(.sr-only),
-.upload-section h2:not(.sr-only) {
-  font-size: var(--font-size-h2);
-  text-align: center;
+  margin-bottom: 10px;
 }
 
 /* --- Documents Section --- */
@@ -3084,11 +3057,6 @@ body {
   padding: 80px 0;
   background: var(--light-color);
 }
-/* Documents section H2 should be a section title */
-.documents-section .section-title {
-  margin-bottom: 40px;
-}
-
 .document-bento-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -3138,17 +3106,17 @@ body {
 }
 .document-info p {
   font-size: 0.9rem;
-  color: #555; /* A11y: Increase contrast */
+  color: #777;
   margin-bottom: 10px;
 }
 .tag {
-  display: inline-block; /* A11y: Tăng độ tương phản */
-  background-color: #e0efff;
-  color: #0056b3;
+  display: inline-block;
+  background-color: #eaf2ff;
+  color: var(--primary-color);
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 .document-stats {
   margin-top: auto; /* Đẩy xuống cuối */
@@ -3156,8 +3124,8 @@ body {
   border-top: 1px solid var(--border-color);
   display: flex;
   gap: 20px;
-  font-size: 0.9rem; /* A11y: Tăng độ tương phản */
-  color: #555;
+  font-size: 0.9rem;
+  color: #777;
 }
 .view-all-link {
   text-align: center;
@@ -3857,6 +3825,10 @@ body.viewer-wide .document-viewer {
   transition: all 0.3s ease;
 }
 .updating-section:hover {
+  border-color: var(--primary-color);
+  background-color: #f1f7ff !important;
+}
+.updating-section i {
   color: var(--primary-color);
 }
 .updating-section .btn-contribute {

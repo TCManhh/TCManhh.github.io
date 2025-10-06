@@ -83,24 +83,18 @@ function setActiveNavLink() {
   const navLinks = document.querySelectorAll(".main-nav a");
 
   navLinks.forEach((link) => {
-    if (!link.href) return; // Bỏ qua các link không có href
-
     // Lấy đường dẫn của link (loại bỏ phần domain nếu có)
     const linkPath = new URL(link.href).pathname;
 
     // Xử lý đặc biệt cho Trang Chủ
-    // So sánh chính xác hơn, tránh active link cha khi ở trang con
     if (linkPath === "/index.html" || linkPath === "/") {
       if (currentPath === "/index.html" || currentPath === "/") {
-        link.classList.add("active"); // Chỉ active trang chủ khi ở đúng trang chủ
+        link.classList.add("active");
       }
     }
     // Xử lý cho các trang con khác
     else if (currentPath.startsWith(linkPath)) {
       link.classList.add("active");
-    } else {
-      // Đảm bảo các link khác không có class active
-      link.classList.remove("active");
     }
   });
 }

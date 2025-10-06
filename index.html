@@ -26,33 +26,42 @@
     <meta
       property="og:image"
       content="https://tcmanhh.github.io/assets/images/logo_ngang.jpg"
-    /> <!-- Giữ lại JPG/PNG để tương thích tối đa với các trình thu thập thông tin mạng xã hội cũ -->
+    />
     <!-- P1: Preconnect to required origins -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin/>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://images.unsplash.com" />
  
     <!-- P1: Preload LCP hero image -->
     <link
       rel="preload"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" 
+      as="image"
+      href="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop"
+      fetchpriority="high"
+    />
+    <!-- P1: Preload critical fonts (Font Awesome) -->
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      as="image"
-      href="/assets/images/logo_ngang_xoa_nen.webp"
-      fetchpriority="high"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-regular-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
-    <!-- P1: Preload critical assets (Font Awesome) -->
+ 
+    <link rel="stylesheet" href="/style.css" />
+    <!-- P1: Defer non-critical CSS (Font Awesome) -->
     <link
-      rel="preload"
-      as="style"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
-      onload="this.onload=null;this.rel='stylesheet'"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      media="print"
+      onload="this.media='all'"
     />
-    <link rel="stylesheet" href="/style.css?v=20240524" />    
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
     <script type="application/ld+json">
       {
@@ -88,11 +97,7 @@
                   placeholder="Tìm kiếm tài liệu, môn học, đề thi..."
                   autocomplete="off"
                 />
-                <button
-                  type="submit"
-                  id="main-search-button"
-                  aria-label="Tìm kiếm tài liệu"
-                >
+                <button type="submit" id="main-search-button">
                   <i class="fas fa-search"></i>
                 </button>
               </div>
@@ -108,9 +113,8 @@
         </div>
       </section>
 
-      <section class="features-section" aria-labelledby="features-heading">
+      <section class="features-section">
         <div class="container">
-          <h2 id="features-heading" class="section-title">Các Tính Năng Chính</h2> 
           <div class="feature-item">
             <div class="feature-icon"><i class="fas fa-book-open"></i></div>
             <h3>Tài Liệu Đa Dạng</h3>
@@ -137,9 +141,9 @@
         </div>
       </section>
 
-      <section class="documents-section" aria-labelledby="documents-heading">
+      <section class="documents-section">
         <div class="container">
-          <h2 id="documents-heading" class="section-title">Khám Phá Tài Liệu Mới</h2> 
+          <h2>Khám Phá Tài Liệu Mới</h2>
           <div class="document-bento-grid">
             <a
               href="/truong-dai-hoc/uet/cntt-ctdlgt/slides/TS_Tran_Thi_Minh_Chau/bai-giang-mergesort-viewer.html"
@@ -199,9 +203,9 @@
         </div>
       </section>
 
-      <section id="upload-section" class="upload-section" aria-labelledby="upload-heading">
+      <section id="upload-section" class="upload-section">
         <div class="container">
-          <h2 id="upload-heading" class="section-title">Chung Tay Xây Dựng Cộng Đồng Tri Thức</h2> 
+          <h2>Chung Tay Xây Dựng Cộng Đồng Tri Thức</h2>
           <p>Mỗi tài liệu bạn chia sẻ là một đóng góp quý giá cho cộng đồng.</p>
           <form id="upload-form" class="upload-box">
             <i class="fas fa-cloud-upload-alt"></i>
@@ -687,7 +691,7 @@
         });
       });
     </script>
-    <!-- P2: Defer layout script with versioning -->
-    <script src="/assets/js/layout.js?v=20240524" defer></script>
+    <!-- P2: Defer layout script -->
+    <script src="/assets/js/layout.js" defer></script>
   </body>
 </html>
