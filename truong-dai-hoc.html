@@ -76,6 +76,9 @@
       <section class="university-list">
         <div class="container">
           <h2 class="region-title">Các trường Đại học & Học viện ở Miền Bắc</h2>
+          <div class="no-results-message" id="no-results-mb">
+            Không tìm thấy trường nào phù hợp với từ khóa của bạn.
+          </div>
           <div class="university-grid">
             <a href="/truong-dai-hoc/uet.html" class="university-card">
               <img
@@ -93,11 +96,17 @@
           <h2 class="region-title">
             Các trường Đại học & Học viện ở Miền Trung
           </h2>
+          <div class="no-results-message" id="no-results-mt">
+            Không tìm thấy trường nào phù hợp với từ khóa của bạn.
+          </div>
           <div class="university-grid">
             <!-- Chưa có trường nào -->
           </div>
 
           <h2 class="region-title">Các trường Đại học & Học viện ở Miền Nam</h2>
+          <div class="no-results-message" id="no-results-mn">
+            Không tìm thấy trường nào phù hợp với từ khóa của bạn.
+          </div>
           <div class="university-grid">
             <!-- Chưa có trường nào -->
           </div>
@@ -141,43 +150,52 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById("searchInput");
-        const universityCards = document.querySelectorAll(".university-card");
         const universityGrids = document.querySelectorAll(".university-grid");
         const regionTitles = document.querySelectorAll(".region-title");
+        const noResultsMessages = document.querySelectorAll(
+          ".no-results-message"
+        );
 
         // --- HÀM LỌC ĐƯỢỢC TÁCH RIÊNG ---
         function filterUniversities() {
           const searchTerm = searchInput.value.toLowerCase().trim();
+          let hasVisibleCardOverall = false;
 
-          universityCards.forEach(function (card) {
-            const universityName = card
-              .querySelector("h3")
-              .textContent.toLowerCase(); // Giữ nguyên
-            const universityAcronym = card
-              .querySelector("p")
-              .textContent.toLowerCase();
+          universityGrids.forEach(function (grid, index) {
+            const cardsInGrid = grid.querySelectorAll(".university-card");
+            let hasVisibleCardInGrid = false;
 
-            if (
-              universityName.includes(searchTerm) ||
-              universityAcronym.includes(searchTerm)
-            ) {
-              card.style.display = "flex";
-            } else {
-              card.style.display = "none";
-            }
-          });
+            cardsInGrid.forEach(function (card) {
+              const universityName = card
+                .querySelector("h3")
+                .textContent.toLowerCase();
+              const universityAcronym = card
+                .querySelector("p")
+                .textContent.toLowerCase();
 
-          universityGrids.forEach(function (grid) {
+              const isVisible =
+                universityName.includes(searchTerm) ||
+                universityAcronym.includes(searchTerm);
+
+              card.style.display = isVisible ? "flex" : "none";
+              if (isVisible) {
+                hasVisibleCardInGrid = true;
+                hasVisibleCardOverall = true;
+              }
+            });
+
             const regionTitle = grid.previousElementSibling;
-            if (regionTitle && regionTitle.classList.contains("region-title")) {
-              const visibleCardsInGrid = grid.querySelectorAll(
-                '.university-card[style*="display: flex"]'
-              );
-              if (visibleCardsInGrid.length === 0 && searchTerm) {
-                // Chỉ ẩn nếu đang có tìm kiếm
+            const noResultMessage = noResultsMessages[index];
+
+            if (regionTitle) {
+              if (hasVisibleCardInGrid) {
                 regionTitle.style.display = "none";
+                if (noResultMessage) noResultMessage.style.display = "none";
               } else {
-                regionTitle.style.display = "block";
+                // Chỉ ẩn tiêu đề và hiện thông báo nếu có tìm kiếm
+                regionTitle.style.display = searchTerm ? "none" : "block";
+                if (noResultMessage)
+                  noResultMessage.style.display = searchTerm ? "block" : "none";
               }
             }
           });

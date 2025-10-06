@@ -1133,12 +1133,6 @@ body {
   display: block;
 }
 
-body {
-  padding-top: var(
-    --header-height
-  ); /* Sửa lại để khớp với chiều cao header (65px) */
-}
-
 /* File: style.css */
 /* DÁN ĐOẠN NÀY VÀO CUỐI FILE HOẶC THAY THẾ CHO ĐOẠN .breadcrumb CŨ */
 
@@ -3301,12 +3295,6 @@ body {
   display: block;
 }
 
-body {
-  padding-top: var(
-    --header-height
-  ); /* Sửa lại để khớp với chiều cao header (65px) */
-}
-
 /* File: style.css */
 /* DÁN ĐOẠN NÀY VÀO CUỐI FILE HOẶC THAY THẾ CHO ĐOẠN .breadcrumb CŨ */
 
@@ -3872,6 +3860,29 @@ body.viewer-wide .document-viewer {
 /* --- FIX: Đồng bộ màu icon cho nút đóng góp --- */
 .updating-section .btn-contribute i {
   color: #fff;
+}
+
+/* =================================================================== */
+/* --- PHẦN 20: CSS CHO ACCESSIBILITY & UX --- */
+/* =================================================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.no-results-message {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  display: none; /* Ẩn mặc định */
 }
 /* =================================================================== */
 /* --- PHẦN 9: CSS CHO TRÌNH CHIẾU SLIDE (PRESENTATION) --- */

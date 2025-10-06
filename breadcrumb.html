@@ -159,21 +159,16 @@
       } else {
         const link = document.createElement("a");
 
-        // --- LOGIC SỬA LỖI TẠO LINK ---
-        let linkHref = cumulativePath + "/" + segment; // Bắt đầu bằng đường dẫn thư mục
+        // --- LOGIC TẠO LINK ĐƠN GIẢN HÓA ---
+        let linkHref = (cumulativePath + "/" + segment).replace(/\/+/g, "/");
 
-        // Nếu segment không có đuôi (ví dụ: 'uet', 'cntt-csdl') và có một tệp .html tương ứng trong map, hãy trỏ đến tệp .html đó.
-        // Loại trừ trường hợp đặc biệt như 'slides' để tránh tạo link sai.
-        if (
-          !segment.includes(".") &&
-          map[segment + ".html"] &&
-          segment !== "slides"
-        ) {
+        // Chỉ thêm ".html" nếu segment không phải là thư mục cuối cùng và có tệp .html tương ứng
+        if (!segment.includes(".") && map[segment + ".html"]) {
           linkHref += ".html";
         }
 
         // Xử lý riêng cho trang chủ
-        if (name === "Trang chủ" || segment === "index.html") {
+        if (index === 0) {
           linkHref = "/index.html";
         }
 
@@ -186,14 +181,6 @@
       cumulativePath += "/" + segment;
 
       breadcrumbList.appendChild(listItem);
-    });
-
-    // --- PHẦN SỬA LỖI ---
-    // Đoạn mã này sẽ tìm tất cả các link trên trang và sửa lại href
-    // Chúng ta cần đảm bảo nó chỉ chạy cho các link trong breadcrumb
-    const breadcrumbLinks = breadcrumbList.querySelectorAll("a");
-    breadcrumbLinks.forEach((link) => {
-      // Logic sửa link (nếu cần) có thể được thêm vào đây trong tương lai
     });
   })();
 </script>

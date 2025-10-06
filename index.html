@@ -196,6 +196,7 @@
               class="form-fields"
               style="display: none; margin-top: 20px; text-align: left"
             >
+              <label for="university" class="sr-only">Tên trường đại học</label>
               <input
                 type="text"
                 id="university"
@@ -205,6 +206,7 @@
               />
               <span class="error-message" id="university-error"></span>
 
+              <label for="subject" class="sr-only">Tên môn học</label>
               <input
                 type="text"
                 id="subject"
@@ -214,6 +216,9 @@
               />
               <span class="error-message" id="subject-error"></span>
 
+              <label for="teacher" class="sr-only"
+                >Tên giảng viên hoặc khoa</label
+              >
               <input
                 type="text"
                 id="teacher"
@@ -223,6 +228,9 @@
               />
               <span class="error-message" id="teacher-error"></span>
 
+              <label for="description" class="sr-only"
+                >Mô tả ngắn về tài liệu</label
+              >
               <textarea
                 id="description"
                 name="description"
@@ -251,6 +259,7 @@
       <div class="popup-content">
         <button id="popup-close-btn" class="popup-close">&times;</button>
         <img
+          loading="lazy"
           src="https://i.pinimg.com/originals/c3/00/45/c30045e7f17b6a7114b537651a1a7a42.gif"
           alt="Mèo đa tạ"
         />
@@ -477,22 +486,21 @@
           {
             text: "Đa tạ sư huynh!",
             imageUrl:
-              "https://i.pinimg.com/236x/27/10/92/2710921c9b5c92e7ddc40925c3373b35.jpg",
+              "https://i.pinimg.com/originals/c3/00/45/c30045e7f17b6a7114b537651a1a7a42.gif",
           },
           {
             text: "Tài liệu vip quá hai ơi!",
             imageUrl:
-              "https://i.pinimg.com/236x/76/c8/8c/76c88cf777792e85badbbd8e002a2082.jpg",
+              "https://i.pinimg.com/originals/76/c8/8c/76c88cf777792e85badbbd8e002a2082.gif",
           },
           {
             text: "Bắn Tym <3",
             imageUrl:
-              "https://i.pinimg.com/474x/2a/e6/5f/2ae65f442640ad7baf112f65fad61530.jpg",
+              "https://i.pinimg.com/originals/2a/e6/5f/2ae65f442640ad7baf112f65fad61530.gif",
           },
           {
             text: "Uầy!",
-            imageUrl:
-              "https://cdn2.fptshop.com.vn/unsafe/meme_da_ta_16_4e907df585.jpg",
+            imageUrl: "https://media.tenor.com/w8s_3yms0o4AAAAC/meo-che.gif",
           },
         ];
 
@@ -502,6 +510,7 @@
             const selectedPopup = popupOptions[randomIndex];
             popupText.textContent = selectedPopup.text;
             popupImage.src = selectedPopup.imageUrl;
+            popupImage.loading = "lazy";
             successPopup.classList.add("active");
           }
         }

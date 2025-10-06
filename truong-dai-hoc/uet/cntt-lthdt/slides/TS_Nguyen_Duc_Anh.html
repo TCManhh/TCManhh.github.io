@@ -289,14 +289,13 @@
     </main>
 
     <div id="footer-placeholder"></div>
-      <nav id="breadcrumb-placeholder" aria-label="Breadcrumb"></nav>
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         const sectionHeaders = document.querySelectorAll(".section-header");
         sectionHeaders.forEach((header) => {
-          // Sửa lỗi 'this' trong arrow function
-          header.addEventListener("click", () =>
-            header.parentElement.classList.toggle("active")
-          );
+          header.addEventListener("click", () => {
+            header.parentElement.classList.toggle("active");
+          });
         });
       });
     </script>

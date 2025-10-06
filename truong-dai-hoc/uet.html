@@ -95,6 +95,9 @@
       <section class="subjects-list">
         <div class="container">
           <h2 class="faculty-title">Khoa Công nghệ Thông tin</h2>
+          <div class="no-results-message" id="no-results-cntt">
+            Không tìm thấy môn học nào phù hợp với từ khóa của bạn.
+          </div>
           <div class="subject-grid">
             <a href="/truong-dai-hoc/uet/cntt-csdl.html" class="subject-card">
               <i class="fas fa-database"></i>
@@ -124,6 +127,9 @@
           </div>
 
           <h2 class="faculty-title">Khoa Điện tử Viễn thông</h2>
+          <div class="no-results-message" id="no-results-dtvt">
+            Không tìm thấy môn học nào phù hợp với từ khóa của bạn.
+          </div>
           <div class="subject-grid"></div>
         </div>
       </section>
@@ -198,45 +204,50 @@
       // Chức năng tìm kiếm môn học
       document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById("subjectSearchInput");
-        const subjectCards = document.querySelectorAll(".subject-card");
         const subjectGrids = document.querySelectorAll(".subject-grid");
         const facultyTitles = document.querySelectorAll(".faculty-title");
+        const noResultsMessages = document.querySelectorAll(
+          ".no-results-message"
+        );
 
         function filterSubjects() {
           const searchTerm = searchInput.value.toLowerCase().trim();
+          let hasVisibleCardOverall = false;
 
-          subjectCards.forEach(function (card) {
-            const subjectName = card
-              .querySelector("h3")
-              .textContent.toLowerCase();
-            const subjectCode = card
-              .querySelector("p")
-              .textContent.toLowerCase();
+          subjectGrids.forEach(function (grid, index) {
+            const cardsInGrid = grid.querySelectorAll(".subject-card");
+            let hasVisibleCardInGrid = false;
 
-            if (
-              subjectName.includes(searchTerm) ||
-              subjectCode.includes(searchTerm)
-            ) {
-              card.style.display = "flex";
-            } else {
-              card.style.display = "none";
-            }
-          });
+            cardsInGrid.forEach(function (card) {
+              const subjectName = card
+                .querySelector("h3")
+                .textContent.toLowerCase();
+              const subjectCode = card
+                .querySelector("p")
+                .textContent.toLowerCase();
 
-          subjectGrids.forEach(function (grid) {
+              const isVisible =
+                subjectName.includes(searchTerm) ||
+                subjectCode.includes(searchTerm);
+
+              card.style.display = isVisible ? "block" : "none"; // subject-card is block
+              if (isVisible) {
+                hasVisibleCardInGrid = true;
+                hasVisibleCardOverall = true;
+              }
+            });
+
             const facultyTitle = grid.previousElementSibling;
-            if (
-              facultyTitle &&
-              facultyTitle.classList.contains("faculty-title")
-            ) {
-              const visibleCardsInGrid = grid.querySelectorAll(
-                '.subject-card[style*="display: flex"]'
-              );
+            const noResultMessage = noResultsMessages[index];
 
-              if (visibleCardsInGrid.length === 0 && searchTerm) {
-                facultyTitle.style.display = "none";
-              } else {
+            if (facultyTitle) {
+              if (hasVisibleCardInGrid) {
                 facultyTitle.style.display = "block";
+                if (noResultMessage) noResultMessage.style.display = "none";
+              } else {
+                facultyTitle.style.display = "none";
+                if (noResultMessage)
+                  noResultMessage.style.display = searchTerm ? "block" : "none";
               }
             }
           });
