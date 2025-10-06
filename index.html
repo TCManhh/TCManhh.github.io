@@ -27,11 +27,42 @@
       property="og:image"
       content="https://tcmanhh.github.io/assets/images/logo_ngang.jpg"
     />
+    <!-- P1: Preconnect to required origins -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+ 
+    <!-- P1: Preload LCP hero image -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop"
+      fetchpriority="high"
+    />
+    <!-- P1: Preload critical fonts (Font Awesome) -->
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-regular-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+ 
     <link rel="stylesheet" href="/style.css" />
+    <!-- P1: Defer non-critical CSS (Font Awesome) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -49,7 +80,6 @@
   <body>
     <div id="header-placeholder"></div>
 
-    <main>
       <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="container">
@@ -258,14 +288,17 @@
     <div id="success-popup" class="popup-overlay">
       <div class="popup-content">
         <button id="popup-close-btn" class="popup-close">&times;</button>
+        <!-- P2: Lazy-load offscreen images -->
         <img
           loading="lazy"
           src="https://i.pinimg.com/originals/c3/00/45/c30045e7f17b6a7114b537651a1a7a42.gif"
           alt="Mèo đa tạ"
+          decoding="async"
         />
         <h3>Đa tạ sư huynh!</h3>
       </div>
     </div>
+    </main>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -658,6 +691,7 @@
         });
       });
     </script>
-    <script src="/assets/js/layout.js"></script>
+    <!-- P2: Defer layout script -->
+    <script src="/assets/js/layout.js" defer></script>
   </body>
 </html>

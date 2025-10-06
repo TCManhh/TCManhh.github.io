@@ -3884,6 +3884,29 @@ body.viewer-wide .document-viewer {
   color: var(--text-color);
   display: none; /* Ẩn mặc định */
 }
+
+/* =================================================================== */
+/* --- PHẦN 21: TỐI ƯU HIỆU NĂNG (PERFORMANCE) --- */
+/* =================================================================== */
+
+/* P1: Tránh CLS cho iframe bằng kỹ thuật Aspect Ratio Box */
+.iframe-aspect-ratio-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 75%; /* Tỷ lệ 4:3, có thể điều chỉnh thành 56.25% cho 16:9 */
+  background-color: #e9ecef; /* Màu nền giữ chỗ */
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.iframe-aspect-ratio-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 /* =================================================================== */
 /* --- PHẦN 9: CSS CHO TRÌNH CHIẾU SLIDE (PRESENTATION) --- */
 /* =================================================================== */
