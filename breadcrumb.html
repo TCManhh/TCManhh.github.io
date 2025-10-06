@@ -1,174 +1,199 @@
 <nav class="breadcrumb">
-    <div class="container">
-        <ol id="breadcrumb-list"></ol>
-    </div>
+  <div class="container">
+    <ol id="breadcrumb-list"></ol>
+  </div>
 </nav>
 
 <script>
-(function() {
- // Bảng tra cứu tên
-    const map = { "": "Trang chủ",
-        "index.html": "Trang chủ",
-        "truong-dai-hoc": "Tài Liệu Trường Đại học & Học viện",
-        "truong-dai-hoc.html": "Tài Liệu Trường Đại học & Học viện",
-        "uet.html": "Trường Đại học Công nghệ",
-        "uet": "Trường Đại học Công nghệ",
-        
-        "cntt": "Khoa Công nghệ Thông tin",
-        /* === MÔN CSDL === */
-        "cntt-csdl.html": "Cơ sở dữ liệu",
-        "cntt-csdl": "Cơ sở dữ liệu",
-        "GVkhoaCNTT-documents.html": "GV Khoa Công Nghệ Thông Tin",
-        "GVkhoaCNTT-documents": "GV Khoa Công Nghệ Thông Tin",
-        "c1-viewer.html": "C1.pptx",
-        "c2-1-viewer.html": "C2_1.pptx",
-        "c2-2-viewer.html": "C2_2.pptx",
-        "classicmodels-viewer.html": "CSDL Classicmodels",
-        "th-template-viewer.html": "[TH] Template Nộp Bài Tập.docx",
-        "thuchanh-csdl-viewer.html": "TH_CSDL_Jul_2025.pdf",
-        "tai_lieu_a4_viewer.html": "Mô tả DB classicmodels.pdf",
+  (function () {
+    // Bảng tra cứu tên
+    const map = {
+      "": "Trang chủ",
+      "index.html": "Trang chủ",
+      "truong-dai-hoc": "Tài Liệu Trường Đại học & Học viện",
+      "truong-dai-hoc.html": "Tài Liệu Trường Đại học & Học viện",
+      "uet.html": "Trường Đại học Công nghệ",
+      uet: "Trường Đại học Công nghệ",
 
-        /* === MÔN CTDL & GT === */
-        "cntt-ctdlgt.html": "Cấu Trúc Dữ Liệu và Giải Thuật",
-        "cntt-ctdlgt": "Cấu Trúc Dữ Liệu và Giải Thuật",
-        "TS_Tran_Thi_Minh_Chau.html": "TS. Trần Thị Minh Châu", 
-        "TS_Tran_Thi_Minh_Chau": "TS. Trần Thị Minh Châu",
-        "bai-giang-union-find-viewer.html": "Bài giảng Union-Find",
-        "chuan-bi-moi-truong-lap-trinh-java-viewer.html": "Chuẩn bị môi trường lập trình Java",
-        "bai-giang-gioi-thieu-ctdlgt-viewer.html": "Bài giảng: Giới thiệu",
-        "bai-giang-phan-tich-thuat-toan-viewer.html": "Bài giảng: Phân tích thuật toán",
-        "bai-tap-on-tap-phan-tich-thuat-toan.html": "Bài tập ôn tập: Phân tích thuật toán",
-        "bai-giang-stack-queue-array-viewer.html": "Bài giảng: Stack and Queue I: Array",
-        "bai-giang-stack-queue-linked-list-viewer.html": "Bài giảng: Stack and Queue II : Linked List",
-        "bai-tap-stack-queue-viewer.html": "Bài tập: Stack and Queue",
-        "btvn-linked-list-hackerrank-viewer.html": "BTVN: Linked List (HackerRank)",
-        "sach-algorithms-4th-ed-viewer.html": "Sách Algorithms 4th Ed",
-        "bai-giang-elementary-sorts-viewer.html": "Bài giảng: Elementary Sorts",
-        "bai-giang-mergesort-viewer.html": "Bài giảng: Mergesort",
-        "bai-tap-elementary-mergesort-viewer.html": "Bài tập: Elementary Sorts & Mergesort",
+      cntt: "Khoa Công nghệ Thông tin",
+      /* === MÔN CSDL === */
+      "cntt-csdl.html": "Cơ sở dữ liệu",
+      "cntt-csdl": "Cơ sở dữ liệu",
+      "GVkhoaCNTT-documents.html": "GV Khoa Công Nghệ Thông Tin",
+      "GVkhoaCNTT-documents": "GV Khoa Công Nghệ Thông Tin",
+      "c1-viewer.html": "C1.pptx",
+      "c2-1-viewer.html": "C2_1.pptx",
+      "c2-2-viewer.html": "C2_2.pptx",
+      "classicmodels-viewer.html": "CSDL Classicmodels",
+      "th-template-viewer.html": "[TH] Template Nộp Bài Tập.docx",
+      "thuchanh-csdl-viewer.html": "TH_CSDL_Jul_2025.pdf",
+      "tai_lieu_a4_viewer.html": "Mô tả DB classicmodels.pdf",
 
-        /* === MÔN Lập trình Hướng đối tượng === */
-        "cntt-lthdt.html": "Lập trình hướng đối tượng",
-        "cntt-lthdt": "Lập trình hướng đối tượng",
-        "TS_Nguyen_Duc_Anh.html": "TS. Nguyễn Đức Anh",
-        "TS_Nguyen_Duc_Anh": "TS. Nguyễn Đức Anh",
-        "0.1-Policy-viewer.html": "0.1 - Policy.pdf",
-        "0-Project-Management-Programs-viewer.html": "0 - Project Management Programs.pdf",
-        "0.2-Project-Management-Programs-viewer.html": "0.2 - Project Management Programs.pdf",
-        "0.3-GitHub-viewer.html": "0.3 - GitHub.pdf",
-        "1-Gioi-thieu-Java-modified-viewer.html": "1-Giới thiệu Java_modified.pdf",
-        "2.2-KhaiNiem-HuongDoiTuong-modified-viewer.html": "2.2_KhaiNiem_HuongDoiTuong_modified.pdf",
-        "2.1-JDK-JVM-JRE-JIT-viewer.html": "2.1- JDK JVM JRE JIT.pdf",
-        "3-LopDoiTuong-Java-modified-viewer.html": "3_LopDoiTuong_Java_modified.pdf",
-        "4-HieuThem-Java-1-viewer.html": "4_HieuThem_Java-1.pdf",
-        "5-HieuThem-Java-2-viewer.html": "5_HieuThem_Java-2.pdf",
-        "6-OOP_ThuaKe-viewer.html": "6-OOP_ThuaKe.pdf",
-        "7-OOP_Dahinh-viewer.html": "7-OOP_Dahinh.pdf",
-        "8-Exceptions-v2-viewer.html": "8 - Exceptions v2.pdf",
-        "9-IOStreams-v2-viewer.html": "9 - IOStreams v2.pdf",
-        "10-Generic-v4-viewer.html": "10 - Generic v4.pdf",
-        "11-Data-structures-viewer.html": "11_Data structures-15-8 v3.pdf",
-        "Design-Patterns-viewer.html": "Design Patterns-new2.pdf",
-        "13-Mot-so-ngon-ngu-OOP-viewer.html": "13-Mot so ngôn ngữ OOP-new.pdf",
-        "14-On-tap-viewer.html": "14-Ôn tập.pdf",
-        
-        /* === MÔN Xác suất thống kê === */
-        "cntt-xstk.html": "Xác suất thống kê",
-        "cntt-xstk": "Xác suất thống kê",
-        "le-sy-vinh-documents.html": "GS. Lê Sỹ Vinh",
-        "le-sy-vinh-documents": "GS. Lê Sỹ Vinh",
-        "xac-suat-thong-ke-week-1-viewer.html": "Tuần 1: Biến cố và xác suất của biến cố (P1)",
-        "xac-suat-thong-ke-week-2-viewer.html": "Tuần 2: Biến cố và xác suất của biến cố (P2)",
-        "xac-suat-thong-ke-week-3-viewer.html": "Tuần 3: Đại lượng ngẫu nhiên rời rạc",
-        "xac-suat-thong-ke-week-5-6-viewer.html": "Tuần 5 & 6: Đại lượng ngẫu nhiên liên tục",
-        "xac-suat-thong-ke-week-6-viewer.html": "Tuần 6: Luật số lớn & Định lý giới hạn trung tâm",
-        "xac-suat-thong-ke-week-7-viewer.html": "Tuần 7: Giới thiệu thống kê & Khoảng tin cậy",
-        "xac-suat-thong-ke-week-8-viewer.html": "Tuần 8: Kiểm định giả thuyết",
-        "xac-suat-thong-ke-week-9-viewer.html": "Tuần 9: Kiểm định – P-value",
-        "xac-suat-thong-ke-week-10-viewer.html": "Tuần 10: Phân tích tương quan & Hồi quy",
-        "xac-suat-thong-ke-week-11-viewer.html": "Tuần 11: Công thức Bayes",
+      /* === MÔN CTDL & GT === */
+      "cntt-ctdlgt.html": "Cấu Trúc Dữ Liệu và Giải Thuật",
+      "cntt-ctdlgt": "Cấu Trúc Dữ Liệu và Giải Thuật",
+      "TS_Tran_Thi_Minh_Chau.html": "TS. Trần Thị Minh Châu",
+      TS_Tran_Thi_Minh_Chau: "TS. Trần Thị Minh Châu",
+      "bai-giang-union-find-viewer.html": "Bài giảng Union-Find",
+      "chuan-bi-moi-truong-lap-trinh-java-viewer.html":
+        "Chuẩn bị môi trường lập trình Java",
+      "bai-giang-gioi-thieu-ctdlgt-viewer.html": "Bài giảng: Giới thiệu",
+      "bai-giang-phan-tich-thuat-toan-viewer.html":
+        "Bài giảng: Phân tích thuật toán",
+      "bai-tap-on-tap-phan-tich-thuat-toan.html":
+        "Bài tập ôn tập: Phân tích thuật toán",
+      "bai-giang-stack-queue-array-viewer.html":
+        "Bài giảng: Stack and Queue I: Array",
+      "bai-giang-stack-queue-linked-list-viewer.html":
+        "Bài giảng: Stack and Queue II : Linked List",
+      "bai-tap-stack-queue-viewer.html": "Bài tập: Stack and Queue",
+      "btvn-linked-list-hackerrank-viewer.html":
+        "BTVN: Linked List (HackerRank)",
+      "sach-algorithms-4th-ed-viewer.html": "Sách Algorithms 4th Ed",
+      "bai-giang-elementary-sorts-viewer.html": "Bài giảng: Elementary Sorts",
+      "bai-giang-mergesort-viewer.html": "Bài giảng: Mergesort",
+      "bai-tap-elementary-mergesort-viewer.html":
+        "Bài tập: Elementary Sorts & Mergesort",
 
-        /* === MÔN Kiến trúc máy tính === */
-        "cntt-ktmt.html": "Kiến trúc máy tính",
-        "cntt-ktmt": "Kiến trúc máy tính",
-        "PGS_TS_NguyenTriThanh.html": "PGS.TS. Nguyễn Trí Thành",
-        "PGS_TS_NguyenTriThanh": "PGS.TS. Nguyễn Trí Thành",
-        "slide_gioi_thieu.html": "Slide giới thiệu",
-        "slide_chuong1.html": "Slide chương 1",
-        "slide_chuong2.html": "Slide chương 2",
-        "bai_tap_tuan_1.html": "Bài tập tuần 1",
-        "bai_tap_tuan_2.html": "Bài tập tuần 2",
-        "bai_tap_tuan_3.html": "Bài tập tuần 3",
-        "giao_trinh.html": "Giáo trình",
-        "Link_tai_phan_mem_mo_phong_EasyEDA.html": "Link tải phần mềm mô phỏng EasyEDA",
-        "huong_dan_su_dung_phan_mem.html": "Hướng dẫn sử dụng phần mềm",
-        "Cong_cu_thuc_hanh_ve_mach.html": "Công cụ thực hành vẽ mạch",
-        "huong_dan_su_dung_phan_mem_logisim.html": "Hướng dẫn sử dụng phần mềm logisim",
-        "giao_trinh_va_sach.html": "Giáo trình & Sách",
-        "giao_trinh_va_sach": "Giáo trình & Sách",
-        "sach-algorithms-4th-ed-viewer.html": "Sách Algorithms 4th Ed",
-        "website-algorithms-4th-ed-viewer.html": "Trang web sách Algorithms 4th Ed",
+      /* === MÔN Lập trình Hướng đối tượng === */
+      "cntt-lthdt.html": "Lập trình hướng đối tượng",
+      "cntt-lthdt": "Lập trình hướng đối tượng",
+      "TS_Nguyen_Duc_Anh.html": "TS. Nguyễn Đức Anh",
+      TS_Nguyen_Duc_Anh: "TS. Nguyễn Đức Anh",
+      "0.1-Policy-viewer.html": "0.1 - Policy.pdf",
+      "0-Project-Management-Programs-viewer.html":
+        "0 - Project Management Programs.pdf",
+      "0.2-Project-Management-Programs-viewer.html":
+        "0.2 - Project Management Programs.pdf",
+      "0.3-GitHub-viewer.html": "0.3 - GitHub.pdf",
+      "1-Gioi-thieu-Java-modified-viewer.html":
+        "1-Giới thiệu Java_modified.pdf",
+      "2.2-KhaiNiem-HuongDoiTuong-modified-viewer.html":
+        "2.2_KhaiNiem_HuongDoiTuong_modified.pdf",
+      "2.1-JDK-JVM-JRE-JIT-viewer.html": "2.1- JDK JVM JRE JIT.pdf",
+      "3-LopDoiTuong-Java-modified-viewer.html":
+        "3_LopDoiTuong_Java_modified.pdf",
+      "4-HieuThem-Java-1-viewer.html": "4_HieuThem_Java-1.pdf",
+      "5-HieuThem-Java-2-viewer.html": "5_HieuThem_Java-2.pdf",
+      "6-OOP_ThuaKe-viewer.html": "6-OOP_ThuaKe.pdf",
+      "7-OOP_Dahinh-viewer.html": "7-OOP_Dahinh.pdf",
+      "8-Exceptions-v2-viewer.html": "8 - Exceptions v2.pdf",
+      "9-IOStreams-v2-viewer.html": "9 - IOStreams v2.pdf",
+      "10-Generic-v4-viewer.html": "10 - Generic v4.pdf",
+      "11-Data-structures-viewer.html": "11_Data structures-15-8 v3.pdf",
+      "Design-Patterns-viewer.html": "Design Patterns-new2.pdf",
+      "13-Mot-so-ngon-ngu-OOP-viewer.html": "13-Mot so ngôn ngữ OOP-new.pdf",
+      "14-On-tap-viewer.html": "14-Ôn tập.pdf",
 
+      /* === MÔN Xác suất thống kê === */
+      "cntt-xstk.html": "Xác suất thống kê",
+      "cntt-xstk": "Xác suất thống kê",
+      "le-sy-vinh-documents.html": "GS. Lê Sỹ Vinh",
+      "le-sy-vinh-documents": "GS. Lê Sỹ Vinh",
+      "xac-suat-thong-ke-week-1-viewer.html":
+        "Tuần 1: Biến cố và xác suất của biến cố (P1)",
+      "xac-suat-thong-ke-week-2-viewer.html":
+        "Tuần 2: Biến cố và xác suất của biến cố (P2)",
+      "xac-suat-thong-ke-week-3-viewer.html":
+        "Tuần 3: Đại lượng ngẫu nhiên rời rạc",
+      "xac-suat-thong-ke-week-5-6-viewer.html":
+        "Tuần 5 & 6: Đại lượng ngẫu nhiên liên tục",
+      "xac-suat-thong-ke-week-6-viewer.html":
+        "Tuần 6: Luật số lớn & Định lý giới hạn trung tâm",
+      "xac-suat-thong-ke-week-7-viewer.html":
+        "Tuần 7: Giới thiệu thống kê & Khoảng tin cậy",
+      "xac-suat-thong-ke-week-8-viewer.html": "Tuần 8: Kiểm định giả thuyết",
+      "xac-suat-thong-ke-week-9-viewer.html": "Tuần 9: Kiểm định – P-value",
+      "xac-suat-thong-ke-week-10-viewer.html":
+        "Tuần 10: Phân tích tương quan & Hồi quy",
+      "xac-suat-thong-ke-week-11-viewer.html": "Tuần 11: Công thức Bayes",
 
-        /* === CHUNG === */
-        "slides.html": "Slide Bài giảng",
-        "slides": "Slide Bài giảng"
+      /* === MÔN Kiến trúc máy tính === */
+      "cntt-ktmt.html": "Kiến trúc máy tính",
+      "cntt-ktmt": "Kiến trúc máy tính",
+      "PGS_TS_NguyenTriThanh.html": "PGS.TS. Nguyễn Trí Thành",
+      PGS_TS_NguyenTriThanh: "PGS.TS. Nguyễn Trí Thành",
+      "slide_gioi_thieu.html": "Slide giới thiệu",
+      "slide_chuong1.html": "Slide chương 1",
+      "slide_chuong2.html": "Slide chương 2",
+      "bai_tap_tuan_1.html": "Bài tập tuần 1",
+      "bai_tap_tuan_2.html": "Bài tập tuần 2",
+      "bai_tap_tuan_3.html": "Bài tập tuần 3",
+      "giao_trinh.html": "Giáo trình",
+      "Link_tai_phan_mem_mo_phong_EasyEDA.html":
+        "Link tải phần mềm mô phỏng EasyEDA",
+      "huong_dan_su_dung_phan_mem.html": "Hướng dẫn sử dụng phần mềm",
+      "Cong_cu_thuc_hanh_ve_mach.html": "Công cụ thực hành vẽ mạch",
+      "huong_dan_su_dung_phan_mem_logisim.html":
+        "Hướng dẫn sử dụng phần mềm logisim",
+      "giao_trinh_va_sach.html": "Giáo trình & Sách",
+      giao_trinh_va_sach: "Giáo trình & Sách",
+      "sach-algorithms-4th-ed-viewer.html": "Sách Algorithms 4th Ed",
+      "website-algorithms-4th-ed-viewer.html":
+        "Trang web sách Algorithms 4th Ed",
+
+      /* === CHUNG === */
+      "slides.html": "Slide Bài giảng",
+      slides: "Slide Bài giảng",
     };
 
-  const breadcrumbList = document.getElementById('breadcrumb-list');
-  let pathSegments = window.location.pathname.replace(/^\/+|\/+$/g, '').split('/');
-    
-  let cumulativePath = '';
+    const breadcrumbList = document.getElementById("breadcrumb-list");
+    let pathSegments = window.location.pathname
+      .replace(/^\/+|\/+$/g, "")
+      .split("/");
 
-  pathSegments.forEach((segment, index) => {
-  const isLast = index === pathSegments.length - 1;
-        
-        if (!segment) return;
-        
-  const name = map[segment] || segment.replace('.html', '').replace(/-/g, ' ');
-  const listItem = document.createElement('li');
-  
-  if (isLast) {
-   listItem.classList.add('active');
-  listItem.textContent = name;
-        } else {
-            const link = document.createElement('a');
-            
-            // --- LOGIC SỬA LỖI TẠO LINK ---
-            let linkHref = cumulativePath + '/' + segment; // Bắt đầu bằng đường dẫn thư mục
-            
-            // Nếu segment không có đuôi, và có một tệp .html tương ứng trong map, hãy trỏ đến tệp .html đó.
-            if (!segment.includes('.') && map[segment + '.html']) {
-                linkHref += '.html';
-            }
+    let cumulativePath = "";
 
-            // --- FIX: Xử lý đặc biệt cho 'slides' ---
-            if (segment === 'slides') {
-                linkHref = cumulativePath + '/slides.html';
-            } 
-            
-            // Xử lý riêng cho trang chủ
-  if (name === 'Trang chủ' || segment === 'index.html') {
-                linkHref = '/index.html';
-            }
+    pathSegments.forEach((segment, index) => {
+      const isLast = index === pathSegments.length - 1;
 
-  link.href = linkHref;
-            link.textContent = name;
-            listItem.appendChild(link);
-   }
-        
-        // Cập nhật đường dẫn cho vòng lặp tiếp theo
-  cumulativePath += '/' + segment;
-        
-        breadcrumbList.appendChild(listItem);
-    }); 
+      if (!segment) return;
+
+      const name =
+        map[segment] || segment.replace(".html", "").replace(/-/g, " ");
+      const listItem = document.createElement("li");
+
+      if (isLast) {
+        listItem.classList.add("active");
+        listItem.textContent = name;
+      } else {
+        const link = document.createElement("a");
+
+        // --- LOGIC SỬA LỖI TẠO LINK ---
+        let linkHref = cumulativePath + "/" + segment; // Bắt đầu bằng đường dẫn thư mục
+
+        // Nếu segment không có đuôi (ví dụ: 'uet', 'cntt-csdl') và có một tệp .html tương ứng trong map, hãy trỏ đến tệp .html đó.
+        // Loại trừ trường hợp đặc biệt như 'slides' để tránh tạo link sai.
+        if (
+          !segment.includes(".") &&
+          map[segment + ".html"] &&
+          segment !== "slides"
+        ) {
+          linkHref += ".html";
+        }
+
+        // Xử lý riêng cho trang chủ
+        if (name === "Trang chủ" || segment === "index.html") {
+          linkHref = "/index.html";
+        }
+
+        link.href = linkHref;
+        link.textContent = name;
+        listItem.appendChild(link);
+      }
+
+      // Cập nhật đường dẫn cho vòng lặp tiếp theo
+      cumulativePath += "/" + segment;
+
+      breadcrumbList.appendChild(listItem);
+    });
 
     // --- PHẦN SỬA LỖI ---
     // Đoạn mã này sẽ tìm tất cả các link trên trang và sửa lại href
     // Chúng ta cần đảm bảo nó chỉ chạy cho các link trong breadcrumb
-    const breadcrumbLinks = breadcrumbList.querySelectorAll('a');
-    breadcrumbLinks.forEach(link => {
-        // Logic sửa link (nếu cần) có thể được thêm vào đây trong tương lai
+    const breadcrumbLinks = breadcrumbList.querySelectorAll("a");
+    breadcrumbLinks.forEach((link) => {
+      // Logic sửa link (nếu cần) có thể được thêm vào đây trong tương lai
     });
-})();
+  })();
 </script>

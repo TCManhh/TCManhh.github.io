@@ -1,48 +1,11 @@
-<!DOCTYPE html>
-<html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>
-      Trình chiếu: 7-OOP_Dahinh.pdf - Lập trình hướng đối tượng - StuShare
-    </title>
-    <meta
-      name="description"
-      content="Tài liệu slide về tính đa hình trong Lập trình hướng đối tượng. Môn Lập trình hướng đối tượng của TS. Nguyễn Đức Anh."
-    />
-    <link rel="stylesheet" href="/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-  </head>
-  <body class="has-fixed-breadcrumb">
-    <div id="header-placeholder"></div>
-    <div id="breadcrumb-placeholder"></div>
+# PowerShell script để thêm comment system vào tất cả viewer files chưa có
 
-    <main>
-      <section class="document-viewer-section">
-        <div class="presentation-container">
-          <div class="presentation-wrapper">
-            <iframe
-              src="https://drive.google.com/file/d/1IPFAOGcBB0bFWBD5a9C2a1pMt9ZNvBdw/preview"
-              allow="autoplay"
-              allowfullscreen
-              title="7-OOP_Dahinh.pdf"
-            ></iframe>
-          </div>
-        </div>
+# --- TỐI ƯU: Tự động tìm tất cả các file *-viewer.html trong thư mục dự án ---
+$projectRoot = "d:\Code\tcmanhh.github.io"
+$filesToUpdate = Get-ChildItem -Path $projectRoot -Recurse -Filter "*-viewer.html" | ForEach-Object { $_.FullName }
 
-        <div class="viewer-actions">
-          <a
-            href="https://drive.google.com/file/d/1waRYZdqtKE_dECXTpYYbDdLA_6JBTkUu/view?usp=drive_link"
-            class="btn btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fas fa-crown"></i> Tải xuống hoặc In (Thành viên VIP)</a
-          >
-        </div>
-      </section>
+# HTML comment section template
+$commentSectionHTML = @'
 
       <section class="comments-section" style="padding: 40px 0">
         <div class="container comments-shell">
@@ -88,6 +51,7 @@
           </form>
 
           <div id="comments-container" class="comments-list">
+            <!-- skeleton khi đang tải -->
             <div class="comment-skeleton"></div>
             <div class="comment-skeleton"></div>
             <div class="comment-skeleton"></div>
@@ -106,14 +70,15 @@
           <div id="comments-toast" class="toast"></div>
         </div>
       </section>
-    </main>
+'@
 
-    <div id="footer-placeholder"></div>
-    <script src="/assets/js/layout.js"></script>
+# JavaScript comment system template  
+$commentScriptJS = @'
     <script>
       let FORM_STARTED_AT = Date.now(); // đo thời gian điền form
     </script>
 
+    <!-- SCRIPT LOGIC BÌNH LUẬN ĐÃ ĐƯỢC NÂNG CẤP TOÀN BỘ -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const SCRIPT_URL =
@@ -192,6 +157,7 @@
           setTimeout(() => el.toast.classList.remove("show"), 10000);
         };
 
+        // --- NEW: Hàm tạo màu sắc động cho Avatar ---
         const nameToColor = (name) => {
           let hash = 0;
           for (let i = 0; i < name.length; i++) {
@@ -201,6 +167,7 @@
           return `hsl(${h}, 70%, 60%)`;
         };
 
+        // --- NEW: Hàm tạo màu ngẫu nhiên cho avatar mặc định ---
         const getRandomColor = () => {
           const h = Math.floor(Math.random() * 360);
           return `hsl(${h}, 70%, 60%)`;
@@ -231,6 +198,8 @@
           const timeDisplay = formatTimeAgo(comment.timestamp);
           const body = escapeHTML(comment.comment || "").replace(/\n/g, "<br>");
           const cid = escapeHTML(comment.comment_id);
+
+          // --- NEW: Ẩn nút trả lời nếu đã đạt cấp 4 ---
           const replyButtonHTML =
             level < 4
               ? `<button class="reply-btn-text reply-btn" data-comment-id="${cid}">Trả lời</button>`
@@ -289,7 +258,7 @@
             .slice()
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
           const end = state.page * state.pageSize;
-          renderCommentList(sorted.slice(0, end), el.container);
+          renderCommentList(sorted.slice(0, end), el.container, 1);
           el.loadMore.style.display =
             sorted.length > end ? "inline-block" : "none";
         };
@@ -360,8 +329,8 @@
             action: "react",
             page_id: PAGE_ID,
             comment_id,
-            device_id: DEVICE_ID,
-            reaction,
+            device_id: DEVICE_ID, // mỗi thiết bị 1 phiếu (tính lần cuối)
+            reaction, // 'like' | 'dislike'
           });
           const response = await fetch(SCRIPT_URL, {
             method: "POST",
@@ -375,6 +344,7 @@
             throw new Error(result.error || "Gửi phản ứng thất bại.");
         }
 
+        // --- Main Form Logic ---
         const handleFormInteraction = () => {
           el.formActions.style.display = "flex";
           el.commentInput.rows = 2;
@@ -409,6 +379,7 @@
 
         el.form.addEventListener("submit", async (e) => {
           e.preventDefault();
+          const originalText = el.submitBtn.innerHTML;
           el.submitBtn.disabled = true;
           el.submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Đang tải lên...`;
           try {
@@ -428,6 +399,7 @@
           }
         });
 
+        // --- Like/Dislike Logic ---
         el.container.addEventListener("click", async (e) => {
           const likeBtn = e.target.closest(".like-btn");
           const dislikeBtn = e.target.closest(".dislike-btn");
@@ -461,6 +433,7 @@
           }
         });
 
+        // --- Reply Form Logic ---
         el.container.addEventListener("click", (e) => {
           const replyBtn = e.target.closest(".reply-btn");
           if (!replyBtn) return;
@@ -469,6 +442,7 @@
             `reply-form-for-${parentId}`
           );
 
+          // Đóng tất cả các form trả lời khác đang mở
           document.querySelectorAll(".reply-form-container").forEach((c) => {
             if (c.id !== container.id) c.innerHTML = "";
           });
@@ -521,6 +495,7 @@
             }
             const button = replyForm.querySelector("button[type='submit']");
             button.disabled = true;
+            const originalReplyText = button.innerHTML;
             button.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`;
             try {
               await postComment({
@@ -533,7 +508,7 @@
             } catch (error) {
               showToast(`Lỗi: ${error.message}`, false);
               button.disabled = false;
-              button.innerHTML = "Trả lời";
+              button.innerHTML = originalReplyText;
             }
           });
         });
@@ -543,10 +518,13 @@
           reRenderWithControls();
         });
 
+        // --- Real-time Counter Updates ---
         function refreshReactionCountersOnly(payload) {
+          // payload: {success:true,data:[{comment_id, like_count, dislike_count, ...}]}
           if (!payload?.success || !Array.isArray(payload.data)) return;
           const byId = {};
           payload.data.forEach((c) => (byId[c.comment_id] = c));
+          // duyệt tất cả ".actions" hiện có
           document.querySelectorAll(".actions").forEach((act) => {
             const likeBtn = act.querySelector(".like-btn");
             const dislikeBtn = act.querySelector(".dislike-btn");
@@ -564,6 +542,7 @@
         async function pollCounts() {
           try {
             const cb = "poll_cb_" + Date.now();
+            // dùng JSONP như loadComments
             window[cb] = function (resp) {
               refreshReactionCountersOnly(resp);
               delete window[cb];
@@ -576,12 +555,41 @@
             document.body.appendChild(s);
           } catch (_) {}
         }
-        setInterval(pollCounts, 15000);
+        setInterval(pollCounts, 15000); // 15s
 
         // === INITIAL LOAD ===
         loadComments();
-        updateMainAvatar("?");
+        updateMainAvatar("?"); // Đặt màu ngẫu nhiên cho avatar khi tải trang
       });
     </script>
-  </body>
-</html>
+'@
+
+Write-Host "Bắt đầu batch update $($filesToUpdate.Count) files..."
+
+foreach ($file in $filesToUpdate) {
+    if (Test-Path $file) {
+        Write-Host "Đang xử lý: $file"
+        
+        $content = Get-Content $file -Raw -Encoding UTF8
+        
+        # Tìm và thêm comment section trước </main>
+        if ($content -notmatch "comments-section") {
+            # Chèn comment section ngay trước thẻ đóng </main>
+            $content = $content -replace "(\s*</main>)", "$commentSectionHTML`n`$1"
+            
+            # Chèn JavaScript comment system ngay trước thẻ đóng </body>
+            $content = $content -replace "(\s*</body>)", "$commentScriptJS`n`$1"
+            
+            # Ghi lại file với encoding UTF-8
+            # Đảm bảo file được lưu với BOM để trình duyệt đọc đúng ký tự tiếng Việt
+            Set-Content $file -Value $content -Encoding UTF8
+            Write-Host "✓ Đã cập nhật: $file"
+        } else {
+            Write-Host "- Đã có comment system, bỏ qua: $file"
+        }
+    } else {
+        Write-Host "✗ Không tìm thấy file: $file"
+    }
+}
+
+Write-Host "Hoàn thành batch update!"

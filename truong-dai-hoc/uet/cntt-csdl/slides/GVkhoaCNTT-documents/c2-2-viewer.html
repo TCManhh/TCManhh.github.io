@@ -294,7 +294,6 @@
             .slice()
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
           const end = state.page * state.pageSize;
-          renderCommentList(sorted.slice(0, end), el.container);
           renderCommentList(sorted.slice(0, end), el.container, 1);
           el.loadMore.style.display =
             sorted.length > end ? "inline-block" : "none";
