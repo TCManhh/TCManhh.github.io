@@ -53,6 +53,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
   }
+
+  // --- 4. Tải Comments (LOGIC MỚI) ---
+  // Chỉ thực hiện trên các trang có thẻ <main>
+  const mainElement = document.querySelector("main");
+  if (mainElement) {
+    // Tải song song 2 file html
+    Promise.all([
+      fetch("/assets/html/author-respect.html").then((res) =>
+        res.ok ? res.text() : ""
+      ),
+      fetch("/assets/html/comments.html").then((res) =>
+        res.ok ? res.text() : ""
+      ),
+    ])
+      .then(([respectHTML, commentsHTML]) => {
+        if (commentsHTML) {
+          // Chèn khối "Tôn trọng tác giả" trước, nếu có
+          if (respectHTML) {
+            mainElement.insertAdjacentHTML("beforeend", respectHTML);
+          }
+          // Sau đó chèn khối bình luận
+          mainElement.insertAdjacentHTML("beforeend", commentsHTML);
+
+          // Chỉ tải script bình luận nếu HTML của nó được chèn thành công
+          const script = document.createElement("script");
+          script.src = "/assets/js/comments.js";
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+      })
+      .catch((err) => console.warn("Lỗi khi tải các module phụ:", err));
+  }
 });
 
 // --- Hàm xử lý hiệu ứng header --- (Giữ nguyên)

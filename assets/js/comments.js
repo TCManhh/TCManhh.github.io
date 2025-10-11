@@ -1,0 +1,438 @@
+// --- INITIALIZATION ---
+// Script này được layout.js tải sau khi DOM sẵn sàng, nên có thể chạy trực tiếp.
+(function () {
+  // Dừng lại nếu trang không có khối bình luận (do layout.js chèn vào)
+  if (!document.getElementById("comments")) return;
+
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbxGdIvBCFFCQGvX0bJxdrIMVz3uP5mZ9L7pEper1YiGQMp2HOtXwCMXNjCfJ7MD0exA/exec";
+
+  // --- PAGE IDENTIFIER ---
+  const main = document.querySelector("main");
+  const canonical = document.querySelector('link[rel="canonical"]')?.href;
+  const baseForId = canonical || window.location.href;
+  const PAGE_ID =
+    main?.dataset?.threadId ||
+    new URL(baseForId).pathname.replace(/[^a-zA-Z0-9]/g, "_");
+
+  let FORM_STARTED_AT = Date.now(); // đo thời gian điền form
+
+  // === DEVICE ID MANAGEMENT ===
+  function ensureDeviceId() {
+    let uid = localStorage.getItem("ss_device_id");
+    if (!uid) {
+      uid = "d_" + Date.now() + "_" + Math.random().toString(36).slice(2, 9);
+      localStorage.setItem("ss_device_id", uid);
+    }
+    return uid;
+  }
+  const DEVICE_ID = ensureDeviceId();
+
+  // === STATE QUẢN LÝ TRẠNG THÁI ===
+  const state = { raw: [], tree: [], page: 1, pageSize: 10 };
+
+  // === DOM ELEMENTS ===
+  const el = {
+    container: document.getElementById("comments-container"),
+    form: document.getElementById("comment-form"),
+    nameInput: document.getElementById("comment-name"),
+    commentInput: document.getElementById("comment-text"),
+    formActions: document.querySelector(".comment-main-form .form-actions"),
+    mainAvatar: document.getElementById("main-form-avatar"),
+    submitBtn: document.querySelector(
+      '.comment-main-form button[type="submit"]'
+    ),
+    cancelBtn: document.querySelector(".comment-main-form .cancel-btn"),
+    loadMore: document.getElementById("comments-load-more"),
+    toast: document.getElementById("comments-toast"),
+  };
+
+  // === HELPER FUNCTIONS ===
+  const formatTimeAgo = (dateInput) => {
+    const date = new Date(dateInput);
+    if (isNaN(date.getTime())) return "";
+    const now = new Date();
+    const seconds = Math.round((now - date) / 1000);
+    if (seconds < 5) return "vừa xong";
+    const minutes = Math.round(seconds / 60);
+    if (minutes < 60) return `${minutes} phút trước`;
+    const hours = Math.round(minutes / 60);
+    if (hours < 24) return `${hours} giờ trước`;
+    return `${Math.round(hours / 24)} ngày trước`;
+  };
+
+  const generateCommentId = () =>
+    `comment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+  const escapeHTML = (str) =>
+    String(str).replace(
+      /[&<>"'`]/g,
+      (m) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+          "`": "&#96;",
+        }[m])
+    );
+
+  const showToast = (msg, isSuccess = true) => {
+    if (!el.toast) return;
+    el.toast.textContent = msg;
+    el.toast.style.background = isSuccess ? "#28a745" : "#dc3545";
+    el.toast.classList.add("show");
+    setTimeout(() => el.toast.classList.remove("show"), 5000);
+  };
+
+  const nameToColor = (name) => {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const h = hash % 360;
+    return `hsl(${h}, 70%, 60%)`;
+  };
+
+  const getRandomColor = () =>
+    `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
+
+  // === CORE LOGIC: DATA PROCESSING & RENDERING ===
+  const buildCommentTree = (comments) => {
+    const commentMap = new Map();
+    comments.forEach((c) => {
+      if (c && c.comment_id)
+        commentMap.set(c.comment_id, { ...c, replies: [] });
+    });
+    const tree = [];
+    commentMap.forEach((comment) => {
+      if (comment.parent_id && commentMap.has(comment.parent_id)) {
+        commentMap.get(comment.parent_id).replies.push(comment);
+      } else {
+        tree.push(comment);
+      }
+    });
+    return tree;
+  };
+
+  const createCommentHTML = (comment, level = 1) => {
+    const author = escapeHTML(comment.name || "Ẩn danh");
+    const initial = author.charAt(0).toUpperCase();
+    const avatarColor = nameToColor(author);
+    const timeDisplay = formatTimeAgo(comment.timestamp);
+    const body = escapeHTML(comment.comment || "").replace(/\n/g, "<br>");
+    const cid = escapeHTML(comment.comment_id);
+    const replyButtonHTML =
+      level < 4
+        ? `<button class="reply-btn-text reply-btn" data-comment-id="${cid}">Trả lời</button>`
+        : "";
+
+    return `
+      <div class="thread-item">
+        <div class="avatar" style="background-color: ${avatarColor};">${initial}</div>
+        <div class="col">
+          <div class="meta">
+            <span class="author">${author}</span>
+            <span class="time">${timeDisplay}</span>
+          </div>
+          <div class="body">${body}</div>
+          <div class="actions">
+            <button class="action-btn like-btn" data-cid="${cid}"><i class="far fa-thumbs-up"></i><span class="like-count">${
+      comment.like_count || 0
+    }</span></button>
+            <button class="action-btn dislike-btn" data-cid="${cid}"><i class="far fa-thumbs-down"></i><span class="dislike-count">${
+      comment.dislike_count || 0
+    }</span></button>
+            ${replyButtonHTML}
+          </div>
+          <div class="reply-form-container" id="reply-form-for-${cid}"></div>
+          <div class="replies" id="replies-to-${cid}"></div>
+        </div>
+      </div>`;
+  };
+
+  const renderCommentList = (comments, container, level = 1) => {
+    const sorted = comments
+      .slice()
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    const frag = document.createDocumentFragment();
+    sorted.forEach((c) => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "thread";
+      wrapper.innerHTML = createCommentHTML(c, level);
+      frag.appendChild(wrapper);
+      if (Array.isArray(c.replies) && c.replies.length && level < 4) {
+        const repliesContainer = wrapper.querySelector(
+          `#replies-to-${c.comment_id}`
+        );
+        if (repliesContainer)
+          renderCommentList(c.replies, repliesContainer, level + 1);
+      }
+    });
+    container.innerHTML = "";
+    container.appendChild(frag);
+  };
+
+  const reRenderWithControls = () => {
+    const sorted = state.tree
+      .slice()
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    const end = state.page * state.pageSize;
+    renderCommentList(sorted.slice(0, end), el.container, 1);
+    el.loadMore.style.display = sorted.length > end ? "inline-block" : "none";
+  };
+
+  // === API & EVENT HANDLING ===
+  window.renderCommentsJSONP = function (resp) {
+    try {
+      if (!resp || !resp.success)
+        throw new Error(resp?.error || "Không xác định");
+      state.raw = resp.data || [];
+      state.tree = buildCommentTree(state.raw);
+
+      if (state.raw.length === 0) {
+        el.container.innerHTML =
+          "<p>Chưa có bình luận nào. Hãy là người đầu tiên!</p>";
+        el.loadMore.style.display = "none";
+        return;
+      }
+      reRenderWithControls();
+    } catch (err) {
+      el.container.innerHTML = `<p style="color:red;">Lỗi tải bình luận: ${err.message}</p>`;
+    }
+  };
+
+  function loadComments() {
+    el.container.innerHTML =
+      '<div class="comment-skeleton"></div><div class="comment-skeleton"></div>';
+    const s = document.createElement("script");
+    s.src = `${SCRIPT_URL}?page_id=${encodeURIComponent(
+      PAGE_ID
+    )}&callback=renderCommentsJSONP`;
+    s.onerror = () => {
+      el.container.innerHTML =
+        '<p style="color:red;">Lỗi kết nối đến máy chủ bình luận.</p>';
+      s.remove();
+    };
+    s.onload = () => s.remove();
+    document.body.appendChild(s);
+  }
+
+  async function postComment({ name, comment, parent_id }) {
+    const body = new URLSearchParams({
+      name,
+      comment,
+      page_id: PAGE_ID,
+      comment_id: generateCommentId(),
+      parent_id: parent_id || "",
+      device_id: DEVICE_ID,
+      website: document.getElementById("hp-website")?.value || "",
+      form_started_at: String(FORM_STARTED_AT),
+    });
+
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body,
+    });
+    const result = await response.json();
+    if (!result.success)
+      throw new Error(result.error || "Gửi bình luận thất bại.");
+  }
+
+  async function postReaction({ comment_id, reaction }) {
+    const body = new URLSearchParams({
+      action: "react",
+      page_id: PAGE_ID,
+      comment_id,
+      device_id: DEVICE_ID,
+      reaction,
+    });
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body,
+    });
+    const result = await response.json();
+    if (!result.success)
+      throw new Error(result.error || "Gửi phản ứng thất bại.");
+  }
+
+  // --- Main Form Logic ---
+  const handleFormInteraction = () => {
+    el.form.classList.add("active"); // Thêm class để CSS xử lý hiển thị
+    el.formActions.style.display = "flex";
+    el.commentInput.rows = 2;
+    FORM_STARTED_AT = Date.now();
+  };
+
+  const resetMainForm = () => {
+    el.form.reset();
+    el.form.classList.remove("active");
+    el.formActions.style.display = "none";
+    el.submitBtn.disabled = true;
+    el.commentInput.rows = 1;
+    updateMainAvatar("?");
+  };
+
+  const updateMainAvatar = (name) => {
+    const initial = name.charAt(0).toUpperCase();
+    el.mainAvatar.textContent = initial;
+    el.mainAvatar.style.backgroundColor =
+      name === "?" ? getRandomColor() : nameToColor(name);
+    el.mainAvatar.style.color = name === "?" ? "var(--dark-color)" : "#fff";
+  };
+
+  el.nameInput.addEventListener("input", () =>
+    updateMainAvatar(el.nameInput.value || "?")
+  );
+  el.commentInput.addEventListener("input", () => {
+    el.submitBtn.disabled = el.commentInput.value.trim() === "";
+  });
+  el.commentInput.addEventListener("focus", handleFormInteraction);
+  el.nameInput.addEventListener("focus", handleFormInteraction);
+  el.cancelBtn.addEventListener("click", resetMainForm);
+
+  el.form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    el.submitBtn.disabled = true;
+    el.submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`; // Spinner
+    try {
+      await postComment({
+        name: el.nameInput.value,
+        comment: el.commentInput.value,
+        parent_id: null,
+      });
+      resetMainForm();
+      showToast("Đã gửi bình luận!");
+      setTimeout(loadComments, 1500); // Chờ GAS xử lý
+    } catch (error) {
+      showToast(`Lỗi: ${error.message}`, false);
+    } finally {
+      el.submitBtn.disabled = false;
+      el.submitBtn.innerHTML = "Bình luận"; // Trả lại text gốc
+    }
+  });
+
+  // --- Event Delegation for Likes, Dislikes, and Replies ---
+  el.container.addEventListener("click", async (e) => {
+    const likeBtn = e.target.closest(".like-btn");
+    const dislikeBtn = e.target.closest(".dislike-btn");
+    const replyBtn = e.target.closest(".reply-btn");
+
+    if (likeBtn) {
+      try {
+        await postReaction({
+          comment_id: likeBtn.dataset.cid,
+          reaction: "like",
+        });
+        showToast("Đã thích!");
+        setTimeout(loadComments, 1000);
+      } catch (error) {
+        showToast(`Lỗi: ${error.message}`, false);
+      }
+      return;
+    }
+
+    if (dislikeBtn) {
+      try {
+        await postReaction({
+          comment_id: dislikeBtn.dataset.cid,
+          reaction: "dislike",
+        });
+        showToast("Đã không thích!");
+        setTimeout(loadComments, 1000);
+      } catch (error) {
+        showToast(`Lỗi: ${error.message}`, false);
+      }
+      return;
+    }
+
+    if (replyBtn) {
+      const parentId = replyBtn.dataset.commentId;
+      const container = document.getElementById(`reply-form-for-${parentId}`);
+
+      document.querySelectorAll(".reply-form-container").forEach((c) => {
+        if (c.id !== container.id) c.innerHTML = "";
+      });
+
+      if (container.innerHTML) {
+        container.innerHTML = "";
+        return;
+      }
+
+      const currentUserName = el.nameInput.value;
+      const userInitial = (currentUserName || "?").charAt(0).toUpperCase();
+      const avatarColor = currentUserName
+        ? nameToColor(currentUserName)
+        : "var(--light-color)";
+      const textColor = currentUserName ? "#fff" : "var(--dark-color)";
+
+      container.innerHTML = `
+        <div class="reply-box">
+          <div class="avatar" style="background-color: ${avatarColor}; color: ${textColor};">${userInitial}</div>
+          <div class="form-content">
+            <form data-parent-id="${parentId}">
+              <textarea placeholder="Viết câu trả lời..." required rows="1"></textarea>
+              <div class="form-actions" style="display: flex;">
+                 <button type="button" class="btn btn-secondary cancel-reply-btn">Hủy</button>
+                 <button type="submit" class="btn btn-primary">Trả lời</button>
+              </div>
+            </form>
+          </div>
+        </div>`;
+
+      const replyForm = container.querySelector("form");
+      const replyTextarea = replyForm.querySelector("textarea");
+      replyTextarea.focus();
+
+      container
+        .querySelector(".cancel-reply-btn")
+        .addEventListener("click", () => {
+          container.innerHTML = "";
+        });
+
+      replyForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!el.nameInput.value.trim()) {
+          showToast(
+            "Vui lòng nhập tên của bạn ở khung bình luận chính.",
+            false
+          );
+          el.nameInput.focus();
+          return;
+        }
+        const button = replyForm.querySelector("button[type='submit']");
+        button.disabled = true;
+        button.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`; // Spinner
+        try {
+          await postComment({
+            name: el.nameInput.value,
+            comment: replyTextarea.value,
+            parent_id: parentId,
+          });
+          showToast("Đã gửi trả lời!");
+          setTimeout(loadComments, 1500);
+        } catch (error) {
+          showToast(`Lỗi: ${error.message}`, false);
+          button.disabled = false;
+          button.innerHTML = "Trả lời"; // Trả lại text gốc
+        }
+      });
+    }
+  });
+
+  el.loadMore.addEventListener("click", () => {
+    state.page++;
+    reRenderWithControls();
+  });
+
+  // === INITIAL LOAD ===
+  loadComments();
+  updateMainAvatar("?");
+})();
