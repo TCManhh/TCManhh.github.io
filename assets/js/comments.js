@@ -29,7 +29,7 @@
   const DEVICE_ID = ensureDeviceId();
 
   // === STATE QUẢN LÝ TRẠNG THÁI ===
-  const state = { raw: [], tree: [], page: 1, pageSize: 10 };
+  const state = { raw: [], tree: [], page: 1, pageSize: 10, lastFetch: 0 };
 
   // === DOM ELEMENTS ===
   const el = {
@@ -45,10 +45,12 @@
     cancelBtn: document.querySelector(".comment-main-form .cancel-btn"),
     loadMore: document.getElementById("comments-load-more"),
     toast: document.getElementById("comments-toast"),
+    hpWebsite: document.getElementById("hp-website"), // Honeypot field
   };
 
   // === HELPER FUNCTIONS ===
   const formatTimeAgo = (dateInput) => {
+    if (!dateInput) return "(đang gửi...)";
     const date = new Date(dateInput);
     if (isNaN(date.getTime())) return "";
     const now = new Date();
@@ -62,7 +64,7 @@
   };
 
   const generateCommentId = () =>
-    `comment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    `c_${Date.now().toString(36)}_${Math.random().toString(36).substr(2, 5)}`;
 
   const escapeHTML = (str) =>
     String(str).replace(
@@ -125,7 +127,7 @@
     const cid = escapeHTML(comment.comment_id);
     const replyButtonHTML =
       level < 4
-        ? `<button class="reply-btn-text reply-btn" data-comment-id="${cid}">Trả lời</button>`
+        ? `<button class="reply-btn-text reply-btn" data-comment-id="${cid}" data-level="${level}">Trả lời</button>`
         : "";
 
     return `
@@ -134,7 +136,7 @@
         <div class="col">
           <div class="meta">
             <span class="author">${author}</span>
-            <span class="time">${timeDisplay}</span>
+            <span class="time status">${timeDisplay}</span>
           </div>
           <div class="body">${body}</div>
           <div class="actions">
@@ -160,6 +162,7 @@
     sorted.forEach((c) => {
       const wrapper = document.createElement("div");
       wrapper.className = "thread";
+      wrapper.id = `thread-${c.comment_id}`;
       wrapper.innerHTML = createCommentHTML(c, level);
       frag.appendChild(wrapper);
       if (Array.isArray(c.replies) && c.replies.length && level < 4) {
@@ -170,8 +173,16 @@
           renderCommentList(c.replies, repliesContainer, level + 1);
       }
     });
-    container.innerHTML = "";
-    container.appendChild(frag);
+    // Chỉ xóa các bình luận cũ, giữ lại bình luận tạm
+    Array.from(container.children).forEach((child) => {
+      if (
+        !child.classList.contains("pending") &&
+        !child.classList.contains("sent")
+      ) {
+        child.remove();
+      }
+    });
+    container.prepend(frag);
   };
 
   const reRenderWithControls = () => {
@@ -188,10 +199,19 @@
     try {
       if (!resp || !resp.success)
         throw new Error(resp?.error || "Không xác định");
+
+      resp.data.forEach((comment) => {
+        const tempComment = document.getElementById(
+          `thread-${comment.comment_id}`
+        );
+        if (tempComment) tempComment.remove();
+      });
+
       state.raw = resp.data || [];
       state.tree = buildCommentTree(state.raw);
+      state.lastFetch = Date.now();
 
-      if (state.raw.length === 0) {
+      if (state.raw.length === 0 && el.container.children.length === 0) {
         el.container.innerHTML =
           "<p>Chưa có bình luận nào. Hãy là người đầu tiên!</p>";
         el.loadMore.style.display = "none";
@@ -204,8 +224,10 @@
   };
 
   function loadComments() {
-    el.container.innerHTML =
-      '<div class="comment-skeleton"></div><div class="comment-skeleton"></div>';
+    if (el.container.children.length === 0) {
+      el.container.innerHTML =
+        '<div class="comment-skeleton"></div><div class="comment-skeleton"></div>';
+    }
     const s = document.createElement("script");
     s.src = `${SCRIPT_URL}?page_id=${encodeURIComponent(
       PAGE_ID
@@ -219,15 +241,16 @@
     document.body.appendChild(s);
   }
 
-  async function postComment({ name, comment, parent_id }) {
+  async function postComment({ name, comment, parent_id, comment_id }) {
     const body = new URLSearchParams({
+      action: "comment",
       name,
       comment,
       page_id: PAGE_ID,
-      comment_id: generateCommentId(),
+      comment_id,
       parent_id: parent_id || "",
       device_id: DEVICE_ID,
-      website: document.getElementById("hp-website")?.value || "",
+      website: el.hpWebsite?.value || "",
       form_started_at: String(FORM_STARTED_AT),
     });
 
@@ -241,31 +264,88 @@
     const result = await response.json();
     if (!result.success)
       throw new Error(result.error || "Gửi bình luận thất bại.");
+    return result;
   }
 
-  async function postReaction({ comment_id, reaction }) {
-    const body = new URLSearchParams({
-      action: "react",
-      page_id: PAGE_ID,
-      comment_id,
-      device_id: DEVICE_ID,
-      reaction,
-    });
-    const response = await fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-      body,
-    });
-    const result = await response.json();
-    if (!result.success)
-      throw new Error(result.error || "Gửi phản ứng thất bại.");
+  // [SỬA] Nâng cấp hàm postReaction để xử lý logic like/dislike chéo
+  async function postReaction({
+    comment_id,
+    reaction,
+    targetButton,
+    oppositeButton,
+  }) {
+    const isTargetActive = targetButton.classList.contains("active");
+    const isOppositeActive = oppositeButton.classList.contains("active");
+    const finalReaction = isTargetActive ? "remove" : reaction;
+
+    // --- Bắt đầu cập nhật giao diện tạm thời (Optimistic UI) ---
+
+    // 1. Xử lý nút đối diện: Nếu nó đang active, tắt nó đi và giảm số đếm
+    if (isOppositeActive) {
+      oppositeButton.classList.remove("active");
+      const oppositeCountSpan = oppositeButton.querySelector(
+        reaction === "like" ? ".dislike-count" : ".like-count"
+      );
+      if (oppositeCountSpan) {
+        oppositeCountSpan.textContent = Math.max(
+          0,
+          parseInt(oppositeCountSpan.textContent, 10) - 1
+        );
+      }
+    }
+
+    // 2. Xử lý nút vừa nhấn: Bật/tắt và tăng/giảm số đếm
+    const targetCountSpan = targetButton.querySelector(
+      reaction === "like" ? ".like-count" : ".dislike-count"
+    );
+    if (targetCountSpan) {
+      const currentCount = parseInt(targetCountSpan.textContent, 10);
+      targetCountSpan.textContent = isTargetActive
+        ? currentCount - 1
+        : currentCount + 1;
+      targetButton.classList.toggle("active");
+    }
+
+    // --- Gửi yêu cầu lên server và xử lý nếu có lỗi ---
+    try {
+      const body = new URLSearchParams({
+        action: "react",
+        page_id: PAGE_ID,
+        comment_id,
+        device_id: DEVICE_ID,
+        reaction: finalReaction,
+      });
+      const res = await fetch(SCRIPT_URL, { method: "POST", body });
+      const data = await res.json();
+      if (!data.success) {
+        throw new Error(data.error || "Lỗi phản ứng.");
+      }
+      // Thành công: Giao diện đã được cập nhật, không cần làm gì thêm.
+    } catch (error) {
+      // Lỗi: Khôi phục lại trạng thái giao diện về như cũ
+      if (isOppositeActive) {
+        oppositeButton.classList.add("active");
+        const oppositeCountSpan = oppositeButton.querySelector(
+          reaction === "like" ? ".dislike-count" : ".like-count"
+        );
+        if (oppositeCountSpan)
+          oppositeCountSpan.textContent =
+            parseInt(oppositeCountSpan.textContent, 10) + 1;
+      }
+      if (targetCountSpan) {
+        const currentCount = parseInt(targetCountSpan.textContent, 10);
+        targetCountSpan.textContent = isTargetActive
+          ? currentCount + 1
+          : currentCount - 1;
+        targetButton.classList.toggle("active");
+      }
+      throw error; // Ném lỗi ra ngoài để được xử lý
+    }
   }
 
   // --- Main Form Logic ---
   const handleFormInteraction = () => {
-    el.form.classList.add("active"); // Thêm class để CSS xử lý hiển thị
+    el.form.classList.add("active");
     el.formActions.style.display = "flex";
     el.commentInput.rows = 2;
     FORM_STARTED_AT = Date.now();
@@ -301,21 +381,57 @@
   el.form.addEventListener("submit", async (e) => {
     e.preventDefault();
     el.submitBtn.disabled = true;
-    el.submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`; // Spinner
+    el.submitBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`;
+
+    const name = el.nameInput.value;
+    const comment = el.commentInput.value;
+    const tempCommentId = generateCommentId();
+
+    const tempCommentData = {
+      name,
+      comment,
+      comment_id: tempCommentId,
+      timestamp: null,
+      like_count: 0,
+      dislike_count: 0,
+      replies: [],
+    };
+    const tempCommentElement = document.createElement("div");
+    tempCommentElement.className = "thread pending";
+    tempCommentElement.id = `thread-${tempCommentId}`;
+    tempCommentElement.innerHTML = createCommentHTML(tempCommentData, 1);
+
+    const noCommentMsg = el.container.querySelector("p");
+    if (noCommentMsg) noCommentMsg.remove();
+
+    el.container.prepend(tempCommentElement);
+    resetMainForm();
+
     try {
       await postComment({
-        name: el.nameInput.value,
-        comment: el.commentInput.value,
+        name,
+        comment,
         parent_id: null,
+        comment_id: tempCommentId,
       });
-      resetMainForm();
-      showToast("Đã gửi bình luận!");
-      setTimeout(loadComments, 1500); // Chờ GAS xử lý
+
+      const sentComment = document.getElementById(`thread-${tempCommentId}`);
+      if (sentComment) {
+        sentComment.classList.remove("pending");
+        sentComment.classList.add("sent");
+        sentComment.querySelector(".time.status").textContent = "vừa xong";
+      }
     } catch (error) {
+      const failedComment = document.getElementById(`thread-${tempCommentId}`);
+      if (failedComment) {
+        failedComment.classList.add("failed");
+        failedComment.querySelector(".status").textContent = "(Lỗi gửi)";
+        setTimeout(() => failedComment.remove(), 5000);
+      }
       showToast(`Lỗi: ${error.message}`, false);
     } finally {
       el.submitBtn.disabled = false;
-      el.submitBtn.innerHTML = "Bình luận"; // Trả lại text gốc
+      el.submitBtn.innerHTML = "Bình luận";
     }
   });
 
@@ -326,29 +442,43 @@
     const replyBtn = e.target.closest(".reply-btn");
 
     if (likeBtn) {
+      const actionsContainer = likeBtn.closest(".actions");
+      const dislikeBtnRef = actionsContainer.querySelector(".dislike-btn");
+      likeBtn.disabled = true;
+      dislikeBtnRef.disabled = true;
       try {
         await postReaction({
           comment_id: likeBtn.dataset.cid,
           reaction: "like",
+          targetButton: likeBtn,
+          oppositeButton: dislikeBtnRef,
         });
-        showToast("Đã thích!");
-        setTimeout(loadComments, 1000);
       } catch (error) {
         showToast(`Lỗi: ${error.message}`, false);
+      } finally {
+        likeBtn.disabled = false;
+        dislikeBtnRef.disabled = false;
       }
       return;
     }
 
     if (dislikeBtn) {
+      const actionsContainer = dislikeBtn.closest(".actions");
+      const likeBtnRef = actionsContainer.querySelector(".like-btn");
+      dislikeBtn.disabled = true;
+      likeBtnRef.disabled = true;
       try {
         await postReaction({
           comment_id: dislikeBtn.dataset.cid,
           reaction: "dislike",
+          targetButton: dislikeBtn,
+          oppositeButton: likeBtnRef,
         });
-        showToast("Đã không thích!");
-        setTimeout(loadComments, 1000);
       } catch (error) {
         showToast(`Lỗi: ${error.message}`, false);
+      } finally {
+        dislikeBtn.disabled = false;
+        likeBtnRef.disabled = false;
       }
       return;
     }
@@ -409,19 +539,59 @@
         }
         const button = replyForm.querySelector("button[type='submit']");
         button.disabled = true;
-        button.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`; // Spinner
+        button.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`;
+
+        const name = el.nameInput.value;
+        const comment = replyTextarea.value;
+        const tempReplyId = generateCommentId();
+
+        const parentLevel = parseInt(replyBtn.dataset.level, 10);
+        const newLevel = parentLevel + 1;
+
+        const tempReplyData = {
+          name,
+          comment,
+          parent_id: parentId,
+          comment_id: tempReplyId,
+          timestamp: null,
+          like_count: 0,
+          dislike_count: 0,
+        };
+
+        const tempReplyElement = document.createElement("div");
+        tempReplyElement.className = "thread pending";
+        tempReplyElement.id = `thread-${tempReplyId}`;
+        tempReplyElement.innerHTML = createCommentHTML(tempReplyData, newLevel);
+
+        const repliesContainer = document.getElementById(
+          `replies-to-${parentId}`
+        );
+        repliesContainer.prepend(tempReplyElement);
+        container.innerHTML = "";
+
         try {
           await postComment({
-            name: el.nameInput.value,
-            comment: replyTextarea.value,
+            name,
+            comment,
             parent_id: parentId,
+            comment_id: tempReplyId,
           });
-          showToast("Đã gửi trả lời!");
-          setTimeout(loadComments, 1500);
+          const sentReply = document.getElementById(`thread-${tempReplyId}`);
+          if (sentReply) {
+            sentReply.classList.remove("pending");
+            sentReply.classList.add("sent");
+            sentReply.querySelector(".time.status").textContent = "vừa xong";
+          }
         } catch (error) {
+          const failedReply = document.getElementById(`thread-${tempReplyId}`);
+          if (failedReply) {
+            failedReply.classList.add("failed");
+            failedReply.querySelector(".status").textContent = "(Lỗi gửi)";
+            setTimeout(() => failedReply.remove(), 5000);
+          }
           showToast(`Lỗi: ${error.message}`, false);
           button.disabled = false;
-          button.innerHTML = "Trả lời"; // Trả lại text gốc
+          button.innerHTML = "Trả lời";
         }
       });
     }
