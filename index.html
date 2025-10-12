@@ -336,6 +336,7 @@
           link: "fas fa-link",
           video: "fas fa-video",
           subject: "fas fa-book",
+          textbook: "fas fa-atlas",
         };
 
         // Hàm chuẩn hóa tiếng Việt
@@ -409,32 +410,25 @@
                 score += 1;
               return { ...doc, score };
             })
-            .filter((doc) => doc.score > 0)
+            .filter(
+              (doc) =>
+                doc.score > 0 &&
+                (doc.type === "subject" || doc.type === "textbook")
+            )
             .sort((a, b) => {
-              // --- LOGIC SẮP XẾP MỚI ---
+              // Logic sắp xếp mới: Ưu tiên Môn học > Giáo trình > Đề thi > Tài liệu khác
+              const priority = {
+                subject: 1,
+                textbook: 2,
+                exam: 3, // Chuẩn bị cho tương lai
+              };
+              const priorityA = priority[a.type] || 99;
+              const priorityB = priority[b.type] || 99;
 
-              // Ưu tiên 1: Môn học (subject) luôn lên đầu
-              const isASubject = a.type === "subject";
-              const isBSubject = b.type === "subject";
-              if (isASubject && !isBSubject) return -1;
-              if (!isASubject && isBSubject) return 1;
-
-              // Ưu tiên 2: Tài liệu bài giảng
-              const lectureMaterialTypes = [
-                "powerpoint",
-                "pdf",
-                "word",
-                "video",
-                "link",
-              ];
-              const isALecture = lectureMaterialTypes.includes(a.type);
-              const isBLecture = lectureMaterialTypes.includes(b.type);
-              if (!isASubject && !isBSubject) {
-                if (isALecture && !isBLecture) return -1;
-                if (!isALecture && isBLecture) return 1;
+              if (priorityA !== priorityB) {
+                return priorityA - priorityB;
               }
-
-              // Ưu tiên 3: Điểm số liên quan
+              // Nếu cùng độ ưu tiên, sắp xếp theo điểm số
               return b.score - a.score;
             })
             .slice(0, 6); // Lấy 6 kết quả hàng đầu
@@ -443,11 +437,276 @@
             suggestionsContainer.innerHTML = results
               .map((doc) => {
                 const iconClass = iconMap[doc.type] || "fas fa-file";
+                // Logic hiển thị tiêu đề động
+                let displayTitle = doc.title;
+                if (doc.entityType === "lecturer_page" && doc.courseName) {
+                  displayTitle = `${doc.courseName} - ${doc.title}`;
+                } else if (
+                  doc.type === "subject" &&
+                  doc.universityAcronym
+                ) {
+                  displayTitle = `${doc.title} - ${doc.universityAcronym}`;
+                }
+
                 return `
                     <a href="${doc.url}" class="suggestion-item">
                         <i class="${iconClass} suggestion-icon"></i>
                         <div class="suggestion-info">
-                            <span class="suggestion-title">${doc.title}</span>
+                            <span class="suggestion-title">${displayTitle}</span>
+                            </div>
+                    </a>`;
+              })
+              .join("");
+            suggestionsContainer.style.display = "block";
+          } else {
+            suggestionsContainer.style.display = "none";
+          }
+        }
+
+        // Gắn sự kiện
+        searchButton.addEventListener("click", performSearch);
+        searchInput.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            performSearch();
+          }
+        });
+        searchInput.addEventListener("input", showSuggestions);
+
+        // Ẩn gợi ý khi click ra ngoài
+        document.addEventListener("click", function (event) {
+          const isClickInside =
+            searchInput.contains(event.target) ||
+            suggestionsContainer.contains(event.target);
+          if (!isClickInside) {
+            suggestionsContainer.style.display = "none";
+          }
+        });
+
+        // Ẩn gợi ý khi người dùng cuộn trang
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (suggestionsContainer.style.display === "block") {
+              suggestionsContainer.style.display = "none";
+            }
+          },
+          { passive: true }
+        );
+
+        // ==================================
+        // --- PHẦN 2: SCRIPT UPLOAD FORM ---
+        // ==================================
+        // ... (phần script upload giữ nguyên, không thay đổi)
+        const fileInput = document.getElementById("file-upload");
+        const uploadForm = document.getElementById("upload-form");
+        const statusDiv = document.getElementById("upload-status");
+        const submitBtn = document.getElementById("submit-btn");
+        const uploadBoxText = document.querySelector(".upload-box > p");
+        const originalUploadText = uploadBoxText.textContent;
+        const formFields = document.querySelector(".form-fields");
+        const SCRIPT_URL =
+          "https://script.google.com/macros/s/AKfycbyV3FasM4ecK7O6Li0lM6_v3q76eQtUEGjHh6ao_vg_Bh6uy_XflxjEEqC3EduZ-UA7/exec";
+
+        const universityInput = document.getElementById("university");
+        const subjectInput = document.getElementById("subject");
+        const teacherInput = document.getElementById("teacher");
+        const universityError = document.getElementById("university-error");
+        const subjectError = document.getElementById("subject-error");
+        const teacherError = document.getElementById("teacher-error");
+        const inputsToValidate = [universityInput, subjectInput, teacherInput];
+
+        const successPopup = document.getElementById("success-popup");
+        const popupCloseBtn = document.getElementById("popup-close-btn");
+        const popupImage = successPopup.querySelector("img");
+        const popupText = successPopup.querySelector("h3");
+        const popupOptions = [
+          {
+            text: "Đa tạ sư huynh!",
+            imageUrl:
+              "https://i.pinimg.com/originals/c3/00/45/c30045e7f17b6a7114b537651a1a7a42.webp",
+          },
+          {
+            text: "Tài liệu vip quá hai ơi!",
+            imageUrl:
+              "https://i.pinimg.com/originals/76/c8/8c/76c88cf777792e85badbbd8e002a2082.webp",
+          },
+          {
+            text: "Bắn Tym <3",
+            imageUrl:
+              "https://i.pinimg.com/originals/2a/e6/5f/2ae65f442640ad7baf112f65fad61530.webp",
+          },
+          {
+            text: "Uầy!",
+            imageUrl: "https://media.tenor.com/w8s_3yms0o4AAAAC/meo-che.webp",
+          },
+        ];
+
+        function showPopup() {
+          if (successPopup && popupImage && popupText) {
+            const randomIndex = Math.floor(Math.random() * popupOptions.length);
+            const selectedPopup = popupOptions[randomIndex];
+            popupText.textContent = selectedPopup.text;
+            popupImage.src = selectedPopup.imageUrl;
+            popupImage.loading = "lazy";
+            successPopup.classList.add("active");
+          }
+        }
+        function hidePopup() {
+          if (successPopup) {
+            successPopup.classList.remove("active");
+          }
+        }
+
+        function readFileAsBase64(file) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const fileData = reader.result;
+              const fileInfo = {
+                fileName: file.name,
+                mimeType: file.type,
+                file: fileData,
+              };
+              resolve(fileInfo);
+            };
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+          });
+        }
+
+        function validateForm() {
+          let isValid = true;
+          universityInput.classList.remove("input-error");
+          universityError.classList.remove("active");
+          subjectInput.classList.remove("input-error");
+          subjectError.classList.remove("active");
+          teacherInput.classList.remove("input-error");
+          teacherError.classList.remove("active");
+
+          if (universityInput.value.trim() === "") {
+            universityInput.classList.add("input-error");
+            universityError.textContent = "Vui lòng nhập tên trường.";
+            universityError.classList.add("active");
+            isValid = false;
+          }
+          if (subjectInput.value.trim() === "") {
+            subjectInput.classList.add("input-error");
+            subjectError.textContent = "Vui lòng nhập tên môn học.";
+            subjectError.classList.add("active");
+            isValid = false;
+          }
+          if (teacherInput.value.trim() === "") {
+            teacherInput.classList.add("input-error");
+            teacherError.textContent = "Vui lòng nhập tên giảng viên/khoa.";
+            teacherError.classList.add("active");
+            isValid = false;
+          }
+          return isValid;
+        }
+
+        if (popupCloseBtn) {
+          popupCloseBtn.addEventListener("click", hidePopup);
+        }
+        if (successPopup) {
+          successPopup.addEventListener("click", function (event) {
+            if (event.target === successPopup) {
+              hidePopup();
+            }
+          });
+        }
+
+        fileInput.addEventListener("change", function () {
+          if (fileInput.files.length > 0) {
+            uploadBoxText.textContent = `${fileInput.files.length} tệp đã được chọn`;
+            if (formFields) {
+              formFields.style.display = "block";
+            }
+          } else {
+            uploadBoxText.textContent = originalUploadText;
+            if (formFields) {
+              formFields.style.display = "none";
+            }
+          }
+        });
+
+        inputsToValidate.forEach((input) => {
+          input.addEventListener("input", () => {
+            if (input.value.trim() !== "") {
+              input.classList.remove("input-error");
+              const errorSpan = document.getElementById(`${input.id}-error`);
+              if (errorSpan) {
+                errorSpan.classList.remove("active");
+              }
+            }
+          });
+        });
+
+        uploadForm.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const isFormValid = validateForm();
+          if (!isFormValid) {
+            return;
+          }
+
+          const files = fileInput.files;
+          if (files.length > 0) {
+            submitBtn.disabled = true;
+            statusDiv.innerHTML = `<p style="color: blue;">Đang chuẩn bị tải lên ${files.length} tệp...</p>`;
+
+            try {
+              const filePromises = Array.from(files).map(readFileAsBase64);
+              const filesArray = await Promise.all(filePromises);
+              const payload = {
+                files: filesArray,
+                university: universityInput.value,
+                subject: subjectInput.value,
+                teacher: teacherInput.value,
+                description: document.getElementById("description").value,
+              };
+
+              statusDiv.innerHTML = `<p style="color: blue;">Đang tải lên ${files.length} tệp...</p>`;
+
+              const response = await fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify(payload),
+              });
+              const data = await response.json();
+
+              if (data.status === "success") {
+                showPopup();
+                statusDiv.innerHTML = "";
+              } else {
+                statusDiv.innerHTML = `<p style="color: red;">Lỗi: ${data.message}</p>`;
+              }
+            } catch (error) {
+              console.error("Lỗi khi xử lý tệp:", error);
+              statusDiv.innerHTML =
+                '<p style="color: red;">Đã xảy ra lỗi khi đọc tệp.</p>';
+            } finally {
+              uploadForm.reset();
+              submitBtn.disabled = false;
+              uploadBoxText.textContent = originalUploadText;
+              if (formFields) {
+                formFields.style.display = "none";
+              }
+            }
+          }
+        });
+      });
+    </script>
+    <!-- P2: Defer layout script -->
+    <script src="/assets/js/layout.js" defer></script>
+  </body>
+</html>
+                    ? `${doc.courseName} - ${doc.title}`
+                    : doc.title;
+
+                return `
+                    <a href="${doc.url}" class="suggestion-item">
+                        <i class="${iconClass} suggestion-icon"></i>
+                        <div class="suggestion-info">
+                            <span class="suggestion-title">${displayTitle}</span>
                             </div>
                     </a>`;
               })

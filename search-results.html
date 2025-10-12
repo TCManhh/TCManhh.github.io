@@ -52,6 +52,9 @@
       .result-icon.fa-video {
         color: #ff0000;
       }
+      .result-icon.fa-atlas {
+        color: #34a853; /* Màu xanh lá cây cho giáo trình */
+      }
       .result-icon.fa-book {
         color: var(--accent-color);
       } /* Màu cho icon môn học */
@@ -134,6 +137,7 @@
           link: "fas fa-link",
           video: "fas fa-video",
           subject: "fas fa-book" /* Icon cho môn học */,
+          textbook: "fas fa-atlas",
         };
 
         // 1. Tải dữ liệu tìm kiếm
@@ -209,12 +213,23 @@
 
               return { ...doc, score };
             })
-            .filter((r) => r.score > 0)
+            .filter(
+              (r) =>
+                r.score > 0 && (r.type === "subject" || r.type === "textbook")
+            )
             .sort((a, b) => {
-              const isASubject = a.type === "subject";
-              const isBSubject = b.type === "subject";
-              if (isASubject && !isBSubject) return -1;
-              if (!isASubject && isBSubject) return 1;
+              // Logic sắp xếp mới: Ưu tiên Môn học > Giáo trình > Đề thi > Tài liệu khác
+              const priority = {
+                subject: 1,
+                textbook: 2,
+                exam: 3, // Chuẩn bị cho tương lai
+              };
+              const priorityA = priority[a.type] || 99;
+              const priorityB = priority[b.type] || 99;
+
+              if (priorityA !== priorityB) {
+                return priorityA - priorityB;
+              }
               return b.score - a.score;
             });
         }
@@ -241,11 +256,19 @@
             noResultsDiv.style.display = "none";
             results.forEach((doc) => {
               const iconClass = iconMap[doc.type] || "fas fa-file";
+              // Logic hiển thị tiêu đề động
+              let displayTitle = doc.title;
+              if (doc.entityType === "lecturer_page" && doc.courseName) {
+                displayTitle = `${doc.courseName} - ${doc.title}`;
+              } else if (doc.type === "subject" && doc.universityAcronym) {
+                displayTitle = `${doc.title} - ${doc.universityAcronym}`;
+              }
+
               const itemHTML = `
                         <a href="${doc.url}" class="search-result-item">
                             <i class="${iconClass} result-icon"></i>
                             <div class="result-info">
-                                <h3>${doc.title}</h3>
+                                <h3>${displayTitle}</h3>
                                 <div class="result-path">${doc.path}</div>
                                 </div>
                         </a>

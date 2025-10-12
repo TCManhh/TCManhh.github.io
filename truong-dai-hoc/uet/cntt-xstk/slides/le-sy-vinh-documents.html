@@ -113,12 +113,17 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Tự động mở tất cả các section
+        const sections = document.querySelectorAll(".document-section");
+        sections.forEach((section) => section.classList.add("active"));
+
+        // Giữ lại chức năng click để đóng/mở
         const sectionHeaders = document.querySelectorAll(".section-header");
-        sectionHeaders.forEach((header) => {
-          header.addEventListener("click", function () {
-            this.parentElement.classList.toggle("active");
-          });
-        });
+        sectionHeaders.forEach((header) =>
+          header.addEventListener("click", () =>
+            header.parentElement.classList.toggle("active")
+          )
+        );
       });
     </script>
     <script src="/assets/js/layout.js"></script>

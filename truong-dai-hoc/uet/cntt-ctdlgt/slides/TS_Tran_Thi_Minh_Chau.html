@@ -176,5 +176,12 @@
 
     <div id="footer-placeholder"></div>
     <script src="/assets/js/layout.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tự động mở tất cả các section tài liệu theo tuần
+        const sections = document.querySelectorAll(".document-section");
+        sections.forEach((section) => section.classList.add("active"));
+      });
+    </script>
   </body>
 </html>

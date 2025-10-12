@@ -2116,6 +2116,9 @@ a.document-item:hover {
 .document-item i.fa-file-word {
   color: #4285f4;
 }
+.document-item i.fa-atlas {
+  color: #34a853; /* Màu xanh lá cây cho giáo trình */
+}
 .document-item i.fa-link {
   color: #6e6e6e;
 }
@@ -2447,6 +2450,9 @@ body {
 }
 .suggestion-icon.fa-video {
   color: red;
+}
+.suggestion-icon.fa-atlas {
+  color: #34a853;
 }
 .suggestion-icon.fa-book {
   color: var(--accent-color);
