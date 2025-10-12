@@ -157,19 +157,23 @@
         listItem.classList.add("active");
         listItem.textContent = name;
       } else {
-        const link = document.createElement("a");
-
-        // --- LOGIC TẠO LINK ĐƠN GIẢN HÓA ---
+        const link = document.createElement("a"); // --- LOGIC TẠO LINK CHUẨN HƠN ---
         let linkHref = (cumulativePath + "/" + segment).replace(/\/+/g, "/");
 
-        // Chỉ thêm ".html" nếu segment không phải là thư mục cuối cùng và có tệp .html tương ứng
-        if (!segment.includes(".") && map[segment + ".html"]) {
-          linkHref += ".html";
-        }
+        const isHome = segment === "" || segment === "index.html";
 
-        // Xử lý riêng cho trang chủ
-        if (index === 0) {
+        if (isHome) {
+          // Chỉ khi thật sự là trang chủ
           linkHref = "/index.html";
+        } else {
+          // Nếu là “nhóm” (thư mục) và có file .html tương ứng trong map → dùng .html
+          if (!segment.includes(".") && map[segment + ".html"]) {
+            linkHref += ".html";
+          }
+          // Nếu là “nhóm” nhưng không có file .html ánh xạ → trỏ về thư mục
+          else if (!segment.includes(".")) {
+            if (!linkHref.endsWith("/")) linkHref += "/";
+          }
         }
 
         link.href = linkHref;
