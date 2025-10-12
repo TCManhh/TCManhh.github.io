@@ -49,15 +49,27 @@
       .result-icon.fa-link {
         color: #6e6e6e;
       }
+      .result-icon.fa-globe {
+        color: #6e6e6e;
+      }
       .result-icon.fa-video {
         color: #ff0000;
       }
       .result-icon.fa-atlas {
-        color: #34a853; /* Màu xanh lá cây cho giáo trình */
+        color: #2a9d8f; /* Màu xanh ngọc cho giáo trình */
+      }
+      .result-icon.fa-book-journal-whills {
+        color: #2a9d8f; /* Màu xanh ngọc cho giáo trình */
       }
       .result-icon.fa-book {
         color: var(--accent-color);
       } /* Màu cho icon môn học */
+      .result-icon.fa-pen-to-square {
+        color: #9d4edd; /* Tím */
+      }
+      .result-icon.fa-file-pen {
+        color: #7c4dff;
+      }
 
       .result-info {
         flex-grow: 1;
@@ -132,12 +144,14 @@
 
         const iconMap = {
           powerpoint: "fas fa-file-powerpoint",
-          pdf: "fas fa-file-pdf",
-          word: "fas fa-file-word",
+          pdf: "fas fa-file-pdf", // Giữ nguyên
+          word: "fas fa-file-word", // Giữ nguyên
           link: "fas fa-link",
           video: "fas fa-video",
           subject: "fas fa-book" /* Icon cho môn học */,
-          textbook: "fas fa-atlas",
+          textbook: "fas fa-book-journal-whills", // Icon giáo trình mới
+          exercise: "fas fa-file-pen", // Icon bài tập mới
+          assignment: "fas fa-file-pen",
         };
 
         // 1. Tải dữ liệu tìm kiếm

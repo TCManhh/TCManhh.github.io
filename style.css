@@ -339,27 +339,6 @@ a.document-item:hover {
   background-color: #f5f5f5;
   color: var(--primary-color);
 }
-.document-item i {
-  margin-right: 15px;
-  color: var(--text-color);
-  width: 20px;
-  text-align: center;
-}
-.document-item i.fa-file-powerpoint {
-  color: #d24726;
-}
-.document-item i.fa-file-pdf {
-  color: #d93025;
-}
-.document-item i.fa-file-word {
-  color: #4285f4;
-}
-.document-item i.fa-link {
-  color: #6e6e6e;
-}
-.document-item i.fa-edit {
-  color: #7c4dff;
-}
 .document-item.assignment {
   color: var(--dark-color);
 }
@@ -684,8 +663,14 @@ body {
 .suggestion-icon.fa-link {
   color: #6e6e6e;
 }
+.suggestion-icon.fa-globe {
+  color: #6e6e6e;
+}
 .suggestion-icon.fa-video {
   color: red;
+}
+.suggestion-icon.fa-atlas {
+  color: #2a9d8f;
 }
 .suggestion-icon.fa-book {
   color: var(--accent-color);
@@ -2097,15 +2082,15 @@ body.viewer-wide .document-viewer {
   text-decoration: none;
   font-size: 1rem;
 }
-a.document-item:hover {
-  background-color: #f5f5f5;
-  color: var(--primary-color);
-}
 .document-item i {
   margin-right: 15px;
   color: var(--text-color);
   width: 20px;
   text-align: center;
+}
+a.document-item:hover {
+  background-color: #f5f5f5;
+  color: var(--primary-color);
 }
 .document-item i.fa-file-powerpoint {
   color: #d24726;
@@ -2113,17 +2098,27 @@ a.document-item:hover {
 .document-item i.fa-file-pdf {
   color: #d93025;
 }
-.document-item i.fa-file-word {
+.document-item i.fa-file-word,
+.document-item i.fa-edit {
   color: #4285f4;
 }
-.document-item i.fa-atlas {
-  color: #34a853; /* Màu xanh lá cây cho giáo trình */
+.document-item i.fa-atlas,
+.document-item i.fa-book-journal-whills,
+.document-item i.fa-book-open {
+  color: #2a9d8f; /* Xanh ngọc */
 }
 .document-item i.fa-link {
-  color: #6e6e6e;
+  color: #6c757d; /* Xám */
 }
-.document-item i.fa-edit {
-  color: #7c4dff;
+.document-item i.fa-pen-to-square,
+.document-item i.fa-file-pen {
+  color: #9d4edd; /* Tím */
+}
+.document-item i.fa-video {
+  color: #ff0000; /* Đỏ đậm */
+}
+.document-item i.fa-laptop-code {
+  color: #577590; /* Xanh xám */
 }
 .document-item.assignment {
   color: var(--dark-color);
@@ -2446,6 +2441,9 @@ body {
   color: #4285f4;
 }
 .suggestion-icon.fa-link {
+  color: #6e6e6e;
+}
+.suggestion-icon.fa-globe {
   color: #6e6e6e;
 }
 .suggestion-icon.fa-video {
