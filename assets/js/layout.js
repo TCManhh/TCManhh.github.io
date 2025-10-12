@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/header.html")
       .then((response) => response.text())
       .then((data) => {
-        headerPlaceholder.innerHTML = data;
+        headerPlaceholder.outerHTML = data; // Thay thế placeholder bằng nội dung header
         initializeHeaderScrollEffect();
         setActiveNavLink(); // <<< GỌI HÀM MỚI Ở ĐÂY
 
@@ -111,16 +111,22 @@ function initializeHeaderScrollEffect() {
  * vào link tương ứng trên thanh công cụ (header).
  */
 function setActiveNavLink() {
-  const currentPath = window.location.pathname;
+  const currentPath = window.location.pathname.replace(/\/$/, ""); // Xóa dấu / ở cuối nếu có
   const navLinks = document.querySelectorAll(".main-nav a");
 
   navLinks.forEach((link) => {
     // Lấy đường dẫn của link (loại bỏ phần domain nếu có)
-    const linkPath = new URL(link.href).pathname;
+    const linkPath = new URL(link.href).pathname
+      .replace(/\/$/, "")
+      .replace(/\.html$/, "");
 
     // Xử lý đặc biệt cho Trang Chủ
-    if (linkPath === "/index.html" || linkPath === "/") {
-      if (currentPath === "/index.html" || currentPath === "/") {
+    if (linkPath === "/index" || linkPath === "") {
+      if (
+        currentPath === "/index" ||
+        currentPath === "" ||
+        currentPath === "/index.html"
+      ) {
         link.classList.add("active");
       }
     }

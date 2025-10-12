@@ -200,6 +200,11 @@
       if (!resp || !resp.success)
         throw new Error(resp?.error || "Không xác định");
 
+      // Xóa các skeleton loader trước khi render
+      el.container
+        .querySelectorAll(".comment-skeleton")
+        .forEach((sk) => sk.remove());
+
       resp.data.forEach((comment) => {
         const tempComment = document.getElementById(
           `thread-${comment.comment_id}`
@@ -212,8 +217,9 @@
       state.lastFetch = Date.now();
 
       if (state.raw.length === 0 && el.container.children.length === 0) {
-        el.container.innerHTML =
-          "<p>Chưa có bình luận nào. Hãy là người đầu tiên!</p>";
+        el.container.innerHTML = `<div class="no-comments">
+            <p>Hãy là người đầu tiên chia sẻ suy nghĩ của bạn nhé! 💬</p>
+          </div>`;
         el.loadMore.style.display = "none";
         return;
       }
@@ -401,7 +407,7 @@
     tempCommentElement.id = `thread-${tempCommentId}`;
     tempCommentElement.innerHTML = createCommentHTML(tempCommentData, 1);
 
-    const noCommentMsg = el.container.querySelector("p");
+    const noCommentMsg = el.container.querySelector(".no-comments");
     if (noCommentMsg) noCommentMsg.remove();
 
     el.container.prepend(tempCommentElement);
