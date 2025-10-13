@@ -1,5 +1,30 @@
 <style>
   /* Bo tròn ô nhập tên và bình luận chính */
+  .rating-stars {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ccc;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+  .rating-stars .star {
+    display: inline-block;
+    transition: transform 0.1s;
+  }
+  .rating-stars .star:hover {
+    transform: scale(1.2);
+  }
+  .rating-stars .star.hover,
+  .rating-stars .star.selected {
+    color: #ffc107; /* Màu vàng khi hover hoặc được chọn */
+  }
+  .comment-rating {
+    font-size: 16px;
+    color: #ccc;
+  }
+  .comment-rating .star.selected {
+    color: #ffc107;
+  }
   #comment-name,
   #comment-text {
     border-radius: 18px !important; /* Tăng độ ưu tiên để ghi đè style có sẵn */
@@ -49,6 +74,16 @@
             required
           />
         </div>
+        <!-- Rating Stars -->
+        <div class="form-row rating-stars" id="rating-stars">
+          <span class="star" data-value="1" title="Tệ">★</span>
+          <span class="star" data-value="2" title="Không hay">★</span>
+          <span class="star" data-value="3" title="Bình thường">★</span>
+          <span class="star" data-value="4" title="Hay">★</span>
+          <span class="star" data-value="5" title="Rất hay!">★</span>
+        </div>
+        <input type="hidden" id="rating-value" value="0" />
+
         <div class="form-row">
           <textarea
             id="comment-text"

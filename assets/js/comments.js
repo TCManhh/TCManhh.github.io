@@ -29,7 +29,13 @@
   const DEVICE_ID = ensureDeviceId();
 
   // === STATE QUẢN LÝ TRẠNG THÁI ===
-  const state = { raw: [], tree: [], page: 1, pageSize: 10, lastFetch: 0 };
+  const state = {
+    raw: [],
+    tree: [],
+    page: 1,
+    pageSize: 10,
+    lastFetch: 0,
+  };
 
   // === DOM ELEMENTS ===
   const el = {
@@ -46,6 +52,8 @@
     loadMore: document.getElementById("comments-load-more"),
     toast: document.getElementById("comments-toast"),
     hpWebsite: document.getElementById("hp-website"), // Honeypot field
+    ratingStars: document.querySelectorAll("#rating-stars .star"),
+    ratingValueInput: document.getElementById("rating-value"),
   };
 
   // === HELPER FUNCTIONS ===
@@ -101,6 +109,19 @@
     `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
 
   // === CORE LOGIC: DATA PROCESSING & RENDERING ===
+
+  const renderStarsHTML = (rating) => {
+    if (!rating || rating == 0) return "";
+    let starsHTML = '<div class="comment-rating">';
+    for (let i = 0; i < 5; i++) {
+      starsHTML += `<span class="star ${
+        i < rating ? "selected" : ""
+      }">${"★"}</span>`;
+    }
+    starsHTML += "</div>";
+    return starsHTML;
+  };
+
   const buildCommentTree = (comments) => {
     const commentMap = new Map();
     comments.forEach((c) => {
@@ -136,6 +157,7 @@
         <div class="col">
           <div class="meta">
             <span class="author">${author}</span>
+            ${renderStarsHTML(comment.rating)}
             <span class="time status">${timeDisplay}</span>
           </div>
           <div class="body">${body}</div>
@@ -247,7 +269,7 @@
     document.body.appendChild(s);
   }
 
-  async function postComment({ name, comment, parent_id, comment_id }) {
+  async function postComment({ name, comment, parent_id, comment_id, rating }) {
     const body = new URLSearchParams({
       action: "comment",
       name,
@@ -258,6 +280,7 @@
       device_id: DEVICE_ID,
       website: el.hpWebsite?.value || "",
       form_started_at: String(FORM_STARTED_AT),
+      rating: rating || "0", // Thêm rating
     });
 
     const response = await fetch(SCRIPT_URL, {
@@ -364,6 +387,8 @@
     el.submitBtn.disabled = true;
     el.commentInput.rows = 1;
     updateMainAvatar("?");
+    el.ratingValueInput.value = "0"; // Reset rating
+    updateStarSelection(0);
   };
 
   const updateMainAvatar = (name) => {
@@ -373,6 +398,30 @@
       name === "?" ? getRandomColor() : nameToColor(name);
     el.mainAvatar.style.color = name === "?" ? "var(--dark-color)" : "#fff";
   };
+
+  // --- Rating Stars Logic ---
+  function updateStarSelection(rating) {
+    el.ratingStars.forEach((star, index) => {
+      star.classList.toggle("selected", index < rating);
+    });
+  }
+
+  el.ratingStars.forEach((star) => {
+    star.addEventListener("click", () => {
+      const rating = parseInt(star.dataset.value, 10);
+      el.ratingValueInput.value = rating;
+      updateStarSelection(rating);
+    });
+    star.addEventListener("mouseover", () => {
+      const hoverValue = parseInt(star.dataset.value, 10);
+      el.ratingStars.forEach((s, i) =>
+        s.classList.toggle("hover", i < hoverValue)
+      );
+    });
+    star.addEventListener("mouseout", () => {
+      el.ratingStars.forEach((s) => s.classList.remove("hover"));
+    });
+  });
 
   el.nameInput.addEventListener("input", () =>
     updateMainAvatar(el.nameInput.value || "?")
@@ -391,6 +440,7 @@
 
     const name = el.nameInput.value;
     const comment = el.commentInput.value;
+    const rating = parseInt(el.ratingValueInput.value, 10);
     const tempCommentId = generateCommentId();
 
     const tempCommentData = {
@@ -400,6 +450,7 @@
       timestamp: null,
       like_count: 0,
       dislike_count: 0,
+      rating: rating,
       replies: [],
     };
     const tempCommentElement = document.createElement("div");
@@ -419,6 +470,7 @@
         comment,
         parent_id: null,
         comment_id: tempCommentId,
+        rating: rating,
       });
 
       const sentComment = document.getElementById(`thread-${tempCommentId}`);
