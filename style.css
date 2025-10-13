@@ -3262,6 +3262,24 @@ body.viewer-wide .document-viewer {
     padding-top: 120%;
   }
 }
+
+@media (min-width: 767px) and (max-width: 1166px) {
+  .presentation-wrapper {
+    /* Tỷ lệ 4:3 cho tablet và màn hình nhỏ */
+    padding-top: 75%;
+    /* Giới hạn chiều cao tối đa là 720px để không quá lớn trên màn hình dọc */
+    max-height: 720px;
+  }
+}
+
+@media (min-width: 1167px) {
+  .presentation-wrapper {
+    /* Giới hạn chiều cao tối đa để slide luôn nằm trong màn hình lớn */
+    max-height: calc(
+      100vh - var(--header-height) - var(--breadcrumb-height) - 40px
+    );
+  }
+}
 .document-note {
   display: flex;
   align-items: center;

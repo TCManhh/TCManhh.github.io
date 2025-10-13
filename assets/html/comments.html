@@ -7,6 +7,13 @@
     margin-bottom: 10px;
     transition: color 0.2s;
   }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #eee;
+  }
   .rating-stars .star {
     display: inline-block;
     transition: transform 0.1s;
@@ -64,7 +71,12 @@
 
     <!-- Form bình luận chính (giao diện động) -->
     <form id="comment-form" class="comment-main-form">
-      <div class="avatar" id="main-form-avatar">?</div>
+      <img
+        id="main-form-avatar"
+        class="avatar"
+        src="https://ui-avatars.com/api/?name=?&background=random&color=fff&size=48"
+        alt="avatar"
+      />
       <div class="form-content">
         <div class="form-row">
           <input

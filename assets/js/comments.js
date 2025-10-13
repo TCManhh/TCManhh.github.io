@@ -57,6 +57,12 @@
   };
 
   // === HELPER FUNCTIONS ===
+  // [MỚI] Hàm tạo URL avatar từ tên
+  const generateAvatarUrl = (name) => {
+    const encodedName = encodeURIComponent(name || "?");
+    return `https://ui-avatars.com/api/?name=${encodedName}&background=random&color=fff&size=48`;
+  };
+
   const formatTimeAgo = (dateInput) => {
     if (!dateInput) return "(đang gửi...)";
     const date = new Date(dateInput);
@@ -141,8 +147,6 @@
 
   const createCommentHTML = (comment, level = 1) => {
     const author = escapeHTML(comment.name || "Ẩn danh");
-    const initial = author.charAt(0).toUpperCase();
-    const avatarColor = nameToColor(author);
     const timeDisplay = formatTimeAgo(comment.timestamp);
     const body = escapeHTML(comment.comment || "").replace(/\n/g, "<br>");
     const cid = escapeHTML(comment.comment_id);
@@ -153,7 +157,7 @@
 
     return `
       <div class="thread-item">
-        <div class="avatar" style="background-color: ${avatarColor};">${initial}</div>
+        <img src="${generateAvatarUrl(author)}" alt="${author}" class="avatar">
         <div class="col">
           <div class="meta">
             <span class="author">${author}</span>
@@ -392,11 +396,9 @@
   };
 
   const updateMainAvatar = (name) => {
-    const initial = name.charAt(0).toUpperCase();
-    el.mainAvatar.textContent = initial;
-    el.mainAvatar.style.backgroundColor =
-      name === "?" ? getRandomColor() : nameToColor(name);
-    el.mainAvatar.style.color = name === "?" ? "var(--dark-color)" : "#fff";
+    const finalName = (name || "?").trim();
+    el.mainAvatar.src = generateAvatarUrl(finalName);
+    el.mainAvatar.alt = finalName;
   };
 
   // --- Rating Stars Logic ---
@@ -555,15 +557,12 @@
       }
 
       const currentUserName = el.nameInput.value;
-      const userInitial = (currentUserName || "?").charAt(0).toUpperCase();
-      const avatarColor = currentUserName
-        ? nameToColor(currentUserName)
-        : "var(--light-color)";
-      const textColor = currentUserName ? "#fff" : "var(--dark-color)";
 
       container.innerHTML = `
         <div class="reply-box">
-          <div class="avatar" style="background-color: ${avatarColor}; color: ${textColor};">${userInitial}</div>
+          <img src="${generateAvatarUrl(currentUserName)}" alt="${
+        currentUserName || "?"
+      }" class="avatar">
           <div class="form-content">
             <form data-parent-id="${parentId}">
               <textarea placeholder="Viết câu trả lời..." required rows="1"></textarea>
