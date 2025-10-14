@@ -42,6 +42,26 @@ async function initializeLayout() {
  * @param {boolean} isPopState - Đánh dấu nếu đây là sự kiện từ nút back/forward của trình duyệt.
  */
 async function loadPageContent(url, isPopState = false) {
+  // [FIX v2] Xử lý khi click vào link của trang hiện tại (ví dụ: click logo ở trang chủ)
+  // Chuẩn hóa pathname để so sánh (coi / và /index.html là một)
+  const normalizePath = (path) => {
+    if (path.endsWith("/index.html")) {
+      return path.slice(0, -10); // Bỏ "/index.html"
+    }
+    return path.replace(/\/$/, ""); // Bỏ dấu / ở cuối
+  };
+
+  const currentPath = normalizePath(window.location.pathname);
+  const newPath = normalizePath(new URL(url, window.location.origin).pathname);
+
+  if (currentPath === newPath) {
+    // [FIX v3] Nếu click vào link của trang hiện tại, cuộn lên đầu trang thay vì không làm gì.
+    // Điều này mang lại phản hồi cho người dùng.
+    if (window.scrollY > 0) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    return; // Dừng lại, không tải lại nội dung
+  }
   try {
     const response = await fetch(url);
     if (!response.ok) {
