@@ -42,26 +42,36 @@ async function initializeLayout() {
  * @param {boolean} isPopState - Đánh dấu nếu đây là sự kiện từ nút back/forward của trình duyệt.
  */
 async function loadPageContent(url, isPopState = false) {
-  // [FIX v2] Xử lý khi click vào link của trang hiện tại (ví dụ: click logo ở trang chủ)
-  // Chuẩn hóa pathname để so sánh (coi / và /index.html là một)
-  const normalizePath = (path) => {
-    if (path.endsWith("/index.html")) {
-      return path.slice(0, -10); // Bỏ "/index.html"
-    }
-    return path.replace(/\/$/, ""); // Bỏ dấu / ở cuối
-  };
+  let newPath = new URL(url, window.location.origin).pathname;
 
-  const currentPath = normalizePath(window.location.pathname);
-  const newPath = normalizePath(new URL(url, window.location.origin).pathname);
+  // [FIX] Nếu link là trang chủ, luôn tải lại toàn bộ trang
+  // để đảm bảo trạng thái được reset hoàn toàn.
+  if (newPath === "/" || newPath === "/index.html") {
+    window.location.href = "/index.html";
+    return;
+  }
+
+  // [FIX v5] Đơn giản hóa logic so sánh đường dẫn để tăng độ tin cậy.
+  // Mục tiêu: coi / và /index.html là một.
+  let currentPath = window.location.pathname;
+
+  // Chuẩn hóa các đường dẫn trỏ về trang chủ
+  if (currentPath === "/index.html") {
+    currentPath = "/";
+  }
 
   if (currentPath === newPath) {
-    // [FIX v3] Nếu click vào link của trang hiện tại, cuộn lên đầu trang thay vì không làm gì.
+    // Nếu click vào link của trang hiện tại, cuộn lên đầu trang thay vì không làm gì.
     // Điều này mang lại phản hồi cho người dùng.
     if (window.scrollY > 0) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     return; // Dừng lại, không tải lại nội dung
   }
+
+  // Thêm class 'loading' để hiển thị hiệu ứng chuyển trang
+  document.body.classList.add("page-loading");
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -94,6 +104,9 @@ async function loadPageContent(url, isPopState = false) {
   } catch (error) {
     console.error("Lỗi khi tải trang:", error);
     window.location.href = url; // Nếu có lỗi, quay về cách điều hướng truyền thống
+  } finally {
+    // Xóa class 'loading' sau khi hoàn thành tải trang
+    document.body.classList.remove("page-loading");
   }
 }
 
