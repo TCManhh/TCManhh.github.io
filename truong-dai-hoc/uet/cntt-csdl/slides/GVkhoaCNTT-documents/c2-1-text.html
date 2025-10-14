@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      Nội dung: Chương 2 - Mô hình thực thể - liên kết (ER) - StuShare
+    </title>
+    <meta
+      name="description"
+      content="Tài liệu slide chương 2 về Mô hình thực thể - liên kết (ER). Nội dung bao gồm quá trình thiết kế CSDL, các khái niệm thực thể, thuộc tính, liên kết, và các bài tập ví dụ."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://tcmanhh.github.io/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c2-1-viewer.html"
+    />
+
+    <!-- Tăng tốc load viewer -->
+    <link rel="preconnect" href="https://docs.google.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://lh3.googleusercontent.com"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="//docs.google.com" />
+    <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
+
+    <!-- Redirect an toàn: nhanh (~1s) nhưng vẫn cho Google render -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          location.replace("c2-1-viewer.html");
+        }, 300);
+      });
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="1;url=c2-1-viewer.html" />
+    </noscript>
+  </head>
+  <body>
+    <h1>Chương 2: Mô hình thực thể - liên kết (Entity-Relationship)</h1>
+    <p><em>Tác giả: Khoa CNTT</em></p>
+    <p>
+      <em>Người dùng sẽ được chuyển sang trang trình chiếu sau ít giây...</em>
+    </p>
+
+    <!-- BẮT BUỘC: chép đầy đủ TOÀN BỘ nội dung dưới đây vào các thẻ HTML phù hợp -->
+
+    <p>
+      Mô hình thực thể - liên kết (Entity-Relationship) do P.P Chen giới thiệu
+      năm 1976. Đây là mô hình dữ liệu quan niệm bậc cao hỗ trợ thiết kế CSDL,
+      sử dụng các khái niệm: thực thể, thuộc tính, các liên kết,...
+    </p>
+
+    <h2>Nội dung</h2>
+    <ul>
+      <li>Quá trình thiết kế CSDL</li>
+      <li>Nguyên tắc thiết kế</li>
+      <li>Mô hình thực thể - liên kết (ER)</li>
+      <li>Mô hình thực thể liên - kết mở rộng (EER)</li>
+    </ul>
+
+    <h2>2.1- Quá trình thiết kế CSDL</h2>
+    <p>
+      Quá trình thiết kế bao gồm các bước: Khảo sát yêu cầu, nghiệp vụ -> Thiết
+      kế E/R -> Thiết kế Lược đồ quan hệ -> CSDL quan hệ.
+    </p>
+    <p>
+      Chi tiết quá trình: Từ Thế giới thực, tiến hành Phân tích yêu cầu (dữ liệu
+      và chức năng) để ra được Các yêu cầu về dữ liệu và Các đặc tả chức năng.
+      Từ yêu cầu dữ liệu, thực hiện Thiết kế quan niệm để ra Lược đồ quan niệm.
+      Sau đó, Thiết kế mức logic/ánh xạ để ra Lược đồ logic. Cuối cùng, Thiết kế
+      mức vật lý để ra Lược đồ trong. Song song, từ đặc tả chức năng, thực hiện
+      Thiết kế chương trình ứng dụng và Cài đặt giao tác để tạo ra Chương trình
+      ứng dụng. Các bước thiết kế logic, vật lý phụ thuộc vào HQT cụ thể, trong
+      khi các bước trước đó độc lập với HQT.
+    </p>
+
+    <h2>2.2- Nguyên tắc thiết kế</h2>
+    <ul>
+      <li>Chính xác</li>
+      <li>Dễ hiểu</li>
+      <li>Tránh trùng lặp</li>
+      <li>Chọn đúng thuộc tính và kiểu thuộc tính</li>
+      <li>Chọn đúng mối quan hệ</li>
+    </ul>
+
+    <h2>Nội dung chi tiết</h2>
+    <ul>
+      <li>Quá trình thiết kế CSDL</li>
+      <li>Mô hình thực thể - liên kết
+        <ul>
+          <li>Thực thể</li>
+          <li>Thuộc tính</li>
+          <li>Ràng buộc trên kiểu liên kết</li>
+          <li>Lược đồ thực thể - liên kết</li>
+          <li>Thực thể yếu</li>
+        </ul>
+      </li>
+      <li>Thiết kế</li>
+      <li>Ví dụ</li>
+    </ul>
+
+    <h2>2.3 - Mô hình thực thể - liên kết (ER)</h2>
+    <p>
+      Được dùng để thiết kế CSDL ở mức quan niệm, biểu diễn trừu tượng cấu trúc
+      của CSDL. Lược đồ thực thể- liên kết (ERD) biểu diễn CSDL theo mô hình ER.
+    </p>
+    <h3>Các khái niệm cơ bản:</h3>
+    <ul>
+      <li>Thực thể/tập thực thể (Entity Sets)</li>
+      <li>Thuộc tính (Attributes)</li>
+      <li>Mối quan hệ/liên kết (Relationship)</li>
+    </ul>
+
+    <h3>a. Thực thể /tập thực thể</h3>
+    <p>
+      <strong>Thực thể (Entity):</strong> Là một đối tượng của thế giới thực
+      (vật lý hoặc trừu tượng) được mô hình hóa. Thực thể được mô tả bởi một tập
+      các thuộc tính.
+    </p>
+    <p><strong>Tập thực thể:</strong> tập hợp các thực thể giống nhau.</p>
+    <p><strong>Kiểu thực thể:</strong> tập tất cả các thực thể giống nhau.</p>
+    <p>
+      Chú ý: Thực thể tương đương Đối tượng (Object), Kiểu thực thể tương đương
+      Lớp đối tượng (Class).
+    </p>
+    <h4>Ví dụ “Quản lý đề án công ty”</h4>
+    <ul>
+      <li>
+        Một nhân viên là một thực thể. Tập hợp các nhân viên là tập thực thể.
+      </li>
+      <li>Một đề án là một thực thể. Tập hợp các đề án là tập thực thể.</li>
+      <li>
+        Một phòng ban là một thực thể. Tập hợp các phòng ban là tập thực thể.
+      </li>
+    </ul>
+    <h4>Ví dụ CSDL “THƯ VIỆN”</h4>
+    <p>
+      Dựa trên mô tả về thư viện, các thực thể có thể là: Nhánh, Sách, Tác giả,
+      Nhà xuất bản, Bản sao sách, Người mượn, Lần mượn.
+    </p>
+    <h4>Ví dụ CSDL “QL Tuyển sinh“</h4>
+    <p>
+      Các thực thể có thể là: Thí sinh, Trường, Khoa, Ngành, Khối thi, Môn thi,
+      Khu vực, Đối tượng ưu tiên.
+    </p>
+
+    <h3>b. Thuộc tính</h3>
+    <p>
+      Là các đặc trưng để mô tả thực thể. Mỗi thực thể cụ thể sẽ có các giá trị
+      riêng cho mỗi thuộc tính.
+    </p>
+    <p>
+      <strong>Miền giá trị của thuộc tính (domain):</strong> tập tất cả các giá
+      trị hợp lệ mà thuộc tính đó có thể nhận. Ví dụ: Hoten (string), Maso
+      (integer), Điểm (số thực 0..10).
+    </p>
+    <h4>Ví dụ CSDL Tuyển sinh</h4>
+    <ul>
+      <li>
+        Thí sinh: SBD (string [9]), họ tên, ngày sinh, nơi sinh, khu vực, đối
+        tượng ưu tiên, trường THPT
+      </li>
+      <li>Trường: Mã, tên , địa chỉ, điện thoại</li>
+      <li>Khoa: Mã, tên khoa, địa chỉ, điện thoại</li>
+      <li>Ngành: Mã, tên, chỉ tiêu ts, điểm chuẩn</li>
+      <li>Khối thi: Mã, tên</li>
+      <li>Môn thi: Mã, tên, hình thức thi, thời gian thi.</li>
+    </ul>
+    <h4>Loại thuộc tính:</h4>
+    <ul>
+      <li>
+        <strong>Thuộc tính đơn:</strong> không thể tách thành các thành phần
+        nhỏ, độc lập.
+      </li>
+      <li>
+        <strong>Thuộc tính phức hợp:</strong> có thể tách ra thành các thành
+        phần độc lập nhỏ hơn.
+      </li>
+      <li>
+        <strong>Thuộc tính đơn trị:</strong> có giá trị duy nhất cho một thực
+        thể (VD: số CMND).
+      </li>
+      <li>
+        <strong>Thuộc tính đa trị:</strong> có nhiều giá trị cho cùng một thực
+        thể (VD: bằng cấp).
+      </li>
+      <li>
+        <strong>Thuộc tính suy diễn (được):</strong> ví dụ năm sinh ↔ tuổi.
+      </li>
+      <li><strong>Thuộc tính phức tạp:</strong> kết hợp đa trị và phức hợp.</li>
+    </ul>
+    <h4>Ví dụ thực thể NHANVIEN</h4>
+    <ul>
+      <li>Mã NV (MaNV: integer)</li>
+      <li>Họ tên (Hoten: string[50])</li>
+      <li>Ngày sinh (ns: date)</li>
+      <li>Địa chỉ (diachi: string[100])</li>
+      <li>Quê quán (quequan: string[30])</li>
+      <li>Hệ số lương (hsluong: float)</li>
+      <li>Hệ số phụ cấp (hsphucap: float)</li>
+      <li>Tổng lương (tongluong: float)</li>
+      <li>Họ tên con</li>
+    </ul>
+    <p>Loại thuộc tính? Kiểu giá trị? Miền giá trị?</p>
+
+    <h3>c. Kiểu thực thể và khóa</h3>
+    <p>
+      <strong>Kiểu thực thể:</strong> tập hợp tất cả các thực thể có thuộc tính
+      như nhau.
+    </p>
+    <p>
+      <strong>Tập thực thể:</strong> nhóm các thực thể thuộc một kiểu trong CSDL
+      tại một thời điểm.
+    </p>
+    <p>
+      <strong>Khóa của kiểu thực thể:</strong> là thuộc tính mà giá trị của nó
+      khác nhau trên 2 thực thể bất kỳ thuộc kiểu đó. Khóa dùng để phân biệt các
+      thực thể. Khóa có thể là 1 hay nhiều thuộc tính. Một thực thể có thể có
+      nhiều khóa.
+    </p>
+    <p><strong>Thực thể yếu:</strong> thực thể không có khóa.</p>
+    <p>
+      Ví dụ: Nhân viên (Manv, SCMND, Họ tên, ...), Nhân thân (Manv, Họ tên, quan
+      hệ, ...).
+    </p>
+
+    <h3>d. Liên kết</h3>
+    <p>
+      <strong>Liên kết:</strong> Là mối quan hệ giữa 2 hay nhiều thực thể. Ví
+      dụ: nhân viên thuộc một phòng ban.
+    </p>
+    <p>
+      <strong>Tập liên kết:</strong> là tập hợp các liên kết giống nhau giữa các
+      thực thể.
+    </p>
+    <p>
+      <strong>Kiểu liên kết giữa các kiểu thực thể:</strong> tập tất cả các liên kết giống nhau trên các thực thể của kiểu thực thể.
+    </p>
+    <p>Sơ đồ ví dụ: Kiểu liên kết "Đăng_kí" giữa SINHVIEN và LOP, và các thể hiện liên kết (r1, r2, r3, r4) giữa các sinh viên cụ thể và lớp cụ thể.</p>
+    <p>
+      <strong>Cấp liên kết:</strong> Là số kiểu thực thể tham gia vào liên kết
+      đó.
+    </p>
+    <p>
+      <strong>Liên kết đệ quy:</strong> là liên kết mà một kiểu thực thể tham
+      gia với các vai trò khác nhau. Cần nêu rõ tên vai trò. Ví dụ: NHANVIEN
+      liên kết với chính nó qua quan hệ Giamsat, với vai trò "Giám sát" và "Bị
+      giám sát".
+    </p>
+    <h4>Các loại liên kết:</h4>
+    <ul>
+      <li>1-to-1 (Một-Một)</li>
+      <li>1-to-Many (Một-Nhiều)</li>
+      <li>Many-to-1 (Nhiều-Một)</li>
+      <li>Many-to-Many (Nhiều-Nhiều)</li>
+    </ul>
+
+    <h3>e. Lược đồ ER</h3>
+    <p>
+      Là đồ thị biểu diễn các tập thực thể, thuộc tính và các liên kết của CSDL.
+      Đỉnh là thực thể, thuộc tính, liên kết. Cung là đường nối giữa chúng.
+    </p>
+    <ul>
+      <li>Kiểu thực thể: Hình chữ nhật</li>
+      <li>Thuộc tính: Hình elip</li>
+      <li>Quan hệ (liên kết): Hình thoi</li>
+    </ul>
+    <p>
+      Chú ý: Lược đồ ER không được lưu trữ trong CSDL, nó chỉ giúp thiết kế
+      CSDL.
+    </p>
+    <h4>Ví dụ : Quản lý dự án</h4>
+    <p>Sơ đồ ER cho quản lý dự án bao gồm các thực thể NHANVIEN, PHONGBAN, DEAN và các liên kết Lam_viec, Quan_ly, Phan_cong, Phu_trach.</p>
+    <ul>
+        <li>NHANVIEN có các thuộc tính: TENNV, NGSINH, GT, LUONG, HONV, DCHI.</li>
+        <li>PHONGBAN có thuộc tính: TENPHG.</li>
+        <li>DEAN có thuộc tính: TENDA, DDIEM_DA.</li>
+    </ul>
+
+    <h3>f. Ràng buộc trên kiểu liên kết</h3>
+    <p>Giả sử có n kiểu thực thể E1, E2, …, En. Quan hệ R trên n tập thực thể E1, E2, …, En. Thể hiện của R là tập hữu hạn các danh sách rj=(e1, e2, …, en) với ei là thực thể Ei. R ⊆ E1 × E2 × E3 × … × En.</p>
+    <p>Ví dụ: Xét quan hệ Lam_viec giữa NHANVIEN và PHONGBAN, các thể hiện có thể là (Tung, Nghien cuu), (Hang, Dieu hanh), (Vinh, Quan ly).</p>
+
+    <h3>f. Ràng buộc trên kiểu liên kết</h3>
+    <p>
+      Ràng buộc là những quy định để giới hạn số các tổ hợp có thể của các thực
+      thể tham gia, phản ánh đúng điều kiện của thế giới thực.
+    </p>
+    <h4>Ràng buộc tỉ số:</h4>
+    <p>
+      Xét mối quan hệ nhị phân giữa 2 tập thực thể A và B, có các loại: 1:1,
+      1:n, n:1, n:m.
+    </p>
+    <h4>Ràng buộc tỉ số: ví dụ</h4>
+    <ul>
+        <li>NHANVIEN và DONVI có liên kết Lam_viec_tai (n:1).</li>
+        <li>NHANVIEN và DONVI có liên kết Quan_ly (1:1).</li>
+        <li>NHANVIEN và DUAN có liên kết Tham_gia (n:m).</li>
+    </p>
+    <h4>Ràng buộc (min, max):</h4>
+    <p>
+      Chỉ định số lần mỗi thực thể tham gia ít nhất (min) và nhiều nhất (max)
+      vào thể hiện của liên kết.
+    </p>
+    <ul>
+      <li>(0,1): không hoặc 1</li>
+      <li>(1,1): duy nhất 1</li>
+      <li>(0,n): không hoặc nhiều</li>
+      <li>(1,n): một hoặc nhiều</li>
+    </ul>
+    <h4>Ví dụ</h4>
+    <ul>
+        <li>Một phòng ban có nhiều nhân viên, một nhân viên chỉ thuộc 1 phòng ban: Liên kết Lam_viec giữa NV (1,1) và PB (1,n).</li>
+        <li>Một nhân viên có thể tham gia nhiều đề án hoặc không, một dự án có nhiều nv: Liên kết Phan_cong giữa NV (0,n) và DA (1,n).</li>
+        <li>Một nhân viên có thể là trưởng phòng của 1 phòng ban nào đó: Liên kết La_truong_phong giữa NV (0,1) và PB (1,1).</li>
+    </ul>
+    <p>Một loại thực thể có thể tham gia nhiều lần vào một quan hệ với nhiều vai trò khác nhau. Ví dụ: liên kết đệ quy Huong_dan trên NHANVIEN với vai trò "Người hướng dẫn" (0,n) và "Người được hướng dẫn" (0,1).</p>
+    <h4>Ràng buộc tỉ số: Bài tập</h4>
+    <p>Xác định mối quan hệ và xây dựng lược đồ ER đối với CSDL thư viện gồm các kiểu thực thể: BANDOC, TACGIA, SACH, NXB, DONVI.</p>
+    <p>Các liên kết & ràng buộc:</p>
+    <ul>
+        <li>Bạn đọc thuộc một đơn vị nào đó, có thể mượn tối đa 5 quyển sách, một quyển sách chỉ cho 1 người mượn tại 1 thời điểm.</li>
+        <li>Một tác giả có thể viết nhiều quyển sách, có thể đồng tác giả.</li>
+        <li>Nhà XB có thể xuất bản nhiều sách, mỗi sách chỉ do 1 nxb phát hành.</li>
+    </ul>
+    <h4>Ràng buộc tham gia và sự phụ thuộc tồn tại:</h4>
+    <p>
+      Chỉ ra sự tồn tại của một kiểu thực thể có phụ thuộc vào một kiểu thực thể
+      khác thông qua liên kết hay không.
+    </p>
+    <ul>
+      <li>
+        <strong>Tham gia toàn bộ:</strong> Mọi thực thể trong tập thực thể phải
+        tham gia vào liên kết. Ký hiệu bằng đường nối đôi. (min >= 1).
+      </li>
+      <li>
+        <strong>Tham gia bộ phận:</strong> Thực thể không bắt buộc phải tham gia
+        vào liên kết. Ký hiệu bằng đường nối đơn. (min = 0).
+      </li>
+    </ul>
+    <p>Ví dụ: Trong liên kết Quan_ly giữa NHANVIEN và PHONGBAN. Nếu phòng nào cũng phải có người quản lý thì PHONGBAN tham gia toàn bộ. Nếu không phải nhân viên nào cũng là trưởng phòng thì NHANVIEN tham gia bộ phận.</p>
+    <p>Ràng buộc tham gia chỉ ra sự tồn tại của một kiểu thực thể phụ thuộc vào một kiểu thực thể khác thông qua liên kết.</p>
+    <p>Có 2 loại ràng buộc: Ràng buộc tỉ số lực lượng (k1:k2) và Ràng buộc tham gia. Cả hai được gọi chung là ràng buộc cấu trúc. Có thể dùng cặp (min, max) để phản ảnh ràng buộc cấu trúc: min = 0 là tham gia bộ phận, min > 0 là tham gia toàn bộ.</p>
+
+
+    <h3>g. Thuộc tính trên liên kết</h3>
+    <p>
+      Mô tả tính chất cho mối liên kết. Thuộc tính này không thể gắn với những
+      thực thể tham gia. Ví dụ: thuộc tính THGIAN trên liên kết Lam_viec giữa
+      NHANVIEN và DUAN.
+    </p>
+
+    <h3>h. Thực thể yếu</h3>
+    <p>
+      Là thực thể không có khóa. Thực thể yếu phải tham gia vào một liên kết xác
+      định với một thực thể chủ. Thực thể yếu và liên kết xác định được mô tả
+      bằng hình chữ nhật và hình thoi nét đôi.
+    </p>
+    <p>
+      Ví dụ 1: Thực thể yếu THANNHAN liên kết với thực thể chủ NHANVIEN qua liên kết Co_than_nhan (1,1) - (0,n).
+      Ví dụ 2: Thực thể yếu CHI_TIET liên kết với HOA_DON và HANG_HOA.
+    </p>
+
+    <h3>Các ký hiệu (trên Lược đồ ER)</h3>
+    <ul>
+      <li>Kiểu thực thể: Hình chữ nhật</li>
+      <li>Kiểu thực thể yếu: Hình chữ nhật nét đôi</li>
+      <li>Kiểu liên kết: Hình thoi</li>
+      <li>Kiểu liên kết xác định: Hình thoi nét đôi</li>
+      <li>Thuộc tính: Hình elip</li>
+      <li>Thuộc tính khóa: Hình elip có gạch chân</li>
+      <li>Thuộc tính đa trị: Hình elip nét đôi</li>
+      <li>Thuộc tính phức hợp: Thuộc tính có các thuộc tính con nối vào</li>
+      <li>Thuộc tính suy diễn được: Hình elip nét đứt</li>
+      <li>Tham gia toàn bộ: Đường nối đôi</li>
+      <li>Ràng buộc tỉ số: Ghi M, N trên đường nối</li>
+      <li>Ràng buộc cấu trúc: Ghi (min, max) trên đường nối</li>
+    </ul>
+
+    <h2>Nội dung chi tiết</h2>
+    <ul>
+      <li>Quá trình thiết kế CSDL</li>
+      <li>Mô hình thực thể - liên kết</li>
+      <li>Thiết kế
+        <ul>
+          <li>Các bước thiết kế</li>
+          <li>Nguyên lý thiết kế</li>
+        </ul>
+      </li>
+      <li>Ví dụ</li>
+    </ul>
+    <h2>2.3 - Các bước thiết kế ER</h2>
+    <ol>
+      <li>B1: Xác định các thực thể</li>
+      <li>B2: Xác định các liên kết (quan hệ)</li>
+      <li>B3: Xác định thuộc tính của thực thể và mối quan hệ</li>
+      <li>B4: Xác định miền giá trị của thuộc tính</li>
+      <li>B5: Xác định thuộc tính khóa</li>
+      <li>
+        B6: Xác định ràng buộc (tỉ số; min-max; ràng buộc tham gia) cho mối quan
+        hệ và thể hiện chúng trên lược đồ thực thể - liên kết
+      </li>
+    </ol>
+
+    <h2>Nội dung chi tiết</h2>
+    <ul>
+      <li>Quá trình thiết kế CSDL</li>
+      <li>Mô hình thực thể - quan hệ</li>
+      <li>Thiết kế</li>
+      <li>Ví dụ
+        <ul>
+          <li>Quản lý đề án công ty</li>
+        </ul>
+      </li>
+    </ul>
+    <h2>Ví dụ ‘Quản lý dự án công ty’</h2>
+    <p>
+      Mô tả: CSDL quản lý thông tin nhân viên, phòng ban, dự án. Công ty có
+      nhiều đơn vị, mỗi đơn vị có tên, mã, trưởng phòng, ngày nhận chức, và có
+      thể ở nhiều địa điểm. Dự án có tên, mã, do 1 phòng ban chủ trì, triển khai
+      ở 1 địa điểm. Nhân viên có mã, tên, địa chỉ, ngày sinh, giới tính, lương;
+      làm việc ở 1 phòng ban, tham gia các đề án với số giờ khác nhau, có một
+      người quản lý trực tiếp. Nhân viên có thể có con được hưởng bảo hiểm.
+    </p>
+    <h3>Bước 1: Xác định các thực thể, thuộc tính, khóa</h3>
+    <ul>
+      <li>
+        Nhân viên: Mã nhân viên (khóa), Họ tên, ngày sinh, giới tính, lương, địa
+        chỉ
+      </li>
+      <li>Đơn vị: Mã đơn vị (khóa), Tên đơn vị, địa điểm (đa trị)</li>
+      <li>Con: Tên, ngày sinh, giới tính (thực thể yếu)</li>
+      <li>Dự án: Mã dự án (khóa), tên dự án, địa điểm</li>
+    </ul>
+    <h3>Bước 2: Xác định các liên kết, ràng buộc</h3>
+    <ul>
+      <li>
+        Làm việc cho: giữa NHÂNVIÊN và ĐƠNVỊ. Ràng buộc: mỗi nhân viên làm ở 1 
+        đơn vị (1,1), một đơn vị có nhiều nhân viên (1,N).
+      </li>
+      <li>
+        Quản lý: giữa NHÂNVIÊN và ĐƠNVỊ. Ràng buộc: một đơn vị có 1 quản lý
+        (1,1), một nhân viên có thể quản lý 0 hoặc 1 đơn vị (0,1).
+      </li>
+      <li>
+        Kiểm soát: giữa ĐƠNVỊ và DỰÁN. Ràng buộc: một đơn vị kiểm soát nhiều dự
+        án (0,N), một dự án do 1 đơn vị kiểm soát (1,1).
+      </li>
+      <li>
+        Làm việc trên: giữa NHÂNVIÊN và DỰÁN. Ràng buộc: nhân viên có thể làm
+        nhiều dự án (0,N), dự án có nhiều nhân viên (1,N). Có thuộc tính "Số
+        giờ".
+      </li>
+      <li>
+        Giám sát: liên kết đệ quy trên NHÂNVIÊN. Ràng buộc: một nhân viên có 1
+        người giám sát (0,1), một người giám sát nhiều người (0,N).
+      </li>
+      <li>
+        Có: giữa NHÂNVIÊN và CON. Ràng buộc: nhân viên có nhiều con (0,N), một
+        đứa con thuộc 1 nhân viên (1,1). Đây là liên kết xác định.
+      </li>
+    </ul>
+    <p>Bước 6: Hoàn thiện lược đồ ER với đầy đủ các thực thể, thuộc tính, liên kết và ràng buộc (1,N), (1,1), (0,1), (0,N) và vai trò (Người giám sát, Bị giám sát).</p>
+
+    <h2>Bài tập</h2>
+    <h3>Bài tập 1: Quản lý thi tuyển sinh</h3>
+    <p>
+      Yêu cầu: Xây dựng lược đồ ER dựa trên mô tả: Mỗi thí sinh có thể đăng kí 2
+      nguyện vọng (2 ngành). Mỗi trường có thể có một hoặc hơn 1 ngành. Mỗi
+      ngành thuộc 1 khối thi. Mỗi khối có 3 môn thi. Mỗi phòng thi có 2 cán bộ
+      là giám thị. Một giám sát (cũng là cán bộ) giám sát tối đa 6 giám thị. Mỗi
+      phòng thi không quá 30 thí sinh, có địa điểm xác định. Lược đồ ER mẫu được cung cấp với các thực thể THISINH, NGANH, TRUONG, KHOITHI, MONTHI, PHONGTHI, CB_COITHI, KHUVUC và các liên kết giữa chúng.
+    </p>
+    <h3>Bài tập 2: CSDL TRƯỜNG</h3>
+    <p>
+      Yêu cầu: Xây dựng lược đồ ER cho CSDL TRƯỜNG với các thực thể Trường con,
+      Khoa, Môn học, Học phần, Giáo viên, Sinh viên và các mối quan hệ như quản
+      lý, cung cấp, làm việc, dạy, học, giám sát.
+    </p>
+    <h3>Bài tập 3: CSDL THƯ VIỆN</h3>
+    <p>
+      Yêu cầu: Xây dựng lược đồ ER cho CSDL THƯ VIỆN với các thực thể Nhánh,
+      Sách, Tác giả, Nhà xuất bản, Bản sao sách, Người mượn và các mối quan hệ
+      viết, xuất bản, lưu trữ, mượn.
+    </p>
+    <h3>Bài tập 4: CSDL BÁN_HÀNG</h3>
+    <p>
+      Yêu cầu: Xây dựng lược đồ ER cho CSDL BÁN_HÀNG với các thực thể HÀNG_HÓA,
+      NHÀ_CUNG_CẤP, NHÂN_VIÊN và các mối quan hệ cung cấp, quản lý nhóm, bán 
+      hàng.
+    </p>
+
+    <!-- QA (chỉ là comment, không hiển thị; phục vụ kiểm tra đủ mục):
+       - Tổng số ký tự (ước lượng) của nội dung body: 10500
+       - Danh sách tiêu đề (theo thứ tự): [H1: Chương 2: Mô hình thực thể - liên kết (Entity-Relationship)], [H2: Nội dung], [H2: 2.1- Quá trình thiết kế CSDL], [H2: 2.2- Nguyên tắc thiết kế], [H2: 2.3 - Mô hình thực thể - liên kết (ER)], [H3: Các khái niệm cơ bản:], [H3: a. Thực thể /tập thực thể], [H4: Ví dụ “Quản lý đề án công ty”], [H4: Ví dụ CSDL “THƯ VIỆN”], [H4: Ví dụ CSDL “QL Tuyển sinh“], [H3: b. Thuộc tính], [H4: Ví dụ CSDL Tuyển sinh], [H4: Loại thuộc tính:], [H3: c. Kiểu thực thể và khóa], [H3: d. Liên kết], [H4: Các loại liên kết:], [H3: e. Lược đồ ER], [H3: f. Ràng buộc trên kiểu liên kết], [H4: Ràng buộc tỉ số:], [H4: Ràng buộc (min, max):], [H4: Ràng buộc tham gia và sự phụ thuộc tồn tại:], [H3: g. Thuộc tính trên liên kết], [H3: h. Thực thể yếu], [H3: Các ký hiệu (trên Lược đồ ER)], [H2: 2.3 - Các bước thiết kế ER], [H2: Ví dụ ‘Quản lý dự án công ty’], [H3: Bước 1: Xác định các thực thể, thuộc tính, khóa], [H3: Bước 2: Xác định các liên kết, ràng buộc], [H2: Bài tập], [H3: Bài tập 1: Quản lý thi tuyển sinh], [H3: Bài tập 2: CSDL TRƯỜNG], [H3: Bài tập 3: CSDL THƯ VIỆN], [H3: Bài tập 4: CSDL BÁN_HÀNG]
+       - Ghi chú phần OCR đã chép: Toàn bộ nội dung text từ các slide đã được chép lại, bao gồm các danh sách, mô tả sơ đồ và các bài tập.
+    -->
+  </body>
+</html>

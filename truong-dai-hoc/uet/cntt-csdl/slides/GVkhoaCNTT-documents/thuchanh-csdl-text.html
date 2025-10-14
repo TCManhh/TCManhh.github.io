@@ -1,0 +1,2874 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Nội dung: Thực hành Cơ sở dữ liệu - StuShare</title>
+    <meta
+      name="description"
+      content="Nội dung chi tiết tài liệu bài giảng Thực hành Cơ sở dữ liệu. Bao gồm hướng dẫn cài đặt MySQL, các kiểu dữ liệu, tạo bảng, truy vấn SELECT, JOIN, subquery, và sử dụng MySQL Workbench."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://tcmanhh.github.io/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/thuchanh-csdl-viewer.html"
+    />
+
+    <!-- Tăng tốc load viewer -->
+    <link rel="preconnect" href="https://drive.google.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://lh3.googleusercontent.com"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="//drive.google.com" />
+    <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
+
+    <!-- Redirect an toàn: nhanh (~1s) nhưng vẫn cho Google render -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          location.replace("thuchanh-csdl-viewer.html");
+        }, 300);
+      });
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="1;url=thuchanh-csdl-viewer.html" />
+    </noscript>
+  </head>
+  <body>
+    <h1>BÀI GIẢNG: THỰC HÀNH CƠ SỞ DỮ LIỆU</h1>
+    <p>
+      <em
+        >Giảng viên: GVCC.ThS. Vũ Bá Duy, TS. Dư Phương Hạnh, TS. Lê Hồng
+        Hải</em
+      >
+    </p>
+    <p>
+      <em>Người dùng sẽ được chuyển sang trang trình chiếu sau ít giây...</em>
+    </p>
+
+ 
+    <!-- Nội dung học thuật đầy đủ bắt đầu tại đây -->
+    <div style="text-align: center; margin: 2rem 0">
+      <p>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ</p>
+      <p>KHOA CÔNG NGHỆ THÔNG TIN</p>
+      <p>-------------------oOo--------------------</p>
+      <br />
+      <h2>BÀI GIẢNG</h2>
+      <h1>THỰC HÀNH CƠ SỞ DỮ LIỆU</h1>
+      <br />
+      <p><strong>Giảng viên:</strong></p>
+      <p>GVCC.ThS. Vũ Bá Duy</p>
+      <p>TS. Dư Phương Hạnh</p>
+      <p>TS. Lê Hồng Hải</p>
+      <br /><br />
+      <p>Hà Nội, Năm 2025</p>
+    </div>
+    <hr />
+    <h2>Mục lục</h2>
+    <ul>
+      <li><a href="#loi-noi-dau">Lời nói đầu</a></li>
+      <li>
+        <a href="#bai-1">Bài thực hành số 1: Cài đặt hệ quản trị CSDL và quản lý CSDL</a>
+        <ul>
+          <li><a href="#bai-1-1">1. Cài đặt hệ quản trị CSDL MySQL Server</a></li>
+          <li><a href="#bai-1-2">2. Cấu trúc MyQSL Server</a></li>
+          <li><a href="#bai-1-3">3. Kết nối tới MySQL server</a></li>
+          <li><a href="#bai-1-4">4. Tạo, xóa cơ sở dữ liệu (CSDL)</a></li>
+          <li><a href="#bai-1-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-2">Bài thực hành số 2: Các kiểu dữ liệu. Tạo và sửa đổi cấu trúc bảng</a>
+        <ul>
+          <li><a href="#bai-2-1">1. Các kiểu dữ liệu</a></li>
+          <li><a href="#bai-2-2">2. Tạo bảng Cơ sở dữ liệu</a></li>
+          <li><a href="#bai-2-3">3. Thay đổi cấu trúc bảng</a></li>
+          <li><a href="#bai-2-4">4. Xóa bảng</a></li>
+          <li><a href="#bai-2-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-3">Bài thực hành số 3: Truy vấn cơ bản (phần 1)</a>
+        <ul>
+          <li><a href="#bai-3-1">1. Cài đặt cở sở dữ liệu mẫu Classicmodels</a></li>
+          <li><a href="#bai-3-2">2. Thực hiện truy vấn với câu lệnh SELECT</a></li>
+          <li><a href="#bai-3-3">3. Mệnh đề WHERE</a></li>
+          <li><a href="#bai-3-4">4. Kết nối các điều kiện với toán tử AND và OR</a></li>
+          <li><a href="#bai-3-5">5. IS NULL: tìm các giá trị không xác định</a></li>
+          <li><a href="#bai-3-6">6. Từ khoá DISTINCT</a></li>
+          <li><a href="#bai-3-7">7. Giới hạn số lượng kết quả với LIMIT</a></li>
+          <li><a href="#bai-3-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-4">Bài thực hành số 4: Truy vấn cơ bản (phần 2)</a>
+        <ul>
+          <li><a href="#bai-4-1">1. Toán tử IN</a></li>
+          <li><a href="#bai-4-2">2. Toán tử BETWEEN</a></li>
+          <li><a href="#bai-4-3">3. Toán tử LIKE</a></li>
+          <li><a href="#bai-4-4">4. Thuộc tính suy diễn (Derived Attribute)</a></li>
+          <li><a href="#bai-4-5">5. Sắp xếp kết quả với ORDER BY</a></li>
+          <li><a href="#bai-4-6">6. Kết hợp các kết quả với toán tử UNION</a></li>
+          <li><a href="#bai-4-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-5">Bài thực hành số 5: Các hàm xử lý của MySQL</a>
+        <ul>
+          <li><a href="#bai-5-1">1. Hàm xử lý chuỗi SUBSTRING</a></li>
+          <li><a href="#bai-5-2">2. Hàm CONCAT</a></li>
+          <li><a href="#bai-5-3">3. Hàm REPLACE</a></li>
+          <li><a href="#bai-5-4">4. Hàm IF</a></li>
+          <li><a href="#bai-5-5">5. Hàm LAST_INSERT_ID</a></li>
+          <li><a href="#bai-5-6">6. Hàm DATEDIFF</a></li>
+          <li><a href="#bai-5-7">7. Hàm ADDDATE</a></li>
+          <li><a href="#bai-5-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-6">Bài thực hành số 6: Truy vấn nhóm</a>
+        <ul>
+          <li><a href="#bai-6-1">1. Các hàm nhóm</a></li>
+          <li><a href="#bai-6-2">2. Mệnh đề nhóm GROUP BY</a></li>
+          <li><a href="#bai-6-3">3. Mệnh đề điều kiện HAVING</a></li>
+          <li><a href="#bai-6-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-7">Bài thực hành số 7: Các phép nối bảng dữ liệu</a>
+        <ul>
+          <li><a href="#bai-7-1">1. PHÉP NỐI TRONG (INNER JOIN)</a></li>
+          <li><a href="#bai-7-2">2. PHÉP NỐI TRÁI (LEFT JOIN)</a></li>
+          <li><a href="#bai-7-3">3. PHÉP TỰ NỐI (Self Join)</a></li>
+          <li><a href="#bai-7-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-8">Bài thực hành số 8: Truy vấn con (Subquery)</a>
+        <ul>
+          <li><a href="#bai-8-1">1. Khái niệm truy vấn con</a></li>
+          <li><a href="#bai-8-2">2. Truy vấn con không tương quan</a></li>
+          <li><a href="#bai-8-3">3. Truy vấn con tương quan</a></li>
+          <li><a href="#bai-8-4">4. Sử dụng truy vấn con</a></li>
+          <li><a href="#bai-8-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-9">Bài thực hành số 9: Thêm, sửa, xóa dữ liệu trong bảng</a>
+        <ul>
+          <li><a href="#bai-9-1">1. Câu lệnh INSERT</a></li>
+          <li><a href="#bai-9-2">2. Câu lệnh UPDATE</a></li>
+          <li><a href="#bai-9-3">3. Câu lệnh DELETE</a></li>
+          <li><a href="#bai-9-4">4. Cập nhật dữ liệu có ràng buộc</a></li>
+          <li><a href="#bai-9-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bai-10">Bài thực hành số 10: Mô hình hóa CSDL sử dụng công cụ MySQL Workbench</a>
+        <ul>
+          <li><a href="#bai-10-1">1. Giới thiệu MySQL Workbench</a></li>
+          <li><a href="#bai-10-2">2. Tạo mô hình quan hệ thực thể EER</a></li>
+          <li><a href="#bai-10-3">3. Tạo CSDL từ mô hình quan hệ thực thể EER</a></li>
+          <li><a href="#bai-10-4">4. Đồng bộ hóa mô hình EER với CSDL trong MySQL Server</a></li>
+          <li><a href="#bai-10-5">5. Tạo mô hình quan hệ thực thể EER từ CSDL có sẵn</a></li>
+          <li><a href="#bai-10-bt">v. Bài tập thực hành</a></li>
+        </ul>
+      </li>
+    </ul>
+    <hr />
+    <h2 id="loi-noi-dau">Lời nói đầu</h2>
+    <p>
+      Hiện nay có rất nhiều phần mềm Hệ quản trị cơ sở dữ liệu theo mô hình quan
+      hệ (Relational DBMS) khác nhau, nhưng rất may mắn là các hệ quản trị cơ sở
+      dữ liệu này sử dụng chung một ngôn ngữ được gọi là SQL (Structured Query
+      Language- Ngôn ngữ truy vấn có cấu trúc). Các hệ quản trị cơ sở dữ liệu
+      hiện nay đều cơ bản hỗ trợ chuẩn ANSI 2003 SQL.
+    </p>
+    <p>
+      Có thể nói ngôn ngữ SQL là một yếu tố đóng góp cho sự thành công của cơ sở
+      dữ liệu quan hệ. Đây là ngôn ngữ mức cao nên người dùng chỉ cần viết lệnh
+      thực hiện để đạt kết quả của truy vấn, phần tính toán và tối ưu hóa câu
+      lệnh được hệ quản trị đảm nhận.
+    </p>
+    <p>SQL bao gồm ba phần chính:</p>
+    <ul>
+      <li>
+        Ngôn ngữ thao tác dữ liệu (Data manipulation language - DML): được sử
+        dụng để lưu trữ, sửa đổi và truy xuất dữ liệu từ CSDL. Có những thành
+        phần tiêu chuẩn dùng để thêm, cập nhật và xóa dữ liệu delete data.
+      </li>
+      <li>
+        Ngôn ngữ định nghĩa dữ liệu (Data definition language - DDL): được sử
+        dụng để định nghĩa cấu trúc của dữ liệu. Các câu lệnh này dùng để định
+        nghĩa cấu trúc của cơ sở dữ liệu, bao gồm định nghĩa các hàng, các cột,
+        các bảng dữ liệu, các chỉ số và một số thuộc tính khác liên quan đến cơ
+        sở dữ liệu
+      </li>
+      <li>
+        Ngôn ngữ điều khiển dữ liệu (Data control language - DCL): được sử dụng
+        để quản lý truy cập tới dữ liệu của người dùng.
+      </li>
+    </ul>
+    <p>
+      Nội dung các bài thực hành sẽ tập trung chủ yếu vào hai phần ngôn ngữ là
+      DML và DDL và sử dụng DBMS mã nguồn mở MySQL server làm công cụ thực hành.
+      Nội dung trong các bài giảng chủ yếu là các thao tác, câu lệnh truy vấn,
+      khai thác dữ liệu minh họa phần lý thuyết của môn học mà không nhằm tới
+      việc sử dụng hay khai thác toàn bộ Hệ quản trị cơ sở dữ liệu MySQL.
+    </p>
+    <p>
+      Bài giảng “Thực hành cơ sở dữ liệu” gồm 10 bài thực hành; mỗi bài đều có 2
+      phần, phần thứ nhất: giới thiệu tóm tắt các khái niệm hoặc các câu lệnh
+      cần thiết của bài giảng, phần thứ 2 là các bài tập thực hành sinh viên cần
+      thực hiện dưới sự hướng dẫn trực tiếp của giáo viên hoặc tự thực hiện như
+      các bài tập để củng cố nội dung của bài giảng.
+    </p>
+    <hr />
+    <p>
+      Các yêu cầu trong suốt các bài thực hành được thao tác trên một Cơ sở dữ
+      liệu mẫu. Các câu lệnh, ví dụ được thực hiện thống nhất trên MySQL.
+    </p>
+    <hr /> 
+    <h2 id="bai-1">Bài thực hành số 1</h2>
+    <h3>Cài đặt hệ quản trị CSDL và quản lý CSDL</h3>
+    <h4>v Nội dung chính</h4>
+    <ul>
+      <li>
+        Cài đặt MySQL server, thiết lập cổng làm việc, tạo tài khoản quản lý;
+        kết nối với MySQL server.
+      </li>
+      <li>Cấu trúc thư mục của MySQL, ý nghĩa của từng thư mục.</li>
+      <li>Làm quen với thao tác tạo cơ sở dữ liệu.</li>
+    </ul>
+    <h4 id="bai-1-1">1. Cài đặt hệ quản trị CSDL MySQL Server</h4>
+    <p>
+      MySQL Server có thể chạy trên nhiều nền tảng khác nhau như Linux, Windows,
+      Mac, FreeBSD, Unix. MySQL Server được cài đặt từ bản cài đặt hoặc được cài
+      đặt bằng bản được biên dịch từ mã nguồn mở. MySQL Server có thể tải về từ
+      địa chỉ <a href="http://dev.mysql.com/downloads/mysql/">http://dev.mysql.com/downloads/mysql/</a>.
+    </p>
+    <p>
+      MySQL cung cấp 2 lựa chọn để cài đặt: sử dụng bộ cài MSI sẽ cài đặt MySQL
+      dưới dạng service chạy ngầm hoặc chủ động thi hành server thông qua ZIP
+    </p>
+    <h4 id="bai-1-2">2. Cấu trúc MyQSL Server</h4>
+    <p><strong>File cấu hình</strong></p>
+    <p>
+      Tất cả các cấu hình cài đặt hệ thống đều được lưu lại trong file cấu hình.
+      Tên file là my.ini nếu sử dụng Windows hoặc my.cnf Linux, Unix, và Mac.
+      Nội dung chính của file cấu hình như sau (dòng bắt đầu bằng kí tự # là
+      dòng chú thích):
+    </p>
+    <pre><code># The TCP/IP Port the MySQL Server will listen on
+
+port=3306
+
+# Path to installation directory. All paths are
+
+# usually resolved relative to this.
+
+basedir="C:/Program Files/MySQL/MySQL Server 5.5/"
+
+# Path to the database root
+
+datadir="C:/Program Files/MySQL/MySQL Server 5.5/Data/"</code></blockquote>
+</code></pre>
+    <ul>
+      <li>Tùy chọn port: xác định số hiệu cổng làm việc của MySQL Server</li>
+      <li>Tùy chọn basedir: chỉ thư mục cài đặt MySQL server.</li>
+      <li>Tùy chọn datadir: đường dẫn chỉ tới thư mục lưu trữ dữ liệu.</li>
+    </ul>
+    <p>
+      Gợi ý: Người sử dụng nên sử dụng thư mục làm việc và thư mục lưu trữ dữ
+      liệu khác với cài đặt ngầm định để tăng tính bảo mật của hệ thống.
+    </p>
+    <p><strong>Cấu trúc thư mục MySQL</strong></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Thư mục</th>
+          <th>Nội dung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>bin</td>
+          <td>
+            File nhị phân - mysqld chương trình server, tất cả các chương trình
+            khách và công cụ để sử dụng và quản trị MySQL server.
+          </td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>
+            Nơi MySQL lưu trữ (đọc và ghi) dữ liệu, và các file log của server.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr>
+          <td>include</td>
+          <td>
+            Tập các file header, sử dụng khi viết và biên dịch các chương trình
+            sử dụng các thư viện của MySQL.
+          </td>
+        </tr>
+        <tr>
+          <td>lib</td>
+          <td>Các file thư viện của MySQL.</td>
+        </tr>
+        <tr>
+          <td>scripts</td>
+          <td>
+            mysql_install_db script, được sử dụng để khởi tạo file dữ liệu và
+            các tài khoản.
+          </td>
+        </tr>
+        <tr>
+          <td>share</td>
+          <td>
+            SQL scripts để sửa các đặc quyền, cũng như tập các file ngôn ngữ.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>
+        Thư mục Bin chứa các file chương trình của MySQL. Dưới đây là mô tả một
+        số chương trình trong thư mục:
+      </li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Tên chương trình</th>
+          <th>Mô tả chức năng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>mysqld</td>
+          <td>MySQL server</td>
+        </tr>
+        <tr>
+          <td>mysql</td>
+          <td>Công cụ khách giúp thực thi tương tác các câu lệnh SQL</td>
+        </tr>
+        <tr>
+          <td>mysqladmin</td>
+          <td>
+            Trợ giúp các tác vụ quản trị khác nhau (hiện thị trạng thái, tắt
+            server,..).
+          </td>
+        </tr>
+        <tr>
+          <td>mysqldump</td>
+          <td>Lưu nội dung của CSDL MySQL ra ngoài</td>
+        </tr>
+        <tr>
+          <td>mysqlimport</td>
+          <td>Nhập dữ liệu vào bảng từ file</td>
+        </tr>
+        <tr>
+          <td>mysqlshow</td>
+          <td>Hiển thị thông tin về CSDL, bảng, cột</td>
+        </tr>
+        <tr>
+          <td>myisamchk</td>
+          <td>Kiểm tra sự toàn vẹn của các file bảng MyISAM và sửa chữa</td>
+        </tr>
+        <tr>
+          <td>mysqlcheck</td>
+          <td>Thực hiện tác vụ bảo trì bảng</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <h4 id="bai-1-3">3. Kết nối tới MySQL server</h4>
+    <p>
+      Trước hết đảm bảo rằng MySQL Server đã được bật sau quá trình cài đặt
+      trên. Một cách khác có thể khởi động MySQL Server trực tiếp thông qua câu
+      lệnh.
+    </p>
+    <pre><code>shell&gt; basedir\mysqld.exe --console</code></pre>
+    <p>Trong đó basedir là thư mục chứa chương trình mysqld.exe</p>
+    <p>
+      Minh họa trên cho thấy tiến trình MySQL server đã chạy và chờ kết nối tới
+      tại cổng có số hiệu 3306. Chương trình khách khi kết nối tới MySQL server
+      sử dụng một số tham số như trong bảng dưới, hai cách sử dụng là tương
+      đương nhau.
+    </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>-u &lt;username&gt;</td>
+          <td>--user=username</td>
+          <td>Xác định người dùng đăng nhập MySQL.</td>
+        </tr>
+        <tr>
+          <td>-p</td>
+          <td>--password</td>
+          <td>Hỏi mật khẩu ngay sau khi lệnh bắt đầu</td>
+        </tr>
+        <tr>
+          <td>-p&lt;password&gt;</td>
+          <td>--password=xxx</td>
+          <td>
+            Mật khẩu được truyền trực tiếp. Khác với các lựa chọn khác, không có
+            khoảng cách sau –p. Sẽ thuận tiện hơn nhưng giảm an toàn (nên tránh)
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr>
+          <td>-h hostname</td>
+          <td>--host=hostname</td>
+          <td>
+            Xác định tên hoặc địa chỉ IP của máy tính (giá trị ngầm định là
+            chính máy tính localhost)
+          </td>
+        </tr>
+        <tr>
+          <td>-P port</td>
+          <td>--port=port</td>
+          <td>Xác định cổng làm việc của MySQL server</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Ví dụ: Hai cách đăng nhập vào hệ thống MySQL server</p>
+    <p>Cách 1:</p>
+    <pre><code>basedir\mysql.exe –u user_name –p your_password</code></pre>
+    <p>Cách 2:</p>
+    <pre><code>basedir\mysql.exe --user=user_name --password=your_password</code></pre>
+    <p>Với basedir là đường dẫn tới thư mục trỏ tới file chạy</p>
+    <p>
+      Ngầm định ban đầu hệ quản trị CSDL có một tài khoản quản trị username là
+      root và mật khẩu để trống.
+    </p>
+    <p>
+      Sau khi kết nối thành công tới MySQL Server như hình trên, ta có thể thao
+      tác với CSDL, Ví dụ: <code>mysql&gt; SHOW DATABASES;</code>
+    </p>
+    <p>Ngắt kết nối tới MySQL server sử dụng:</p>
+    <pre><code>mysql&gt; exit;</code></pre>
+    <h4 id="bai-1-4">4. Tạo, xóa cơ sở dữ liệu (CSDL)</h4>
+    <p>
+      Sau khi đã đăng nhập vào MySQL server sử dụng chương trình khách
+      mysql.exe, các bước sau mô tả cách khởi tạo và xóa cơ sở dữ liệu.
+    </p>
+    <p><strong>§ Khởi tạo CSDL</strong></p>
+    <p>Để tạo CSDL trong MySQL, sử dụng câu lệnh CREATE DATABASE như sau:</p>
+    <pre><code>CREATE DATABASE [IF NOT EXISTS] database_name;</code></pre>
+    <p>
+      Chú ý: Các câu lệnh SQL kết thúc bởi dấu ; hoặc \g, \G và bấm phím Enter.
+    </p>
+    <p>
+      Câu lệnh CREATE DATABASE sẽ tạo CSDL có tên là database_nameđược xác định.
+      IF NOT EXISTS là một tùy chọn tránh lỗi nếu tồn tại một CSDL cùng tên. Nếu
+      đã tồn tại CSDL cùng tên trong MySQL server, câu lệnh sẽ không được thi
+      hành.
+    </p>
+    <p>Ví dụ: tạo một CSDL tên là classicmodels</p>
+    <pre><code>CREATE DATABASE classicmodels;</code></pre>
+    <p><strong>§ Hiện thị các CSDL</strong></p>
+    <p>
+      Câu lệnh SHOW DATABASES sẽ hiển thị tất cả các CSDL trong server. Có thể
+      sử dụng câu lệnh này để kiểm tra CSDL mới tạo hoặc hiển thị tên tất cả các
+      CSDL đã có trong server trước khi tạo CSDL mới.
+    </p>
+    <pre><code>SHOW DATABASES;</code></pre>
+    <p><strong>§ Chọn CSDL để làm việc</strong></p>
+    <p>
+      Để chọn một CSDL có dự định làm việc, có thể sử dụng câu lệnh USE như sau:
+    </p>
+    <pre><code>USE database_name;</code></pre>
+    <p>Ví dụ: chọn CSDL classicmodels, sử dụng câu lệnh sau</p>
+    <pre><code>USE classicmodels;</code></pre>
+    <p>
+      Từ đây có thể thao tác trên các bảng dữ liệu của CSDL được chọn. Ví dụ để
+      hiển thị các bảng dữ liệu trong CSDL hiện thời sử dụng lệnh:
+    </p>
+    <pre><code>SHOW TABLES</code></pre>
+    <p><strong>§ Xóa Cơ sở Dữ liệu</strong></p>
+    <p>
+      Xóa CSDL có nghĩa là sẽ xóa CSDL vật lý, tất cả dữ liệu và các đối tượng
+      liên quan trong CSDL sẽ bị xóa vĩnh viễn. Do đó cần cẩn thận khi thi hành
+      câu lệnh này. MySQL cung cấp câu lệnh theo chuẩn DROP DATABASE để cho phép
+      xóa một CSDL
+    </p>
+    <pre><code>DROP DATABASE [IF EXISTS] database_name;</code></pre>
+    <p>
+      Giống như câu lệnh CREATE DATABASE, tùy chọn IF EXIST chống xóa CSDL nếu
+      không tồn tại.
+    </p>
+    <h4 id="bai-1-bt">v Bài tập thực hành:</h4>
+    <ol>
+      <li>
+        Thay đổi cổng ngầm định của MySQL server thành 3307 và kết nối tới MySQL
+        server tại cổng này thông qua MySQL Command line (CLI).
+      </li>
+      <li>
+        Chuyển thư mục chứa data của hệ thống sang thư mục khác và thay đổi
+        đường dẫn thư mục chứa CSDL trong file cấu hình tới thư mục mới. Khởi
+        động lại server.
+      </li>
+      <li>
+        Sử dụng MySQL CLI:
+        <ol type="a">
+          <li>
+            Tạo CDSL tên là my_database, sau đó dùng lệnh hiện thị các CSDL có
+            trong server.
+          </li>
+          <li>Kiểm tra trong thư mục chứa CSDL xem CSDL mới được tạo ra.</li>
+          <li>
+            Xóa CSDL my_database, sau đó dùng lệnh hiển thị các CSDL có trong
+            Mysql server.
+          </li>
+        </ol>
+      </li>
+      <li>Kết nối với MySQL server sử dụng MySQL Workbench.</li>
+      <li>
+        Khởi tạo CSDL mẫu tại Tải file script sampledatabase.sql để tạo CSDLvề
+        từ địa chỉ: http://www.mysqltutorial.org/mysql-sample-database.aspx
+      </li>
+    </ol>
+    <hr />
+    <h2 id="bai-2">Bài thực hành số 2</h2>
+    <h3>Các kiểu dữ liệu. Tạo và sửa đổi cấu trúc bảng</h3>
+    <h4>v Nội dung chính:</h4>
+    <ul>
+      <li>Các kiểu dữ liệu của MySQL</li>
+      <li>Tạo các bảng dữ liệu</li>
+      <li>Thay đổi cấu trúc bảng</li>
+      <li>Xóa bảng</li>
+    </ul>
+    <h4 id="bai-2-1">1. Các kiểu dữ liệu</h4>
+    <p>
+      MySQL hỗ trợ các bảng CSDL chứa các cột với các kiểu dữ liệu khác nhau.
+      Các bảng dưới đây liệt kê các kiểu dữ liệu MySQL hỗ trợ.
+    </p>
+    <p><strong>Các kiểu dữ liệu số</strong></p>
+    <p>Bảng sau mô tả một các kiểu dữ liệu số trong MySQL:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Kiểu</th>
+          <th>Lưu trữ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TINYINT</td>
+          <td>1 byte</td>
+        </tr>
+        <tr>
+          <td>SMALLINT</td>
+          <td>2 bytes</td>
+        </tr>
+        <tr>
+          <td>MEDIUMINT</td>
+          <td>3 bytes</td>
+        </tr>
+        <tr>
+          <td>INT/INTEGER</td>
+          <td>4 bytes</td>
+        </tr>
+        <tr>
+          <td>BIGINT</td>
+          <td>8 bytes</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Lưu ý: Kiểu BOOLEAN tương ứng với TINYINT(1)</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Kiểu dữ liệu</th>
+          <th>Lưu trữ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FLOAT</td>
+          <td>4 bytes</td>
+        </tr>
+        <tr>
+          <td>DOUBLE</td>
+          <td>8 bytes</td>
+        </tr>
+        <tr>
+          <td>DECIMAL</td>
+          <td>Phụ thuộc vào khi định nghĩa cột</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Các kiểu dữ liệu xâu</strong></p>
+    <p>
+      Trong MySQL, xâu có thể lưu mọi thứ từ dữ liệu văn bản tới dữ liệu nhị
+      phân như ảnh, file. Xâu có thể được so sánh và tìm kiếm dựa trên mẫu sử
+      dụng mệnh đề LIKE hoặc biểu thức chính quy. Bảng phía dưới là các kiểu dữ
+      liệu xâu trong MySQL:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Kiểu dữ liệu xâu</th>
+          <th>Mô tả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CHAR</td>
+          <td>Một chuỗi ký tự có độ dài cố định</td>
+        </tr>
+        <tr>
+          <td>VARCHAR</td>
+          <td>Một chuỗi ký tự có độ dài có thể thay đổi</td>
+        </tr>
+        <tr>
+          <td>BINARY</td>
+          <td>Một chuỗi nhị phân độ dài có định</td>
+        </tr>
+        <tr>
+          <td>VARBINARY</td>
+          <td>Một chuỗi nhị phân độ dài có thể thay đổi</td>
+        </tr>
+        <tr>
+          <td>TINYBLOB</td>
+          <td>Một đối tượng nhị phân rất nhỏ</td>
+        </tr>
+        <tr>
+          <td>BLOB</td>
+          <td>Một đối tượng nhị phân nhỏ</td>
+        </tr>
+        <tr>
+          <td>MEDIUMBLOB</td>
+          <td>Một đối tượng nhị phân cỡ trung bình</td>
+        </tr>
+        <tr>
+          <td>LONGBLOB</td>
+          <td>Một đối tượng nhị phân cỡ lớn</td>
+        </tr>
+        <tr>
+          <td>TINYTEXT</td>
+          <td>Mỗi chuỗi văn bản rất nhỏ</td>
+        </tr>
+        <tr>
+          <td>TEXT</td>
+          <td>Mỗi chuỗi văn bản nhỏ</td>
+        </tr>
+        <tr>
+          <td>MEDIUMTEXT</td>
+          <td>Mỗi chuỗi văn bản cỡ trung bình</td>
+        </tr>
+        <tr>
+          <td>LONGTEXT</td>
+          <td>Mỗi chuỗi văn bản rất dài</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Các kiểu dữ liệu ngày và thời gian</strong></p>
+    <p>
+      MySQL cung cấp kiểu dữ liệu ngày, thời gian và tổ hợp ngày và thời gian.
+      Ngoài ra MySQL cũng cung cấp kiểu dữ liệu timestamp để lưu thời gian thay
+      đổi của bản ghi.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Các kiểu dữ liệu</th>
+          <th>Mô tả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DATE</td>
+          <td>Giá trị ngày trong định dạng 'YYYY-MM-DD'</td>
+        </tr>
+        <tr>
+          <td>TIME</td>
+          <td>Giá trị thời gian trong định dạng 'hh:mm:ss'</td>
+        </tr>
+        <tr>
+          <td>DATETIME</td>
+          <td>
+            Giá trị ngày tháng và thời gian trong định dạng 'YYYY-MM-DD
+            hh:mm:ss'
+          </td>
+        </tr>
+        <tr>
+          <td>TIMESTAMP</td>
+          <td>Giá trị nhãn thời gian trong định dạng 'YYYY-MM-DD hh:mm:ss'</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Cột có kiểuTIMESTAMP đóng vai trò đặt biệt do được tự động cập nhật giá
+      trị thời gian thay đổi gần nhất khi bản ghi được thêm vào hoặc cập nhật.
+    </p>
+    <h4 id="bai-2-2">2. Tạo bảng Cơ sở dữ liệu</h4>
+    <p>
+      Để tạo bảng, MySQL sử dụng câu lệnh CREATE TABLE. Câu lệnh có cấu trúc như
+      sau:
+    </p>
+    <pre><code>CREATE TABLE [IF NOT EXISTS] table_name(
+
+         &lt;column name&gt;&lt;type&gt; [&lt;default value&gt;] [column constraints],
+
+       ...
+
+       &lt;column name&gt;&lt;type&gt; [&lt;default value&gt;] [column constraints],
+
+       &lt;table constraint&gt;,
+
+       ...
+
+       &lt;table constraint&gt;
+
+
+ ) ENGINE=table_type
+</code></pre>
+    <p>
+      MySQL hỗ trợ tùy chọn IF NOT EXISTS để tránh lỗi tạo bảng đã tồn tại trong
+      CSDL table_name là tên bảng muốn tạo.
+    </p>
+    <p>
+      Giá trị DEFAULT: MySQL cho phép gán giá trị ngầm định cho một cột. Nếu giá
+      trị của cột đó không được xác định khi thêm dữ liệu vào bảng, giá trị cột
+      sẽ được gán giá trị value. Giá trị ngầm định của một cột là NULL.
+    </p>
+    <p>
+      Table_type: xác định kiểu của bảng dữ liệu khi lưu trữ (chú ý thuộc tính
+      này là đặc điểm riêng của MySQL). Nếu không xác định thì MySQL sẽ sử dụng
+      kiểu bảng ngầm định. MySQL hỗ trợ các kiểu bảng lưu trữ khác nhau, cho
+      phép tối ưu CSDL theo mục đích sử dụng. Một số kiểu bảng trong MySQL như
+      MyISAM, InnoDB, BerkeleyDB (BDB), MERGE, HEAP…
+    </p>
+    <p>
+      MyISAM: Các bảng MyISAM làm việc rất nhanh, nhưng không hỗ trợ giao dịch.
+      Thường được sử dụng trong các ứng dụng Web, là kiểu bảng ngầm định trong
+      các phiên bản MySQL trước 5.5
+    </p>
+    <p>
+      InnoDB: Các bảng InnoDB hỗ trợ giao dịch an toàn, hỗ trợ khóa ngoài.
+      InnoDB là kiểu lưu trữ ngầm định từ phiên bản MySQL 5.5.
+    </p>
+    <p>
+      Định nghĩa tập các cột: Các cột được liệt kê với các thuộc tính như kiểu
+      dữ liệu, giá trị ngầm định nếu có, các ràng buộc trên cột.
+    </p>
+    <p>
+      Các ràng buộc trong SQL gồm có: Primary Key, Foreign Key, Not Null,
+      Unique, Check. Nếu dữ liệu cập nhật vi phạm ràng buộc đã khai báo sẽ bị từ
+      chối.
+    </p>
+    <p>Các ràng buộc có thể được định nghĩa theo hai cách:</p>
+    <ol>
+      <li>
+        Column constraint (Ràng buộc cột): ràng buộc được áp dụng cho một cột cụ
+        thể
+      </li>
+      <li>
+        Table constraint (Ràng buộc bảng): được khai báo tách rời, có thể áp
+        dụng ràng buộc cho một hoặc nhiều cột.
+      </li>
+    </ol>
+    <p>
+      PRIMARY KEY (ràng buộc khóa chính): Ràng buộc này định nghĩa một cột hoặc
+      một tổ hợp các cột xác định duy nhất mỗi dòng trong bảng
+    </p>
+    <p>
+      NOT NULL: Ràng buộc này yêu cầu giá trị của cột không được phép là NULL
+    </p>
+    <p>
+      UNIQUE: ràng buộc yêu cầu các giá trị của cột là phân biệt. Chú ý với ràng
+      buộc này giá trị của cột có thể là NULL nếu ràng buộc NOT NULL không được
+      áp dụng trên cột.
+    </p>
+    <p>CHECK:</p>
+    <hr />
+    <p>Ràng buộc khóa chính khai báo theo kiểu ràng buộc mức cột:</p>
+    <blockquote><code>Column_name datatype [CONSTRAINT constraint_name] PRIMARY
+KEY</code></blockquote>
+    <p>Ràng buộc khóa chính khai báo theo kiểu ràng buộc mức bảng:</p>
+    <blockquote><code> [CONSTRAINT constraint_name] PRIMARY KEY
+ (column_name1,column_name2,..)</code></blockquote>
+    <p>Ví dụ: Tạo bảng employees với khóa chính xác định khi định nghĩa cột</p>
+    <blockquote><code> CREATE TABLE employees (
+
+                  employeeNumber int(11) NOT NULL PRIMARY KEY ,
+                  <i>employeeNumber int(11) NOT NULL PRIMARY KEY ,</i>
+
+                  lastName varchar(50) NOT NULL,
+
+                  firstName varchar(50) NOT NULL,
+
+                  extension varchar(10) NOT NULL,
+
+                  email varchar(100) NOT NULL,
+
+                  officeCode varchar(10) NOT NULL,
+
+                  reportsTo int(11) default NULL,
+
+                  jobTitle varchar(50) NOT NULL
+
+               ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></pre>
+    <p>Hoặc sử dụng cách như trên và đặt tên cho ràng buộc đó</p>
+    <pre><code>CREATE TABLE employees (
+
+                  employeeNumber int(11) NOT NULL CONSTRAINT
+                  <i>employeeNumber int(11) NOT NULL CONSTRAINT</i>
+
+ emp_id_pk PRIMARY KEY,
+</code></pre>
+    <pre><code>lastName varchar(50) NOT NULL,
+
+                  firstName varchar(50) NOT NULL,
+
+                  extension varchar(10) NOT NULL,
+
+                  email varchar(100) NOT NULL,
+
+                  officeCode varchar(10) NOT NULL,
+
+                  reportsTo int(11) default NULL,
+
+                  jobTitle varchar(50) NOT NULL,
+
+                  PRIMARY KEY (employeeNumber)
+
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></pre>
+    <p><strong>Đặt tên ràng buộc</strong></p>
+    <p>
+      Khai báo CONSTRAINT &lt;name&gt; &lt;constraint&gt; dùng để đặt tên ràng
+      buộc. Mục đích của việc đặt tên ràng buộc là khi cập nhật dữ liệu vi phạm
+      ràng buộc, hệ quản trị CSDL thường bao gồm tên ràng buộc vào thông báo
+      lỗi. Ngoài ra có thể sử dụng tên ràng buộc khi sửa đổi hóa xóa ràng buộc.
+      Như ở ví dụ trên, ràng buộc khóa chính được đặt tên là emp_id_pk.
+    </p>
+    <p>
+      Ví dụ: Tạo bảng employees với khóa chính xác định theo kiểu ràng buộc bảng
+      thay vì khai báo cùng với định nghĩa cột.
+    </p>
+    <pre><code>CREATE TABLE employees (
+
+                  employeeNumber int(11) NOT NULL,
+
+                  lastName varchar(50) NOT NULL,
+
+                  firstName varchar(50) NOT NULL,
+
+                  extension varchar(10) NOT NULL,
+                  email varchar(100) NOT NULL,
+
+                   officeCode varchar(10) NOT NULL,
+
+                   reportsTo int(11) default NULL,
+
+ 
+                   jobTitle varchar(50) NOT NULL,
+
+                   PRIMARY KEY (employeeNumber)
+
+ 
+                   <i>PRIMARY KEY (employeeNumber)</i>
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></pre>
+    <p><strong>FOREIGN KEY (Ràng buộc khóa ngoài)</strong></p>
+    <p>
+      Từ khóa FOREIGN KEY được dùng để xác định khóa ngoài. Trong ví dụ dưới xác
+      định cột country_id làm khóa ngoài, tham chiếu đến khóa chính của bảng
+      country.
+    </p>
+    <pre><code>CREATE TABLE city (
+
+       city_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+       city VARCHAR(50) NOT NULL,
+
+       country_id SMALLINT UNSIGNED NOT NULL,
+
+       last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON
+       UPDATE CURRENT_TIMESTAMP,
+
+       PRIMARY KEY(city_id),
+
+       CONSTRAINT fk_city_country FOREIGN KEY (country_id)
+       <i>CONSTRAINT fk_city_country FOREIGN KEY (country_id)
+       REFERENCES country (country_id) ON DELETE RESTRICT ON
+       UPDATE CASCADE</i>)</code></pre>
+    <p>Ý nghĩa của các tùy chọn đi kèm khi khai báo ràng buộc khóa ngoài:</p>
+    <ul>
+      <li>
+        ON DELETE RESTRICT:có nghĩa không cho phép xóa dòng dữ liệu ở bảng được
+        tham chiếu khi còn dữ liệu tham chiếu tới. Trong ví dụ trên không được
+        phép xóa dòng dữ liệu của bảng country nếu tồn tại dòng dữ liệu từ bảng
+        city tham chiếu tới.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        ON UPDATE CASCADE:có nghĩa khi cập nhật dữ liệu ở bảng được tham chiếu,
+        dữ liệu bên bảng tham chiếu sẽ được tự động cập nhật. Trong ví dụ trên,
+        khi thay đổi dữ liệu của cột country_id của bảng country thì cột
+        country_id của bảng city sẽ được tự động cập nhật.
+      </li>
+      <li>
+        Khi không sử dụng các tùy chọn này, ngầm định RESTRICT sẽ được sử dụng
+        cho các sự kiện DELETE và UPDATE.
+      </li>
+    </ul>
+    <p>
+      Sau khi đã tạo các bảng dữ liệu, có thể kiểm tra xem cấu trúc của các cột
+      dữ liệu trong
+    </p>
+    <p>Ví dụ: Hiển thị thông tin của bảng employees</p>
+    <pre><code>DESCRIBE employees;</code></pre>
+    <p>Kết quả trả về từ MySQL server</p>
+    <p>Bên cạnh lệnh DESCRIBE có thể sử dụng câu lệnh:</p>
+    <pre><code>SHOW CREATE TABLE Table_Name</code></pre>
+    <p>sẽ hiển thị về câu lệnh được sử dụng để tạo ra bảng dữ liệu.</p>
+    <h4 id="bai-2-3">3. Thay đổi cấu trúc bảng</h4>
+    <p>
+      Bên cạnh tạo bảng, để sửa đổi cấu trúc bảng đã tồn tại trong CSDL sử dụng
+      câu lệnh ALTER TABLE. Câu lệnh có thể được dùng để:
+    </p>
+    <ul>
+      <li>Thêm, xóa, sửa các cột của bảng</li>
+      <li>Thêm và xóa các ràng buộc</li>
+    </ul>
+    <p>Cú pháp của lệnh ALTER TABLE như sau:</p>
+    <blockquote><code> ALTER TABLE table_name tùy chọn[, tùy chọn...]</code></blockquote>
+    <p>Các tùy chọn:</p>
+    <blockquote><code>       ADD [COLUMN] &lt;column_definition&gt;
+
+       MODIFY [COLUMN] &lt;create_definition&gt;
+
+       DROP [COLUMN] &lt;column_name&gt;
+
+       ADD &lt;table_constraint&gt;
+
+       DROP &lt;constraint_name&gt;
+</code></blockquote>
+    <p>
+      Ví dụ: Thêm cột salary có kiểu INT, không vượt quá 10 chữ số, ràng buộc
+      không được để trống vào bảng dữ liệu employees
+    </p>
+    <pre><code>ALTER TABLE employees ADD salary INT(10) NOT NULL</code></pre>
+    <p>Ví dụ: Sửa kiểu của cột salary thành kiểu decimal(15,2)</p>
+    <pre><code>ALTER TABLE employees MODIFY salary decimal(15,2);</code></pre>
+    <p>Ví dụ: Xóa cột officeCode khỏi bảng employees</p>
+    <pre><code>ALTER TABLE employees DROP officeCode</code></pre>
+    <h4 id="bai-2-4">4. Xóa bảng</h4>
+    <p>Để xóa bảng khỏi CSDL, sử dụng câu lệnh DROP TABLE:</p>
+    <pre><code>DROP TABLE [IF EXISTS] &lt;table_name&gt;</code></pre>
+    <p>
+      MySQL cho phép xóa nhiều bảng cùng lúc bằng cách liệt kê tên các bảng cách
+      nhau bởi dấu phẩy. Tùy chọn IF EXISTS được sử dụng để tránh xóa bảng không
+      tồn tại trong CSDL.
+    </p>
+    <h4 id="bai-2-bt">v Bài tập thực hành</h4>
+    <ol>
+      <li>
+        Tạo CSDL My_Classicmodels gồm 4 bảng: productlines, products, orders và
+        orderdetails với các thuộc tính như trong hình vẽ phía dưới. Các khóa
+        chính có kiểu INT sử dụng kiểu tự tăng AUTO_INCREMENT. Gợi ý: Khóa chính
+        được tạo thành từ tổ hợp nhiều hơn 1 cột cần khai báo theo ràng buộc mức
+        bảng.
+      </li>
+      <li>
+        Sau khi đã tạo 4 bảng dữ liệu trên, thêm các ràng buộc khóa ngoài giữa
+        các bảng như trong hình vẽ. Các ràng buộc khóa ngoài sử dụng thêm tùy
+        chọn ON UPDATE CASCADE
+      </li>
+    </ol>
+    <hr>
+    <h2 id="bai-3">Bài thực hành số 3</h2>
+    <h3>Truy vấn cơ bản (phần 1)</h3>
+    <h4>v Nội dung chính</h4>
+    <ul>
+      <li>Câu lệnh Select: cú pháp và cách sử dụng</li>
+      <li>Lọc dữ liệu với WHERE</li>
+      <li>Các toán tử AND, OR, IS NULL</li>
+      <li>Loại bỏ dữ liệu kết quả trùng lặp với DISTINCT</li>
+      <li>Giới hạn các bản ghi trả về bằng LIMIT</li>
+    </ul>
+    <h4 id="bai-3-1">1. Cài đặt cở sở dữ liệu mẫu Classicmodels</h4>
+    <hr>
+    <p>Cơ sở dữ liệu mẫu bao gồm các bảng sau:</p>
+    <ul>
+      <li>Customers: Lưu trữ thông tin về khách hàng.</li>
+      <li>Products: Lưu trữ danh sách về các sản phẩm.</li>
+      <li>ProductLines: Lưu trữ danh mục các loại sản phẩm</li>
+      <li>Orders: Lưu trữ các đơn hàng được đặt bởi các khách hàng.</li>
+      <li>OrderDetails: Lưu trữ về chi tiết các dòng đơn hàng</li>
+      <li>Payments: Lưu trữ các thanh toán của khách hàng</li>
+      <li>Employees: Lưu trữ thông tin về các nhân viên của tổ chức</li>
+      <li>Offices: Lưu thông tin về các văn phòng của tổ chức.</li>
+    </ul>
+    <p><i>*Ghi chú thảo luận quan hệ giữa các bảng dữ liệu</i></p>
+    <h4 id="bai-3-2">2. Thực hiện truy vấn với câu lệnh SELECT</h4>
+    <p>
+      Trong phần này, sẽ học cách sử dụng mệnh đề SELECT để truy vấn dữ liệu từ
+      các bảng cơ sở dữ liệu.
+    </p>
+    <p><strong>Cú pháp SELECT</strong></p>
+    <pre><code>SELECT tên cột 1, tên cột 2, ...
+FROM các bảng
+[WHERE điều kiện chọn]
+[GROUP BY nhóm]
+[HAVING điều kiện chọn nhóm]
+[ORDER BY các cột sắp xếp]
+[LIMIT giới hạn số lượng];</code></blockquote>
+    <ul>
+</code></pre>
+      <li>
+        Trong một truy vấn SELECT có nhiều yếu tố tùy chọn mà có thể sử dụng.
+        Các tùy chọn được đặt trong dấu ngoặc vuông [].
+      </li>
+      <li>
+        Thứ tự xuất hiện của các từ khoá WHERE, GROUP BY, HAVING, ORDER BY và
+        LIMIT phải theo đúng thứ tự trên.
+      </li>
+    </ul>
+    <p>
+      Ví dụ: nếu cần phải xem tên, họ và vị trí công việc của nhân viên, có thể
+      sử dụng truy vấn sau đây:
+    </p>
+    <pre><code>SELECT lastname, firstname, jobtitle
+FROM Employees</code></pre>
+    <p>
+      Ví dụ: Muốn lấy ra thông tin về mã sản phẩm và tên sản phẩm, thực hiện
+      truy vấn như sau:
+    </p>
+    <pre><code>SELECT ProductCode, ProductName
+FROM Products</code></pre>
+    <p>
+      Để chọn tất cả các cột trong một bảng có thể sử dụng dấu sao (*) ký hiệu
+      thay vì liệt kê tất cả các tên cột sau từ khoá SELECT. Ví dụ: nếu cần phải
+      truy vấn tất cả các thông tin về nhân viên, có thể sử dụng truy vấn sau
+      đây:
+    </p>
+    <pre><code>SELECT * FROM employees</code></pre>
+    <p>
+      Hạn chế dùng SELECT * do sẽ không tối ưu với dữ liệu lớn gồm nhiều cột
+    </p>
+    <h4 id="bai-3-3">3. Mệnh đề WHERE</h4>
+    <p>
+      Mệnh đề WHERE của câu lệnh SELECT cho phép chọn các hàng cụ thể phù hợp
+      với điều kiện hoặc tiêu chí tìm kiếm. Sử dụng mệnh đề WHERE để lọc các bản
+      ghi dựa trên một điều kiện nhất định.
+    </p>
+    <p>
+      Ví dụ: có thể tìm thấy các chủ tịch của công ty bằng cách sử dụng truy vấn
+      sau đây:
+    </p>
+    <pre><code>SELECT FirstName, LastName, email
+FROM Employees
+WHERE jobtitle = "President"</code></pre>
+    <p>
+      Hoăc có thể tìm ra các thông tin về tên của khách hàng có mã số 112 bằng
+      truy vấn như sau:
+    </p>
+    <pre><code>SELECT *
+FROM Customers
+WHERE customerNumber=112</code></pre>
+    <p>Ví dụ sau đưa ra các đơn hàng có mã khách hàng là 181</p>
+    <pre><code>SELECT *
+FROM orders
+WHERE customerNumber = 181</code></pre>
+    <h4 id="bai-3-4">4. Kết nối các điều kiện với toán tử AND và OR</h4>
+    <p>
+      Chúng ta có thể kết hợp hai hay nhiều điều kiện khác nhau trong mệnh đề
+      WHERE, sử dụng các toán tử AND, OR. Với hai điều kiện nối bởi AND, cần cả
+      WHERE, sử dụng các toán tử <b>AND, OR</b>. Với hai điều kiện nối bởi AND, cần cả
+      hai đúng để điều kiện kết hợp là đúng. Với hai điều kiện nối bởi OR, điều
+      kiện kết hợp là đúng nếu một hoặc cả hai điều kiện là đúng
+    </p>
+    <p>
+      Ví dụ: đưa ra các khách hàng tại Mỹ của người chăm sóc khách hàng có mã là
+      1165
+    </p>
+    <pre><code>SELECT *
+FROM customers
+WHERE country ='USA' and salesRepEmployeeNumber = 1165</code></pre>
+    <p>
+      Ví dụ: đưa ra các đơn hàng có trạng thái là ‘On Hold’ hoặc ‘In Process’
+    </p>
+    <pre><code>SELECT *
+FROM orders
+WHERE status = 'On Hold' or status ='In Process'</code></pre>
+    <h4 id="bai-3-5">5. IS NULL: tìm các giá trị không xác định</h4>
+    <p>
+      Với các trường chưa được nhập dữ liệu (coi giá trị là chưa xác định), SQL
+      coi giá trị đó là NULL. Để kiểm tra một trường có giá trị là NULL hay
+      không, thay vì sử dụng phép so sánh =, SQL sử dụng phép toán is NULL
+    </p>
+    <p>Ví dụ: Đưa ra các khách hàng chưa được gán nhân viên chăm sóc</p>
+    <pre><code>SELECT customerName, salesRepEmployeeNumber
+FROM customers
+WHERE salesRepEmployeeNumber = NULL</code></pre>
+    <p>
+      Nếu sử dụng phép so sánh = như trên, sẽ không có dòng kết quả nào được trả
+      về.
+    </p>
+    <p>Cần thay phép so sánh = thành <b><i>is NULL</i></b></p>
+    <pre><code>SELECT customerName, salesRepEmployeeNumber
+FROM customers
+WHERE salesRepEmployeeNumber is NULL</code></pre>
+    <p><i></i></p>
+    <h4 id="bai-3-6">6. Từ khoá DISTINCT</h4>
+    <p>
+      Với từ khóa DISTINCT, có thể loại bỏ dữ liệu trùng lặp từ câu lệnh SELECT.
+    </p>
+    <p>
+      Ví dụ: để tìm thấy bao nhiêu vị trí công việc của tất cả các nhân viên, sử
+      dụng từ khóa DISTINCT trong câu lệnh SELECT như sau:
+    </p>
+    <pre><code>SELECT DISTINCT jobTitle FROM Employees;</code></pre>
+    <p>
+      Hoặc có thể tìm ra mã số các sản phẩm đã được mua bằng truy vấn như sau:
+    </p>
+    <pre><code>SELECT DISTINCT productCode FROM OrderDetails;</code></pre>
+    <h4 id="bai-3-7">7. Giới hạn số lượng kết quả với LIMIT</h4>
+    <p>
+      Trong hầu hết các lần truy vấn, khi làm việc với các bảng dữ liệu có chứa
+      hàng nghìn đến hàng triệu bản ghi và không muốn viết một truy vấn để có
+      được tất cả các dữ liệu đó để đảm bảo hiệu suất và lưu lượng truy cập giữa
+      các máy chủ cơ sở dữ liệu và máy chủ ứng dụng . MySQL hỗ trợ một tính năng
+      là LIMIT cho phép hạn chế các bản ghi trả lại với câu lệnh SELECT.
+    </p>
+    <p>
+      Giả thiết ta có một bảng cơ sở dữ liệu với 10.000 bản ghi và muốn nhận
+      được N bản ghi đầu tiên, có thể sử dụng truy vấn sau đây:
+    </p>
+    <pre><code>SELECT * FROM table_name LIMIT N</code></pre>
+    <p>
+      LIMIT cũng cho phép lấy ra một số lượng bản ghi nhất định tính từ một vị
+      trí nào đó:
+    </p>
+    <pre><code>LIMIT S, N</code></pre>
+    <p>
+      Trong câu truy vấn trên, S là điểm bắt đầu ghi chỉ số. MySQL xác định rằng
+      vị trí đầu tiên được ghi lại bắt đầu với 0; N là số lượng bản ghi muốn
+      chọn.
+    </p>
+    <p>
+      Ví dụ: Có thể lấy ra thông tin về tên của 5 sản phẩm đầu tiên trong bảng
+      Product bằng truy vấn như sau:
+    </p>
+    <pre><code>SELECT productName FROM Products LIMIT 5;</code></pre>
+    <p>
+      Hoặc có thể lấy ra thông tin về 10 khách hàng đầu tiên hiện đang ở Pháp
+      bằng truy vấn như sau:
+    </p>
+    <pre><code>select * from customers
+where country='France'
+limit 10;</code></pre>
+    <h4 id="bai-3-bt">v Bài tập thực hành:</h4>
+    <ol>
+      <li>Đưa ra danh sách các nhân viên có trường reportsTo chưa xác định.</li>
+      <li>Đưa ra danh sách các CustomerNumber đã có thực hiện giao dịch.</li>
+      <li>Đưa ra danh sách các loại trạng thái đơn hàng.</li>
+      <li>
+        Đưa ra danh sách các đơn hàng có ngày yêu cầu vận chuyển là ‘18/1/2003’.
+        Lưu ý: MySQL lưu dữ liệu ngày tháng theo định dạng năm/tháng/ngày.
+        <i>Lưu ý: MySQL lưu dữ liệu ngày tháng theo định dạng năm/tháng/ngày.</i>
+      </li>
+      <li>
+        Đưa ra danh sách các đơn hàng có ngày đặt trong tháng 4 năm 2005 và có
+        trạng thái là ‘Shipped’
+      </li>
+      <li>Đưa ra danh sách các sản phẩm thuộc nhóm ‘Classic Cars’.</li>
+    </ol>
+    <hr />
+    <h2 id="bai-4">Bài thực hành số 4</h2>
+    <h3>Truy vấn cơ bản (phần 2)</h3>
+    <h4>v Nội dung chính</h4>
+    <p>
+      Trong bài này, sẽ đề cập đến cách sử dụng một số toán tử như IN, BETWEEN,
+      Trong bài này, sẽ đề cập đến cách sử dụng một số toán tử như <i>IN, BETWEEN, UNION,
+      LIKE, ORDER BY; Thuộc tính suy diễn.</i>
+    </p>
+    <h4 id="bai-4-1">1. Toán tử IN</h4>
+    <p>
+      Toán tử IN cho phép chọn giá trị phù hợp từ một tập các giá trị. Cú pháp
+      sử dụng như sau:
+    </p>
+    <pre><code>SELECT danh sách các cột
+FROM tên bảng
+WHERE cột IN ("giá trị 1","giá trị 2"…)</code></pre>
+    <p>
+      Các cột trong mệnh đề WHERE không cần phải xuất hiện trong danh sách cột
+      đã chọn, nhưng nó phải là một cột trong bảng. Nếu danh sách có nhiều hơn
+      một giá trị, mỗi mục được phân cách bằng dấu phẩy. Ngoài ra, có thể sử
+      dụng toán tử NOT đi kèm với toán tử IN cho mục đích phủ định.
+    </p>
+    <p>Chúng ta hãy xem một số ví dụ sau:</p>
+    <p>
+      Giả sử nếu muốn tìm tất cả các văn phòng được đặt tại Mỹ (USA) và Pháp
+      (France), có thể thực hiện truy vấn sau đây:
+    </p>
+    <pre><code>SELECT officeCode, city, phone
+FROM offices
+WHERE country = 'USA' OR country = 'France'</code></pre>
+    <p>
+      Trong trường hợp này, chúng ta có thể sử dụng IN thay vì truy vấn trên:
+    </p>
+    <pre><code>SELECT officeCode, city, phone
+FROM offices
+WHERE country IN ('USA','France')</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>Để có được tất cả các văn phòng không nằm ở Mỹ và Pháp, chúng ta có thể sử dụng NOT IN như sau:</p>
+    <pre><code>SELECT officeCode, city, phone
+FROM offices
+WHERE country NOT IN ('USA','France')</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <h4 id="bai-4-2">2. Toán tử BETWEEN</h4>
+    <p>
+      BETWEEN cho phép lấy các giá trị trong một phạm vi cụ thể. Nó phải được sử
+      dụng trong mệnh đề WHERE. Sau đây minh họa cú pháp:
+    </p>
+    <pre><code>SELECT column_list
+FROM table_name
+WHERE column_1 BETWEEN lower_range AND upper_range</code></pre>
+    <p>
+      MySQL trả lại tất cả bản ghi trong đó giá trị column_1 nằm trong phạm vi
+      lower_rage và upper_range. Truy vấn tương đương để có được cùng một kết
+      quả là:
+    </p>
+    <pre><code>SELECT column_list
+FROM table_name
+WHERE column_1 &gt;= lower_range AND column_1 &lt;= upper_range</code></pre>
+    <p>Ví dụ:</p>
+    <p>
+      Giả sử chúng ta muốn tìm tất cả các sản phẩm có giá nằm trong phạm vi 90 $
+      và 100 $, chúng ta có thể thực hiện truy vấn sau đây:
+    </p>
+    <pre><code>SELECT productCode,ProductName,buyPrice
+FROM products
+WHERE buyPrice BETWEEN 90 AND 100
+ORDER BY buyPrice DESC</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Để tìm tất cả các bản ghi không nằm trong một phạm vi, chúng ta sử dụng
+      NOT BETWEEN. Ví dụ: để tìm tất cả các sản phẩm với giá mua nằm ngoài phạm
+      vi 20 và 100, chúng ta có thể viết truy vấn sau đây:
+    </p>
+    <pre><code>SELECT productCode,ProductName,buyPrice
+FROM products
+WHERE buyPrice NOT BETWEEN 20 AND 100</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>Truy vấn trên tương đương với truy vấn sau:</p>
+    <pre><code>SELECT productCode,ProductName,buyPrice
+FROM products
+WHERE buyPrice &lt; 20 OR buyPrice &gt; 100
+ORDER BY buyPrice DESC</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <h4 id="bai-4-3">3. Toán tử LIKE</h4>
+    <p>
+      LIKE cho phép thực hiện việc tìm kiếm thông tin dựa trên sự so sánh ký tự
+      LIKE cho phép  thực hiện việc tìm kiếm thông tin dựa trên sự so sánh ký tự
+      (‘giống như’). LIKE thường được sử dụng với câu lệnh SELECT trong mệnh đề
+      WHERE. MySQL cung cấp cho hai ký tự đại diện sử dụng với LIKE, đó là % và
+      _.
+    </p>
+    <ul>
+      <li>
+        Ký tự đại diện tỷ lệ phần trăm (%) đại diện cho bất kỳ chuỗi có thể
+        không có hoặc có nhiều ký tự
+      </li>
+      <li>Gạch dưới (_) chỉ đại diện cho một ký tự duy nhất.</li>
+    </ul>
+    <p>
+      Ví dụ: Giả sử muốn tìm kiếm những nhân viên có tên bắt đầu với ký tự 'a',
+      có thể làm điều đó như sau:
+    </p>
+    <pre><code>SELECT employeeNumber, lastName, firstName
+ FROM employees
+ WHERE firstName LIKE 'a%'</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      MySQL quét toàn bộ bảng employees (nhân viên) để tìm tất cả nhân viên có
+      tên bắt đầu với ký tự 'a' và theo sau bởi một số lượng ký tự bất kỳ.
+    </p>
+    <p>
+      Ví dụ: Để tìm kiếm tất cả các nhân viên có họ kết thúc với chuỗi ‘on’, có
+      thể thực hiện truy vấn như sau:
+    </p>
+    <pre><code>SELECT employeeNumber, lastName, firstName
+ FROM employees
+ WHERE lastName LIKE '%on'</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Nếu chỉ biết rằng chuỗi tìm kiếm được nhúng vào một vị trí nào đó trong
+      giá trị của một cột, có thể đặt % đầu và cuối của chuỗi tìm kiếm để tìm
+      tất cả khả năng.
+    </p>
+    <p>
+      Ví dụ: muốn tìm tất cả các nhân viên mà họ của các nhân viên này có chứa
+      cụm 'on', có thể thực hiện truy vấn sau đây:
+    </p>
+    <pre><code>SELECT employeeNumber, lastName, firstName
+FROM employees
+WHERE lastName LIKE '%on%'</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Chúng ta cũng có thể dùng NOT kèm với LIKE để hàm chứa ý nghĩa phủ định.
+      Ví dụ: muốn tìm các nhân viên có họ không bắt đầu bởi ký tự ‘B’, viết như
+      sau:
+    </p>
+    <pre><code>SELECT employeeNumber, lastName, firstName
+FROM employees
+WHERE lastName NOT LIKE 'B%'</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Lưu ý là MySQL không phân biệt chữ hoa chữ thường nên ‘b%’ và ‘B%’ là như
+      nhau. Trong trường hợp chuỗi tìm kiếm của lại bắt đầu bởi một ký tự đại
+      diện, chẳng hạn là ‘_’, mysql cung cấp cho ký tự ‘\’ để chỉ ra rằng các ký
+      tự đại diện đi sau đó được sử dụng theo đúng nghĩa đen chứ không còn là ký
+      tự đại diện nữa. Ví dụ: tìm các sản phẩm mà mã của chúng có chứa chuỗi
+      ‘_20’, khi đó phải viết truy vấn như sau:
+    </p>
+    <pre><code>SELECT productCode, productName
+FROM products
+WHERE productCode LIKE '%\_20%'</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      LIKE cung cấp một cách thuận tiện để tìm bản ghi có các cột chứa các chuỗi
+      phù hợp với mẫu tìm kiếm. Tuy nhiên, do việc thực thi LIKE chính là quét
+      toàn bộ bảng để tìm tất cả các bản ghi phù hợp do đó nó không cho phép
+      database engine sử dụng index để tìm kiếm nhanh.
+    </p>
+    <p>
+      <b>Chú ý:</b> <i>Khi dữ liệu trong bảng là đủ lớn, hiệu suất thực thi LIKE sẽ bị suy
+      giảm. Trong một số trường hợp, có thể tránh vấn đề này bằng cách sử dụng
+      các kỹ thuật khác như Indexing, hoặc sử dụng phương pháp đánh chỉ mục
+      FULLTEXT của MySQL (sẽ đề cập trong mục về tối ưu truy vấn CSDL).
+    </i></p>
+    <h4 id="bai-4-4">4. Thuộc tính suy diễn (Derived Attribute)</h4>
+    <p>
+      SQL cung cấp khả năng tạo các thuộc tính suy diễn trong bảng kết quả trả
+      về sử dụng các toán tử và hàm dựa trên các thuộc tính có sẵn. Tên cột của
+      thuộc tính suy diễn phụ thuộc vào hệ thống, tuy nhiên có thể gán bí danh
+      làm tên cột.
+    </p>
+    <p>
+      Ví dụ sau sẽ tạo ra một cột suy diễn được đặt tên là lineTotal, thuộc tính
+      này là kết quả phép nhân giữa hai thuộc tính priceEach và quantityOrdered
+    </p>
+    <pre><code>SELECT orderNumber, (priceEach*quantityOrdered) as
+lineTotal FROM orderdetails</code></pre>
+    <p><b></b></p>
+    <h4 id="bai-4-5">5. Sắp xếp kết quả với ORDER BY</h4>
+    <p>
+      Mệnh đề ORDER BY cho phép sắp xếp các kết quả trên một hoặc nhiều cột
+      trong kết quả truy vấn theo thứ tự tăng dần hay giảm dần. Để sắp xếp kết
+      quả theo thứ tự tăng dần, sử dụng ASC; giảm dần là DESC. Theo mặc định,
+      ORDER BY sẽ sắp xếp các kết quả theo thứ tự tăng dần.
+    </p>
+    <p>
+      Ví dụ: để sắp xếp danh sách nhân viên theo tên và vị trí công việc, có thể
+      thực hiện truy vấn sau đây:
+    </p>
+    <pre><code>SELECT FirstName, LastName, jobtitle
+FROM Employees
+ORDER BY firstname ASC, jobtitle DESC;</code></pre>
+    <p>
+      Hoặc có thể đưa ra thông tin về tên các sản phẩm theo thứ tự tăng dần của
+      số lượng hàng tồn kho bằng truy vấn như sau:
+    </p>
+    <pre><code>SELECT productName
+FROM Products
+ORDER BY quantityInStock;
+</code></pre>
+    <p>
+      Trong câu lệnh trên từ khóa ASC không sử dụng, do mặc định sẽ sắp xếp kết
+      quả theo thứ tự tăng dần. Kết quả của câu lệnh trong hình sau.
+    </p>
+    <p>
+      Nếu không chỉ rõ việc sắp xếp được thực hiện theo thứ tự tăng hay giảm
+      dần, MySQL sẽ mặc định việc sắp xếp dữ liệu được thực hiện theo thứ tự
+      tăng dần.
+    </p>
+    <h4 id="bai-4-6">6. Kết hợp các kết quả với toán tử UNION</h4>
+    <p>
+      UNION cho phép kết hợp hai hoặc nhiều bộ kết quả từ nhiều bảng với nhau.
+      Cú pháp của việc sử dụng MySQL UNION là như sau:
+    </p>
+    <pre><code>SELECT statement
+UNION [DISTINCT | ALL]
+SELECT statement
+UNION [DISTINCT | ALL]
+…</code></pre>
+    <p>Để sử dụng UNION, có một số nguyên tắc cần phải làm theo:</p>
+    <ul>
+      <li>Số lượng các cột trong mỗi câu lệnh SELECT phải giống nhau.</li>
+      <li>
+        Các kiểu dữ liệu của cột trong danh sách cột của câu lệnh SELECT phải
+        giống nhau hoặc ít nhất là có thể chuyển đổi sang cho nhau.
+      </li>
+    </ul>
+    <p>
+      Theo mặc định, UNION MySQL loại bỏ tất cả các hàng trùng lặp từ kết quả
+      ngay cả khi không sử dụng từ khoá DISTINCT sau từ khoá UNION.
+    </p>
+    <p>
+      Nếu sử dụng UNION ALL, các hàng trùng lặp vẫn còn trong tập hợp kết quả
+      cuối cùng. chỉ nên sử dụng điều này trong các trường hợp hoặc là muốn giữ
+      lại bản sao các hàng, hoặc chắc chắn rằng có không có bản sao các hàng
+      trong tập hợp kết quả. Ví dụ: kết hợp thông tin về các khách hàng và nhân
+      viên thành một tập hợp kết quả, sử dụng truy vấn sau đây:
+    </p>
+    <pre><code>SELECT customerNumber id, contactLastname name
+FROM customers
+UNION
+SELECT employeeNumber id,firstname name
+FROM employees</code></pre>
+    <p>
+      Khi sử dụng ORDER BY để sắp xếp kết quả với UNION, phải đặt nó ở vị trí
+      cuối cùng trong mệnh đề SELECT.
+    </p>
+    <p>
+      Ví dụ: Giả sử kết hợp thông tin của nhân viên và khách hàng, sau đó muốn
+      sắp xếp kết quả theo tên và ID thứ tự tăng dần
+    </p>
+    <pre><code>(SELECT customerNumber, contactLastname
+FROM customers)
+UNION
+(SELECT employeeNumber, firstname
+FROM employees)
+ORDER BY contactLastname, customerNumber</code></pre>
+    <p>
+      Nếu tên cột không giống nhau trong hai mệnh đề SELECT của phép UNION, tên
+      nào sẽ được hiển thị ở đầu ra nếu chúng ta không sử dụng bí danh cho mỗi
+      cột trong mệnh đề SELECT. Câu trả lời là MySQL sẽ sử dụng các tên cột của
+      câu lệnh SELECT đầu tiên là tên cột trong kết quả đầu ra
+    </p>
+    <pre><code>(SELECT customerNumber, contactLastname
+FROM customers)
+UNION
+(SELECT employeeNumber, firstname
+FROM employees)
+ORDER BY contactLastname, customerNumber</code></pre>
+    <p>
+      Kết quả của phép toán hợp giữa hai tập kết quả từ bảng dữ liệu customers
+      và employees
+    </p>
+    <p>
+      MySQL cũng cung cấp một lựa chọn khác để sắp xếp các kết quả thiết lập dựa
+      trên vị trí cột trong mệnh đề ORDER BY như truy vấn sau đây:
+    </p>
+    <pre><code>(SELECT customerNumber, contactLastname
+FROM customers)
+UNION
+(SELECT employeeNumber, firstname
+FROM employees)
+ORDER BY 2, 1</code></pre>
+    <h4 id="bai-4-bt">v Bài tập thực hành:</h4>
+    <ol>
+      <li>
+        Dùng toán tử IN để đưa ra thông tin của các khách hàng sống tại các
+        thành phố Nantes và Lyon. Viết cách khác sử dụng toán tử OR
+      </li>
+      <li>
+        Sử dụng BETWEEN để tìm các đơn hàng đã được chuyển trong khoảng thời
+        gian từ ‘10/1/2003’ đến ‘10/3/2003’. Viết cách khác sử dụng toán tử AND
+      </li>
+      <li>
+        Sử dụng LIKE để đưa ra thông tin về các nhóm hàng hoá có chứa từ ‘CARS’.
+      </li>
+      <li>Truy vấn 10 sản phẩm có số lượng trong kho là lớn nhất.</li>
+      <li>
+        Sắp xếp danh sách các nhân viên theo lastname, nếu cùng lastname sẽ sắp
+        theo firstname
+      </li>
+      <li>
+        Đưa ra danh sách các sản phẩm và thêm thuộc tính là tiền hàng tồn của
+        sản phẩm.
+      </li>
+    </ol>
+    <hr />
+    <h2 id="bai-5">Bài thực hành số 5</h2>
+    <h3>Các hàm xử lý của MySQL</h3>
+    <h4>
+      v Nội dung chính: Trong bài này, chúng ta sẽ làm quen với một số hàm
+      (functions) cơ bản:
+    </h4>
+    <ul>
+      <li>Hàm xử lý xâu kí tự: Substring, Concat, Replace</li>
+      <li>Hàm điều kiện If</li>
+      <li>Hàm LAST_INSERT_ID</li>
+      <li>Hàm xử lý thời gian: DATEDIFF, ADDDATE, YEAR, MONTH</li>
+    </ul>
+    <h4 id="bai-5-1">1. Hàm xử lý chuỗi SUBSTRING</h4>
+    <p>
+      Hàm Substring cho phép trích xuất một chuỗi con từ một chuỗi khác, bắt đầu
+      tại vị trí cụ thể và với một độ dài nhất định. Sau đây minh họa các hình
+      thức sử dụng khác nhau của hàm này.
+    </p>
+    <pre><code>SUBSTRING(str,pos);
+SUBSTRING(str FROM pos);</code></blockquote>
+    <p>
+</code></pre>
+      Kết quả của câu lệnh ở trên trả về một chuỗi con từ một chuỗi str bắt đầu
+      từ vị trí pos
+    </p>
+    <pre><code>SUBSTRING(str,pos,len);
+SUBSTRING(str FROM pos FOR len);</code></blockquote>
+    <p>
+</code></pre>
+      Hai câu lệnh ở trên trả về một chuỗi con từ một chuỗi str, bắt đầu tại vị
+      trí pos và chuỗi con trả về chỉ có len ký tự. Lưu ý rằng FROM là từ khoá
+      cú pháp SQL chuẩn. Chúng ta hãy xem xét một số ví dụ sau”
+    </p>
+    <pre><code>SELECT substring('MySQL Substring',7);
+Trả về: Substring
+SELECT substring('MySQL Substring' FROM 7);
+Trả về: Substring
+SELECT substring('MySQL Substring',7,3);
+Trả về: Sub
+SELECT substring('MySQL Substring' FROM 7 FOR 3);
+</code></blockquote>
+Trả về: Sub</code></pre>
+    <p>
+      cũng có thể sử dụng giá trị âm cho tham số pos. Nếu sử dụng giá trị âm cho
+      tham số pos, sự bắt đầu của chuỗi con được tính từ cuối của chuỗi, ví dụ
+    </p>
+    <pre><code>SELECT substring('MySQL Substring',-9);</code></pre>
+    <p>Trả về: Substring</p>
+    <p>
+      Đôi khi thấy đoạn mã sử dụng substr () thay vì hàm substring () . Substr
+      là từ đồng nghĩa với substring, vì vậy nó có tác dụng tương tự.
+    </p>
+    <h4 id="bai-5-2">2. Hàm CONCAT</h4>
+    <p>
+      Hàm Concat được sử dụng để nối hai hoặc nhiều chuỗi. Nếu các đối số là số,
+      chúng sẽ được chuyển đổi thành chuỗi trước khi nối. Nếu bất kỳ đối số
+      trong danh sách đối số là NULL, hàm concat sẽ trả về NULL.
+    </p>
+    <pre><code>CONCAT(str1,str2,...)</code></pre>
+    <p>
+      Ví dụ: Để hiển thị tên đầy đủ đầu tiên của địa chỉ liên lạc của khách hàng
+      chúng tôi sử dụng hàm concat để nối các tên đầu tiên và tên cuối cùng và
+      dấu phân cách giữa chúng. Dưới đây là truy vấn:
+    </p>
+    <pre><code>SELECT CONCAT(contactLastname,', ',contactFirstname)
+fullname
+FROM customers</code></pre>
+    <p>
+      MySQL cũng hỗ trợ hàm concat_ws cho phép chúng ta nối hai hay nhiều hơn
+      hai chuỗi với một dấu phân cách được xác định trước. Cú pháp của hàm
+      concat_ws là:
+    </p>
+    <pre><code>CONCAT_WS(seperator,str1,str2,...)</code></pre>
+    <p>
+      Tham số đầu tiên là dấu phân cách do định nghĩa và sau đó là những chuỗi
+      muốn nối. Kết quả trả về là một chuỗi đã được ghép nối,với dấu phân cách
+      giữa mỗi thành phần ghép nối. Ví dụ, có thể đạt được kết quả tương tự
+      trong ví dụ trên bằng cách sử dụng concat_ws thay vì hàm concat.
+    </p>
+    <pre><code>SELECT CONCAT_WS('; ',contactLastname,contactFirstname)
+fullname
+FROM customers</code></pre>
+    <p>
+      Dưới đây là một ví dụ khác của việc sử dụng concat_ws để có được định dạng
+      địa chỉ của khách hàng.
+    </p>
+    <pre><code>SELECT CONCAT_WS(char(10),
+               CONCAT_WS(' ',contactLastname,contactFirstname),
+addressLine1, addressLine2,
+                    CONCAT_WS(' ',postalCode,city),                country,
+                    CONCAT_WS(char(10),'')) AS Customer_Address FROM customers</code></pre>
+    <h4 id="bai-5-3">3. Hàm REPLACE</h4>
+    <p>
+      MySQL cung cấp cho một hàm xử lý chuỗi hữu ích là Replace, cho phép thay
+      thế một chuỗi trong một cột của một bảng bằng một chuỗi mới.
+    </p>
+    <p>Cú pháp của hàm như sau:</p>
+    <pre><code>UPDATE &lt;tên bảng&gt;
+SET tên cột = REPLACE(tên cột,xâu cần tìm,xâu thay thế)
+WHERE &lt;các điều kiện&gt;</code></pre>
+    <p>
+      Lưu ý: rằng khi tìm kiếm các văn bản để thay thế, MySQL có phân biệt chữ
+      hoa và chữ thường.
+    </p>
+    <p>
+      Ví dụ: nếu muốn sửa lỗi chính tả trong bảng Product trong cơ sở dữ liệu
+      mẫu, sử dụng hàm Replace như sau:
+    </p>
+    <pre><code>UPDATE products
+SET productDescription =
+REPLACE(productDescription,'abuot','about')</code></pre>
+    <p>
+      Truy vấn sẽ xem xét cột productDescription và tìm thấy tất cả các lần xuất
+      hiện của lỗi chính tả 'abuot' và thay thế nó bằng từ chính xác 'about'.
+    </p>
+    <p>
+      Điều rất quan trọng cần lưu ý rằng trong hàm Replace, tham số đầu tiên là
+      tên trường không đặt trong dấu ‘’. Nếu đặt dấu để tên trường như
+      'field_name’, truy vấn sẽ cập nhật nội dung của cột 'field_name’, gây mất
+      dữ liệu.
+    </p>
+    <p>
+      Hiện nay hàm Replace không hỗ trợ biểu thức chính quy vì vậy nếu cần phải
+      thay thế một chuỗi văn bản bằng một mẫu, cần phải sử dụng hàm do người
+      dùng định nghĩa (UDF) từ thư viện bên ngoài.
+    </p>
+    <h4 id="bai-5-4">4. Hàm IF</h4>
+    <p>
+      IF là một hàm điều khiển, trả về kết quả là một chuỗi hoặc số dựa trên một
+      điều kiện cho trước. Cú pháp của hàm IF như sau:
+    </p>
+    <pre><code>IF(expr,if_true_expr,if_false_expr)</code></pre>
+    <ul>
+      <li>
+        Tham số đầu tiên là expr sẽ được kiểm tra là đúng hay sai. Giá trị thực
+        có nghĩa là expr không bằng 0 và expr không bằng NULL. Lưu ý rằng NULL
+        là một giá trị đặc biệt, không bằng bất cứ điều gì khác, ngay cả bản
+        thân nó.
+      </li>
+      <li>
+        Nếu expr được đánh giá là đúng, hàm IF sẽ trả lại if_true_expr, nếu
+        không nó sẽ trả lại if_false_expr.
+      </li>
+    </ul>
+    <p>Ví dụ:</p>
+    <pre><code>SELECT IF(1 = 2,'true','false');
+Trả về: false
+SELECT IF(1 = 1,' true','false');
+Trả về: true</code></pre>
+    <p>
+      Ví dụ: Trong bảng khách hàng, không phải tất cả các khách hàng đều có
+      thông tin về state. Vì vậy, khi chúng ta lựa chọn khách hàng, thông tin
+      state sẽ hiển thị giá trị NULL, không có ý nghĩa cho mục đích báo cáo.
+    </p>
+    <pre><code>SELECT customerNumber,
+           customerName,
+           country
+FROM customers;</code></pre>
+    <p>
+      Chúng ta có thể sử dụng IF để hiển thị trạng thái của khách hàng là N / A
+      nếu nó là NULL như sau:
+    </p>
+    <pre><code>SELECT customerNumber,
+           customerName,
+           IF(state IS NULL,'N/A',state) state,
+           country
+FROM customers;</code></pre>
+    <p>
+      Ví dụ: Hàm IF cũng rất hữu ích với chức năng tổng hợp. Giả sử nếu muốn
+      biết có bao nhiêu đơn đặt hàng đã vận chuyển và huỷ bỏ cùng một lúc, chúng
+      ta có thể sử dụng IF để đếm như sau:
+    </p>
+    <pre><code>SELECT SUM(IF(status = 'Shipped',1,0)) AS Shipped,
+       SUM(IF(status = 'Cancelled',1,0)) AS Cancelled
+FROM orders;</code></pre>
+    <p>
+      Trong truy vấn trên, nếu tình trạng của đơn đặt hàng là SHIPPED hoặc
+      CANCELLED, IF sẽ trả lại giá trị 1, nếu không nó trả về 0. Và sau đó hàm
+      SUM sẽ tính toán tổng số để vận chuyển và bị hủy bỏ dựa trên giá trị trả
+      về của hàm IF.
+    </p>
+    <h4 id="bai-5-5">5. Hàm LAST_INSERT_ID</h4>
+    <p>
+      Hàm LAST_INSERT_ID trả về ID của bản ghi cuối cùng được chèn vào bảng, với
+      điều kiện đólà ID của cột có thuộc tính AUTO_INCREMENT. Trong thiết kế cơ
+      sở dữ liệu thường sử dụng một cột tự động tăng AUTO_INCREMENT. Khi chèn
+      một bản ghi mới
+    </p>
+    <p>
+      vào bảng có cột AUTO_INCREMENT, MySQL tạo ra ID cho tự động dựa trên các
+      thiết lập của cột đó. có thể có được ID này bằng cách sử dụng hàm
+      LAST_INSERT_ID.
+    </p>
+    <p>
+      Ví dụ: tạo ra một bảng mới để thử nghiệm được gọi là TBL. Trong bảng TBL,
+      chúng ta sử dụng ID là cột AUTO_INCREMENT.
+    </p>
+    <pre><code>CREATE TABLE tbl(
+      id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+           description varchar(250) NOT NULL
+);</code></pre>
+    <p>
+      Sau đó, chúng ta sử dụng hàm LAST_INSERT_ID () để có được ID mới chèn.
+    </p>
+    <pre><code>INSERT INTO tbl(description)
+VALUES('MySQL last_insert_id');</code></pre>
+    <p>Thực hiện truy vấn:</p>
+    <pre><code>SELECT LAST_INSERT_ID();</code></pre>
+    <p>
+      Điều quan trọng cần lưu ý rằng nếu chèn nhiều bản ghi vào bảng bằng cách
+      sử dụng câu lệnh INSERT duy nhất, hàm LAST_INSERT_ID sẽ trả lại giá trị
+      tạo ra cho các bản ghi chèn vào đầu tiên. Hãy thử các bước sau:
+    </p>
+    <pre><code>INSERT INTO tbl(description)
+VALUES('record 1'),
+      ('record 2'),
+      ('record 3');</code></pre>
+    <p>Thực hiện truy vấn:</p>
+    <pre><code>SELECT LAST_INSERT_ID();</code></pre>
+    <p>
+      Chúng ta đã chèn 3 bản ghi bằng cách sử dụng câu lệnh INSERT và hàm
+      LAST_INSERT_ID trả lại ID của bản ghi đầu tiên như mong muốn. MySQL
+      LAST_INSERT_ID hoạt động dựa trên nguyên tắc độc lập với client. Nó có
+      nghĩa là giá trị được trả về bởi hàm LAST_INSERT_ID cho một client cụ thể
+      là giá trị mà client đó tạo ra. Điều này đảm bảo rằng mỗi client có thể
+      nhận được ID riêng của mình mà không cần phải quan tâm đến các hoạt động
+      của các client khác và không cần sử dụng cơ chế lock hay transaction (sẽ
+      học sau).
+    </p>
+    <h4 id="bai-5-6">6. Hàm DATEDIFF</h4>
+    <p>
+      Trong một số trường hợp, cần phải tính toán số ngày giữa hai mốc thời
+      gian, ví dụ số ngày từ ngày vận chuyển và ngày yêu cầu trong một đơn đặt
+      hàng. Trong những trường hợp này, cần phải sử dụng hàm DATEDIFF. Cú pháp
+      DATEDIFF như sau:
+    </p>
+    <pre><code>DATEDIFF(expr1,expr2)</code></pre>
+    <p>expr1 và expr2 là hai mốc thời gian. Ví dụ:</p>
+    <pre><code>SELECT DATEDIFF('2011-08-17','2011-08-17');
+Trả về: 0 day
+
+
+SELECT DATEDIFF('2011-08-17','2011-08-08');
+Trả về: 9 days
+
+
+SELECT DATEDIFF('2011-08-08','2011-08-17');
+Trả về: 9 days</code></pre>
+    <p>
+      Ví dụ: Để tính toán số ngày còn lại giữa ngày vận chuyển và ngày yêu cầu
+      để trong đơn đặt hàng, chúng ta sử dụng DATEDIFF như sau:
+    </p>
+    <pre><code>SELECT orderNumber, DATEDIFF(requiredDate,shippedDate) AS daysLeft
+FROM orders
+ORDER BY daysLeft DESC;</code></pre>
+    <h4 id="bai-5-7">7. Hàm ADDDATE</h4>
+    <p>
+      MySQL cũng hỗ trợ một số hàm xử lý ngày tháng khác như: ADDDATE, YEAR,
+      MONTH, DAY
+    </p>
+    <p>
+      Hàm ADDDATE: trả về một giá trị thời gian là kết quả của thao tác trên một
+      giá trị thời gian khác.
+    </p>
+    <p>Ví dụ: đưa ra ngày tháng sau ngày giờ hiện tại 30 ngày:</p>
+    <pre><code>SELECT ADDDATE(NOW(), INTERVAL 30 DAY);</code></pre>
+    <p>Sử dụng từ khóa DAY để chỉ giá trị sẽ cộng vào là ngày.</p>
+    <p>
+      Ví dụ: đưa ra các đơn đặt hàng trong khoảng 30 ngày tính từ ngày 1/5/2005
+    </p>
+    <pre><code>SELECT *
+FROM orders
+WHERE orderDate&gt;= '2005-5-1' AND orderDate &lt; ADDDATE('2005-
+5-1', INTERVAL 30 DAY);</code></pre>
+    <p>Kết quả truy vấn:</p>
+    <p>
+      Ví dụ: đưa ra các đơn đặt hàng tính từ trước ngày 1/5/2005, 30 ngày đến
+      ngày 1/5/2005
+    </p>
+    <pre><code>SELECT *
+FROM orders
+WHERE orderDate&lt;= '2005-5-1' AND orderDate &gt; ADDDATE('2005-
+5-1', INTERVAL -30 DAY);</code></pre>
+    <p>
+      Nếu thời gian cộng vào là tháng, năm thì từ khóa tương ứng được sử dụng là
+      MONTH, YEAR.
+    </p>
+    <p>Ví dụ trên có thể viết lại như sau</p>
+    <pre><code>SELECT *
+FROM orders
+WHERE orderDate&lt;= '2005-5-1' AND orderDate &gt; ADDDATE('2005-
+5-1', INTERVAL -1 MONTH);</code></pre>
+    <p>
+      Hàm EXTRACT: tách ra các giá trị như ngày, tháng, năm từ một giá trị có
+      kiểu thời gian. (chú ý có thể dùng hàm MONTH hoặc YEAR thay thế)
+    </p>
+    <p>Ví dụ: đưa ra tháng của một giá trị thời gian:</p>
+    <pre><code>SELECT MONTH('2004-12-31 23:59:59');
+SELECT YEAR('2004-12-31 23:59:59');</code></pre>
+    <p>Ví dụ: đưa ra các đơn hàng đặt năm 2005</p>
+    <pre><code>SELECT *
+FROM orders
+
+WHERE YEAR(orderDate) = 2005</code></pre>
+    <p>Ví dụ: đưa ra các đơn hàng đặt trong tháng 5 năm 2005</p>
+    <pre><code>SELECT *
+FROM orders
+WHERE YEAR(orderDate) = 2005 and MONTH(orderDate) = 5;</code></pre>
+    <p>
+      Chú ý: Để tối ưu truy vấn, không nên sử dụng các hàm trong mệnh đề WHERE,
+      viết lại truy vấn trên sử dụng Between
+    </p>
+    <h4 id="bai-5-bt">v Bài tập thực hành:</h4>
+    <ol>
+      <li>
+        Lấy ra 50 ký tự đầu tiên của phần mô tả sản phẩm, đặt tên là ‘Title of
+        products’, chuyển hết thành chữ in hoa.
+      </li>
+      <li>
+        Đưa ra mô tả về các nhân viên theo định dạng ‘Fullname, jobTitle.’
+      </li>
+      <li>Thay thế toàn bộ tên nhóm hàng ‘Cars’ thành ‘Automobiles’.</li>
+      <li>Tìm 5 đơn hàng được vận chuyển sớm nhất so với ngày hẹn.</li>
+      <li>
+        Đưa ra các đơn đặt hàng trong tháng 5 năm 2005 và có ngày chuyển hàng
+        đến chưa xác định.
+      </li>
+      <li>
+        Sử dụng hàm IF hoặc để phân loại khách hàng VIP, Regular theo hạn mức
+        tín dụng (creditLimit), ví dụ nếu hạn mức trên 100000 là khách hàng VIP
+      </li>
+    </ol>
+    <hr />
+    <h2 id="bai-6">Bài thực hành số 6</h2>
+    <h3>Truy vấn nhóm</h3>
+    <h4>
+      v Nội dung chính: Trong bài này, chúng ta sẽ làm quen với các hàm nhóm và
+      truy vấn nhóm:
+    </h4>
+    <ul>
+      <li>Các hàm nhóm: SUM, AVG, MAX và MIN, COUNT, GROUP_CONCAT</li>
+      <li>Mệnh đề GROUP BY</li>
+      <li>Mệnh đề HAVING</li>
+    </ul>
+    <h4 id="bai-6-1">1. Các hàm nhóm</h4>
+    <p><strong>Hàm SUM</strong></p>
+    <p>
+      Đôi khi các thông tin chúng ta cần không được lưu trữ thực sự trong các
+      bảng cơ sở dữ liệu, nhưng chúng ta có thể lấy được chúng bằng cách tính
+      toán từ dữ liệu được lưu trữ. Ví dụ, chúng ta có bảng OrderDetails để lưu
+      trữ thông tin về các đơn đặt hàng. Khi chúng ta nhìn vào đó, chúng ta
+      không biết tổng số tiền của tất cả các sản phẩm bán được là bao nhiêu. Tuy
+      nhiên, hàm tính tổng SUM có thể giúp chúng ta trả lời câu hỏi này. Trước
+      hết chúng ta xem hoạt động của hàm SUM, việc thực hiện nhóm dữ liệu sẽ
+      trình bày trong phần 2
+    </p>
+    <p>Ví dụ: Tính tổng số lượng hàng hóa hiện còn trong kho</p>
+    <pre><code>SELECT sum(quantityInStock) FROM products</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Hoặc để tính tổng số tiền chúng ta đã thu được từ đầu tới giờ, viết truy
+      vấn như sau:
+    </p>
+    <pre><code>SELECT sum(priceEach * quantityOrdered) total
+FROM orderdetails</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p><strong>Hàm AVG</strong></p>
+    <p>
+      AVG được sử dụng để tính giá trị trung bình của một biểu thức, Nó không
+      chấp nhận giá trị NULL. Chúng ta có thể sử dụng AVG để tính toán giá trung
+      bình của tất cả các sản phẩm đã mua như sau:
+    </p>
+    <pre><code>SELECT AVG(buyPrice) average_buy_price
+FROM Products</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p><strong>Hàm MAX và MIN</strong></p>
+    <p>
+      Hàm MAX trả về giá trị lớn nhất và hàm MIN trả về giá trị nhỏ nhất của một
+      tập các giá trị.
+    </p>
+    <pre><code>MAX(expression)
+MIN(expression)</code></pre>
+    <p>
+      Ví dụ: Sử dụng MAX và MIN để lấy ra mức giá cao nhất và mức giá nhỏ nhất
+      của sản phẩm.
+    </p>
+    <pre><code>SELECT MAX(buyPrice) highest_price,
+                 MIN(buyPrice) lowest_price
+FROM Products</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p><strong>Hàm COUNT</strong></p>
+    <p>
+      Hàm COUNT là hàm đếm số lượng, chẳng hạn chúng ta có thể đếm số lượng sản
+      phẩm đang được bán như sau:
+    </p>
+    <pre><code>SELECT COUNT(*) AS Total
+FROM products</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Lưu ý: một phiên bản khác của hàm COUNT sử dụng tham số là tên cột. Nếu
+      cách này được sử dụng, sẽ chỉ đếm các dòng mà giá trị tại cột đó là khác
+      NULL.
+    </p>
+    <h4 id="bai-6-2">2. Mệnh đề nhóm GROUP BY</h4>
+    <p>
+      Mệnh đề GROUP BY được sử dụng để gộp các bản ghi có cùng giá trị tại một
+      hay nhiều cột, thành một tập hợp. GROUP BY nếu có thì nó phải đứng sau
+      mệnh đề WHERE hoặc FROM. Theo sau từ khoá GROUP BY là một danh sách các
+      biểu thức, phân cách nhau bởi dấu phẩy.
+    </p>
+    <pre><code>SELECT col1_,col_2,... col_n, các hàm nhóm(biểu thức)
+FROM tên bảng
+WHERE điều kiện
+GROUP BY col_1, col_2, ... col_n
+ORDER BY danh sách cột</code></pre>
+    <p>
+      Theo định nghĩa, hàm nhóm cho phép chúng ta thực hiện một phép tính trên
+      một tập bản ghi và trả về một giá trị. Hàm nhóm bỏ qua các giá trị null
+      khi thực hiện tính toán, ngoại trừ hàm COUNT. Hàm nhóm thường được sử dụng
+      với mệnh đề GROUP BY của câu lệnh SELECT.
+    </p>
+    <p>
+      Trong ví dụ minh họa trên, khi thực hiện GROUP BY Name sẽ tạo thành 3 nhóm
+      là: A, B và nhóm C. Phép toán SUM(value) sẽ thực hiện phép tính tổng trên
+      từng nhóm
+    </p>
+    <p>
+      Ví dụ: muốn biết có bao nhiêu đơn đặt hàng trong từng nhóm trạng thái, có
+      thể sử dụng hàm COUNT như sau:
+    </p>
+    <pre><code>SELECT status, count(*)
+FROM orders
+GROUP BY status</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Ví dụ: muốn biết có bao nhiêu loại sản phẩm trong mỗi loại dòng sản phẩm
+    </p>
+    <pre><code>SELECT productLine, count(*)
+FROM products
+GROUP BY productline</code></pre>
+    <p>
+      Ví dụ: Để có được tổng số tiền cho mỗi sản phẩm đã bán, chúng ta chỉ cần
+      sử dụng chức năng SUM và nhóm sản phẩm. Dưới đây là truy vấn:
+    </p>
+    <pre><code>SELECT productCode,sum(priceEach * quantityOrdered) total
+FROM orderdetails
+GROUP by productCode</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Ví dụ: Giả sử chúng ta muốn xem các kết quả của truy vấn trên, hiển thị
+      theo thứ tự tăng dần chúng ta làm như sau:
+    </p>
+    <pre><code>SELECT productCode,sum(priceEach * quantityOrdered) total
+FROM orderdetails
+GROUP by productCode
+ORDER BY total DESC</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>Lưu ý: sự khác nhau giữa GROUP BY trong MySQL và ANSI SQL</p>
+    <p>
+      MySQL tuân theo chuẩn ANSI SQL. Tuy nhiên, có 2 sự khác biệt khi sử dụng
+      GROUP BY trong MySQL như sau:
+    </p>
+    <ul>
+      <li>
+        Trong ANSI SQL, phải thực hiện GROUP BY tất cả các cột xuất hiện trong
+        mệnh đề SELECT. MySQL không đòi hỏi như vậy, có thể đưa thêm các cột vào
+        trong mệnh đề SELECT và không bắt buộc chúng phải xuất hiện ở mệnh đề
+        GROUP BY.
+      </li>
+      <li>
+        MySQL cũng cho phép sắp xếp các nhóm theo thứ tự các kết quả tính toán,
+        mặc định là giảm dần.
+      </li>
+    </ul>
+    <h4 id="bai-6-3">3. Mệnh đề điều kiện HAVING</h4>
+    <p>
+      HAVING cũng là một mệnh đề có thể xuất hiện hoặc không trong mệnh đề
+      SELECT. Nó chỉ ra một điều kiệ lọc trên dữ liệu là một nhóm các bản ghi
+      hoặc là kết quả của việc thực hiện hàm nhóm. HAVING thường được sử dụng
+      cùng với GROUP BY, khi đó điều kiện lọc chỉ được áp dụng trên các cột xuất
+      hiện trong mệnh đề GROUP BY mà thôi. Nếu HAVING không di kèm với GROUP BY,
+      khi đó nó có ý nghĩa như WHERE mà thôi. Lưu ý rằng, HAVING áp dụng trên
+      các nhóm bản ghi, còn WHERE áp dụng trên từng bản ghi riêng lẻ.
+    </p>
+    <p>
+      Ví dụ: Chúng ta sử dụng mệnh đề GROUP BY để có được tất cả các đơn đặt
+      hàng, số lượng các mặt hàng bán ra và tổng giá trị trong mỗi đơn đặt hàng
+      như sau:
+    </p>
+    <pre><code>SELECT ordernumber,
+       sum(quantityOrdered) AS itemsCount,
+       sum(priceEach * quantityOrdered) AS total
+FROM orderdetails
+GROUP BY ordernumber</code></pre>
+    <p>
+      Bây giờ, có thể yêu cầu hiển thị chỉ những đơn hàng có tổng giá trị lớn
+      hơn $1000 bằng cách sử dụng HAVING như sau:
+    </p>
+    <pre><code>SELECT ordernumber,
+       sum(quantityOrdered) AS itemsCount,
+       sum(priceEach * quantityOrdered) AS total
+FROM orderdetails
+GROUP BY ordernumber
+HAVING total &gt; 1000</code></pre>
+    <p>
+      Chúng ta sử dụng bí danh cho cột sum (priceEach * quantityOrdered) là
+      total, như vậy trong mệnh đề HAVING, chúng ta chỉ cần dùng bí danh đó thay
+      vì Gõ sum( priceeach) một lần nữa.
+    </p>
+    <p>
+      Có thể sử dụng một điều kiện kết hợp trong mệnh đề HAVING với các toán tử
+      OR, AND.
+    </p>
+    <p>
+      Ví dụ: nếu muốn biết những đơn hàng có tổng giá trị lớn hơn $ 1000 và có
+      hơn 600 mặt hàng trong đó, có thể sử dụng truy vấn sau đây:
+    </p>
+    <pre><code>SELECT ordernumber,
+      sum(quantityOrdered) AS itemsCount,
+      sum(priceeach) AS total
+FROM orderdetails
+GROUP BY ordernumber
+HAVING total &gt; 1000 AND itemsCount &gt; 600</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <h4 id="bai-6-bt">v Bài tập thực hành</h4>
+    <ol>
+      <li>
+        Đưa ra tên các thành phố và số lượng khách hàng tại từng thành phố.
+      </li>
+      <li>
+        Đưa ra tổng số đơn hàng của mỗi tháng trong năm 2005, sắp xếp theo thứ
+        tự giảm dần của tổng số đơn hàng.
+      </li>
+      <li>Đưa ra 10 mã đơn đặt hàng có giá trị lớn nhất.</li>
+      <li>
+        Đưa ra mã nhóm hàng và tổng số lượng hàng hoá còn trong kho của nhóm
+        hàng đó.
+      </li>
+    </ol>
+    <ol start="5">
+      <li>
+        Đưa ra danh sách gồm mã nhân viên kèm theo danh sách tên khách hàng của
+        mã nhân viên (gợi ý: sử dụng hàm GROUP_CONCAT)
+      </li>
+      <li>Đưa ra mã khách hàng và tổng số tiền khách đã đó trả.</li>
+      <li>
+        Viết 1 truy vấn, đưa ra số lượng đơn đã chuyển và đã hủy trong mỗi tháng
+        trong năm 2025
+      </li>
+    </ol>
+    <hr />
+    <h2 id="bai-7">Bài thực hành số 7</h2>
+    <h3>Các phép nối bảng dữ liệu</h3>
+    <h4>
+      v Nội dung chính: Trong các bài thực hành trước, các truy vấn được thực
+      hiện trên một bảng dữ liệu. Không ngạc nhiên khi rất nhiều truy vấn yêu
+      cầu thông tin từ nhiều bảng dữ liệu khác nhau. Ví dụ muốn đưa ra thông tin
+      khách hàng của các đơn hàng, cần kết hợp thông tin từ hai bảng dữ liệu là
+      customers và orders. Kết hợp các bảng dữ liệu để tạo ra một bảng suy diễn
+      được gọi là phép nối (join). Trong bài này, chúng ta sẽ làm quen với phép
+      toán nối để truy vấn dữ liệu từ nhiều bảng: INNER JOIN, LEFT JOIN, SELF
+      JOIN
+    </h4>
+    <h4 id="bai-7-1">1. PHÉP NỐI TRONG (INNER JOIN)</h4>
+    <p>
+      INNER JOIN hay còn gọi là phép nối trong, là một phần tùy chọn của câu
+      lệnh SELECT. Nó xuất hiện liền ngay sau mệnh đề FROM. Trước khi sử dụng
+      INNER JOIN, phải xác định rõ các tiêu chí sau đây:
+    </p>
+    <ul>
+      <li>
+        Trước tiên, cần phải xác định các bảng mà muốn liên kết với bảng chính.
+        Bảng chính xuất hiện trong mệnh đề FROM. Bảng muốn nối với bảng chính
+        phải xuất hiện sau từ khóa INNER JOIN. Về mặt lý thuyết, có thể nối một
+        bảng với số lượng không giới hạn các bảng khác, tuy nhiên, để có hiệu
+        suất tốt hơn, nên hạn chế số lượng bảng tham gia phép nối dựa trên các
+        điều kiện nối và khối lượng dữ liệu trong các bảng.
+      </li>
+      <li>
+        Thứ hai, cần phải xác định điều kiện nối. Điều kiện nối xuất hiện sau từ
+        khóa ON. Điều kiện nối chính là nguyên tắc để tìm được các bản ghi phù
+        hợp trong các bảng và nối chúng lại với nhau.
+      </li>
+    </ul>
+    <p>Cú pháp INNER JOIN như sau:</p>
+    <pre><code>SELECT column_list
+       FROM table1
+       INNER JOIN table2 ON join_condition1
+       INNER JOIN table3 ON join_condition2
+       ...
+       WHERE WHERE_conditions;</code></pre>
+    <p>
+      Ví dụ, nếu nối hai bảng A và B, INNER JOIN so sánh mỗi bản ghi của bảng A
+      với mỗi bản ghi của bảng B để tìm tất cả các cặp bản ghi đáp ứng được điều
+      kiện nối. Khi điều kiện nối được thoả mãn, giá trị cột cho mỗi cặp bản ghi
+      phù hợp của bảng A và bảng B được kết hợp thành một bản ghi trong kết quả
+      trả về.
+    </p>
+    <p>
+      Hạn chế sự trùng tên cột khi sử dụng INNER JOIN: Nếu nối nhiều bảng có cột
+      với tên tương tự, phải chỉ rõ tên bảng có chứa cột dữ liệu định lấy để
+      tránh lỗi cột không rõ ràng. Giả sử nếu bảng tbl_A và tbl_B có các cột
+      tương tự M . Trong câu lệnh SELECT với INNER JOIN, phải tham chiếu tới cột
+      M bằng cách sử dụng cú pháp như tbl_A.M .
+    </p>
+    <p>
+      Ví dụ: Hãy xem xét hai bảng products và orderDetails. Bảng products là
+      bảng dữ liệu tổng thể lưu trữ tất cả các sản phẩm. Bất cứ khi nào một sản
+      phẩm được bán ra, nó được lưu trữ trong bảng OrderDetails cùng với các
+      thông tin khác. Liên kết giữa các bảng này là cột productCode
+    </p>
+    <p>
+      Ví dụ: muốn biết những sản phẩm đã được bán, có thể sử dụng INNER JOIN như
+      sau:
+    </p>
+    <pre><code>SELECT products.productCode, products.productName,
+orderDetails.orderNumber
+FROM products
+INNER JOIN orderDetails on products.productCode =
+orderDetails.productCode;</code></pre>
+    <p>
+      INNER JOIN so sánh từng dòng trong bảng products và OrderDetails để tìm
+      một cặp bản ghi có cùng productCode. Nếu một cặp bản ghi có cùng mã sản
+      phẩm, khi đó tên sản phẩm và số thứ tự cũng sẽ được kết hợp thành một hàng
+      để trả lại kết quả. (Chú ý: Số lượng dòng trong kết quả trả về của phép
+      nối trên là số lượng dòng của bảng orderdetails ?)
+    </p>
+    <p>
+      Bí danh (Alias): có thể tạo bí danh của bảng tbl_A là A và tham chiếu đến
+      cột M là A.M , như vậy không mất công gõ lại tên bảng nữa. Ví dụ trên có
+      thể viết lại như sau:
+    </p>
+    <pre><code>SELECT p.productCode, p.productName, o.orderNumber
+FROM products p
+INNER JOIN orderDetails o on p.productCode = o.productCode;</code></pre>
+    <p>
+      Lưu ý: Bên cạnh phép nối trong sử dụng mệnh đề INNER JOIN .. ON, có thể
+      nối trong hai bảng bằng cách đưa điều kiện nối vào mệnh đề WHERE. Ví dụ
+      trên có thể viết lại như sau:
+    </p>
+    <pre><code>SELECT p.productCode, p.productName, o.orderNumber
+FROM products p, orderDetails o
+WHERE p.productCode = o.productCode;</code></pre>
+    <p>Xem xét một số ví dụ khác sử dụng phép nối dưới đây:</p>
+    <p>
+      Ví dụ: Bảng Employees là bảng lưu giữ thông tin về các nhân viên của công
+      ty; bảng Customers là bảng lưu giữ thông tin của các khách hàng, trong đó
+      có thông tin liên quan đến mã số của nhân viên chăm sóc khách hàng. Như
+      vậy liên kết giữa hai bảng này được thực hiện thông qua cột employeeNumber
+      của bảng Employees và cột salesRep employeeNumber của bảng Customers.
+    </p>
+    <p>
+      Để biết thông tin về khách hàng và tên nhân viên chăm sóc khách hàng đó,
+      có thể viết truy vấn sử dụng INNER JOIN như sau:
+    </p>
+    <pre><code>SELECT customerName, firstname as EmployeeName
+FROM customers C inner join employees E
+on C.salesrepemployeenumber = e.employeenumber</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Ví dụ: Đưa ra thông tin về các dòng sản phẩm và tổng số hàng có trong dòng
+      sản phẩm đó.
+    </p>
+    <pre><code>SELECT pl.productLine, pl.textDescription,
+sum(quantityInStock)
+FROM productlines pl JOIN products p ON pl.productLine
+=p.productLine
+GROUP by pl.productLine;</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Ví dụ: Đưa ra thông tin về các sản phẩm và tổng giá trị đã đặt hàng cho
+      sản phẩm
+    </p>
+    <pre><code>SELECT P.productCode,
+                 P.productName,
+                 SUM(priceEach * quantityOrdered) total
+FROM orderdetails O
+INNER JOIN products P ON O.productCode = P.productCode
+GROUP by productCode
+ORDER BY total</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Bên cạnh phép nối hai bảng dữ liệu, ta có thể nối nhiều bảng dữ liệu trong
+      cùng một câu lệnh SELECT.
+    </p>
+    <p>
+      Ví dụ: Đưa ra tên các khách hàng và tổng giá trị các đơn hàng của các
+      khách hàng đó.
+    </p>
+    <pre><code>SELECT C.customerName, sum(OD.priceEach*OD.quantityOrdered)
+as total
+FROM customers C
+INNER JOIN orders O on C.customerNumber = O.customerNumber
+INNER JOIN orderdetails OD on O.orderNumber =
+OD.orderNumber
+GROUP BY C.customerName</code></pre>
+    <p>
+      Như trong ví dụ trên thông tin cần kết hợp từ ba bảng dữ liệu: customers,
+      orders và orderdetails.
+    </p>
+    <p>
+      Ví dụ: Đưa ra các đơn hàng, tên các khách hàng và tổng giá trị của đơn
+      hàng đó.
+    </p>
+    <pre><code>SELECT O.orderNumber,C.customerName,
+sum(OD.priceEach*OD.quantityOrdered) as total
+FROM customers C
+INNER JOIN orders O on C.customerNumber = O.customerNumber
+INNER JOIN orderdetails OD on O.orderNumber =
+OD.orderNumber
+GROUP BY O.orderNumber;</code></pre>
+    <h4 id="bai-7-2">2. PHÉP NỐI TRÁI (LEFT JOIN)</h4>
+    <p>
+      LEFT JOIN cũng là một tùy chọn của câu lệnh SELECT cho phép lấy thêm dữ
+      liệu từ các bảng khác. LEFT JOIN bao gồm các từ khóa LEFT JOIN, tiếp theo
+      là bảng thứ 2 muốn thực hiện nối. Yếu tố tiếp theo là từ khóa ON và theo
+      sau bởi các điều kiện nối.
+    </p>
+    <p>
+      Mệnh đề LEFT JOIN sẽ được thực hiện như sau: khi một hàng từ bảng bên trái
+      phù hợp với một hàng từ bảng bên phải dựa trên điều kiện nối, nội dung của
+      hàng đó sẽ được lựa chọn như một dòng trong kết quả đầu ra. Khi một hàng
+      trong bảng bên trái không tìm được hàng nào phù hợp trong bảng nối, nó vẫn
+      được xuất hiện trong kết quả đầu ra, nhưng kết hợp với một hàng "giả" từ
+      bảng bên phải với giá trị NULL cho tất cả các cột. Tóm lại, LEFT JOIN cho
+      phép chọn tất cả các hàng từ bảng bên trái ngay cả khi không có bản ghi
+      nào phù hợp với nó trong bảng bên phải.
+    </p>
+    <p>Ví dụ: sử dụng LEFT JOIN</p>
+    <p>
+      Chúng ta hãy xét vào hai bảng customers và orders. Nếu muốn biết một khách
+      hàng với hoá đơn nào đó của họ và tình trạng hoá đơn đó thế nào, có thể sử
+      dụng MySQL LEFT JOIN như sau:
+    </p>
+    <pre><code>SELECT c.customerNumber, customerName,orderNUmber, o.status
+FROM customers c
+LEFT JOIN orders o ON c.customerNumber = o.customerNumber;</code></pre>
+    <p>
+      Ở bảng kết quả trên, có thể nhìn thấy tất cả các khách hàng được liệt kê.
+      Tuy nhiên, có những bản ghi có thông tin khách hàng nhưng tất cả các thông
+      tin về đơn hàng là NULL. Điều này có nghĩa là những khách hàng này không
+      có bất kỳ một đơn đặt hàng nào được lưu trong cơ sở dữ liệu của chúng ta.
+    </p>
+    <p>
+      LEFT JOIN rất hữu ích khi muốn tìm các bản ghi trong bảng bên trái mà
+      không phù hợp với bất kỳ một bản ghi nào trong bảng bên phải. có thể thực
+      hiện điều này bằng cách thêm một mệnh đề WHERE để lựa chọn các hàng chỉ có
+      giá trị NULL trong một cột ở bảng bên phải . Vì vậy, để tìm thấy tất cả
+      các khách hàng không có bất kỳ đơn đặt hàng nào trong cơ sở dữ liệu của
+      chúng ta, có thể sử dụng LEFT JOIN như sau:
+    </p>
+    <pre><code>SELECT c.customerNumber, customerName, orderNumber,
+o.status
+FROM customers c
+LEFT JOIN orders o ON c.customerNumber = o.customerNumber
+WHERE orderNumber is NULL</code></pre>
+    <p>Kết quả trả về như sau:</p>
+    <p>
+      Như vậy, truy vấn chỉ trả về các khách hàng mà không có bất kỳ đơn hàng
+      nào nhờ vào các giá trị NULL. Tương tự như vậy, để tìm ra những nhân viên
+      không làm nhiệm vụ chăm sóc khách hàng, bước đầu, thực hiện truy vấn như
+      sau:
+    </p>
+    <pre><code>Select * from employees e
+left join customers c
+on e.employeenumber=c.salesrepemployeenumber</code></pre>
+    <p>
+      Sau đó lọc ra những bản ghi nhận giá trị null tại cột customerNumber, đó
+      chính là kết quả của truy vấn.
+    </p>
+    <pre><code>Select * from employees e
+left join customers c
+on e.employeenumber=c.salesrepemployeenumber
+where customerNumber is null</code></pre>
+    <h4 id="bai-7-3">3. PHÉP TỰ NỐI (Self Join)</h4>
+    <p>
+      Một phép tự nối là một kiểu nối trong đó một bảng được nối với chính nó,
+      cụ thể khi một bảng có một khóa ngoài tham chiếu tới khóa chính của nó.
+    </p>
+    <p>
+      Ví dụ: Bảng employees có một khóa ngoài là reportsTo tham chiếu tới khóa
+      chính employeeNumber của chính bảng employees.
+    </p>
+    <p>
+      Cần thiết phải sử dụng bí danh cho mỗi bản sao của bảng đó để tránh nhập
+      nhằng.
+    </p>
+    <p>
+      Truy vấn: đưa ra danh sách nhân viên cùng với tên và email người quản lý
+    </p>
+    <pre><code>SELECT concat (e1.lastName ," ",e1.firstName) as fullname,
+e1.email, concat (e2.lastName ," ",e2.firstName) as
+manager, e2.email
+FROM employees e1 LEFT JOIN employees e2
+ON e1.reportsTo = e2.employeeNumber;
+</code></pre>
+    <p>
+      Trong truy vấn trên e1 đại diện cho bảng nhân viên, e2 sẽ chứa thông tin
+      về người quản lý (So sánh kết quả trên nếu thay LEFT JOIN bằng INNER JOIN)
+    </p>
+    <p>Kết quả trả về như sau:</p>
+    <h4 id="bai-7-bt">v Bài tập thực hành:</h4>
+    <ol>
+      <li>Đưa ra danh sách các nhân viên và tên văn phòng nơi họ làm việc.</li>
+      <li>Đưa ra danh sách các mặt hàng chưa có ai đặt mua.</li>
+      <li>
+        Đưa ra danh sách các đơn hàng trong tháng 3/2003 (gồm orderDate,
+        requiredDate, Status) và tổng giá trị tiền của đơn hàng.
+      </li>
+      <li>
+        Đưa ra danh sách các dòng sản phẩm và số lượng sản phẩm của dòng sản
+        phẩm đó. Sắp xếp theo thứ tự số lượng giảm dần.
+      </li>
+      <li>Đưa ra danh sách các khách hàng và số tiền hàng họ đã mua</li>
+      <li>
+        Đưa ra danh sách các nhân viên và tổng số tiền hàng của các khách hàng
+        mà họ chăm sóc trong năm 2003, sắp xếp theo thứ tự tổng giảm dần
+      </li>
+    </ol>
+    <hr />
+    <h2 id="bai-8">Bài thực hành số 8</h2>
+    <h3>Truy vấn con (Subquery)</h3>
+    <h4>v Nội dung chính:</h4>
+    <ul>
+      <li>Khái niệm và sử dụng truy vấn con</li>
+      <li>Truy vấn con tương quan và không tương quan.</li>
+      <li>Sử dụng truy vấn con trong mệnh đề SELECT, WHERE, FROM</li>
+    </ul>
+    <h4 id="bai-8-1">1. Khái niệm truy vấn con</h4>
+    <p>
+      Để kết hợp các bảng dữ liệu với nhau, ngoài các phép nối và các toán tử
+      tập hợp, SQL cung cấp một cách khác để trả lại dữ liệu từ nhiều bảng gọi
+      là truy vấn con (subquery). Khi một câu lệnh SELECT được sử dụng trong một
+      câu lệnh khác, câu lệnh SELECT bên trong được gọi là truy vấn con
+      (subquery), cách gọi khác là truy vấn lồng (nested query), truy vấn trong
+      (inner query). Cơ bản một truy vấn con có thể được sử dụng ở bất cứ nơi
+      đâu mà một biểu thức có thể được sử dụng.
+    </p>
+    <p>Ví dụ: Đưa ra các đơn hàng gần đây nhất</p>
+    <pre><code>SELECT * FROM orders
+WHERE orderDate = (SELECT MAX(orderDate) FROM orders)</code></pre>
+    <p>
+      Truy vấn con SELECT MAX(orderDate) FROM orders trả lại ngày gần đây nhất
+      trong các đơn hàng và giá trị này sẽ được sử dụng trong mệnh đề WHERE của
+      truy vấn ngoài. Kết hợp hai truy vấn trên sẽ trả lại danh sách các đơn
+      hàng của ngày gần nhất.
+    </p>
+    <p>
+      Truy vấn con được chia làm hai loại: truy vấn con không tương quan
+      (non-correlated) và truy vấn con có tương quan (correlated)
+    </p>
+    <h4 id="bai-8-2">2. Truy vấn con không tương quan</h4>
+    <p>
+      Một truy vấn con không tương quan là truy vấn con độc lập với truy vấn bên
+      ngoài. Truy vấn con không tương quan được thi hành thi hành đầu tiên và
+      một lần duy nhất cho toàn bộ câu lệnh. Kết quả của truy vấn con được điền
+      vào truy vấn bên ngoài, và cuối cùng thi hành truy vấn bên ngoài.
+    </p>
+    <p>
+      Ví dụ: đưa các các sản phẩm không có mặt trong bất kỳ một đơn hàng nào.
+    </p>
+    <pre><code>SELECT *
+FROM products
+WHERE productCode not in
+      (SELECT productCode
+      FROM orderdetails
+      )</code></pre>
+    <p>
+      Truy vấn con bên trong sẽ trả về các mã sản phẩm có trong bảng
+      orderdetails. Truy vấn bên ngoài sẽ trả về các sản phẩm có mã không trong
+      danh sách các mã sản phẩm đó.
+    </p>
+    <h4 id="bai-8-3">3. Truy vấn con tương quan</h4>
+    <p>
+      Truy vấn con tương quan không độc lập với truy vấn bên ngoài. Một truy vấn
+      con tương quan là một truy vấn con sử dụng các giá trị từ truy vấn bên
+      ngoài trong mệnh đề WHERE của nó. Quá trình thực hiện như sau: các truy
+      vấn bên ngoài được thực hiện trước tiên và sau đó thi hành truy vấn con
+      bên trong cho mỗi dòng kết quả của truy vấn bên ngoài.
+    </p>
+    <p>
+      Ví dụ: đưa ra các sản phẩm có số lượng trong kho lớn hơn trung bình số
+      lượng trong kho của các sản phẩm cùng loại.
+    </p>
+    <pre><code>SELECT * FROM products p
+WHERE quantityInStock &gt;
+      (SELECt avg(quantityInStock)
+      FROM products
+      WHERE productLine = p.productLine
+      )</code></pre>
+    <p>
+      Quá trình thực hiện truy vấn như sau: với mỗi dòng sản phẩm của truy vấn
+      bên ngoài, câu lệnh truy vấn bên trong sẽ tìm ra số lượng sản phẩm trung
+      bình của của sản phẩm cùng loại với sản phẩm đó và kết quả của truy vấn
+      con sẽ được đưa vào mệnh đề WHERE để kiểm tra.
+    </p>
+    <p>
+      Ví dụ: đưa ra các sản phẩm có mặt trong các đơn hàng, cách viết dưới đây
+      là một cách khác của ví dụ ở phần trước. Sử dụng toán tử EXISTS để kiểm
+      tra sự tồn tại.
+    </p>
+    <pre><code>SELECT * FROM products as p
+WHERE exists
+             (SELECT productCode
+FROM orderdetails
+WHERE productCode = p.productCode)</code></pre>
+    <h4 id="bai-8-4">4. Sử dụng truy vấn con</h4>
+    <p>
+      Ngoài sử dụng truy vấn con trong mệnh đề WHERE, truy vấn con còn có thể
+      được sử dụng trong danh sách các cột của câu lệnh SELECT hoặc trong mệnh
+      đề FROM.
+    </p>
+    <p>Ví dụ: với mỗi dòng đơn hàng, đưa vào thêm tên của sản phẩm.</p>
+    <pre><code>SELECT orderNumber, quantityOrdered,
+      (SELECT productName FROM products WHERE productCode =
+      o.productCode) as productName
+FROM orderdetails o</code></pre>
+    <p>
+      Trong ví dụ trên tên của sản phẩm là kết quả của truy vấn con trên bảng
+      products
+    </p>
+    <p>
+      Ví dụ: với mỗi sản phẩm, đưa kèm thêm tổng số lượng sản phẩm đó đã được
+      đặt hàng
+    </p>
+    <pre><code>SELECT productName,
+       (SELECT sum(quantityOrdered) FROM                    orderdetails WHERE
+       productCode = p.productCode) as totalQuantityOrderd
+FROM products as p
+ORDER BY totalQuantityOrderd desc</code></pre>
+    <p>
+      Trong ví dụ trên giá trị tổng số lượng được đặt là kết quả của truy vấn từ
+      bảng orderDetails
+    </p>
+    <h4 id="bai-8-bt">v Bài tập thực hành</h4>
+    <ol>
+      <li>
+        Sử dụng truy vấn con đưa ra các sản phẩm có đơn đặt hàng trong tháng
+        3/2005. So với cách dùng phép nối bảng thay vì sử dụng truy vấn con.
+      </li>
+      <li>
+        Sử dụng truy vấn con đưa ra các thông tin về các đơn hàng trong tháng
+        gần nhất (sử dụng thông tin từ bảng orders).
+      </li>
+      <li>
+        Sử dụng truy vấn con đưa ra thông tin về các đơn hàng và tổng giá trị
+        đơn hàng (sử dụng thông tin từ bảng orders và orderdetails). So sánh với
+        cách sử dụng phép nối bảng thay vì sử dụng truy vấn con.
+      </li>
+      <li>Tìm nhân viên quản lý nhiều khách hàng nhất</li>
+    </ol>
+    <ol start="5">
+      <li>
+        Tìm khách hàng có tổng số tiền thanh toán lớn hơn mức trung bình của tất
+        cả khách hàng
+      </li>
+      <li>
+        Đưa ra tên khách hàng và số tiền họ còn nợ. (Gợi ý: sử dụng 2 truy vấn
+        con tính các tổng riêng làm 2 bảng tạm, tiếp đến nối 2 bảng tạm)
+      </li>
+    </ol>
+    <hr />
+    <h2 id="bai-9">Bài thực hành số 9</h2>
+    <h3>Thêm, sửa, xóa dữ liệu trong bảng</h3>
+    <h4>v Nội dung: Các câu lệnh cập nhật dữ liệu</h4>
+    <ul>
+      <li>Lệnh INSERT</li>
+      <li>Câu lệnh UPDATE</li>
+      <li>Câu lệnh DELETE</li>
+    </ul>
+    <h4 id="bai-9-1">1. Câu lệnh INSERT</h4>
+    <p>
+      Câu lệnh INSERT cho phép thêm các dòng dữ liệu vào một bảng xác định. Có
+      hai biến thể của lệnh INSERT: cách thứ nhất là thêm một dòng giá trị, cách
+      thứ hai là thêm một tập các dòng trả về từ một câu lệnh SELECT.
+    </p>
+    <p><strong>Thêm một dòng giá trị</strong></p>
+    <pre><code>INSERT INTO table_name
+ [(column_name,...)]
+          VALUES((expression | DEFAULT),...),(...),...</code></pre>
+    <p>
+      INSERT tạo một dòng mới trong bảng &lt;table_name&gt; . Dòng mới chứa các
+      giá trị xác định bởi các biểu thức trong danh sách VALUES. Nếu column_name
+      không được đưa vào, thì trình tự các cột trong bảng &lt;table_name&gt;
+      được sử dung. Nếu column_name được đưa, theo cách này, dòng dữ liệu mới
+      được thêm vào bảng bằng cách xác định tên cột và dữ liệu cho mỗi cột.
+    </p>
+    <p>Ví dụ: thêm một bản ghi vào bảng offices</p>
+    <pre><code>INSERT INTO classicmodels.offices
+       (officeCode,
+       city,
+       phone,
+       addressLine1,
+       addressLine2,
+     state,
+     country,
+     postalCode,
+     territory
+     )
+     VALUES
+     ('8',
+     'Boston',
+     '+1 215 837 0825',
+     '1550 dummy street',
+     NULL,
+     'MA,
+     'USA',
+     '02107',
+     'NA'
+     )</code></pre>
+    <p>
+      Nếu giá trị chưa xác định có thể sử dụng từ khóa NULL. Sử dụng giá trị
+      ngầm định bằng từ khóa DEFAULT.
+    </p>
+    <p>Có thể kiểm tra kết quả của lệnh trên bằng câu lệnh truy vấn:</p>
+    <pre><code>SELECT * FROM classicmodels.offices</code></pre>
+    <p>Kết quả là một dòng dữ liệu mới được ghi vào cuối bảng dữ liệu</p>
+    <p>
+      Chú ý: Nếu không xác định tên các cột, khi trật tự của các cột thay đổi,
+      SQL có thể đưa giá trị vào sai vị trí. Do đó cách tốt để tránh điều này là
+      xác định tên cột đi kèm với dữ liệu khi thêm dữ liệu vào bảng.
+    </p>
+    <p><strong>Thêm nhiều dòng với lệnh SELECT</strong></p>
+    <p>
+      Ngoài ra thay vì cung cấp dữ liệu trực tiếp, có thể chọn từ các bảng khác
+      sử dụng câu lệnh SELECT.
+    </p>
+    <pre><code>INSERT INTO table_name
+          [(column_name,...)]
+          &lt;SELECT statement&gt;;</code></pre>
+    <p>
+      Không giống với cách trước, cách này cho phép tạo nhiều dòng dữ liệu với.
+      Danh sách các cột kết quả của lệnh SELECT phải trùng với danh sách các cột
+      của bảng. Cũng giống như cách trước, các cột không xác định sẽ được gán
+      giá trị ngầm ngậm của cột.
+    </p>
+    <p>Ví dụ: tạo một bảng tạm và thêm vào tất cả các offices tại US</p>
+    <pre><code>INSERT INTO temp_table
+SELECT * FROM classicmodels.offices WHERE country = 'USA'</code></pre>
+    <p>Có thể kiểm tra kết quả của lệnh trên bằng câu lệnh truy vấn:</p>
+    <pre><code>SELECT * FROM classicmodels.temp_table</code></pre>
+    <p><img src="https://i.imgur.com/a/Uvwxyza.png" alt="INSERT SELECT result" loading="lazy" /></p>
+    <h4 id="bai-9-2">2. Câu lệnh UPDATE</h4>
+    <p>
+      Câu lệnh UPDATE được sử dụng để cập nhật dữ liệu đã tồn tại trong các bảng
+      của CSDL. Câu lệnh có thể dùng để thay đổi các giá trị của một dòng, một
+      nhóm các dòng hoặc thậm chí tất cả các dòng trong một bảng. Cấu trúc của
+      câu lệnh UPDATE như sau:
+    </p>
+    <pre><code>UPDATE table_name [, table_name...]
+  SETcolumn_name1=expr1
+        [, column_name2=expr2 ...]
+ [WHERE condition]</code></pre>
+    <ul>
+      <li>
+        Sau từ khóa UPDATE là tên bảng muốn thay đổi dữ liệu. Mệnh đề SET xác
+        định cột thay đổi và giá trị thay đổi. Giá trị thay đổi có thể là giá
+        trị cố định, biểu thức hoặc thậm chí một truy vấn con.
+      </li>
+      <li>
+        Mệnh đề WHERE xác định các dòng của bảng sẽ được cập nhật. Nếu mệnh đề
+        WHERE bị bỏ qua, tất cả các dòng của bảng sẽ bị cập nhật.
+      </li>
+      <li>
+        Mệnh đề WHERE rất quan trọng, không nên bị bỏ qua. Nếu chỉ muốn thay đổi
+        một dòng của một bảng, nhưng quên mệnh đề WHERE sẽ cập nhật toàn bộ
+        bảng.
+      </li>
+      <li>
+        Nếu một câu lệnh UPDATE vi phạm bất cứ ràng buộc toàn vẹn nào, MySQL sẽ
+        không thực hiện cập nhật và đưa ra thông báo lỗi
+      </li>
+    </ul>
+    <p>
+      Ví dụ: Trong bảng employees, nếu muốn cập nhật email của Diane Murphy với
+      employeeNumber là 1002 thành diane-murphy @classicmodelcars.com,
+    </p>
+    <p>Thực hiện câu truy vấn sau:</p>
+    <pre><code>SELECT firstname,
+            lastname,
+            email
+ FROM employees
+ WHERE employeeNumber = 1002</code></pre>
+    <p>Kết quả đã cập nhật email mới diane-murphy@classicmodelcars.com</p>
+    <pre><code>UPDATE employees
+ SET email = 'diane-murphy @classicmodelcars.com'
+ WHERE employeeNumber = 1002</code></pre>
+    <p>
+      Thực hiện câu truy vấn SELECT lại, sẽ thấy email thay đổi giá trị mới:
+    </p>
+    <h4 id="bai-9-3">3. Câu lệnh DELETE</h4>
+    <p>Để xóa các dòng dữ liệu của một bảng CSDL, sử dụng câu lệnh DELETE.</p>
+    <p>Cấu trúc lệnh DELETE như sau:</p>
+    <pre><code>DELETE FROM table_name [WHERE conditions]</code></pre>
+    <ul>
+      <li>
+        Sau DELETE FROM là tên bảng muốn xóa các bản ghi. Mệnh đề WHERE xác định
+        điều kiện để giới hạn các dòng muốn loại bỏ. Nếu một bản ghi thỏa mãn
+        điều kiện WHERE sẽ bị loại bỏ khỏi bảng CSDL.
+      </li>
+      <li>
+        Nếu mệnh đề WHERE bị bỏ qua trong câu lệnh DELETE, tất cả các dòng của
+        bảng sẽ bị xóa. Để giảm sự nguy hiểm của các câu lệnh như DELETE hoặc
+        UPDATE, nên luôn luôn kiểm tra điều kiện WHERE trong một câu lệnh SELECT
+        trước khi thực hiện lệnh DELELE hoặc UPDATE.
+      </li>
+    </ul>
+    <p>
+      Ví dụ: Xóa tất cả các nhân viên trong văn phòng có mã officeNumber là 6,
+      thực hiện câu truy vấn sau:
+    </p>
+    <pre><code>DELETE
+ FROM employees
+ WHERE officeCode = 6</code></pre>
+    <p>
+      Thực hiện lại câu lệnh truy vấn trên bảng employees.Trong bảng không còn
+      các dòng có officeCode = 6
+    </p>
+    <p>Chú ý: Nếu loại bỏ điều kiện WHERE</p>
+    <pre><code>DELETE FROM employees</code></pre>
+    <p>
+      Sẽ xóa tất cả các dòng của bảng employees. Do đó cần chú ý điều kiện trong
+      mệnh đề WHERE khi thực hiện lệnh DELETE.
+    </p>
+    <p>MySQL cũng hỗ trợ xóa các bản ghi từ nhiều bảng khác nhau.</p>
+    <p>
+      Ví dụ: xóa tất cả các nhân viên (employee) làm việc cho văn phòng có mã
+      officecode 1 và cũng xóa cả văn phòng đó.
+    </p>
+    <pre><code>DELETE employees,offices
+ FROM employees,offices
+ WHERE employees.officeCode = offices.officeCode                         AND
+          offices.officeCode = 1
+</code></pre>
+    <p>
+      Sau khi thực hiện lệnh xóa dữ liệu trên, kiểm tra lại các bảng dữ liệu
+      Bảng employees không còn các dòng nhân viên có officeCode = 1
+    </p>
+    <p>Bảng offices không còn dòng có officeCode = 1</p>
+    <h4 id="bai-9-4">4. Cập nhật dữ liệu có ràng buộc</h4>
+    <p>
+      Giữa các bảng dữ liệu có thể tồn tại các ràng buộc, ví dụ ràng buộc khóa
+      ngoài giữa bảng products và productlines.
+    </p>
+    <p>
+      Nếu chúng ta xóa một dòng dữ liệu trong bảng productline mà vẫn còn tồn
+      tại các dòng dữ liệu trong bảng products tham chiếu tới dòng dữ liệu này,
+      ngầm định sẽ không được phép.
+    </p>
+    <p>Ví dụ: Xóa các dòng sản phẩm có mã là ‘Ships’</p>
+    <pre><code>DELETE FROM productlines
+WHERE productLine='Ships'</code></pre>
+    <p>
+      Sẽ hiện thông báo lỗi “Cannot delete or update a parent row: a foreign key
+      constraint fails (`classicmodels`.`products`, CONSTRAINT
+      `fk_products_productlines` FOREIGN KEY (`productLine`) REFERENCES
+      `productlines` (`productLine`) ON DELETE NO ACTION ON UPDATE NO ACTION)”
+    </p>
+    <p>
+      Nếu khai báo khóa ngoài với tùy chọn ON DELETE CASCADE, hệ thống sẽ tự
+      động xóa các dòng dữ liệu trong bảng products tham chiếu tới dòng dữ liệu
+      này.
+    </p>
+    <p>
+      Nếu khai báo khóa ngoài với tùy chọn ON DELETE SET NULL, thì khóa ngoài
+      productLine của các dòng tham chiếu sẽ được thiết lập là NULL.
+    </p>
+    <h4 id="bai-9-bt">v Bài tập thực hành</h4>
+    <ol>
+      <li>
+        Tạo một bảng đặt tên là temp_orderdetails, sau đó thực hiện thêm dữ liệu
+        trong ngày gần đây nhất từ bảng orderdetails vào bảng trên.
+      </li>
+      <li>
+        Sửa các nhân viên có titleJob là ‘Sales Rep’ thành ‘Sales
+        Representative’
+      </li>
+      <li>
+        Cập nhật hạn mức tín dụng của khách bằng 10000+tổng số tiền hàng khách
+        hàng đã mua
+      </li>
+      <li>Giảm giá sản phẩm 10% nếu tồn kho lớn, ngược lại tăng giá 5%</li>
+      <li>
+        Tìm cách thêm dữ liệu các dòng đơn hàng vào bảng orderdetails trước khi
+        thêm thông tin vào bảng đơn hàng.
+      </li>
+    </ol>
+    <hr />
+    <h2 id="bai-10">Bài thực hành số 10</h2>
+    <h3>Mô hình hóa CSDL sử dụng công cụ MySQL Workbench</h3>
+    <h4>v Nội dung chính:</h4>
+    <ul>
+      <li>Giới thiệu MySQL Workbench</li>
+      <li>Tạo mô hình EER</li>
+      <li>Tạo CSDL từ mô hình quan hệ thực thể EER và ngược lại</li>
+    </ul>
+    <h4 id="bai-10-1">1. Giới thiệu MySQL Workbench</h4>
+    <p>
+      MySQL Workbench cung cấp một công cụ đồ họa để làm việc với MySQL Server
+      và CSDL. MySQL Workbench cung cấp ba lĩnh vực chức năng chính:
+    </p>
+    <ul>
+      <li>
+        Phát triển SQL: giúp tạo và quản lý các kết nối tới các CSDL server,
+        cũng như cấu hình các tham số kết nối. MySQL Workbench cũng cung cấp khả
+        năng thi hành các truy vấn SQL trên các kết nối CSDL.
+      </li>
+      <li>
+        Mô hình hóa dữ liệu: Cho phép tạo các mô hình lược đồ CSDL một cách trực
+        quan. Cung cấp khả năng tạo lược đồ từ một CSDL có sẵn (reverse) hoặc
+        tạo CSDL từ lược đồ (forward). Chức năng Table Editor giúp dễ dàng sửa
+        đổi các bảng, cột, chỉ mục, phân mảnh..
+      </li>
+      <li>Quản trị Server: Giúp tạo và quản trị các MySQL server.</li>
+    </ul>
+    <p>MySQL Workbench được cung cấp trên các môi trường khác nhau:</p>
+    <ul>
+      <li>§ Windows</li>
+      <li>§ Linux</li>
+      <li>§ Mac OS X</li>
+    </ul>
+      Trên môi trường Windows, để chạy Workbench máy tính cần cài đặt .NET
+      framework
+    </p>
+    <p>Phần sau sẽ tập trung vào chức năng mô hình hóa dữ liệu</p>
+    <h4 id="bai-10-2">2. Tạo mô hình quan hệ thực thể EER</h4>
+    <p>Bước 1: Sử dụng chức năng Create new EER Model để tạo một mô hình mới</p>
+    <p>
+      Bước 2: Thêm một biểu đồ mới vào mô hình (chọn Model -&gt; Add Diagram)
+    </p>
+    <p>
+      Bước 3: Thêm các bảng yêu cầu vào biểu đồ mới tạo ở bước trước và sửa đổi
+      các bảng để đạt được các yêu cầu đã đặt ra.
+    </p>
+    <p>
+      Để thêm bảng vào mô hình, chọn vào biểu tượng được khoanh tròn như trong
+      hình dưới.
+    </p>
+    <p>Để sửa đổi bảng, chọn bảng và chọn chức năng Edit Table</p>
+    <p>
+      Ví dụ: sửa tên bảng mới tạo là film và bổ sung thêm các cột như hình vẽ
+      dưới
+    </p>
+    <ul>
+      <li>PK: chỉ thuộc tính là khóa chính</li>
+      <li>NN: giá trị không được để trống</li>
+      <li>UQ: ràng buộc giá trị là duy nhất</li>
+      <li>BIN: để chỉ giá trị lưu ở dạng nhị phân</li>
+      <li>UN: Unsigned chỉ thuộc tính lưu ở dạng không dấu</li>
+    </ul>
+    <ul>
+      <li>AI: Nếu giá trị thuộc tính là tự tăng</li>
+      <li>Default: Là giá trị ngầm định của cột</li>
+    </ul>
+    <p><strong>Tạo liên kết giữa các bảng</strong></p>
+    <p>
+      Công cụ hỗ trợ tạo các mối quan hệ giữa các bảng: gồm quan hệ 1-1, quan hệ
+      1-n, quan hệ n-m
+    </p>
+    <p>Chú ý: với quan hệ 1-n, công cụ cung cấp 3 tình huống tạo quan hệ:</p>
+    <ul>
+      <li>
+        Nếu lựa chọn biểu tượng nét đứt: một thuộc tính mới sẽ được tự động tạo
+        bên bảng tham chiếu để tham chiếu tới khóa chính của bảng được tham
+        chiếu, và thuộc tính mới tạo ra không phải là thuộc tính khóa chính của
+        bảng tham chiếu.
+      </li>
+      <li>
+        Nếu lựa chọn biểu tượng nét liền: một thuộc tính mới tương tự như trên
+        được tạo ra, khác biệt ở chỗ thuộc tính này có thuộc tính khóa chính của
+        bảng tham chiếu.
+      </li>
+      <li>
+        Nếu lựa chọn biểu tượng nét liền kèm bút: sẽ cho phép lựa chọn thuộc
+        tính có sẵn của bảng tham chiếu làm khóa ngoài tham chiếu tới khóa chính
+        của bảng được tham chiếu.
+      </li>
+    </ul>
+    <p>
+      Ví dụ: Tạo quan hệ 1-n giữa bảng language và bảng film đã tạo ở bước trên
+    </p>
+    <p>Bước 1: Chọn vào biểu tượng như hình vẽ dưới</p>
+    <p>
+      Bước 2: Click chuột vào bảng film, tiếp đó click chuột vào bảng language
+    </p>
+    <p>
+      Kết quả sẽ sinh ra ràng buộc khóa ngoài liên kết hai bảng film và
+      language. Chú ý: thuộc tính language_language_id sẽ được tự động sinh ra
+    </p>
+    <p>
+      Ngoài cách tạo liên kết khóa ngoài như trên, có thể tạo liên kết khóa
+      ngoài bằng cách
+    </p>
+    <ul>
+      <li>Chọn sửa đổi bảng tham chiếu</li>
+      <li>Chọn vào tab Foreign Keys như hình vẽ dưới đây:</li>
+    </ul>
+    <p>
+      Chú ý: Giao diện này ngoài tạo liên kết khóa ngoài còn hỗ trợ sửa đổi các
+      tùy chọn của khóa ngoài như ON UPDATE, ON DELETE.
+    </p>
+    <p>Ví dụ: Tạo liên kết n-m giữa hai bảng film và category</p>
+    <p>Bước 1: Chọn vào biểu tượng như hình vẽ dưới</p>
+    <p>Bước 2: Click chuột vào bảng film và sau đó là bảng category.</p>
+    <p>
+      Kết quả công cụ sẽ tự động sinh ra một bảng mới có tên film_has_category
+      có khóa chính là là tổ hợp từ khóa chính của hai bảng film và bảng
+      category.
+    </p>
+    <p>
+      Sau bước tạo trên, người sử dụng có thể sửa đổi bảng mới sinh theo nhu cầu
+      của mình.
+    </p>
+    <h4 id="bai-10-3">3. Tạo CSDL từ mô hình quan hệ thực thể EER</h4>
+    <p>
+      Để tạo cơ sở dữ liệu mới tên là my_classicmodels lưu vào MySQL từ mô hình
+      trên:
+    </p>
+    <p>Bước 1: Sử dụng chức năng Database -&gt; Forward Engineer</p>
+    <p>Bước 2: Chọn các đối tượng từ mô hình EER sẽ lưu vào CSDL</p>
+    <p>
+      Bước 3: Chọn kết nối tới MySQL server dùng để lưu trữ CSDL sẽ được tạo ra
+    </p>
+    <h4 id="bai-10-4">4. Đồng bộ hóa mô hình EER với CSDL trong MySQL Server</h4>
+    <p>
+      Trong quá trình phát triển, mô hình EER hoặc CSDL có sự thay đổi,
+      Workbench cung cấp chức năng hỗ trợ đồng bộ hóa các thay đổi giữa mô hình
+      EER và CSDL.
+    </p>
+    <p>
+      Ví dụ trên, mô hình EER được bổ sung bảng actor. Để tiến hành đồng bộ hóa,
+      thực hiện các bước sau:
+    </p>
+    <p>Bước 1: Chọn chức năng Database -&gt; Synchronize Model</p>
+    <p>Bước 2: Chọn kết nối tới MySQL server cần đồng bộ hóa</p>
+    <p>
+      Bước 3: Chọn CSDL muốn đồng bộ và đối tượng cần đồng bộ hóa giữa mô hình
+      EER và CSDL
+    </p>
+    <h4 id="bai-10-5">5. Tạo mô hình quan hệ thực thể EER từ CSDL có sẵn</h4>
+    <p>
+      Bên cạnh tạo mô hình quan hệ thực thể EER từ đầu, có thể tạo mô hình từ
+      một CSDL có sẵn, điều này có thể gặp khi cần phát triển tiếp trên một hệ
+      thống CSDL đã có sẵn. Chọn chức năng: “Create EER Model From Existing
+      Database”
+    </p>
+    <p>Hộp thoại tiếp theo sẽ chỉ ra Database server muốn kết nối đến</p>
+    <p>Bước tiếp theo chọn CSDL muốn sinh mô hình EER</p>
+    <p>
+      Workbench sẽ tạo ra một mô hình EER từ CSDL được chọn như hình dưới đây.
+      Lưu ý: giữa các bảng của mô hình chưa có liên kết do trong CSDL gốc, chưa
+      có liên kết giữa các bảng dữ liệu.
+    </p>
+    <h4 id="bai-10-bt">v Bài tập thực hành</h4>
+    <ol>
+      <li>
+        Tạo một mô hình mới tên là my_classicmodels gồm các bảng sau:
+        <p>Các ràng buộc khóa ngoài với tùy chọn ON UPDATE CASCADE</p>
+        <p>Các bảng sử dụng engine InnoDB.</p>
+        <p>Các khóa chính đều là kiểu số tự động tăng</p>
+        <p>
+          Dùng chức năng Forward Engine để tạo cơ sở dữ liệu đặt tên là
+          my_classicmodels
+        </p>
+      </li>
+      <li>
+        Bổ sung các bảng customers sau vào mô hình đã tạo ở câu 1
+      </li>
+    </ol>
+    <p>Bảng orders đã tạo ở câu 1 sẽ tham chiếu tới bảng customers</p>
+    <p>
+      Sau đó sử dụng chức năng đồng bộ hóa để đồng bộ mô hình với CSDL
+      my_classicmodels lưu trong MySQL Server.
+    </p>
+  </body>
+</html>

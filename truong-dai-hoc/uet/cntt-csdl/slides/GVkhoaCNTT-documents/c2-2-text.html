@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      Nội dung: Chương 2 (tt) - Mô hình EER - Cơ sở dữ liệu - StuShare
+    </title>
+    <meta
+      name="description"
+      content="Tài liệu slide chương 2 (phần 2) về Mô hình thực thể - liên kết mở rộng (EER). Nội dung bao gồm chuyên biệt hóa, tổng quát hóa, các ràng buộc và ví dụ."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://tcmanhh.github.io/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c2-2-viewer.html"
+    />
+
+    <!-- Tăng tốc load viewer -->
+    <link rel="preconnect" href="https://docs.google.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://lh3.googleusercontent.com"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="//docs.google.com" />
+    <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
+
+    <!-- Redirect an toàn: nhanh (~1s) nhưng vẫn cho Google render -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          location.replace("c2-2-viewer.html");
+        }, 300);
+      });
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="1;url=c2-2-viewer.html" />
+    </noscript>
+  </head>
+  <body>
+    <h1>Chương 2 (tiếp theo): Mô hình thực thể - Liên kết mở rộng (EER)</h1>
+    <p><em>Tác giả: Khoa CNTT</em></p>
+    <p>
+      <em>Người dùng sẽ được chuyển sang trang trình chiếu sau ít giây...</em>
+    </p>
+
+    <!-- BẮT BUỘC: chép đầy đủ TOÀN BỘ nội dung dưới đây vào các thẻ HTML phù hợp -->
+
+    <p>
+      Mô hình thực thể - liên kết (Entity-Relationship) do P.P Chen giới thiệu
+      năm 1976. Đây là mô hình dữ liệu quan niệm bậc cao hỗ trợ thiết kế CSDL,
+      sử dụng các khái niệm: thực thể, thuộc tính, các liên kết,...
+    </p>
+
+    <h2>Tại sao cần EER?</h2>
+    <p>
+      Các khái niệm cơ bản của ER không đủ để biểu diễn một số các ứng dụng phức
+      tạp. Cần thêm một số khái niệm để tăng khả năng mô tả đối tượng và mối
+      quan hệ rõ ràng và chính xác hơn.
+    </p>
+    <p>
+      Ví dụ: Thực thể NHANVIEN có thể bao gồm các loại khác nhau như: nhân viên
+      cơ hữu (hưởng lương tháng), nhân viên hưởng theo thời gian, kỹ sư, thư
+      kí,... Mô hình ER thông thường khó biểu diễn các mối quan hệ này.
+    </p>
+    <p>
+      Sơ đồ ví dụ: NHANVIEN là lớp cha của các lớp con COHUU, NV_THEO_TG, KYSU,
+      THUKI.
+    </p>
+
+    <h2>2.3 - Mô hình thực thể - Liên kết mở rộng (EER)</h2>
+    <p>
+      EER (Enhanced Entity-Relationship) là sự mở rộng của ER bằng cách thêm vào
+      một số các khái niệm trừu tượng (abstraction) và thể hiện các ràng buộc rõ
+      ràng hơn.
+    </p>
+
+    <h3>Một số khái niệm cơ bản của EER</h3>
+    <ul>
+      <li>Lớp cha/con</li>
+      <li>Chuyên biệt hóa và Tổng quát hóa</li>
+      <li>Các ràng buộc trên chuyên biệt hóa</li>
+      <li>Phân cấp chuyên biệt và lưới</li>
+      <li>Kiểu hợp (Union type)</li>
+    </ul>
+
+    <h3>Lớp cha/lớp con</h3>
+    <p>
+      <strong>Lớp cha (Superclass):</strong> là kiểu thực thể bao gồm các thực
+      thể mang đặc tính chung (tổng quát) cho các nhóm thực thể.
+    </p>
+    <p>
+      <strong>Lớp con (Subclass):</strong> là các thực thể thành viên của lớp
+      cha nhưng có vai trò riêng biệt (chuyên biệt). Một thực thể không thể tồn
+      tại chỉ trong vai trò của lớp con.
+    </p>
+    <p>
+      Ví dụ: SINHVIEN và GIAOVIEN là các lớp con của lớp cha NGUOI. Chúng đều có
+      các thuộc tính chung của NGUOI (maso, hoten, ngaysinh) nhưng có thêm các
+      thuộc tính riêng.
+    </p>
+    <p>
+      <strong>Tính kế thừa:</strong> Lớp con thừa kế thuộc tính và quan hệ của
+      lớp cha và có thể có một số thuộc tính và quan hệ của riêng nó. Lợi ích là
+      tránh mô tả các định nghĩa trùng lặp và thêm thông tin ngữ nghĩa.
+    </p>
+    <p>
+      Mối quan hệ giữa lớp cha và lớp con gọi là kiểu liên kết ISA (là một), là
+      liên kết 1:1. Ký hiệu bằng hình tam giác có chữ U ngược ().
+    </p>
+    <p>
+      Ví dụ: Lớp cha EMPLOYEE và các lớp con SECRETARY, TECHNICIAN, ENGINEER.
+      Các lớp con kế thừa các thuộc tính Fname, Lname, SSN, Addr từ EMPLOYEE và
+      có thêm thuộc tính riêng như TypingSpeed, TGrade, EngType.
+    </p>
+
+    <h3>Chuyên biệt hóa và Tổng quát hóa</h3>
+    <p>
+      <strong>Chuyên biệt hóa (Specialization):</strong> Là quá trình xác định
+      tập các kiểu thực thể lớp con của một kiểu thực thể (lớp cha), dựa trên
+      một số đặc tính riêng biệt. Đây là cách tiếp cận từ trên xuống (Top down).
+      Ví dụ: từ NHANVIEN chuyên biệt hóa thành KYSU, KETOAN, NV_KYTHUAT dựa trên
+      thuộc tính "Nghề nghiệp".
+    </p>
+    <p>
+      <strong>Tổng quát hóa (Generalization):</strong> Là quá trình xác định lớp
+      cha từ các lớp con có chung một số thuộc tính. Đây là cách tiếp cận từ
+      dưới lên (Bottom up). Ví dụ: từ CAR và TRUCK, tổng quát hóa thành lớp cha
+      VEHICLE.
+    </p>
+    <p>
+      Ví dụ: Sơ đồ minh họa quá trình tổng quát hóa từ CAR và TRUCK thành
+      VEHICLE, và quá trình cụ thể hóa (chuyên biệt hóa) từ VEHICLE thành CAR và
+      TRUCK.
+    </p>
+
+    <h3>Các ràng buộc trên chuyên biệt hóa</h3>
+    <h4>Ràng buộc rời rạc (Disjointness constraint)</h4>
+    <p>
+      Mô tả quan hệ giữa lớp cha và các lớp con. Các lớp con phải độc lập hoàn
+      toàn với nhau (một thực thể của lớp cha chỉ thuộc một lớp con). Ký hiệu
+      bởi chữ 'd' (disjoint) trong vòng tròn.
+    </p>
+    <p>
+      Ví dụ: Một EMPLOYEE có thể là SECRETARY, TECHNICIAN, hoặc ENGINEER (rời
+      rạc). Một EMPLOYEE cũng có thể là SALARIED_EMP hoặc HOURLY_EMP (rời rạc).
+    </p>
+
+    <h4>Ràng buộc chồng chéo (Overlapping constraint)</h4>
+    <p>
+      Cho biết các thực thể lớp con là không tách biệt (một thực thể có thể là
+      thành viên của nhiều lớp con). Ký hiệu bởi chữ 'o' (overlap) trong vòng
+      tròn. Ví dụ: một NGUOI có thể vừa là NHANVIEN, vừa là HOCVIEN.
+    </p>
+
+    <h4>Ràng buộc đầy đủ (Completeness constraint)</h4>
+    <ul>
+      <li>
+        <strong>Ràng buộc toàn bộ (Total):</strong> Tất cả các thực thể trong
+        lớp cha phải là thành viên của ít nhất một lớp con. Thể hiện bằng đường
+        nét đôi nối giữa lớp cha và vòng tròn chuyên biệt.
+      </li>
+      <li>
+        <strong>Ràng buộc từng phần (Partial):</strong> Cho phép một thực thể ở
+        lớp cha có thể không thuộc bất kỳ một lớp con nào. Thể hiện bằng đường
+        nét đơn.
+      </li>
+    </ul>
+    <p>
+      Có 4 khả năng kết hợp ràng buộc: Disjoint-total, Disjoint-partial,
+      Overlapping-total, Overlapping-partial.
+    </p>
+    <p>
+      Ví dụ: Chuyên biệt hóa từ EMPLOYEE thành SECRETARY, TECHNICIAN, ENGINEER
+      là từng phần (partial). Chuyên biệt hóa từ EMPLOYEE thành SALARIED_EMP,
+      HOURLY_EMP là toàn bộ (total).
+    </p>
+
+    <h3>Chuyên biệt phân cấp và lưới</h3>
+    <p>
+      Trong chuỗi quan hệ chuyên biệt, một lớp con có thể lại là lớp cha của lớp
+      khác.
+    </p>
+    <ul>
+      <li>
+        <strong>Phân cấp (Hierarchy):</strong> Một lớp con chỉ tham gia vào 1
+        liên kết lớp cha/con (thừa kế đơn).
+      </li>
+      <li>
+        <strong>Lưới (Lattice):</strong> Một lớp con có thể tham gia vào nhiều
+        hơn 1 liên kết cha/con (thừa kế bội).
+      </li>
+    </ul>
+    <p>
+      Lớp con không chỉ kế thừa thuộc tính của lớp cha trực tiếp mà còn kế thừa
+      thuộc tính của lớp bên trên (cha của lớp cha nó).
+    </p>
+
+    <h3>Kiểu hợp (Union type)</h3>
+    <p>
+      Dùng để mô tả quan hệ lớp con/cha của một lớp con với một tập các lớp cha.
+      Ví dụ: trong CSDL đăng ký xe, người sở hữu (OWNER) có thể là một PERSON,
+      một BANK, hoặc một COMPANY. OWNER là một kiểu hợp của 3 lớp cha này.
+    </p>
+    <p>
+      Ví dụ: Sơ đồ minh họa lớp con OWNER là hợp (union) của các lớp cha PERSON,
+      BANK, và COMPANY. OWNER có liên kết "Sở hữu" với thực thể VEHICLE.
+    </p>
+
+    <h2>Tóm tắt</h2>
+    <ul>
+      <li>Lý do ER cần mở rộng thành EER.</li>
+      <li>Các khái niệm chuyên biệt hóa và tổng quát hóa.</li>
+      <li>Cách thể hiện hệ thống phân cấp trên lược đồ EER.</li>
+      <li>Cách thể hiện các ràng buộc (rời rạc, chồng chéo, đầy đủ).</li>
+    </ul>
+
+    <h2>Bài tập</h2>
+    <p>
+      Xây dựng lược đồ EER cho cơ sở dữ liệu ĐAOTAO (xác định các thực thể, quan
+      hệ, ràng buộc) được mô tả như sau:
+    </p>
+    <ul>
+      <li>
+        Trường có nhiều khoa. Thông tin về Khoa gồm mã khoa, tên khoa, địa chỉ,
+        số điện thoại.
+      </li>
+      <li>
+        Mỗi Khoa quản lý nhiều môn học. Mỗi môn học gồm có tên môn học, mã số,
+        số tín chỉ.
+      </li>
+      <li>
+        Cán bộ của khoa có thể là Hành chính hoặc Giảng viên; Giảng viên có thể
+        là Cơ hữu hoặc trợ giảng (trợ giảng là học viên cao học).
+      </li>
+      <li>
+        Mỗi khoa có nhiều cán bộ làm việc, nhưng mỗi cán bộ chỉ làm việc cho một
+        khoa.
+      </li>
+      <li>Mỗi một khoa có một chủ nhiệm khoa, đó là một Giảng viên.</li>
+      <li>
+        Mỗi giáo viên có thể dạy nhiều nhất là 4 môn học và cũng có thể không
+        dạy môn học nào.
+      </li>
+      <li>
+        Học viên có thể là sinh viên ĐH hoặc cao học, mỗi học viên phải học
+        nhiều môn học.
+      </li>
+      <li>
+        Mỗi một khoa có nhiều học viên, mỗi học viên chỉ thuộc về một khoa.
+      </li>
+      <li>
+        Mỗi sinh viên đại học có một giáo viên hướng dẫn, một giáo viên có thể
+        hướng dẫn nhiều sinh viên.
+      </li>
+    </ul>
+
+    <h2>Tài liệu tham khảo</h2>
+    <ul>
+      <li>Giáo trình CSDL - Chương 2</li>
+      <li>Fundamentals of Database system - Chapter 4</li>
+    </ul>
+
+    <!-- QA (chỉ là comment, không hiển thị; phục vụ kiểm tra đủ mục):
+       - Tổng số ký tự (ước lượng) của nội dung body: 5500
+       - Danh sách tiêu đề (theo thứ tự): [H1: Chương 2 (tiếp theo): Mô hình thực thể - Liên kết mở rộng (EER)], [H2: Tại sao cần EER?], [H2: 2.3 - Mô hình thực thể - Liên kết mở rộng (EER)], [H3: Một số khái niệm cơ bản của EER], [H3: Lớp cha/lớp con], [H3: Chuyên biệt hóa và Tổng quát hóa], [H3: Các ràng buộc trên chuyên biệt hóa], [H4: Ràng buộc rời rạc (Disjointness constraint)], [H4: Ràng buộc chồng chéo (Overlapping constraint)], [H4: Ràng buộc đầy đủ (Completeness constraint)], [H3: Chuyên biệt phân cấp và lưới], [H3: Kiểu hợp (Union type)], [H2: Tóm tắt], [H2: Bài tập], [H2: Tài liệu tham khảo]
+       - Ghi chú phần OCR đã chép: Toàn bộ nội dung text từ các slide đã được chép lại, bao gồm các danh sách, mô tả sơ đồ và bài tập.
+    -->
+  </body>
+</html>

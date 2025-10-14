@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Nội dung: Chương 1 - Tổng quan về Hệ CSDL - StuShare</title>
+    <meta
+      name="description"
+      content="Tài liệu slide chương 1 môn Nhập môn Hệ Cơ sở dữ liệu, bao gồm các khái niệm cơ bản, quá trình phát triển, đặc tính, kiến trúc và ngôn ngữ CSDL."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://tcmanhh.github.io/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c1-viewer.html"
+    />
+
+    <!-- Tăng tốc load viewer -->
+    <link rel="preconnect" href="https://docs.google.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://lh3.googleusercontent.com"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="//docs.google.com" />
+    <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
+
+    <!-- Redirect an toàn: nhanh (~1s) nhưng vẫn cho Google render -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          location.replace("c1-viewer.html");
+        }, 300);
+      });
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="1;url=c1-viewer.html" />
+    </noscript>
+  </head>
+  <body style="text-align: justify">
+    <h1>Chương 1: Tổng quan về Hệ CSDL</h1>
+    <p><em>Tác giả: Khoa CNTT</em></p>
+    <p>
+      <em>Người dùng sẽ được chuyển sang trang trình chiếu sau ít giây...</em>
+    </p>
+
+    <!-- BẮT BUỘC: chép đầy đủ TOÀN BỘ nội dung dưới đây vào các thẻ HTML phù hợp -->
+
+    <p>
+      <strong>NHẬP MÔN HỆ CƠ SỞ DỮ LIỆU</strong
+      ><br />--------------------------------------
+    </p>
+
+    <h2>Mục tiêu môn học</h2>
+    <p>
+      Trang bị cho sinh viên kiến thức cơ bản về cơ sở dữ liệu (CSDL), thiết kế
+      CSDL, trọng tâm với mô hình Quan hệ:
+    </p>
+    <ul>
+      <li>Mô hình thực thể - liên kết (ER); Mô hình quan hệ.</li>
+      <li>Đại số quan hệ,</li>
+      <li>Chuyển lược đồ thực thể - liên kết sang lược đồ quan hệ</li>
+      <li>Phụ thuộc hàm, suy diễn, bao đóng, phủ tối thiểu</li>
+      <li>Dạng chuẩn và chuẩn hóa CSDL quan hệ,</li>
+      <li>
+        Thực hành, sinh viên được học ngôn ngữ SQL và thực hành trên một hệ quản
+        trị CSDL cụ thể.
+      </li>
+    </ul>
+
+    <h2>Mục tiêu chi tiết</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nội dung</th>
+          <th>Bậc 1</th>
+          <th>Bậc 2</th>
+          <th>Bậc 3</th>
+          <th>Bậc 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="5"><strong>1. Kiến thức</strong></td>
+        </tr>
+        <tr>
+          <td>Mô hình thực thể - liên kết (ER)</td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Mô hình quan hệ</td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Đại số quan hệ</td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Phụ thuộc hàm</td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Các dạng chuẩn 1, 2, 3, Boyce-Codd, 4, 5</td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Các thuật toán thiết kế CSDL quan hệ</td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="5"><strong>2. Kỹ năng</strong></td>
+        </tr>
+        <tr>
+          <td>
+            Cài đặt được và sử dụng một hệ quản trị CSDL (Ví dụ MySQL, MS SQL,
+            PostgreSQL)
+          </td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Sử dụng được ngôn ngữ SQL để thực hiện các bài tập cơ bản</td>
+          <td></td>
+          <td>x</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="5"><strong>3. Phẩm chất đạo đức</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Chương 1. Tổng quan về Hệ CSDL</h2>
+    <ul>
+      <li>Mở đầu: Một số khái niệm</li>
+      <li>Quá trình phát triển</li>
+      <li>Một số đặc tính của CSDL</li>
+      <li>Người sử dụng CSDL</li>
+      <li>Kiến trúc của HQT CSDL</li>
+      <li>Các tính năng của HQT CSDL</li>
+      <li>Khái niệm: Mô hình, Lược đồ, Thể hiện</li>
+      <li>Ngôn ngữ CSDL</li>
+    </ul>
+
+    <h2>1.1 Mở đầu</h2>
+    <h3>Thông tin và dữ liệu</h3>
+    <p>
+      <strong>Thông tin (information):</strong> Kinh doanh, Thời tiết, Giáo dục,
+      Sinh viên, ...
+    </p>
+    <p>
+      <strong>Dữ liệu (Data):</strong> Khách hàng: Tên, địa chỉ, số điện thoại;
+      Sinh viên: Họ tên, masv, địa chỉ. Dữ liệu là những thông tin có thể ghi
+      lại được, có ý nghĩa, có mục đích sử dụng.
+    </p>
+
+    <h3>Cơ sở dữ liệu (Database)</h3>
+    <p>Là một tập hợp dữ liệu:</p>
+    <ul>
+      <li>Có liên quan với nhau,</li>
+      <li>Được lưu trữ trong máy tính,</li>
+      <li>Có mục đích xác định,</li>
+      <li>Đáp ứng nhu cầu khai thác của nhóm người sử dụng.</li>
+    </ul>
+    <h4>Các tính chất:</h4>
+    <ul>
+      <li>
+        CSDL biểu diễn một phần của thế giới thực (miniworld), được cập nhật
+        phản ảnh sự thay đổi của thế giới mà nó biểu diễn.
+      </li>
+      <li>
+        Một cơ sở dữ liệu là một tập hợp dữ liệu liên kết với nhau một cách
+        logic và mang một nghĩa nào đó.
+      </li>
+      <li>
+        Một cơ sở dữ liệu được thiết kế và được phổ biến cho một mục đích riêng,
+        có nhóm người sử dụng.
+      </li>
+    </ul>
+
+    <h3>Tại sao cần CSDL?</h3>
+    <ul>
+      <li>Dư thừa dữ liệu và không nhất quán,</li>
+      <li>Nhu cầu truy cập dữ liệu ngày càng cao hơn,</li>
+      <li>Sự toàn vẹn dữ liệu,</li>
+      <li>Đảm bảo Tính nguyên tố của giao tác,</li>
+      <li>Đáp ứng Nhiều người dùng, tương tranh,</li>
+      <li>Sự an toàn...</li>
+    </ul>
+
+    <h3>Hệ quản trị CSDL (Database Management System)</h3>
+    <p>
+      Tập hợp các chương trình cho phép: tạo, bảo trì và khai thác CSDL; tức là
+      phần mềm cho phép định nghĩa, xây dựng và thao tác với cơ sở dữ liệu.
+    </p>
+    <ul>
+      <li>
+        <strong>Định nghĩa CSDL:</strong> đặc tả các kiểu dữ liệu, cấu trúc mô
+        tả chi tiết về dữ liệu, các ràng buộc của dữ liệu trong CSDL.
+      </li>
+      <li>
+        <strong>Xây dựng CSDL:</strong> lưu trữ dữ liệu trên thiết bị bộ nhớ
+      </li>
+      <li><strong>Thao tác:</strong> truy vấn, cập nhật và sinh báo cáo.</li>
+    </ul>
+
+    <h3>Hệ CSDL (Database System)</h3>
+    <p>
+      Sơ đồ hệ CSDL bao gồm: Người sử dụng/Lập trình viên tương tác với Chương
+      trình ứng dụng/Truy vấn. Chương trình này giao tiếp với HQT CSDL, bao gồm
+      Xử lý truy vấn và Truy xuất dữ liệu. HQT CSDL quản lý Định nghĩa CSDL
+      (meta data) và chính CSDL.
+    </p>
+
+    <h3>Một ví dụ về CSDL: Quản lý Đào tạo</h3>
+    <p><strong>Các đối tượng:</strong> Sinh viên, Môn học, Học phần, Ngành..</p>
+    <p><strong>Mối quan hệ:</strong></p>
+    <ul>
+      <li>Mỗi sinh viên có thể học một số học phần trong mỗi kỳ</li>
+      <li>Mỗi môn học được dạy trong một hoặc nhiều học phần xác định</li>
+      <li>Mỗi môn học có thể có các môn điều kiện</li>
+      <li>Mỗi học phần do một giáo viên giảng</li>
+      <li>Mỗi môn học do một khoa quản lý</li>
+      <li>Mỗi sinh viên thuộc một ngành nào đó</li>
+      <li>Mỗi ngành do một khoa quản lý.</li>
+    </ul>
+    <p>
+      <strong>Cấu trúc các bảng:</strong> SINHVIEN (MaSv, Hoten, Lop, MaNganh),
+      MONHOC (MaMH, TenMH, SoTC, MaKhoa), MONDK (MaMH, MaMonDK), HOCPHAN (MaHP,
+      MaMH, Hocky, Giaovien), NGANH (MaNg, TenNg), KHOA (MaKhoa, TenKhoa,
+      MaNganh), DIEM (MaSv, MaHP, Diem).
+    </p>
+    <ul>
+      <li>
+        <strong>Định nghĩa CSDL:</strong> Xác định cấu trúc các bảng, Các kiểu
+        dữ liệu của các trường, các mối liên kết..
+      </li>
+      <li>
+        <strong>Xây dựng CSDL:</strong> Dữ liệu được ghi trong các tệp như thế
+        nào, các quan hệ giữa các bản ghi,
+      </li>
+      <li><strong>Thao tác CSDL:</strong> Cập nhật và khai thác dữ liệu.</li>
+    </ul>
+
+    <h3>Một ví dụ về CSDL: Quản lý Dự án</h3>
+    <p>Bao gồm các bảng NHANVIEN, DEAN, PHANCONG với các dữ liệu mẫu.</p>
+    <ul>
+      <li>
+        <strong>Định nghĩa CSDL:</strong> Cấu trúc bảng, bao gồm các thành phần
+        dữ liệu và kiểu dữ liệu tương ứng
+      </li>
+      <li><strong>Xây dựng CSDL:</strong> Đưa dữ liệu vào các bảng</li>
+      <li>
+        <strong>Xử lý CSDL:</strong> Thực hiện các truy vấn (“Cho biết những
+        nhân viên thuộc phòng nào đó”), thực hiện các phép cập nhật (thêm nhân
+        viên, chuyển phòng của một nhân viên), xóa một nhân viên,..
+      </li>
+    </ul>
+
+    <h2>1.2 Quá trình phát triển</h2>
+    <h3>Tập tin (trước 1960)</h3>
+    <p>
+      Mỗi chương trình ứng dụng có phần quản lý dữ liệu riêng, tương tác trực
+      tiếp với các tập tin riêng lẻ thông qua Hệ Thống Quản Lý Tập Tin.
+    </p>
+    <h3>Hạn chế:</h3>
+    <ul>
+      <li>Dữ liệu bị trùng lặp và dư thừa</li>
+      <li>Thiếu tính nhất quán giữa các dữ liệu</li>
+      <li>Khó khăn trong việc truy xuất</li>
+      <li>Việc chia sẻ dữ liệu bị hạn chế</li>
+      <li>Khó khôi phục khi có sự cố</li>
+    </ul>
+    <h3>Cơ sở dữ liệu (Database)</h3>
+    <p>
+      Các chương trình ứng dụng khác nhau cùng truy cập vào một CSDL chung thông
+      qua một Hệ Quản Trị CSDL (HQTCSDL).
+    </p>
+    <h3>Các mốc thời gian:</h3>
+    <ul>
+      <li>
+        <strong>1960:</strong> Hệ QTCSDL đầu tiên ra đời, dựa trên mô hình phân
+        cấp (IMS của IBM) và mô hình mạng (IDS của General Electric).
+      </li>
+      <li>
+        <strong>1976:</strong> HQTCSDL theo mô hình quan hệ đầu tiên xuất hiện
+        (System – R) của IBM, do Codd đề xuất.
+      </li>
+      <li>
+        <strong>Từ 1980:</strong> Nhiều HQTCSDL mới ra đời: Oracle, DB2, Access,
+        Foxpro, Paradox, MySQL,..
+      </li>
+      <li><strong>Từ 1990:</strong> Xuất hiện HQTCSDL hướng đối tượng.</li>
+      <li>Hệ quản trị CSDL theo mô hình NoSQL.</li>
+    </ul>
+
+    <h2>1.3 Một số đặc tính của CSDL</h2>
+    <ul>
+      <li>
+        <strong>Tính tự mô tả:</strong> Hệ CSDL không chỉ chứa CSDL mà còn chứa
+        định nghĩa (mô tả) của CSDL, được lưu trong catalog (gọi là meta-data).
+        Chương trình ứng dụng có thể truy xuất đến nhiều CSDL nhờ thông tin cấu
+        trúc này.
+      </li>
+      <li>
+        <strong>Tính độc lập giữa chương trình và dữ liệu:</strong> Dữ liệu và
+        chương trình có tính độc lập tương đối. Khi có thay đổi nhỏ về cấu trúc,
+        ít phải sửa lại chương trình.
+      </li>
+      <li>
+        <strong>Tính trừu tượng dữ liệu:</strong> Cho phép trình bày dữ liệu ở
+        mức trừu tượng, che bớt chi tiết lưu trữ vật lý.
+      </li>
+      <li>
+        <strong>Tính nhất quán:</strong> Lưu trữ dữ liệu thống nhất, tránh trùng
+        lặp. Có cơ chế điều khiển truy xuất hợp lý để tránh tranh chấp và đảm
+        bảo dữ liệu luôn đúng.
+      </li>
+      <li>
+        <strong>Hỗ trợ nhiều khung nhìn (view):</strong> Mỗi người dùng có thể
+        có một cách nhìn (view) khác nhau về CSDL, có thể là một phần hoặc dữ
+        liệu tổng hợp.
+      </li>
+      <li>
+        <strong>Chia sẻ dữ liệu và nhiều người dùng:</strong> Nhiều người sử
+        dụng, quản lý tương tranh, đảm bảo tính đúng đắn của các thao tác.
+      </li>
+    </ul>
+
+    <h2>1.4 Người sử dụng CSDL</h2>
+    <ul>
+      <li>
+        <strong>Quản trị viên (Database Administrator - DBA):</strong> Quản lý
+        hệ CSDL, cấp quyền truy cập, điều phối và giám sát việc sử dụng.
+      </li>
+      <li>
+        <strong>Thiết kế viên (Database Designer):</strong> Nắm bắt yêu cầu
+        người dùng, thiết kế CSDL, lựa chọn cấu trúc lưu trữ, quyết định dữ liệu
+        cần lưu.
+      </li>
+      <li>
+        <strong>Người dùng cuối (End User):</strong>
+        <ul>
+          <li>
+            <strong>Người ít sử dụng (người quản lý):</strong> Ít truy cập, cần
+            thông tin khác nhau, dùng truy vấn phức tạp.
+          </li>
+          <li>
+            <strong>Người sử dụng thường xuyên (nhân viên):</strong> Truy vấn và
+            cập nhật thường xuyên qua các chức năng có sẵn.
+          </li>
+          <li>
+            <strong>Người sử dụng đặc biệt:</strong> Thông thạo HQT CSDL, tự xây
+            dựng truy vấn phức tạp (kỹ sư, nhà khoa học, người phân tích).
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>1.5 Các khái niệm</h2>
+    <h3>a. Mô hình dữ liệu (Data Model)</h3>
+    <p>Bao gồm:</p>
+    <ul>
+      <li>
+        Tập các khái niệm để biểu diễn cấu trúc CSDL: Kiểu dữ liệu, các liên
+        kết, các ràng buộc.
+      </li>
+      <li>Các phép toán xử lý dữ liệu.</li>
+    </ul>
+    <p>Ví dụ: Mô hình quan hệ, Mô hình ER.</p>
+    <ol>
+      <li>
+        <strong>Mô hình mức cao (mức quan niệm):</strong> Cung cấp khái niệm gần
+        gũi người dùng (VD: mô hình ER).
+      </li>
+      <li>
+        <strong>Mô hình mức thể hiện (mức lôgic):</strong> Dùng khái niệm người
+        dùng hiểu được nhưng không quá xa cách tổ chức trên máy tính (VD: mô
+        hình quan hệ, mạng, phân cấp).
+      </li>
+      <li>
+        <strong>Mô hình mức thấp (mức vật lý):</strong> Mô tả chi tiết cách dữ
+        liệu được lưu trữ (khuôn dạng bản ghi, đường truy cập).
+      </li>
+    </ol>
+    <p>
+      Các ví dụ về mô hình: ER, đối tượng, quan hệ, mạng, phân cấp được minh họa
+      bằng sơ đồ.
+    </p>
+
+    <h3>b. Lược đồ CSDL (Database Schema)</h3>
+    <p>
+      Là các kí hiệu, mô tả biểu diễn về CSDL (cấu trúc và ràng buộc) đã được
+      xây dựng theo mô hình nào đó.
+    </p>
+
+    <p>
+      Ví dụ: SVien(Ten, MaSV, Nam, Khoa), Mhoc(TenMH, MaMH, TinChi, Khoa),
+      DKien(MaMH, MaMH_Truoc), KHoc(MaKH, MaMH, HocKy, Nam, GV), KQua(MaKH,
+      MaSV, Diem)
+    </p>
+    <h3>c. Thể hiện CSDL (Database Instance)</h3>
+    <p>
+      Là dữ liệu hiện thời được lưu trữ trong CSDL ở một thời điểm nào đó (trạng
+      thái của CSDL).
+    </p>
+
+    <h2>1.6 Kiến trúc 3 mức (lược đồ) của Hệ CSDL</h2>
+    <p>
+      Sơ đồ kiến trúc 3 mức: Mức ngoài (Lược đồ ngoài 1...n) ánh xạ tới Mức quan
+      niệm (Lược đồ quan niệm), và Mức quan niệm ánh xạ tới Mức trong (Lược đồ
+      trong).
+    </p>
+    <p>Kiến trúc 3 lược đồ (theo ANSI/SPARC) bao gồm:</p>
+    <ul>
+      <li>
+        <strong>Mức ngoài (Lược đồ ngoài / View):</strong> Mô tả một phần của
+        CSDL mà một nhóm người dùng quan tâm, che giấu phần còn lại.
+      </li>
+      <li>
+        <strong>Mức quan niệm (Lược đồ quan niệm):</strong> Mô tả cấu trúc tổng
+        thể CSDL cho cộng đồng người dùng (thực thể, kiểu dữ liệu, liên hệ, ràng
+        buộc), che bớt chi tiết lưu trữ vật lý.
+      </li>
+      <li>
+        <strong>Mức trong (Lược đồ trong):</strong> Mô tả cấu trúc lưu trữ vật
+        lý của CSDL.
+      </li>
+    </ul>
+    <p>Kiến trúc 3 mức nhằm đảm bảo <strong>Độc lập dữ liệu</strong>:</p>
+    <ul>
+      <li>
+        <strong>Độc lập logic:</strong> Khả năng thay đổi lược đồ quan niệm mà
+        không thay đổi lược đồ ngoài hoặc chương trình ứng dụng.
+      </li>
+      <li>
+        <strong>Độc lập vật lý:</strong> Khả năng thay đổi lược đồ trong mà
+        không làm thay đổi lược đồ quan niệm cũng như lược đồ ngoài.
+      </li>
+    </ul>
+
+    <h2>Nội dung chi tiết</h2>
+    <ul>
+      <li>Giới thiệu</li>
+      <li>Quá trình phát triển</li>
+      <li>Một số đặc tính của CSDL</li>
+      <li>Người sử dụng CSDL</li>
+      <li>Các khái niệm</li>
+      <li>Kiến trúc của Hệ CSDL</li>
+      <li>Các tính năng của HQT CSDL</li>
+      <li>Ngôn ngữ CSDL</li>
+    </ul>
+
+    <h2>1.7 Các tính năng của HQT CSDL</h2>
+    <ol>
+      <li>
+        <strong>Kiểm soát được tính dư thừa của dữ liệu:</strong> Tích hợp nhu
+        cầu để xây dựng CSDL thống nhất.
+      </li>
+      <li>
+        <strong>Chia sẻ dữ liệu:</strong> Cho phép truy xuất dữ liệu đồng thời
+        trong môi trường đa người dùng.
+      </li>
+      <li>
+        <strong>Hạn chế những truy cập không hợp lệ:</strong> Cấp quyền (tài
+        khoản, mật mã) cho từng người dùng/nhóm người dùng.
+      </li>
+      <li>
+        <strong>Cung cấp nhiều giao diện:</strong> HQT cung cấp ngôn ngữ giữa
+        CSDL và người dùng.
+      </li>
+      <li>
+        <strong>Đảm bảo các ràng buộc toàn vẹn (RBTV):</strong> Các quy định cần
+        thỏa mãn để dữ liệu đúng ngữ nghĩa. HQT có thể tự động kiểm tra một số
+        ràng buộc.
+      </li>
+      <li>
+        <strong>Khả năng sao lưu, phục hồi khi gặp sự cố:</strong> Khôi phục dữ
+        liệu khi có hư hỏng phần cứng/phần mềm.
+      </li>
+    </ol>
+    <h3>Các tính năng khác</h3>
+    <ul>
+      <li>
+        <strong>Chuẩn hóa (quy chuẩn):</strong> Cho phép DBA định nghĩa và áp
+        dụng chuẩn thống nhất.
+      </li>
+      <li>
+        <strong>Uyển chuyển:</strong> Cho phép thay đổi, mở rộng cấu trúc CSDL
+        mà không ảnh hưởng đến ứng dụng.
+      </li>
+      <li><strong>Giảm thời gian phát triển ứng dụng.</strong></li>
+      <li>
+        <strong>Tính khả dụng:</strong> Khi có thay đổi, tất cả người dùng đều
+        thấy được.
+      </li>
+    </ul>
+    <h3>Phân loại HQTCSDL</h3>
+    <ul>
+      <li>
+        <strong>Theo mô hình:</strong> mạng, phân cấp, quan hệ, đối tượng,…
+      </li>
+      <li>
+        <strong>Theo số người dùng:</strong> đơn người dùng, đa người dùng.
+      </li>
+      <li>
+        <strong>Theo sự phân tán của dữ liệu:</strong> tập trung, phân tán
+        (thuần nhất hoặc không thuần nhất).
+      </li>
+    </ul>
+
+    <h2>Nội dung chi tiết</h2>
+    <ul>
+      <li>Giới thiệu</li>
+      <li>Quá trình phát triển</li>
+      <li>Một số đặc tính của CSDL</li>
+      <li>Người sử dụng CSDL</li>
+      <li>Các khái niệm</li>
+      <li>Kiến trúc của Hệ CSDL</li>
+      <li>Các tính năng của HQT CSDL</li>
+      <li>Ngôn ngữ CSDL</li>
+    </ul>
+
+    <h2>1.8 Ngôn ngữ CSDL</h2>
+    <ol>
+      <li>
+        <strong
+          >Ngôn ngữ định nghĩa dữ liệu (DDL – Data Definition Language):</strong
+        >
+        Xác định lược đồ CSDL. Dùng bởi DBA và người thiết kế. Ví dụ: `CREATE
+        TABLE ...`.
+        <p>Ví dụ:</p>
+        <pre>
+<code>CREATE TABLE employees (
+    id INTEGER PRIMARY KEY,
+    first_name CHAR(50) null,
+    last_name CHAR(75) not null,
+    date_of_birth DATE null
+);</code>
+</pre>
+      </li>
+      <li>
+        <strong
+          >Ngôn ngữ thao tác dữ liệu (DML – Data Manipulation Language):</strong
+        >
+        Cho phép truy xuất, thêm, xóa, sửa dữ liệu. Có thể là mức cao (phi thủ
+        tục như SQL) hoặc mức thấp (thủ tục, nhúng trong ngôn ngữ lập trình). Ví
+        dụ: `SELECT`, `INSERT`, `UPDATE`, `DELETE`.
+        <p>Ví dụ:</p>
+        <pre>
+<code>-- Các câu lệnh trong SQL: SELECT, INSERT, UPDATE, và DELETE,..
+SELECT id, last_name FROM employees</code>
+</pre>
+      </li>
+      <li>
+        <strong
+          >Ngôn ngữ điều khiển giao dịch (TCL – Transaction Control
+          Language):</strong
+        >
+        Đảm bảo tính toàn vẹn dữ liệu khi có thay đổi. Ví dụ: `COMMIT`,
+        `ROLLBACK`, `SAVEPOINT`.
+        <p>Các câu lệnh SQL tương ứng:</p>
+        <ul>
+          <li>COMMIT, ROLLBACK, và SAVEPOINT.</li>
+        </ul>
+      </li>
+      <li>
+        <strong
+          >Ngôn ngữ điều khiển dữ liệu (DCL – Data Control Language):</strong
+        >
+        Cung cấp tính năng bảo vệ cho các đối tượng CSDL. Ví dụ: `GRANT`,
+        `REVOKE`.
+        <p>Các câu lệnh SQL tương ứng:</p>
+        <ul>
+          <li>GRANT và REVOKE.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Câu hỏi</h2>
+    <ol>
+      <li>
+        Phân biệt các khái niệm: dữ liệu, cơ sở dữ liệu, hệ quản trị cơ sở dữ
+        liệu, hệ cơ sở dữ liệu.
+      </li>
+      <li>Thế nào là độc lập dữ liệu, độc lập logic và độc lập vật lý.</li>
+      <li>Khái niệm mô hình, lược đồ, thể hiện của cơ sở dữ liệu.</li>
+      <li>Các tính năng chính của HQTCSDL.</li>
+    </ol>
+
+    <!-- QA (chỉ là comment, không hiển thị; phục vụ kiểm tra đủ mục):
+       - Tổng số ký tự (ước lượng) của nội dung body: 13500
+       - Danh sách tiêu đề (theo thứ tự): [H1: Chương 1: Tổng quan về Hệ CSDL], [H2: Mục tiêu môn học], [H2: Mục tiêu chi tiết], [H2: Chương 1. Tổng quan về Hệ CSDL], [H2: 1.1 Mở đầu], [H3: Thông tin và dữ liệu], [H3: Cơ sở dữ liệu (Database)], [H4: Các tính chất:], [H3: Tại sao cần CSDL?], [H3: Hệ quản trị CSDL (Database Management System)], [H3: Hệ CSDL (Database System)], [H3: Một ví dụ về CSDL: Quản lý Đào tạo], [H3: Một ví dụ về CSDL: Quản lý Dự án], [H2: 1.2 Quá trình phát triển], [H3: Tập tin (trước 1960)], [H3: Hạn chế:], [H3: Cơ sở dữ liệu (Database)], [H3: Các mốc thời gian:], [H2: 1.3 Một số đặc tính của CSDL], [H2: 1.4 Người sử dụng CSDL], [H2: 1.5 Các khái niệm], [H3: a. Mô hình dữ liệu (Data Model)], [H3: b. Lược đồ CSDL (Database Schema)], [H3: c. Thể hiện CSDL (Database Instance)], [H2: 1.6 Kiến trúc 3 mức (lược đồ) của Hệ CSDL], [H2: Nội dung chi tiết], [H2: 1.7 Các tính năng của HQT CSDL], [H3: Các tính năng khác], [H3: Phân loại HQTCSDL], [H2: Nội dung chi tiết], [H2: 1.8 Ngôn ngữ CSDL], [H2: Câu hỏi]
+       - Ghi chú phần OCR đã chép: Toàn bộ nội dung text từ các slide đã được chép lại, bao gồm cả các bảng, sơ đồ (dưới dạng mô tả text), và danh sách.
+    -->
+  </body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Nội dung: Mô tả cơ sở dữ liệu Classicmodels - StuShare</title>
+    <meta
+      name="description"
+      content="Tài liệu mô tả chi tiết cơ sở dữ liệu mẫu Classicmodels, bao gồm hướng dẫn cài đặt, ý nghĩa các bảng (Customers, Products, Orders,...) và các trường dữ liệu, cùng sơ đồ quan hệ khóa ngoại."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://tcmanhh.github.io/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/tai_lieu_a4_viewer.html"
+    />
+
+    <!-- Tăng tốc load viewer -->
+    <link rel="preconnect" href="https://drive.google.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://lh3.googleusercontent.com"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="//drive.google.com" />
+    <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
+
+    <!-- Redirect an toàn: nhanh (~1s) nhưng vẫn cho Google render -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          location.replace("tai_lieu_a4_viewer.html");
+        }, 300);
+      });
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="1;url=tai_lieu_a4_viewer.html" />
+    </noscript>
+  </head>
+  <body>
+    <h1>Mô tả cơ sở dữ liệu Classicmodels</h1>
+    <p><em>Tác giả: Nguyễn Quốc An</em></p>
+    <p>
+      <em>Người dùng sẽ được chuyển sang trang trình chiếu sau ít giây...</em>
+    </p>
+
+    <!-- BẮT BUỘC: chép đầy đủ TOÀN BỘ nội dung dưới đây vào các thẻ HTML phù hợp -->
+
+    <h2>1. Cài đặt cơ sở dữ liệu mẫu</h2>
+    <h3>a, Hướng dẫn cài đặt cơ sở dữ liệu mẫu bằng</h3>
+    <ol>
+      <li>
+        <strong>Bước 1:</strong> Tải cơ sở dữ liệu về máy (bạn có thể download
+        bằng đường link dưới đây)<br />CSDL_mẫu
+      </li>
+      <li>
+        <strong>Bước 2:</strong> Sau khi tải Cài đặt cơ sở, ta thực hiện như
+        sau:
+        <ul>
+          <li>
+            Sau khi khởi động Xampp và truy cập vào phpMyAdmin, ta sẽ chọn
+            Import.
+          </li>
+          <li>
+            Sau khi chọn Import, ta sẽ thêm cơ sở dữ liệu đã tải bằng cách chọn
+            “Choose File” và chọn file “mysqlsampledatabase.sql” đã tải.
+          </li>
+          <li>
+            Sau khi đã chọn file ta chọn import ở cuối trang. Khi đó cơ sở dữ
+            liệu “classicmodels” sẽ hiện ở bên trái màn hình.
+          </li>
+          <li>Sau khi thêm Database vào ta sẽ có các bảng như sau:</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h4>Ý nghĩa của các ký hiệu:</h4>
+    <ul>
+      <li>
+        Hình chìa khoá vàng = thể hiện thuộc tính là thành phần của khoá chính.
+      </li>
+      <li>
+        Hình thoi màu xanh (Được tô đầy) = thể hiện các thuộc tính NOT NULL.
+      </li>
+      <li>
+        Hình thoi màu xanh (Không được tô đầy) = thể hiện các thuộc tính có thể
+        NULL.
+      </li>
+      <li>
+        Hình thoi màu đỏ = thể hiện thuộc tính là khoá ngoại {được tô đầy: NOT
+        NULL, không được tô đầy: NULL}.
+      </li>
+    </ul>
+
+    <h3>b, Ý nghĩa của các bảng, các trường của cơ sở dữ liệu mẫu</h3>
+    <p>
+      <em>Các bảng sau khi cài đặt cơ sở dữ liệu mẫu như trên</em>
+    </p>
+    <p>Cơ sở dữ liệu mẫu MySQL này bao gồm các bảng sau:</p>
+    <ol>
+      <li>
+        <strong>Customers (khách hàng):</strong> Lưu trữ thông tin của khách
+        hàng, bao gồm tên, số điện thoại, địa chỉ, người liên hệ và hạn mức tín
+        dụng.
+      </li>
+      <li>
+        <strong>Products (sản phẩm):</strong> Lưu trữ danh sách các mô hình ô tô
+        thu nhỏ, bao gồm mã sản phẩm, tên sản phẩm, quy mô sản phẩm, nhà cung
+        cấp, mô tả và giá bán lẻ.
+      </li>
+      <li>
+        <strong>Productlines (dòng sản phẩm):</strong> Lưu trữ danh sách các
+        dòng sản phẩm, bao gồm mô tả chi tiết về dòng sản phẩm và hình ảnh.
+      </li>
+      <li>
+        <strong>Orders (đơn đặt hàng):</strong> Lưu trữ các đơn đặt hàng được
+        đặt bởi khách hàng, bao gồm ngày đặt hàng, ngày giao hàng yêu cầu, ngày
+        đã giao, trạng thái và nhận xét.
+      </li>
+      <li>
+        <strong>Orderdetails (chi tiết đơn hàng):</strong> Lưu trữ các chi tiết
+        dòng cho mỗi đơn đặt hàng, bao gồm số lượng sản phẩm đặt mua, giá mỗi
+        đơn vị và thứ tự dòng đơn hàng.
+      </li>
+      <li>
+        <strong>Payments (thanh toán):</strong> Lưu trữ các khoản thanh toán
+        được thực hiện bởi khách hàng dựa trên tài khoản của họ, bao gồm số tiền
+        thanh toán và ngày thanh toán.
+      </li>
+      <li>
+        <strong>Employees (nhân viên):</strong> Lưu trữ thông tin nhân viên, bao
+        gồm tên, số liên lạc, email và mối quan hệ tổ chức như ai báo cáo cho
+        ai.
+      </li>
+      <li>
+        <strong>Offices (văn phòng):</strong> Lưu trữ thông tin về văn phòng bán
+        hàng, bao gồm địa chỉ, số điện thoại và mã bưu điện.
+      </li>
+    </ol>
+
+    <h3>Giải thích chi tiết ý nghĩa các trường trong bảng</h3>
+    <ol>
+      <li>
+        <strong>Bảng Customers:</strong> Lưu trữ thông tin của khách hàng.
+        <ul>
+          <li>
+            <strong>customerNumber:</strong> mã số khách hàng, là thuộc tính độc
+            nhất để phân biệt các khách hàng.
+          </li>
+          <li>
+            <strong>customerName:</strong> tên của khách hàng trên hệ thống.
+          </li>
+          <li>
+            <strong>contactLastName:</strong> họ của khách hàng liên hệ trực
+            tiếp, ví dụ khi nhân viên nói chuyện điện thoại với khách hàng thì
+            sẽ sử dụng phần họ này để xưng hô.
+          </li>
+          <li>
+            <strong>contactFirstName:</strong> tên của khách hàng liên hệ trực
+            tiếp.
+          </li>
+          <li><strong>phone:</strong> số điện thoại của khách hàng.</li>
+          <li>
+            <strong>addressLine1:</strong> thông tin chính về địa chỉ của khách
+            hàng, như số nhà, số ngõ, tên đường, tên phố,…
+          </li>
+          <li>
+            <strong>addressLine2:</strong> các thông tin thêm, cụ thể hơn về địa
+            chỉ của khách hàng, như số căn hộ hay tầng nào đó của một toà nhà.
+          </li>
+          <li><strong>city:</strong> tên thành phố của khách hàng.</li>
+          <li>
+            <strong>state:</strong> tên bang của khách hàng (nước ngoài sử dụng
+            đơn vị hành chính này, điển hình là Hoa Kì).
+          </li>
+          <li>
+            <strong>postalCode:</strong> mã bưu điện của khách hàng, thường bao
+            gồm các chữ cái và/hoặc các con số để giúp bưu điện định vị được vị
+            trí địa lý của khách hàng.
+          </li>
+          <li>
+            <strong>country:</strong> thông tin về đất nước của khách hàng.
+          </li>
+          <li>
+            <strong>salesRepEmployeeNumber:</strong> mã số của nhân viên sale
+            phụ trách của khách hàng.
+          </li>
+          <li>
+            <strong>creditLimit:</strong> hạn mức tín dụng của khách hàng.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bảng Products:</strong> Lưu trữ danh sách về các sản phẩm.
+        <ul>
+          <li>
+            <strong>productCode:</strong> mã sản phẩm, là thuộc tính độc nhất để
+            phân biệt các sản phẩm với nhau.
+          </li>
+          <li><strong>productName:</strong> tên sản phẩm.</li>
+          <li>
+            <strong>productLine:</strong> danh mục hay dòng của sản phẩm, ở đây
+            là để lưu các dòng xe khác nhau.
+          </li>
+          <li><strong>productScale:</strong> tỉ lệ của mô hình xe.</li>
+          <li>
+            <strong>productVendor:</strong> bên bán sản phẩm này cho bên bán lẻ,
+            thường là bên sản xuất.
+          </li>
+          <li><strong>productDescription:</strong> mô tả về sản phẩm.</li>
+          <li>
+            <strong>quantityInStock:</strong> lượng hàng còn trong kho của sản
+            phẩm.
+          </li>
+          <li><strong>buyPrice:</strong> giá mua sản phẩm.</li>
+          <li>
+            <strong>MSRP:</strong> viết tắt của Manufacturer's Suggested Retail
+            Price tức giá bán sản phẩm mà bên sản xuất khuyến khích.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bảng ProductLines:</strong> Lưu trữ danh mục các loại sản phẩm.
+        <ul>
+          <li>
+            <strong>productLine:</strong> danh mục hay dòng của sản phẩm, là
+            thuộc tính độc nhất để phân biệt giữa các danh mục sản phẩm khác
+            nhau, ví dụ ở đây là Classic Car (ô tô cổ điển) hay Motorbike (xe
+            máy).
+          </li>
+          <li>
+            <strong>textDescription:</strong> mô tả về sản phẩm dưới dạng văn
+            bản.
+          </li>
+          <li>
+            <strong>htmlDescription:</strong> thẻ mô tả của dòng sản phẩm, cung
+            cấp thông tin ngắn gọn về dòng sản phẩm.
+          </li>
+          <li><strong>image:</strong> ảnh đại diện của danh mục sản phẩm.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bảng Orders:</strong> Lưu trữ các đơn hàng được đặt bởi khách
+        hàng.
+        <ul>
+          <li>
+            <strong>orderNumber:</strong> mã đơn hàng, là thuộc tính độc nhất để
+            phân biệt các đơn hàng.
+          </li>
+          <li><strong>orderDate:</strong> ngày đặt hàng.</li>
+          <li>
+            <strong>requiredDate:</strong> ngày yêu cầu phải nhận được hàng.
+          </li>
+          <li><strong>shippedDate:</strong> ngày hàng được giao.</li>
+          <li>
+            <strong>status:</strong> trạng thái hiện tại của hàng, ví dụ như đã
+            được giao (Shipped) hay còn ở trong kho.
+          </li>
+          <li>
+            <strong>comments:</strong> những nhận xét hay yêu cầu về hàng hoá
+            của khách hàng sau khi nhận được hàng được nhân viên ghi lại, hay
+            những lưu ý được nhân viên đề đạt lại.
+          </li>
+          <li>
+            <strong>customerNumber:</strong> mã số của khách hàng đã đặt hàng.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bảng OrderDetails:</strong> Lưu trữ chi tiết của các dòng đơn
+        hàng.
+        <ul>
+          <li><strong>orderNumber:</strong> mã đơn hàng.</li>
+          <li><strong>productCode:</strong> mã sản phẩm.</li>
+          <li>
+            <strong>quantityOrdered:</strong> số lượng sản phẩm đã được đặt.
+          </li>
+          <li><strong>priceEach:</strong> giá tiền trên một sản phẩm.</li>
+          <li><strong>orderLineNumber:</strong> mã số dòng đơn hàng.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bảng Payments:</strong> Lưu trữ các thanh toán của khách hàng.
+        <ul>
+          <li>
+            <strong>customerNumber:</strong> mã số khách hàng, là thuộc tính độc
+            nhất để phân biệt các khách hàng. - orderNumber: mã đơn hàng.
+          </li>
+          <li>
+            <strong>checkNumber:</strong> mã số của tờ chi phiếu, độc nhất cho
+            mỗi giao dịch tài chính dùng để theo dõi và quản lý giao dịch.
+          </li>
+          <li><strong>paymentDate:</strong> ngày thanh toán.</li>
+          <li><strong>amount:</strong> lượng tiền thanh toán.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bảng Employees:</strong> Lưu trữ thông tin về các nhân viên của
+        tổ chức và cấu trúc quản lý của tổ chức
+        <ul>
+          <li>
+            <strong>employeeNumber:</strong> mã nhân viên, là độc nhất để phân
+            biệt các nhân viên.
+          </li>
+          <li><strong>lastName:</strong> họ của nhân viên.</li>
+          <li><strong>firstName:</strong> tên của nhân viên.</li>
+          <li>
+            <strong>extension:</strong> là đuôi số điện thoại nội bộ để liên lạc
+            trực tiếp với nhân viên, bằng cách gọi số chính của công ty rồi thêm
+            đuôi số này vào.
+          </li>
+          <li><strong>email:</strong> email của nhân viên.</li>
+          <li>
+            <strong>officeCode:</strong> mã văn phòng mà nhân viên làm việc.
+          </li>
+          <li>
+            <strong>reportsTo:</strong> người mà nhân viên cần báo cáo lại kết
+            quả.
+          </li>
+          <li><strong>jobTitle:</strong> chức vụ trong tổ chức.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bảng Offices:</strong> Lưu thông tin về các văn phòng của chức.
+        <ul>
+          <li>
+            <strong>officeCode:</strong> mã văn phòng, là độc nhất để phân biệt
+            giữa các văn phòng.
+          </li>
+          <li>
+            <strong>city:</strong> thành phố mà văn phòng đó được đặt tại.
+          </li>
+          <li><strong>phone:</strong> số điện thoại của văn phòng.</li>
+          <li>
+            <strong>addressLine1:</strong> thông tin chính về địa chỉ của văn
+            phòng (số nhà, con phố, số đường,…).
+          </li>
+          <li>
+            <strong>addressLine2:</strong> thông tin thêm, cụ thể hơn về địa chỉ
+            của văn phòng (tầng mấy, căn nào, phòng nào trong toà nhà).
+          </li>
+          <li>
+            - <strong>state:</strong> bang (đơn vị hành chính nước ngoài, điển
+            hình là Hoa Kì) mà văn phòng đó được đặt tại.
+          </li>
+          <li>
+            <strong>country:</strong> đất nước mà văn phòng đó được đặt tại.
+          </li>
+          <li><strong>postalCode:</strong> mã bưu điện của văn phòng.</li>
+          <li>
+            <strong>territory:</strong> vùng lãnh thổ văn phòng đảm nhiệm.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>
+      c, Các mối quan hệ ràng buộc (ràng buộc khóa ngoại) giữa các bảng trong cơ
+      sở dữ liệu mẫu:
+    </h3>
+    <ol>
+      <li>
+        <strong>Customers (khách hàng) - employees (nhân viên):</strong>
+        <ul>
+          <li>
+            Mỗi khách hàng có một nhân viên đại diện bán hàng thông qua khóa
+            ngoại <code>salesRepEmployeeNumber</code> liên kết với khóa chính
+            <code>employeeNumber</code> của bảng <code>employees</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>
+            ■ customers.salesRepEmployeeNumber- &gt;employees.employeeNumber.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Employees (nhân viên) - offices (văn phòng):</strong>
+        <ul>
+          <li>
+            Mỗi nhân viên làm việc tại một văn phòng, liên kết qua khóa ngoại
+            <code>officeCode</code> từ <code>employees</code> đến khóa chính
+            <code>officeCode</code> của bảng <code>offices</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>■ employees.officeCode-&gt;offices.officeCode.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Employees (nhân viên) - employees (quản lý):</strong>
+        <ul>
+          <li>
+            Một nhân viên có thể báo cáo cho một quản lý khác trong cùng tổ
+            chức, với khóa ngoại <code>reportsTo</code> liên kết với khóa chính
+            <code>employeeNumber</code> của chính bảng <code>employees</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>■ employees.reportsTo-&gt;employees.employeeNumber.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Orders (đơn đặt hàng) - customers (khách hàng):</strong>
+        <ul>
+          <li>
+            Mỗi đơn đặt hàng được đặt bởi một khách hàng, thông qua khóa ngoại
+            <code>customerNumber</code> liên kết với khóa chính
+            <code>customerNumber</code> của bảng <code>customers</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>■ orders.customerNumber-&gt;customers.customerNumber.</li>
+        </ul>
+      </li>
+      <li>
+        <strong
+          >Orderdetails (chi tiết đơn hàng) - orders (đơn đặt hàng):</strong
+        >
+        <ul>
+          <li>
+            Mỗi chi tiết đơn hàng thuộc về một đơn đặt hàng, thông qua khóa
+            ngoại <code>orderNumber</code> liên kết với khóa chính
+            <code>orderNumber</code> của bảng <code>orders</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>■ orderdetails.orderNumber-&gt;orders.orderNumber.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Orderdetails (chi tiết đơn hàng) - products (sản phẩm):</strong>
+        <ul>
+          <li>
+            Mỗi chi tiết đơn hàng liên kết với một sản phẩm, thông qua khóa
+            ngoại <code>productCode</code> liên kết với khóa chính
+            <code>productCode</code> của bảng <code>products</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>■ orderdetails.productCode-&gt;products.productCode.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Products (sản phẩm) - productlines (dòng sản phẩm):</strong>
+        <ul>
+          <li>
+            Mỗi sản phẩm thuộc một dòng sản phẩm, thông qua khóa ngoại
+            <code>productLine</code> liên kết với khóa chính
+            <code>productLine</code> của bảng <code>productlines</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>■ products.productLine-&gt;productlines.productLine.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Payments (thanh toán) - customers (khách hàng):</strong>
+        <ul>
+          <li>
+            Mỗi khoản thanh toán được thực hiện bởi một khách hàng, thông qua
+            khóa ngoại <code>customerNumber</code> liên kết với khóa chính
+            <code>customerNumber</code> của bảng <code>customers</code>.
+          </li>
+          <li>○ Ràng buộc:</li>
+          <li>■ payments.customerNumber- &gt;customers.customerNumber.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <!-- QA (chỉ là comment, không hiển thị; phục vụ kiểm tra đủ mục):
+       - Tổng số ký tự (ước lượng) của nội dung body: 10500
+       - Danh sách tiêu đề (theo thứ tự): [H1: Mô tả cơ sở dữ liệu Classicmodels], [H2: 1. Cài đặt cơ sở dữ liệu mẫu], [H3: a, Hướng dẫn cài đặt cơ sở dữ liệu mẫu bằng], [H4: Ý nghĩa của các ký hiệu:], [H3: b, Ý nghĩa của các bảng, các trường của cơ sở dữ liệu mẫu], [H3: Giải thích chi tiết ý nghĩa các trường trong bảng], [H3: c, Các mối quan hệ ràng buộc (ràng buộc khóa ngoại) giữa các bảng trong cơ sở dữ liệu mẫu:]
+       - Ghi chú phần OCR đã chép: Toàn bộ nội dung văn bản từ file gốc đã được đưa vào, bao gồm các mô tả về hình ảnh và các bước thực hiện. Đã sửa lỗi định dạng và bổ sung các chi tiết còn thiếu so với văn bản gốc.
+    -->
+  </body>
+</html>
