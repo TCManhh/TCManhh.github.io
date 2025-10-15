@@ -2552,7 +2552,7 @@ body.viewer-wide .document-viewer {
     rgba(13, 110, 253, 0.08),
     rgba(13, 110, 253, 0.04)
   );
-  border: 1px solid rgba(13, 110, 253, 0.15);
+   border: 1px solid rgba(13, 110, 253, 0.15);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -6496,4 +6496,3 @@ body.viewer-wide .document-viewer {
   resize: none;
   word-wrap: break-word;
   overflow-wrap: break-word;
-}
