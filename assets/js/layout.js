@@ -138,6 +138,8 @@ function runPageSpecificScripts() {
 
   // [FIX] Khởi tạo lại chức năng đóng/mở cho các mục tài liệu
   initializeDocumentSections();
+
+  updateBreadcrumb(); // Ensure breadcrumb updates after page load
 }
 
 /**
@@ -212,7 +214,6 @@ function initializeDocumentSections() {
   );
   if (sectionHeaders.length === 0) return;
 
-  // Mặc định mở tất cả các section khi tải trang để đồng bộ với hành vi F5
   const sections = document.querySelectorAll(".document-section");
   sections.forEach((section) => {
     if (!section.classList.contains("active")) {
@@ -220,9 +221,7 @@ function initializeDocumentSections() {
     }
   });
 
-  // Gắn sự kiện click để toggle
   sectionHeaders.forEach((header) => {
-    // Tạo một bản sao để loại bỏ listener cũ, tránh gắn nhiều lần
     const newHeader = header.cloneNode(true);
     header.parentNode.replaceChild(newHeader, header);
 
