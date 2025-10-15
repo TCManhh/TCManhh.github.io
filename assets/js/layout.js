@@ -42,31 +42,22 @@ async function initializeLayout() {
  * @param {boolean} isPopState - Đánh dấu nếu đây là sự kiện từ nút back/forward của trình duyệt.
  */
 async function loadPageContent(url, isPopState = false) {
-  let newPath = new URL(url, window.location.origin).pathname;
+  // [FIX] Chuẩn hóa URL để xử lý nhất quán
+  const targetUrl = new URL(url, window.location.origin);
+  const newPath = targetUrl.pathname;
 
-  // [FIX] Nếu link là trang chủ, luôn tải lại toàn bộ trang
-  // để đảm bảo trạng thái được reset hoàn toàn.
+  // Nếu link là trang chủ, luôn tải lại toàn bộ trang
   if (newPath === "/" || newPath === "/index.html") {
     window.location.href = "/index.html";
     return;
   }
 
-  // [FIX v5] Đơn giản hóa logic so sánh đường dẫn để tăng độ tin cậy.
-  // Mục tiêu: coi / và /index.html là một.
-  let currentPath = window.location.pathname;
-
-  // Chuẩn hóa các đường dẫn trỏ về trang chủ
-  if (currentPath === "/index.html") {
-    currentPath = "/";
-  }
-
-  if (currentPath === newPath) {
-    // Nếu click vào link của trang hiện tại, cuộn lên đầu trang thay vì không làm gì.
-    // Điều này mang lại phản hồi cho người dùng.
+  // Nếu click vào link của trang hiện tại, không làm gì cả
+  if (targetUrl.href === window.location.href) {
     if (window.scrollY > 0) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    return; // Dừng lại, không tải lại nội dung
+    return;
   }
 
   // Thêm class 'loading' để hiển thị hiệu ứng chuyển trang
@@ -92,9 +83,16 @@ async function loadPageContent(url, isPopState = false) {
       document.querySelector("main").replaceWith(newMain);
       document.title = newTitle;
 
-      // Cập nhật URL trên thanh địa chỉ
+      // Cập nhật URL trên thanh địa chỉ và history
       if (!isPopState) {
-        window.history.pushState({ path: url }, newTitle, url);
+        // Chỉ pushState nếu URL thực sự thay đổi
+        if (window.location.href !== targetUrl.href) {
+          window.history.pushState(
+            { path: targetUrl.href },
+            newTitle,
+            targetUrl.href
+          );
+        }
       }
 
       // Chạy lại các script cần thiết cho nội dung mới
@@ -137,6 +135,9 @@ function runPageSpecificScripts() {
 
   // Cập nhật trạng thái 'active' cho link điều hướng
   setActiveNavLink();
+
+  // [FIX] Khởi tạo lại chức năng đóng/mở cho các mục tài liệu
+  initializeDocumentSections();
 }
 
 /**
@@ -201,10 +202,39 @@ function initializeHeaderFunctionality() {
   }
 }
 
-/* DÁN HÀM NÀY VÀO CUỐI FILE assets/js/layout.js */
+/**
+ * [MỚI] Khởi tạo chức năng đóng/mở cho các section tài liệu.
+ * Hàm này sẽ được gọi mỗi khi chuyển trang.
+ */
+function initializeDocumentSections() {
+  const sectionHeaders = document.querySelectorAll(
+    ".document-section .section-header"
+  );
+  if (sectionHeaders.length === 0) return;
+
+  // Mặc định mở tất cả các section khi tải trang để đồng bộ với hành vi F5
+  const sections = document.querySelectorAll(".document-section");
+  sections.forEach((section) => {
+    if (!section.classList.contains("active")) {
+      section.classList.add("active");
+    }
+  });
+
+  // Gắn sự kiện click để toggle
+  sectionHeaders.forEach((header) => {
+    // Tạo một bản sao để loại bỏ listener cũ, tránh gắn nhiều lần
+    const newHeader = header.cloneNode(true);
+    header.parentNode.replaceChild(newHeader, header);
+
+    newHeader.addEventListener("click", () => {
+      const section = newHeader.parentElement;
+      section.classList.toggle("active");
+    });
+  });
+}
 
 /**
- * Hàm này tìm trang hiện tại và thêm class 'active'
+ * Hàm này tìm trang hiện tại trong thanh điều hướng và thêm class 'active'
  * vào link tương ứng trên thanh công cụ (header).
  */
 function setActiveNavLink() {
@@ -240,6 +270,16 @@ function setActiveNavLink() {
 
 // 1. Khi trang tải lần đầu
 document.addEventListener("DOMContentLoaded", () => {
+  // [FIX] Lưu trạng thái ban đầu của trang vào history.
+  // Điều này rất quan trọng để nút "Back" hoạt động đúng sau lần điều hướng đầu tiên.
+  // Chúng ta dùng replaceState để không tạo entry thừa khi F5.
+  const initialPath = window.location.href;
+  window.history.replaceState(
+    { path: initialPath },
+    document.title,
+    initialPath
+  );
+
   initializeLayout().then(() => {
     // Sau khi layout chính đã tải xong, mới chạy các script phụ
     runPageSpecificScripts();
@@ -248,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 2. Chặn và xử lý các click vào link
   document.body.addEventListener("click", (e) => {
     // Tìm thẻ <a> gần nhất với phần tử được click
-    const link = e.target.closest("a");
+    const link = e.target.closest("a[href]"); // [FIX] Chỉ bắt các thẻ a có href
 
     // Kiểm tra các điều kiện để bỏ qua và dùng điều hướng mặc định
     if (
@@ -256,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
       link.target === "_blank" || // Mở tab mới
       e.ctrlKey ||
       e.metaKey || // Giữ Ctrl/Cmd để mở tab mới
-      !link.href.startsWith(window.location.origin) || // Link ra ngoài trang
+      new URL(link.href).origin !== window.location.origin || // Link ra ngoài trang
       link.href.includes("#") || // Link có hash (anchor link)
       link.hasAttribute("download") || // Link tải file
       link.href.endsWith(".pdf") ||
@@ -272,7 +312,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 3. Xử lý khi người dùng nhấn nút back/forward của trình duyệt
 window.addEventListener("popstate", (e) => {
+  // [FIX] Đảm bảo event.state tồn tại. Nếu không, có thể là lần đầu vào trang
+  // hoặc một sự kiện popstate không do chúng ta tạo ra.
+  // Trong trường hợp đó, ta sẽ tải lại trang theo URL hiện tại.
   if (e.state && e.state.path) {
-    loadPageContent(e.state.path, true);
+    // Chỉ tải nội dung nếu đường dẫn khác với đường dẫn hiện tại
+    if (window.location.href !== e.state.path) {
+      loadPageContent(e.state.path, true);
+    }
+  } else {
+    // Nếu không có state, có thể là người dùng đã back về trang ban đầu
+    // trước khi SPA được khởi tạo. Tải lại để đảm bảo.
+    window.location.reload();
   }
 });
