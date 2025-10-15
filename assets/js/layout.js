@@ -190,36 +190,46 @@ function handlePageTransition(event) {
   }
 
   event.preventDefault();
-
   const destination = link.href;
   const mainContent = document.querySelector("main");
 
   if (mainContent) {
-    // THAY ĐỔI: Thêm class fade-out để kích hoạt transition mờ đi
-    mainContent.classList.add("fade-out-content");
+    // Thêm class để nội dung trượt ra
+    mainContent.classList.add("content-is-exiting");
   }
 
+  // Đợi animation kết thúc rồi mới chuyển trang
   setTimeout(() => {
     window.location.href = destination;
-  }, 250); // Thời gian này phải khớp với transition trong CSS
+  }, 300); // Khớp với thời gian animation `slideOutUp`
 }
 
 // === KHỞI TẠO ===
 document.addEventListener("DOMContentLoaded", () => {
+  // Bắt đầu tải layout và các script khác
   initializeLayout().then(() => {
     runPageSpecificScripts();
-
-    // [FIX] Kích hoạt hiệu ứng fade-in cho nội dung chính khi tải trang lần đầu
-    const mainContent = document.querySelector("main");
-    if (mainContent) {
-      // Dùng một timeout nhỏ để đảm bảo trình duyệt có thời gian áp dụng
-      // opacity: 0 ban đầu trước khi chuyển sang opacity: 1,
-      // tạo ra hiệu ứng mượt mà.
-      setTimeout(() => {
-        mainContent.classList.add("fade-in-content");
-      }, 50); // 50ms là đủ
-    }
   });
 
+  // Gắn bộ lắng nghe sự kiện click để chuyển trang
   document.body.addEventListener("click", handlePageTransition);
+
+  // Kích hoạt hiệu ứng nội dung trượt vào cho trang hiện tại
+  const mainContent = document.querySelector("main");
+  if (mainContent) {
+    mainContent.classList.add("content-is-entering");
+  }
+});
+
+// Xử lý khi người dùng sử dụng nút back/forward của trình duyệt
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    // Nếu trang được load từ cache, nội dung có thể vẫn bị ẩn
+    // Xóa class 'exiting' và thêm lại class 'entering' để đảm bảo nó hiện ra
+    const mainContent = document.querySelector("main");
+    if (mainContent) {
+      mainContent.classList.remove("content-is-exiting");
+      mainContent.classList.add("content-is-entering");
+    }
+  }
 });

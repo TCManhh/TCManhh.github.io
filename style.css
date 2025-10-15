@@ -6497,22 +6497,28 @@ body.viewer-wide .document-viewer {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-/* === HIỆU ỨNG CHUYỂN TRANG MƯỢT MÀ === */
+/* === HIỆU ỨNG CHUYỂN TRANG CAO CẤP (NỘI DUNG TRƯỢT LÊN) === */
 
-/* THAY ĐỔI: Áp dụng animation cho <main> thay vì <body> */
+/* 1. Mặc định ẩn nội dung chính để chống chớp màn hình */
 main {
-  animation: fadeIn 0.3s ease-in-out forwards;
+  opacity: 0;
 }
 
-/* THAY ĐỔI: Đổi tên class cho rõ nghĩa và nhắm vào <main> */
-main.main-fade-out {
-  animation: fadeOut 0.25s ease-in-out forwards;
+/* 2. Class kích hoạt hiệu ứng NỘI DUNG TRƯỢT VÀO */
+.content-is-entering {
+  animation: slideInUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeIn {
+/* 3. Class kích hoạt hiệu ứng NỘI DUNG TRƯỢT RA */
+.content-is-exiting {
+  animation: slideOutUp 0.15s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+/* 4. Định nghĩa các keyframes cho hiệu ứng */
+@keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -6520,13 +6526,13 @@ main.main-fade-out {
   }
 }
 
-@keyframes fadeOut {
+@keyframes slideOutUp {
   from {
     opacity: 1;
     transform: translateY(0);
   }
   to {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(-20px);
   }
 }
