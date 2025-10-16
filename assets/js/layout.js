@@ -82,7 +82,22 @@ function loadSecondaryComponents() {
         if (respectHTML) {
           mainElement.insertAdjacentHTML("beforeend", respectHTML);
         }
-        mainElement.insertAdjacentHTML("beforeend", commentsHTML);
+
+        // Tách toast ra khỏi commentsHTML để chèn vào body
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = commentsHTML;
+        const toastElement = tempDiv.querySelector("#comments-toast");
+
+        // Chèn phần comments (không có toast) vào main
+        if (toastElement) {
+          toastElement.remove();
+          mainElement.insertAdjacentHTML("beforeend", tempDiv.innerHTML);
+          // Chèn toast trực tiếp vào body để position fixed hoạt động đúng
+          document.body.insertAdjacentElement("beforeend", toastElement);
+        } else {
+          mainElement.insertAdjacentHTML("beforeend", commentsHTML);
+        }
+
         const script = document.createElement("script");
         script.src = "/assets/js/comments.js";
         script.defer = true;
