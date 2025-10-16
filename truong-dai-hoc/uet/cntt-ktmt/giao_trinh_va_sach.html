@@ -37,19 +37,18 @@
                 href="/truong-dai-hoc/uet/cntt-ktmt/giao_trinh_va_sach/computer-organization-and-design-viewer.html"
                 class="document-item"
               >
-                <i class="fas fa-book-journal-whills"></i>
                 <span
-                  >Computer Organization and Design - Patterson & Hennessy</span
+                  >Sách: Computer Organization and Design - Patterson &
+                  Hennessy</span
                 >
               </a>
               <a
                 href="/truong-dai-hoc/uet/cntt-ktmt/giao_trinh_va_sach/computer-architecture-a-quantitative-approach-viewer.html"
                 class="document-item"
               >
-                <i class="fas fa-book-journal-whills"></i>
                 <span
-                  >Computer Architecture: A Quantitative Approach - Hennessy &
-                  Patterson</span
+                  >Sách: Computer Architecture: A Quantitative Approach -
+                  Hennessy & Patterson</span
                 >
               </a>
               <!-- Liên kết cũ có thể giữ lại hoặc xóa đi nếu không cần thiết -->
@@ -66,11 +65,22 @@
 
     <div id="footer-placeholder"></div>
 
+    <script src="/assets/js/layout.js"></script>
+    <script src="/assets/js/document-icons.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Script để mở/đóng các section nếu cần thêm trong tương lai
+        // Tự động mở tất cả các section
+        const sections = document.querySelectorAll(".document-section");
+        sections.forEach((section) => section.classList.add("active"));
+
+        // Giữ lại chức năng click để đóng/mở
+        const sectionHeaders = document.querySelectorAll(".section-header");
+        sectionHeaders.forEach((header) =>
+          header.addEventListener("click", () =>
+            header.parentElement.classList.toggle("active")
+          )
+        );
       });
     </script>
-    <script src="/assets/js/layout.js"></script>
   </body>
 </html>

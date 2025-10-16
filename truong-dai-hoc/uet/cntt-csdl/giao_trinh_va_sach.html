@@ -34,7 +34,6 @@
             </div>
             <div class="section-content">
               <a href="#" class="document-item coming-soon">
-                <i class="fas fa-book-open"></i>
                 <span>Giáo trình Cơ sở dữ liệu - Đang cập nhật</span>
               </a>
             </div>
@@ -45,5 +44,21 @@
 
     <div id="footer-placeholder"></div>
     <script src="/assets/js/layout.js"></script>
+    <script src="/assets/js/document-icons.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tự động mở tất cả các section
+        const sections = document.querySelectorAll(".document-section");
+        sections.forEach((section) => section.classList.add("active"));
+
+        // Giữ lại chức năng click để đóng/mở
+        const sectionHeaders = document.querySelectorAll(".section-header");
+        sectionHeaders.forEach((header) =>
+          header.addEventListener("click", () =>
+            header.parentElement.classList.toggle("active")
+          )
+        );
+      });
+    </script>
   </body>
 </html>

@@ -348,6 +348,19 @@ ul {
   color: var(--dark-color);
   text-decoration: none;
   font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Icon styling for document items */
+.document-item i {
+  font-size: 20px;
+  margin-right: 12px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.document-item:hover i {
+  transform: scale(1.1);
 }
 .section-content .sub-heading {
   font-size: 0.9rem;

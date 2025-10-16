@@ -62,14 +62,12 @@
                 href="/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach/sach-algorithms-4th-ed-viewer.html"
                 class="document-item"
               >
-                <i class="fas fa-book-journal-whills"></i>
                 <span>Sách Algorithms 4th Ed - Sedgewick & Wayne</span>
               </a>
               <a
                 href="/truong-dai-hoc/uet/cntt-ctdlgt/giao_trinh_va_sach/website-algorithms-4th-ed-viewer.html"
                 class="document-item"
               >
-                <i class="fas fa-link"></i>
                 <span>Trang web của sách Algorithms 4th Ed</span>
               </a>
             </div>
@@ -81,5 +79,21 @@
     <div id="footer-placeholder"></div>
 
     <script src="/assets/js/layout.js"></script>
+    <script src="/assets/js/document-icons.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tự động mở tất cả các section
+        const sections = document.querySelectorAll(".document-section");
+        sections.forEach((section) => section.classList.add("active"));
+
+        // Giữ lại chức năng click để đóng/mở
+        const sectionHeaders = document.querySelectorAll(".section-header");
+        sectionHeaders.forEach((header) =>
+          header.addEventListener("click", () =>
+            header.parentElement.classList.toggle("active")
+          )
+        );
+      });
+    </script>
   </body>
 </html>
