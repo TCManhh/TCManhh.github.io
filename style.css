@@ -97,14 +97,6 @@ ul {
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
 }
-/* Giảm khoảng trắng phía trên tiêu đề khu vực đầu tiên */
-.university-list {
-  padding-top: 0px; /* Giảm từ 40px */
-}
-
-.university-list .region-title {
-  margin-top: 15px; /* Giảm từ 40px */
-}
 .region-title,
 .faculty-title,
 .section-title {
@@ -204,12 +196,7 @@ ul {
   font-size: 1.1rem;
   color: var(--text-color);
 }
-.subjects-list {
-  padding: 10px 0 80px;
-}
-.subjects-list .faculty-title {
-  margin-top: 15px; /* Giảm từ 20px */
-}
+
 /* --- BỐ CỤC LƯỚI MÔN HỌC ĐA MÀN HÌNH --- */
 
 /* 1. Mặc định cho điện thoại: 2 môn một dòng */
@@ -6603,4 +6590,10 @@ main {
     opacity: 0;
     transform: translateY(-20px);
   }
+}
+/* --- ĐỒNG BỘ KHOẢNG TRẮNG CHO CÁC TIÊU ĐỀ CHÍNH --- */
+.region-title,
+.faculty-title,
+.section-title {
+  margin-top: 30px; /* Đây là khoảng trắng đồng bộ cho tất cả các tiêu đề */
 }
