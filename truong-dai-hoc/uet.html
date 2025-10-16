@@ -137,5 +137,83 @@
 
     <div id="footer-placeholder"></div>
     <script src="/assets/js/layout.js"></script>
+
+    <script>
+      function updateBreadcrumb() {
+        const placeholder = document.getElementById("breadcrumb-placeholder");
+        const schemaScript = document.querySelector(
+          'script[type="application/ld+json"]'
+        );
+
+        if (!placeholder || !schemaScript) {
+          console.warn(
+            "Không tìm thấy placeholder hoặc schema cho breadcrumb."
+          );
+          return;
+        }
+
+        try {
+          const breadcrumbData = JSON.parse(schemaScript.textContent);
+
+          if (
+            breadcrumbData["@type"] === "BreadcrumbList" &&
+            breadcrumbData.itemListElement
+          ) {
+            const nav = document.createElement("nav");
+            nav.className = "breadcrumb";
+            const container = document.createElement("div");
+            container.className = "container";
+            const ol = document.createElement("ol");
+
+            breadcrumbData.itemListElement.forEach((item) => {
+              const li = document.createElement("li");
+              if (item.item) {
+                const a = document.createElement("a");
+                a.href = item.item;
+                a.textContent = item.name;
+                li.appendChild(a);
+              } else {
+                li.textContent = item.name;
+                li.classList.add("active");
+              }
+              ol.appendChild(li);
+            });
+
+            container.appendChild(ol);
+            nav.appendChild(container);
+            placeholder.replaceWith(nav);
+          }
+        } catch (e) {
+          console.error("Lỗi khi tạo breadcrumb từ schema:", e);
+        }
+      }
+    </script>
+
+    <script>
+      function fitTextOnOneLine(selector) {
+        const element = document.querySelector(selector);
+        if (!element) return;
+
+        element.style.fontSize = "";
+
+        let currentSize = parseFloat(window.getComputedStyle(element).fontSize);
+        const minSize = 10;
+
+        while (
+          element.scrollWidth > element.clientWidth &&
+          currentSize > minSize
+        ) {
+          currentSize--;
+          element.style.fontSize = currentSize + "px";
+        }
+      }
+
+      function runLayoutScripts() {
+        fitTextOnOneLine(".university-hero-info p");
+      }
+
+      window.addEventListener("DOMContentLoaded", runLayoutScripts);
+      window.addEventListener("resize", runLayoutScripts);
+    </script>
   </body>
 </html>

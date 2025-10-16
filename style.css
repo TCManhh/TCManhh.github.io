@@ -200,7 +200,11 @@ ul {
   color: var(--text-color);
 }
 .subjects-list {
-  padding: 40px 0 80px;
+  padding: 10px 0 80px;
+}
+.subjects-list .faculty-title {
+  /* Bỏ hoàn toàn lề trên của riêng tiêu đề "Khoa" đầu tiên */
+  margin-top: 20px; /* Giảm từ 20px */
 }
 .subject-grid {
   display: grid;
@@ -1130,14 +1134,46 @@ body.viewer-wide .document-viewer {
   .upload-box {
     padding: 30px 20px;
   }
-  .university-hero .container {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
+  .university-hero {
+    padding: 20px 0; /* Giảm padding thêm một chút */
   }
+
+  .university-hero .container {
+    flex-direction: row;
+    text-align: left;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .university-hero-logo {
+    /* THAY ĐỔI: Thu nhỏ logo hơn nữa để phù hợp khi tên trường có 2 dòng */
+    width: 60px;
+    height: 60px;
+  }
+
   .university-hero-info h1 {
-    font-size: 1.8rem;
-    line-height: 1.3;
+    /* THAY ĐỔI: Giảm kích thước font chữ mặc định */
+    font-size: 1.25rem;
+    line-height: 1.4;
+
+    /* --- PHẦN QUAN TRỌNG: Giới hạn tên trường trong 2 dòng --- */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Số dòng tối đa được phép */
+    -webkit-box-orient: vertical;
+  }
+
+  .university-hero-info p {
+    margin-top: 4px;
+
+    /* --- THAY ĐỔI: Font chữ linh hoạt & Buộc trên 1 dòng --- */
+    white-space: nowrap; /* Luôn giữ trên 1 dòng */
+    overflow: hidden; /* Ẩn phần bị tràn */
+    text-overflow: ellipsis; /* Hiển thị '...' nếu vẫn quá dài */
+
+    /* Font chữ sẽ tự co giãn theo chiều rộng màn hình */
+    font-size: clamp(0.25rem, 3.5vw, 0.9rem);
   }
   .page-header h1 {
     font-size: 2rem;
