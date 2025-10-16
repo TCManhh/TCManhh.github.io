@@ -1314,6 +1314,16 @@ a.document-item:hover {
 }
 .comment-main-form .form-content {
   width: 100%;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.comment-main-form.active .form-content {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.12);
 }
 .comment-main-form input[type="text"],
 .comment-main-form textarea {
@@ -1322,16 +1332,18 @@ a.document-item:hover {
   border-bottom: 1px solid var(--border-color);
   padding: 8px 10px;
   font-size: 0.95rem;
-  background: transparent;
+  background: #fafafa;
   font-family: var(--font-family);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
   resize: none;
   word-wrap: break-word;
+  border-radius: 6px;
 }
 .comment-main-form input[type="text"]:focus,
 .comment-main-form textarea:focus {
   outline: none;
   border-bottom: 2px solid var(--primary-color);
+  background-color: #fff;
 }
 .comment-main-form .form-actions {
   display: none;
@@ -1341,6 +1353,58 @@ a.document-item:hover {
 }
 .comment-main-form.active .form-actions {
   display: flex;
+}
+.reply-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 16px;
+}
+.reply-box .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--light-color);
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+}
+.reply-box .form-content {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.reply-box .form-content:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.12);
+}
+.reply-box textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  background: #fafafa;
+  font-family: var(--font-family);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  resize: none;
+  word-wrap: break-word;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.reply-box textarea:focus {
+  outline: none;
+  border-bottom: 2px solid var(--primary-color);
+  background-color: #fff;
+}
+.reply-box .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
 }
 .comments-list {
   display: flex;
