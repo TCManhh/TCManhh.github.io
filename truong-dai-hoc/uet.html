@@ -188,32 +188,5 @@
         }
       }
     </script>
-
-    <script>
-      function fitTextOnOneLine(selector) {
-        const element = document.querySelector(selector);
-        if (!element) return;
-
-        element.style.fontSize = "";
-
-        let currentSize = parseFloat(window.getComputedStyle(element).fontSize);
-        const minSize = 10;
-
-        while (
-          element.scrollWidth > element.clientWidth &&
-          currentSize > minSize
-        ) {
-          currentSize--;
-          element.style.fontSize = currentSize + "px";
-        }
-      }
-
-      function runLayoutScripts() {
-        fitTextOnOneLine(".university-hero-info p");
-      }
-
-      window.addEventListener("DOMContentLoaded", runLayoutScripts);
-      window.addEventListener("resize", runLayoutScripts);
-    </script>
   </body>
 </html>

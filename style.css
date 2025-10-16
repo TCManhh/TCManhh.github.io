@@ -97,8 +97,13 @@ ul {
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
 }
+/* Giảm khoảng trắng phía trên tiêu đề khu vực đầu tiên */
 .university-list {
-  padding: 40px 0 80px;
+  padding-top: 0px; /* Giảm từ 40px */
+}
+
+.university-list .region-title {
+  margin-top: 15px; /* Giảm từ 40px */
 }
 .region-title,
 .faculty-title,
@@ -203,13 +208,29 @@ ul {
   padding: 10px 0 80px;
 }
 .subjects-list .faculty-title {
-  /* Bỏ hoàn toàn lề trên của riêng tiêu đề "Khoa" đầu tiên */
-  margin-top: 20px; /* Giảm từ 20px */
+  margin-top: 15px; /* Giảm từ 20px */
 }
+/* --- BỐ CỤC LƯỚI MÔN HỌC ĐA MÀN HÌNH --- */
+
+/* 1. Mặc định cho điện thoại: 2 môn một dòng */
 .subject-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* Chia thành 2 cột bằng nhau */
   gap: 20px;
+}
+
+/* 2. Cho máy tính bảng (rộng từ 768px trở lên): 3 môn một dòng */
+@media (min-width: 768px) {
+  .subject-grid {
+    grid-template-columns: repeat(3, 1fr); /* Chia thành 3 cột bằng nhau */
+  }
+}
+
+/* 3. Cho máy tính (rộng từ 1024px trở lên): 5 môn một dòng */
+@media (min-width: 1024px) {
+  .subject-grid {
+    grid-template-columns: repeat(5, 1fr); /* Chia thành 5 cột bằng nhau */
+  }
 }
 .subject-card {
   display: block;
@@ -248,10 +269,20 @@ ul {
 .teachers-list {
   padding: 40px 0 80px;
 }
+/* --- BỐ CỤC LƯỚI CHO CÁC THẺ CHỌN TÀI LIỆU --- */
+
+/* 1. Mặc định cho điện thoại: 2 thẻ một dòng */
 .teacher-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* Chia thành 2 cột bằng nhau */
   gap: 25px;
+}
+
+/* 2. Cho máy tính bảng & máy tính (rộng từ 768px trở lên): 3 thẻ một dòng */
+@media (min-width: 768px) {
+  .teacher-grid {
+    grid-template-columns: repeat(3, 1fr); /* Chia thành 3 cột bằng nhau */
+  }
 }
 .teacher-card {
   display: block;
@@ -1151,29 +1182,30 @@ body.viewer-wide .document-viewer {
     height: 60px;
   }
 
+  /* Tìm trong @media (max-width: 768px) và cập nhật lại toàn bộ khối này */
+
   .university-hero-info h1 {
-    /* THAY ĐỔI: Giảm kích thước font chữ mặc định */
     font-size: 1.25rem;
     line-height: 1.4;
-
-    /* --- PHẦN QUAN TRỌNG: Giới hạn tên trường trong 2 dòng --- */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Số dòng tối đa được phép */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
 
+  /* === THÊM MỚI DÒNG NÀY === */
+  .university-hero-info {
+    overflow: hidden; /* Buộc container này phải ẩn nội dung bị tràn */
+  }
+  /* ========================== */
+
   .university-hero-info p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
     margin-top: 4px;
-
-    /* --- THAY ĐỔI: Font chữ linh hoạt & Buộc trên 1 dòng --- */
-    white-space: nowrap; /* Luôn giữ trên 1 dòng */
-    overflow: hidden; /* Ẩn phần bị tràn */
-    text-overflow: ellipsis; /* Hiển thị '...' nếu vẫn quá dài */
-
-    /* Font chữ sẽ tự co giãn theo chiều rộng màn hình */
-    font-size: clamp(0.25rem, 3.5vw, 0.9rem);
   }
   .page-header h1 {
     font-size: 2rem;
