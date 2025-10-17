@@ -3,4 +3,4 @@ User-agent: *
 Disallow:
 
 # Sitemap location
-Sitemap: https://tcmanhh.github.io/sitemap.xml
+Sitemap: /sitemap.xml
