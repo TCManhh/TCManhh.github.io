@@ -63,48 +63,20 @@ function runPageSpecificScripts() {
 }
 
 /**
- * Tải các thành phần phụ (bình luận, ghi chú tác giả).
+ * Tải các thành phần phụ (ghi chú tác giả).
  */
 function loadSecondaryComponents() {
   const mainElement = document.querySelector("main");
   if (!mainElement) return;
 
-  Promise.all([
-    fetch("/assets/html/author-respect.html").then((res) =>
-      res.ok ? res.text() : ""
-    ),
-    fetch("/assets/html/comments.html").then((res) =>
-      res.ok ? res.text() : ""
-    ),
-  ])
-    .then(([respectHTML, commentsHTML]) => {
-      if (commentsHTML) {
-        if (respectHTML) {
-          mainElement.insertAdjacentHTML("beforeend", respectHTML);
-        }
-
-        // Tách toast ra khỏi commentsHTML để chèn vào body
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = commentsHTML;
-        const toastElement = tempDiv.querySelector("#comments-toast");
-
-        // Chèn phần comments (không có toast) vào main
-        if (toastElement) {
-          toastElement.remove();
-          mainElement.insertAdjacentHTML("beforeend", tempDiv.innerHTML);
-          // Chèn toast trực tiếp vào body để position fixed hoạt động đúng
-          document.body.insertAdjacentElement("beforeend", toastElement);
-        } else {
-          mainElement.insertAdjacentHTML("beforeend", commentsHTML);
-        }
-
-        const script = document.createElement("script");
-        script.src = "/assets/js/comments.js";
-        script.defer = true;
-        document.body.appendChild(script);
+  fetch("/assets/html/author-respect.html")
+    .then((res) => (res.ok ? res.text() : ""))
+    .then((respectHTML) => {
+      if (respectHTML) {
+        mainElement.insertAdjacentHTML("beforeend", respectHTML);
       }
     })
-    .catch((err) => console.warn("Lỗi khi tải các module phụ:", err));
+    .catch((err) => console.warn("Lỗi khi tải module author-respect:", err));
 }
 
 /**
