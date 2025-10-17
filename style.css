@@ -1549,3 +1549,79 @@ main {
     padding: 0 25px;
   }
 }
+
+/* ===================================================================
+   9. CUSTOM PDF VIEWER (Thiết kế nút điều khiển nổi)
+   =================================================================== */
+#pdf-viewer {
+  position: relative; /* Rất quan trọng: để làm gốc cho các nút điều khiển */
+  max-width: 900px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  background-color: #e9e9e9;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden; /* Ẩn các phần thừa */
+}
+
+#pdf-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#pdf-controls {
+  position: absolute; /* Giúp các nút nổi lên trên */
+  bottom: 20px; /* Căn xuống dưới */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10; /* Đảm bảo nó nằm trên PDF */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  background-color: rgba(33, 37, 41, 0.75); /* Nền tối mờ */
+  backdrop-filter: blur(5px); /* Hiệu ứng kính mờ */
+  padding: 8px 15px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  opacity: 0; /* Mặc định sẽ ẩn đi */
+  visibility: hidden;
+  transform: translate(-50%, 10px); /* Hiệu ứng trượt nhẹ lên */
+  transition: all 0.3s ease;
+}
+
+/* Khi người dùng di chuột vào khu vực xem PDF, các nút sẽ hiện ra */
+#pdf-viewer:hover #pdf-controls {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+}
+
+#page-indicator {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff; /* Chữ trắng */
+  white-space: nowrap; /* <-- THÊM DÒNG NÀY */
+}
+
+#pdf-controls .btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  white-space: nowrap; /* Giữ chữ trên 1 hàng */
+}
+
+#pdf-controls .btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  color: #fff;
+}
