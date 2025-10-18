@@ -43,7 +43,7 @@ function currentScales() {
     ? containerWidth / 900
     : containerWidth / 2 / 900;
   return {
-    full: Math.min(baseScale * 1.5, 2.0),
+    full: Math.min(baseScale * 2.5, 2.0),
   };
 }
 
