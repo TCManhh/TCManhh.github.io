@@ -1573,7 +1573,7 @@ main {
 
 /* Khi ở chế độ xem 1 trang, thu hẹp lại kích thước */
 #pdf-viewer.single-page-view {
-  max-width: 1200px;
+  max-width: 1100px;
 }
 
 #canvas-container {
