@@ -55,11 +55,21 @@ async function renderToCanvas(page, scale, canvas, taskKey) {
 
 function currentScales() {
   const containerWidth = Math.max(320, viewerElement.clientWidth);
-  const baseScale = isSinglePageView
-    ? containerWidth / 900
-    : containerWidth / 2 / 900;
+  const isMobile = window.innerWidth <= 1024;
+
+  // Xác định xem có nên dùng tỉ lệ cho 1 trang hay không
+  // Dùng tỉ lệ 1 trang nếu:
+  // 1. Đang ở chế độ xem 1 trang.
+  // 2. Hoặc đang ở chế độ xem 2 trang NHƯNG trên mobile (vì layout đã chuyển sang dọc).
+  const useSinglePageScale =
+    isSinglePageView || (!isSinglePageView && isMobile);
+
+  const baseScale = useSinglePageScale
+    ? containerWidth / 900 // Tỉ lệ cho 1 trang (hoặc 2 trang trên mobile)
+    : containerWidth / 2 / 900; // Tỉ lệ cho 2 trang trên desktop
+
   return {
-    full: Math.min(baseScale * 3.0, 4.0), // Tăng chất lượng để nét trên mobile
+    full: Math.min(baseScale * 3.0, 4.0),
   };
 }
 

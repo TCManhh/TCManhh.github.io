@@ -1370,8 +1370,8 @@ main {
   }
 }
 
-/* --- General Mobile & Tablet (max-width: 768px) --- */
-@media (max-width: 768px) {
+/* --- General Mobile & Tablet (max-width: 1024px) --- */
+@media (max-width: 1024px) {
   html {
     font-size: 90%;
   }
@@ -1525,6 +1525,16 @@ main {
   }
   .document-viewer-section {
     padding: 0.5rem 0;
+  }
+
+  /* Khi ở chế độ 2 trang trên mobile, chuyển layout sang chiều dọc */
+  #pdf-viewer:not(.single-page-view) #canvas-container {
+    flex-direction: column; /* Xếp chồng các slide lên nhau */
+  }
+  /* Khi ở chế độ 2 trang trên mobile, mỗi slide chiếm 100% chiều rộng */
+  #pdf-viewer:not(.single-page-view) #pdf-canvas-left,
+  #pdf-viewer:not(.single-page-view) #pdf-canvas-right {
+    width: 100%; /* Cho mỗi slide rộng ra toàn màn hình */
   }
 }
 
