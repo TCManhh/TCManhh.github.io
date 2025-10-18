@@ -8,92 +8,109 @@
       name="description"
       content="Slide bài giảng chương 1: Mở đầu môn Cơ sở dữ liệu (INT2202) tại UET. Tài liệu được chia sẻ trên StuShare."
     />
-    <meta
-      name="keywords"
-      content="slide, cơ sở dữ liệu, UET, chương 1, INT2202, StuShare, bài giảng"
-    />
-    <link
-      rel="canonical"
-      href="/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c1-viewer.html"
-    />
-    <meta
-      property="og:title"
-      content="Slide: C1 Mở đầu - Cơ sở dữ liệu - StuShare"
-    />
-    <meta
-      property="og:description"
-      content="Slide bài giảng chương 1: Mở đầu môn Cơ sở dữ liệu (INT2202) tại UET."
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c1-viewer.html"
-    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LearningResource",
-        "name": "Slide: C1 Mở đầu - Cơ sở dữ liệu",
-        "description": "Slide bài giảng chương 1 môn Cơ sở dữ liệu (INT2202) tại trường Đại học Công nghệ - ĐHQGHN.",
-        "learningResourceType": "Presentation",
-        "educationalLevel": "University"
-      }
-    </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script>
       pdfjsLib.GlobalWorkerOptions.workerSrc =
         "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
     </script>
-
     <link rel="stylesheet" href="/style.css" />
+    <style>
+      /* Ẩn các nút tải/in mặc định của trình duyệt */
+      #download,
+      #print {
+        display: none !important;
+      }
+      /* Giao diện nổi tùy chỉnh */
+      #stushare-logo {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        display: flex;
+        gap: 6px;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 6px 10px;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+      }
+      #stushare-logo img {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+      }
+      #doc-title-overlay {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.75);
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+      }
+    </style>
   </head>
   <body class="has-fixed-breadcrumb">
+    <div id="stushare-logo">
+      <img src="/assets/img/logo.webp" alt="StuShare Logo" />
+      <span>StuShare</span>
+    </div>
+    <div id="doc-title-overlay">C1 - Mở đầu Cơ sở dữ liệu</div>
     <div id="header-placeholder"></div>
     <div id="breadcrumb-placeholder"></div>
-
     <main>
       <section class="document-viewer-section">
-        <div class="container">
-          <div id="pdf-viewer" data-pdf-url="C1.pdf">
-            <canvas id="pdf-canvas"></canvas>
-
-            <div id="pdf-controls">
-              <button id="prev-page" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Trang Trước
-              </button>
-              <span id="page-indicator">
-                Trang <span id="page-num"></span> /
-                <span id="page-count"></span>
-              </span>
-              <button id="next-page" class="btn btn-secondary">
-                Trang Sau <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
+        <div
+          id="pdf-viewer"
+          data-pdf-url="https://stushare-worker.kysirong2008.workers.dev/?id=1Ns-nJ0nv8JRZ6ioIer1rtxgXnKmlQzE8"
+        >
+          <div id="canvas-container">
+            <canvas id="pdf-canvas-left"></canvas>
+            <canvas id="pdf-canvas-right"></canvas>
+          </div>
+          <div id="pdf-controls">
+            <button id="prev-page" class="btn btn-secondary">
+              <i class="fas fa-arrow-left"></i> Trang Trước
+            </button>
+            <button
+              id="view-toggle-btn"
+              class="btn btn-secondary"
+              title="Chuyển chế độ xem"
+            >
+              <i class="fas fa-file-alt"></i>
+            </button>
+            <span id="page-indicator"
+              >Trang <span id="page-num"></span> / <span id="page-count"></span
+            ></span>
+            <button id="next-page" class="btn btn-secondary">
+              Trang Sau <i class="fas fa-arrow-right"></i>
+            </button>
           </div>
         </div>
       </section>
-
       <div class="container">
         <div id="author-respect-placeholder"></div>
         <div id="comments-placeholder"></div>
       </div>
     </main>
-
     <div id="footer-placeholder"></div>
-
     <script src="/assets/js/layout.js"></script>
     <script src="/assets/js/pdf-viewer.js" defer></script>
-
     <script>
       const viewerArea = document.getElementById("pdf-viewer");
-      if (viewerArea) {
+      if (viewerArea)
         viewerArea.addEventListener("contextmenu", (e) => e.preventDefault());
-      }
+      const titleOverlay = document.getElementById("doc-title-overlay");
+      titleOverlay.textContent = (
+        document.title || "Tài liệu StuShare"
+      ).replace(" - StuShare", "");
     </script>
   </body>
 </html>

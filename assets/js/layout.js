@@ -53,13 +53,15 @@ function runPageSpecificScripts() {
           newScript.textContent = scriptTag.textContent;
           document.body.appendChild(newScript).remove();
         }
+        // ✅ ĐÃ SỬA: Gọi hàm SAU KHI script của nó đã được thêm vào và thực thi
+        updateBreadcrumb();
       });
   }
 
   loadSecondaryComponents();
   setActiveNavLink();
   initializeDocumentSections();
-  updateBreadcrumb();
+  // Lệnh gọi hàm đã được di chuyển vào trong .then() ở trên
 }
 
 /**
