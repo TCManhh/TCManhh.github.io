@@ -1,7 +1,10 @@
-// /assets/js/pdf-viewer.js (Bản tối ưu - Chỉ render ảnh nét)
+// /assets/js/pdf-viewer.js (Bản cải tiến đầy đủ)
 
 const viewerElement = document.getElementById("pdf-viewer");
 const url = viewerElement?.dataset?.pdfUrl || "";
+
+const loadingOverlay = document.getElementById("loading-overlay");
+const loadingProgress = document.getElementById("loading-progress");
 
 const pdfCanvasLeft = document.getElementById("pdf-canvas-left");
 const pdfCanvasRight = document.getElementById("pdf-canvas-right");
@@ -15,6 +18,19 @@ let pdfDoc = null;
 let pageNum = 1;
 let isSinglePageView = true;
 let activeRenderTasks = { left: null, right: null };
+
+function getPageNumFromUrl() {
+  const hash = window.location.hash;
+  if (hash.startsWith("#page=")) {
+    const pageFromUrl = parseInt(hash.substring(6), 10);
+    if (!isNaN(pageFromUrl) && pageFromUrl > 0) {
+      return pageFromUrl;
+    }
+  }
+  return 1;
+}
+
+pageNum = getPageNumFromUrl();
 
 async function renderToCanvas(page, scale, canvas, taskKey) {
   if (activeRenderTasks[taskKey]) {
@@ -43,7 +59,7 @@ function currentScales() {
     ? containerWidth / 900
     : containerWidth / 2 / 900;
   return {
-    full: Math.min(baseScale * 2.5, 2.0),
+    full: Math.min(baseScale * 3.0, 4.0), // Tăng chất lượng để nét trên mobile
   };
 }
 
@@ -80,6 +96,7 @@ async function renderCurrentView() {
     renderPageDirectly(left, pdfCanvasLeft, "left");
     renderPageDirectly(right, pdfCanvasRight, "right");
   }
+  window.location.hash = `#page=${pageNum}`;
 }
 
 function onPrevPage() {
@@ -116,11 +133,26 @@ nextPageBtn.addEventListener("click", onNextPage);
 viewToggleBtn.addEventListener("click", onToggleView);
 
 if (url) {
-  pdfjsLib
-    .getDocument(url)
-    .promise.then((doc) => {
+  const loadingTask = pdfjsLib.getDocument({
+    url: url,
+    onProgress: (progressData) => {
+      if (progressData.total && loadingProgress) {
+        const percent = Math.round(
+          (progressData.loaded / progressData.total) * 100
+        );
+        loadingProgress.textContent = `${percent}%`;
+      }
+    },
+  });
+  loadingTask.promise
+    .then((doc) => {
+      if (loadingOverlay) loadingOverlay.classList.add("hidden");
       pdfDoc = doc;
       pageCountSpan.textContent = pdfDoc.numPages;
+      // Khôi phục trang từ URL hoặc mặc định là trang 1
+      pageNum = getPageNumFromUrl();
+      if (pageNum > doc.numPages) pageNum = 1;
+
       viewerElement.classList.toggle("single-page-view", isSinglePageView);
       viewToggleBtn.innerHTML = isSinglePageView
         ? '<i class="fas fa-book-open"></i>'
@@ -132,6 +164,7 @@ if (url) {
     })
     .catch((err) => {
       console.error("Lỗi nghiêm trọng khi tải PDF:", err);
+      if (loadingOverlay) loadingOverlay.style.display = "none";
       viewerElement.textContent = "Không thể tải file PDF.";
     });
 } else {

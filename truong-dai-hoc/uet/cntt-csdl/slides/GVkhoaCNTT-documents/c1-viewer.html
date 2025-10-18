@@ -4,10 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slide: C1 Mở đầu - Cơ sở dữ liệu - StuShare</title>
-    <meta
-      name="description"
-      content="Slide bài giảng chương 1: Mở đầu môn Cơ sở dữ liệu (INT2202) tại UET. Tài liệu được chia sẻ trên StuShare."
-    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -19,12 +15,10 @@
     </script>
     <link rel="stylesheet" href="/style.css" />
     <style>
-      /* Ẩn các nút tải/in mặc định của trình duyệt */
       #download,
       #print {
         display: none !important;
       }
-      /* Giao diện nổi tùy chỉnh */
       #stushare-logo {
         position: fixed;
         top: 10px;
@@ -69,8 +63,12 @@
       <section class="document-viewer-section">
         <div
           id="pdf-viewer"
-          data-pdf-url="https://stushare-worker.kysirong2008.workers.dev/?id=1PU4vL27tNKKiGCimGphjt7GQig5Vog9r"
+          data-pdf-url="https://stushare-worker.kysirong2008.workers.dev/?id=14j6CJgP9HFdlT9hrTsUnnGfiRlSYThCk"
         >
+          <div id="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p id="loading-text">Đang tải tài liệu...</p>
+          </div>
           <div id="canvas-container">
             <canvas id="pdf-canvas-left"></canvas>
             <canvas id="pdf-canvas-right"></canvas>
