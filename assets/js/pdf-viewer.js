@@ -22,7 +22,6 @@ class PDFViewer {
   initDOM() {
     this.loadingOverlay = document.getElementById("loading-overlay");
     this.loadingProgress = document.getElementById("loading-progress");
-    // ✅ THÊM DÒNG NÀY
     this.canvasContainer = document.getElementById("canvas-container");
     this.pdfCanvasLeft = document.getElementById("pdf-canvas-left");
     this.pdfCanvasRight = document.getElementById("pdf-canvas-right");
@@ -73,36 +72,29 @@ class PDFViewer {
     window.history.replaceState(null, "", `#page=${this.pageNum}`);
   }
 
-  // ✅ HÀM NÀY ĐÃ ĐƯỢC CẬP NHẬT HOÀN TOÀN
   async renderCurrentView() {
     if (!this.pdfDoc || !this.canvasContainer) return;
 
-    // 1. Bắt đầu hiệu ứng: Làm mờ container
     this.canvasContainer.classList.add("pdf-page-transitioning");
-
-    // 2. Chờ một chút để hiệu ứng fade-out kịp diễn ra
     await new Promise((resolve) => setTimeout(resolve, 150));
 
-    // 3. Render trang mới (khi container đang trong suốt)
     if (this.isSinglePageView) {
       this.pageNum = Math.min(Math.max(1, this.pageNum), this.pdfDoc.numPages);
       this.pageNumSpan.textContent = this.pageNum;
       await this.renderPageDirectly(this.pageNum, this.pdfCanvasLeft, "left");
-      this.renderPageDirectly(0, this.pdfCanvasRight, "right"); // Vẫn gọi để ẩn đi
+      this.renderPageDirectly(0, this.pdfCanvasRight, "right");
     } else {
       let left = this.pageNum % 2 !== 0 ? this.pageNum : this.pageNum - 1;
       if (left < 1) left = 1;
       const right = left + 1;
       this.pageNumSpan.textContent =
         right <= this.pdfDoc.numPages ? `${left}-${right}` : `${left}`;
-      // Render song song để tăng tốc
       await Promise.all([
         this.renderPageDirectly(left, this.pdfCanvasLeft, "left"),
         this.renderPageDirectly(right, this.pdfCanvasRight, "right"),
       ]);
     }
 
-    // 4. Cập nhật URL và hiển thị lại container với nội dung mới
     this.updateUrlHash();
     this.canvasContainer.classList.remove("pdf-page-transitioning");
   }
@@ -162,7 +154,7 @@ class PDFViewer {
         this.viewToggleBtn.title = this.isSinglePageView
           ? "Xem hai trang"
           : "Xem một trang";
-        // Render lần đầu không cần hiệu ứng
+
         const originalRender = async () => {
           if (this.isSinglePageView) {
             this.pageNumSpan.textContent = this.pageNum;
@@ -196,10 +188,16 @@ class PDFViewer {
   async renderToCanvas(page, scale, canvas, taskKey) {
     if (this.activeRenderTasks[taskKey])
       this.activeRenderTasks[taskKey].cancel();
+
     const viewport = page.getViewport({ scale });
     const ctx = canvas.getContext("2d", { alpha: false });
     canvas.width = Math.floor(viewport.width);
     canvas.height = Math.floor(viewport.height);
+
+    // ✅ Dùng CSS để canvas hiển thị đúng kích thước logic, trình duyệt sẽ tự scale down
+    canvas.style.width = `100%`;
+    canvas.style.height = `auto`;
+
     const renderContext = { canvasContext: ctx, viewport };
     const renderTask = page.render(renderContext);
     this.activeRenderTasks[taskKey] = renderTask;
@@ -213,14 +211,11 @@ class PDFViewer {
     }
   }
 
-  currentScales() {
-    const containerWidth = Math.max(320, this.viewerElement.clientWidth);
-    const baseScale = this.isSinglePageView
-      ? containerWidth / 900
-      : containerWidth / 2 / 900;
-    return { full: Math.min(baseScale * 3.0, 4.0) };
-  }
+  // ✅ HÀM NÀY ĐÃ BỊ XÓA: currentScales()
+  // Lý do: Logic tính toán scale đã được chuyển trực tiếp vào renderPageDirectly
+  // để sử dụng kích thước thực tế của trang PDF, giúp kết quả chính xác hơn.
 
+  // ✅ HÀM ĐÃ ĐƯỢC SỬA LỖI - PHIÊN BẢN CUỐI CÙNG
   async renderPageDirectly(pageIndex, canvas, taskKey) {
     if (!this.pdfDoc || pageIndex < 1 || pageIndex > this.pdfDoc.numPages) {
       if (this.activeRenderTasks[taskKey])
@@ -229,14 +224,40 @@ class PDFViewer {
       canvas.style.visibility = "hidden";
       return;
     }
+
     const page = await this.pdfDoc.getPage(pageIndex);
-    const scales = this.currentScales();
+
+    // 1. Lấy viewport gốc của trang (scale = 1) để biết kích thước thực
+    const viewportDefault = page.getViewport({ scale: 1 });
+
+    // 2. Xác định chiều rộng của khung chứa slide
+    const containerWidth = this.pdfCanvasLeft.parentElement.clientWidth;
+
+    // ✅ SỬA LỖI LOGIC QUAN TRỌNG:
+    // Luôn sử dụng TOÀN BỘ chiều rộng của khung chứa để tính toán scale,
+    // bất kể đang ở chế độ 1 hay 2 trang.
+    // Điều này đảm bảo mỗi slide được render với độ phân giải gốc như nhau.
+    const scaleCalculationWidth = containerWidth;
+
+    // 3. Tính toán scale cơ bản dựa trên chiều rộng đã xác định ở trên.
+    // Giờ đây, baseScale sẽ có giá trị cao và nhất quán ở cả 2 chế độ.
+    const baseScale = scaleCalculationWidth / viewportDefault.width;
+
+    // 4. Lấy tỷ lệ pixel của thiết bị để render sắc nét trên màn hình HiDPI/Retina
+    const dpr = window.devicePixelRatio || 1;
+
+    // 5. Tính toán scale cuối cùng để render
+    const finalScale = Math.min(baseScale * dpr, 4.0);
+
+    // 6. Sử dụng một canvas tạm để render
     const tempCanvas = document.createElement("canvas");
-    await this.renderToCanvas(page, scales.full, tempCanvas, `${taskKey}-temp`);
+    await this.renderToCanvas(page, finalScale, tempCanvas, `${taskKey}-temp`);
+
     const mainCtx = canvas.getContext("2d");
     canvas.width = tempCanvas.width;
     canvas.height = tempCanvas.height;
     mainCtx.drawImage(tempCanvas, 0, 0);
+
     canvas.style.visibility = "visible";
   }
 }
