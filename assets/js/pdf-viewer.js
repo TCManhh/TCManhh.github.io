@@ -76,7 +76,7 @@ class PDFViewer {
     if (!this.pdfDoc || !this.canvasContainer) return;
 
     this.canvasContainer.classList.add("pdf-page-transitioning");
-    await new Promise((resolve) => setTimeout(resolve, 150));
+    await new Promise((resolve) => setTimeout(resolve, 75));
 
     if (this.isSinglePageView) {
       this.pageNum = Math.min(Math.max(1, this.pageNum), this.pdfDoc.numPages);

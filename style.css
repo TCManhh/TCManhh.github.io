@@ -1561,67 +1561,74 @@ main {
   }
 }
 
+/* /style.css */
+
 /* ===================================================================
-   9. CUSTOM PDF VIEWER (Cập nhật hiệu ứng chuyển động)
+   9. CUSTOM PDF VIEWER (Bản tăng tốc)
    =================================================================== */
 #pdf-viewer {
   position: relative;
   width: 100%;
-  max-width: 1800px; /* Chiều rộng tối đa cho chế độ xem 2 trang */
+  max-width: 1800px;
   margin: 0 auto;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-  background-color: #f0f0f0; /* Nền xám nhạt hơn */
+  background-color: #f0f0f0;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   overflow: hidden;
-  /* Hiệu ứng chuyển động mượt mà hơn khi đổi chế độ */
-  transition: max-width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  /* ✅ TĂNG TỐC: Giảm thời gian từ 0.65s xuống 0.4s */
+  transition: max-width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Khi ở chế độ xem 1 trang, thu hẹp lại kích thước */
+/* Khi ở chế độ xem 1 trang, thu hẹp lại kích thước viewer */
 #pdf-viewer.single-page-view {
   max-width: 1100px;
 }
 
 #canvas-container {
   display: flex;
-  justify-content: center; /* Căn giữa các slide */
-  gap: 12px; /* Khoảng cách giữa 2 slide */
+  justify-content: center;
+  gap: 12px;
   padding: 12px;
-  /* Bỏ cuộn ngang */
-  overflow-x: hidden;
+  align-items: flex-start;
+  /* ✅ TĂNG TỐC: Giảm thời gian từ 0.15s xuống 0.075s */
+  transition: opacity 0.075s ease-in-out;
+  will-change: opacity;
+}
+
+#pdf-viewer.single-page-view #canvas-container {
+  gap: 0;
 }
 
 #pdf-canvas-left,
 #pdf-canvas-right {
-  /* ✅ THAY ĐỔI: Mỗi slide chiếm 50% chiều rộng */
   width: 50%;
   height: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  border-radius: 4px; /* Bo góc nhẹ cho trang giấy */
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease,
-    width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+  flex-shrink: 0;
+  /* ✅ TĂNG TỐC: Giảm thời gian từ 0.65s/0.5s xuống 0.4s/0.3s */
+  transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.3s cubic-bezier(0.65, 0, 0.35, 1),
+    transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* ✅ THAY ĐỔI: Đơn giản hóa logic hiển thị */
-/* Khi ở chế độ 1 trang, ẩn hoàn toàn slide bên phải */
-#pdf-viewer.single-page-view #pdf-canvas-right {
-  display: none;
-}
-
-/* Khi chuyển sang chế độ 1 trang, trang trái sẽ chiếm toàn bộ không gian */
+/* Chuyển sang chế độ 1 trang */
 #pdf-viewer.single-page-view #pdf-canvas-left {
   width: 100%;
 }
 
-/* Khi ở chế độ 2 trang, hiện slide bên phải */
-#pdf-viewer:not(.single-page-view) #pdf-canvas-right {
-  display: block;
+#pdf-viewer.single-page-view #pdf-canvas-right {
+  width: 0;
+  opacity: 0;
+  transform: translateX(20%) scale(0.95);
+  pointer-events: none;
 }
 
+/* === PHẦN NÚT ĐIỀU KHIỂN (Giữ nguyên) === */
 #pdf-controls {
   position: absolute;
   bottom: 20px;
@@ -1632,21 +1639,21 @@ main {
   align-items: center;
   gap: 15px;
   background-color: rgba(33, 37, 41, 0.75);
-  backdrop-filter: blur(8px); /* Tăng độ mờ */
+  backdrop-filter: blur(8px);
   padding: 8px 15px;
   border-radius: 50px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
-  /* Hiệu ứng xuất hiện từ dưới lên */
   transform: translate(-50%, 20px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Hiện các nút khi di chuột vào khung viewer */
 #pdf-viewer:hover #pdf-controls {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, 0); /* Trở về vị trí cũ */
+  transform: translate(-50%, 0);
 }
 
 #page-indicator {
@@ -1663,14 +1670,14 @@ main {
   padding: 6px 16px;
   font-size: 0.9rem;
   white-space: nowrap;
-  transition: all 0.2s ease; /* Thêm hiệu ứng cho nút */
+  transition: all 0.2s ease;
 }
 
 #pdf-controls .btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
   border-color: #fff;
   color: #fff;
-  transform: translateY(-2px); /* Hiệu ứng nhấc lên khi hover */
+  transform: translateY(-2px);
 }
 
 #view-toggle-btn {
@@ -1683,10 +1690,13 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  /* z-index phải cao hơn canvas nhưng thấp hơn các nút điều khiển */
   z-index: 5;
-  background-color: transparent; /* Hoàn toàn trong suốt */
-  cursor: default; /* Giữ con trỏ chuột mặc định */
+  background-color: transparent;
+  cursor: default;
+}
+
+#canvas-container.pdf-page-transitioning {
+  opacity: 0;
 }
 
 /* ===================================================================
