@@ -1724,3 +1724,21 @@ main {
     transform: rotate(360deg);
   }
 }
+/* ===================================================================
+   PHẦN THÊM VÀO: HIỆU ỨNG CHUYỂN TRANG MƯỢT MÀ
+   =================================================================== */
+
+#canvas-container {
+  /* Yêu cầu trình duyệt chuyển động mượt mà các thay đổi về độ mờ */
+  transition: opacity 0.15s ease-in-out;
+
+  /* Gợi ý cho trình duyệt để tối ưu hiệu năng animation */
+  will-change: opacity;
+}
+
+/* Đây là lớp CSS chúng ta sẽ dùng JavaScript để kích hoạt.
+  Nó sẽ làm cho toàn bộ khu vực chứa slide trở nên trong suốt.
+*/
+#canvas-container.pdf-page-transitioning {
+  opacity: 0;
+}
