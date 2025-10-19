@@ -70,7 +70,7 @@
         "url": "/",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "/search-results.html?q={search_term_string}",
+          "target": "/docs/search/search-results.html?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       }
@@ -354,7 +354,7 @@
         function performSearch() {
           const query = searchInput.value.trim();
           if (query) {
-            window.location.href = `/search-results.html?q=${encodeURIComponent(
+            window.location.href = `/docs/search/search-results.html?q=${encodeURIComponent(
               query
             )}`;
           }

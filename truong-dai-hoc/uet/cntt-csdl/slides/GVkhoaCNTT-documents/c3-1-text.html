@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      Chương 3: Mô hình dữ liệu quan hệ - Nhập môn Cơ sở Dữ liệu - StuShare
+    </title>
+    <meta
+      name="description"
+      content="Tài liệu học tập đầy đủ về Mô hình dữ liệu quan hệ do tiến sĩ E. F. Codd đề xuất, bao gồm các khái niệm quan hệ, thuộc tính, lược đồ, ràng buộc toàn vẹn, khóa chính, khóa ngoại và chuyển đổi lược đồ ER sang lược đồ quan hệ."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c3-1-viewer.html"
+    />
+
+    <!-- Tăng tốc load viewer -->
+    <link
+      rel="preconnect"
+      href="https://stushare-worker.kysirong2008.workers.dev"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link
+      rel="dns-prefetch"
+      href="//stushare-worker.kysirong2008.workers.dev"
+    />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+
+    <!-- Redirect an toàn: nhanh (~1s) nhưng vẫn cho Google render -->
+    <meta http-equiv="refresh" content="1;url=c3-1-viewer.html" />
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          location.replace("c3-1-viewer.html");
+        }, 300);
+      });
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="1;url=c3-1-viewer.html" />
+    </noscript>
+  </head>
+  <body>
+    <h1>Chương 3: Mô hình dữ liệu quan hệ</h1>
+    <p><em>Khóa học: Nhập môn Cơ sở Dữ liệu</em></p>
+    <p><em>Khoa Công nghệ thông tin - Đại học Công nghệ - ĐHQGHN</em></p>
+    <p>
+      <em>Người dùng sẽ được chuyển sang trang trình chiếu sau ít giây...</em>
+    </p>
+
+    <h2>Giới thiệu</h2>
+    <p>
+      Mô hình dữ liệu quan hệ do tiến sĩ E. F. Codd đề xuất trong bài báo "A
+      Relation Model for Large Shared Data Banks", Communications of ACM, tháng
+      6/1970.
+    </p>
+
+    <h3>Đặc điểm của Mô hình quan hệ</h3>
+    <ul>
+      <li>Cung cấp một cấu trúc dữ liệu đơn giản và đồng bộ</li>
+      <li>Có nền tảng lý thuyết vững chắc: Lý thuyết tập hợp</li>
+      <li>
+        Là cơ sở của nhiều HQT CSDL thương mại: Oracle, DB2, SQL Server...
+      </li>
+      <li>
+        Mô hình quan hệ biểu diễn các sự kiện về thực thể hoặc các sự kiện về
+        liên kết dưới dạng các quan hệ
+      </li>
+      <li>
+        Mỗi (trạng thái) quan hệ được biểu thị như bảng các dữ liệu gồm các
+        dòng, các cột cùng các ràng buộc
+      </li>
+      <li>
+        Mỗi dòng là tập các giá trị là dữ liệu về một thực thể hay các sự kiện
+        có liên quan (liên kết) về thực thể
+      </li>
+      <li>Mỗi cột là một thuộc tính</li>
+    </ul>
+
+    <h2>Nội dung chính</h2>
+    <ol>
+      <li>Các khái niệm của mô hình dữ liệu quan hệ</li>
+      <li>Các đặc trưng của quan hệ</li>
+      <li>Chuyển lược đồ ER sang lược đồ quan hệ</li>
+      <li>Các phép toán trên quan hệ (Đại số quan hệ)</li>
+    </ol>
+
+    <h2>1. Các khái niệm cơ bản của mô hình quan hệ</h2>
+
+    <h3>1.1 Quan hệ (Relation)</h3>
+    <p>
+      Các thông tin lưu trữ trong CSDL được tổ chức thành bảng (table) 2 chiều
+      gọi là quan hệ.
+    </p>
+
+    <h4>Ví dụ bảng NHANVIEN:</h4>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>HONV</th>
+          <th>TENNV</th>
+          <th>NS</th>
+          <th>DIACHI</th>
+          <th>GT</th>
+          <th>LUONG</th>
+          <th>PHG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tung</td>
+          <td>Nguyen</td>
+          <td>12/08/1955</td>
+          <td>638 NVC Q5</td>
+          <td>Nam</td>
+          <td>40000</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Hang</td>
+          <td>Bui</td>
+          <td>07/19/1968</td>
+          <td>332 NTH Q1</td>
+          <td>Nu</td>
+          <td>25000</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Nhu</td>
+          <td>Le</td>
+          <td>06/20/1951</td>
+          <td>291 HVH QPN</td>
+          <td>Nu</td>
+          <td>43000</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Hung</td>
+          <td>Nguyen</td>
+          <td>09/15/1962</td>
+          <td>Ba Ria VT</td>
+          <td>Nam</td>
+          <td>38000</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Trong đó:</p>
+    <ul>
+      <li>1 cột là 1 thuộc tính của nhân viên</li>
+      <li>1 dòng là 1 nhân viên</li>
+      <li>Tên quan hệ là NHANVIEN</li>
+    </ul>
+
+    <h4>Quan hệ gồm:</h4>
+    <ul>
+      <li><strong>Tên</strong></li>
+      <li>
+        <strong>Tập hợp các cột</strong>: Được đặt tên, có kiểu dữ liệu cố định
+      </li>
+      <li><strong>Tập hợp các dòng</strong>: Thay đổi theo thời gian</li>
+    </ul>
+
+    <p>
+      Ký hiệu lược đồ quan hệ: NHANVIEN(HONV, TENNV, NS, DIACHI, GT, LUONG, PHG)
+    </p>
+    <p>Cấp của quan hệ là số thuộc tính trong quan hệ.</p>
+
+    <p>Quan sát:</p>
+    <ul>
+      <li>Một dòng ~ Một thực thể, hay một sự kiện liên quan</li>
+      <li>Một cột (trường) ~ Một thuộc tính</li>
+      <li>Quan hệ ~ Tập thực thể, tập sự kiện</li>
+    </ul>
+
+    <h3>1.2 Thuộc tính (Attribute)</h3>
+    <p>
+      Thuộc tính là tên các cột của quan hệ, mô tả ý nghĩa cho các giá trị tại
+      cột đó.
+    </p>
+    <p>
+      Tất cả các dữ liệu trong một cột đều có cùng kiểu dữ liệu, các giá trị là
+      nguyên tố.
+    </p>
+
+    <h3>1.3 Miền giá trị (Domain)</h3>
+    <p>
+      Là tập các giá trị nguyên tố (không thể phân chia trong phạm vi mô hình
+      quan hệ) gắn với một thuộc tính.
+    </p>
+    <p>
+      Kí hiệu Dom(A) là miền giá trị của A; tức là các giá trị A có thể nhận.
+    </p>
+
+    <h4>Kiểu dữ liệu cơ sở:</h4>
+    <ul>
+      <li>Chuỗi ký tự (string)</li>
+      <li>Số (integer)</li>
+      <li>
+        Các kiểu dữ liệu phức tạp: Tập hợp (set), Danh sách (list), Mảng (array)
+        - Không được chấp nhận
+      </li>
+    </ul>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>TENNV: string</li>
+      <li>LUONG: integer</li>
+      <li>Điểm: 0...10</li>
+    </ul>
+
+    <h3>1.4 Bộ (Tuple)</h3>
+    <p>
+      Thể hiện dữ liệu cụ thể các thuộc tính của một thực thể hay sự kiện liên
+      quan trong quan hệ.
+    </p>
+    <p>
+      Là các dòng (dữ liệu) của quan hệ (trừ dòng tiêu đề - tên của các thuộc
+      tính).
+    </p>
+
+    <p>Ví dụ: &lt;Tung, Nguyen, 12/08/1955, 638 NVC, Q5, Nam, 40000, 5&gt;</p>
+    <p>Dữ liệu cụ thể của thuộc tính.</p>
+
+    <h4>Ví dụ các bảng quan hệ:</h4>
+
+    <p><strong>Bảng SINHVIEN:</strong></p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Masv</th>
+          <th>Ho</th>
+          <th>Dem</th>
+          <th>Ten</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>T1</td>
+          <td>Trần</td>
+          <td>Văn</td>
+          <td>An</td>
+        </tr>
+        <tr>
+          <td>C2</td>
+          <td>Lê</td>
+          <td>Đình</td>
+          <td>Bắc</td>
+        </tr>
+        <tr>
+          <td>T3</td>
+          <td>Trần</td>
+          <td>Thị</td>
+          <td>Hảo</td>
+        </tr>
+        <tr>
+          <td>T4</td>
+          <td>Vũ</td>
+          <td>Đức</td>
+          <td>Lâm</td>
+        </tr>
+        <tr>
+          <td>C3</td>
+          <td>Phạm</td>
+          <td>Hải</td>
+          <td>Ngọc</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Bảng SV_DIEM:</strong></p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Masv</th>
+          <th>Mamon</th>
+          <th>Diem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>T1</td>
+          <td>Int1001</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>T1</td>
+          <td>Int1002</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>C2</td>
+          <td>Int1003</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>C2</td>
+          <td>Int1002</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>T3</td>
+          <td>Int1003</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>T4</td>
+          <td>Int1002</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>C2</td>
+          <td>Int1001</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>T4</td>
+          <td>Int1001</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>C3</td>
+          <td>Int1003</td>
+          <td>6</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Bảng MONHOC:</strong></p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Mamon</th>
+          <th>Tenmon</th>
+          <th>Sotinchi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Int1001</td>
+          <td>CSDL</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Int1002</td>
+          <td>NGLT C</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Int1003</td>
+          <td>TRR</td>
+          <td>3</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>1.5 Lược đồ quan hệ (Relation Schema)</h3>
+    <p>Lược đồ quan hệ: Kí hiệu biểu diễn một quan hệ bao gồm:</p>
+    <ul>
+      <li>Tên của quan hệ</li>
+      <li>Tên của tập thuộc tính</li>
+    </ul>
+
+    <p>Ví dụ: NHANVIEN(MANV, TENNV, HONV, NS, DIACHI, GT, LUONG, PHG)</p>
+
+    <h4>Định nghĩa chính thức:</h4>
+    <p>Một lược đồ quan hệ R trên tập các thuộc tính A₁, A₂,..., Aₙ</p>
+    <p>Kí hiệu là R(A₁, A₂,..., Aₙ)</p>
+    <p>Hoặc R(Ω, F) với Ω: tập các thuộc tính; F: tập các ràng buộc</p>
+
+    <p>
+      Một quan hệ (hay trạng thái quan hệ) r, kí hiệu là r(R) của lược đồ R là
+      tập con của D₁ × D₂ × ... × Dₙ;
+    </p>
+    <p>Với Dᵢ = Dom(Aᵢ);</p>
+    <p>Hay nói các khác, Quan hệ là tập hợp các n-bộ (n-tuples)</p>
+    <p>
+      Tức là r(R) = {t₁, t₂,.., tₖ | tᵢ = &lt;d₁, d₂,.., dₙ&gt;; với dᵢ ∈ Dᵢ}
+    </p>
+
+    <h4>Ví dụ minh họa:</h4>
+    <p>Giả sử có:</p>
+    <ul>
+      <li>SBD = {QHI01, QHI02, QHI03}</li>
+      <li>HT = {Nguyễn Đình Minh, Vũ Vân Long, Ngô Đức Dũng}</li>
+      <li>NS = {01/01/2001, 13/5/2002, 19/08/1998, 25/12/1995}</li>
+    </ul>
+
+    <p>Các bộ:</p>
+    <ul>
+      <li>t1 = &lt;QHI02, Nguyễn Đình Minh, 25/12/1995&gt;</li>
+      <li>t2 = &lt;QHI01, Vũ Vân Long, 01/01/2001&gt;</li>
+      <li>t3 = &lt;QHI03, Ngô Đức Dũng, 19/08/1998&gt;</li>
+    </ul>
+
+    <p>r = {t1, t2, t3} tức là quan hệ:</p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>SBD</th>
+          <th>Hoten</th>
+          <th>Ngaysinh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>QHI01</td>
+          <td>Vũ Vân Long</td>
+          <td>01/01/2001</td>
+        </tr>
+        <tr>
+          <td>QHI02</td>
+          <td>Nguyễn Đình Minh</td>
+          <td>25/12/1995</td>
+        </tr>
+        <tr>
+          <td>QHI03</td>
+          <td>Ngô Đức Dũng</td>
+          <td>19/08/1998</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Lược đồ: THISINH(SBD, HT, NS)</p>
+
+    <h3>1.6 Lược đồ CSDL (Database Schema)</h3>
+    <p>
+      Lược đồ cơ sở dữ liệu quan hệ là tập các lược đồ quan hệ và các ràng buộc.
+    </p>
+
+    <p>Ví dụ - Lược đồ cơ sở dữ liệu: Cty</p>
+    <ul>
+      <li>NHANVIEN(MANV, TENNV, HONV, NS, DIACHI, GT, LUONG, PHG)</li>
+      <li>PHONGBAN(MAPHG, TENPHG, TRPHG, NG_NHANCHUC)</li>
+      <li>DIADIEM_PHG(MAPHG, DIADIEM)</li>
+      <li>THANNHAN(MA_NVIEN, TENTN, GT, NS, QUANHE)</li>
+      <li>DEAN(TENDA, MADA, DDIEM_DA, PHONG)</li>
+    </ul>
+
+    <h3>Tóm tắt các ký hiệu thường sử dụng</h3>
+    <ul>
+      <li>Tên quan hệ: R, S, P, Q,..</li>
+      <li>Thuộc tính: A₁, A₂,..., Aₙ</li>
+      <li>Miền giá trị của thuộc tính A: DOM(A)</li>
+      <li>Lược đồ quan hệ R cấp n: R(A₁, A₂,..., Aₙ)</li>
+      <li>Bộ: t, u, v,..</li>
+      <li>Trạng thái của lược đồ quan hệ R: r(R)</li>
+      <li>Giá trị tại thuộc tính A của bộ t: t.A hay t[A]</li>
+    </ul>
+
+    <p>
+      Chú ý: khi biểu thị một lược đồ quan hệ, nếu ngoài mô tả cấu trúc còn quan
+      tâm tới các ràng buộc ta dùng kí hiệu R(Ω, F), (Ω: các thuộc tính, F: các
+      ràng buộc)
+    </p>
+
+    <h2>2. Các đặc trưng của quan hệ</h2>
+
+    <h3>Đặc trưng 1: Thứ tự các bộ</h3>
+    <p>Thứ tự các bộ trong quan hệ là không quan trọng.</p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>HONV</th>
+          <th>TENNV</th>
+          <th>NGSINH</th>
+          <th>DCHI</th>
+          <th>GT</th>
+          <th>LUONG</th>
+          <th>PHG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nguyen</td>
+          <td>Tung</td>
+          <td>12/08/1955</td>
+          <td>638 NVC Q5</td>
+          <td>Nam</td>
+          <td>40000</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Bui</td>
+          <td>Hang</td>
+          <td>07/19/1968</td>
+          <td>332 NTH Q1</td>
+          <td>Nu</td>
+          <td>25000</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Le</td>
+          <td>Nhu</td>
+          <td>06/20/1951</td>
+          <td>291 HVH QPN</td>
+          <td>Nu</td>
+          <td>43000</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Nguyen</td>
+          <td>Hung</td>
+          <td>09/15/1962</td>
+          <td>null</td>
+          <td>Nam</td>
+          <td>38000</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Đặc trưng 2: Thứ tự giá trị trong bộ</h3>
+    <p>Thứ tự giữa các giá trị trong một bộ là quan trọng.</p>
+    <p>Ví dụ:</p>
+    <ul>
+      <li>Bộ &lt;Nguyen, Tung, 12/08/1955, 638 NVC Q5, Nam, 40000, 5&gt;</li>
+      <li>khác với</li>
+      <li>Bộ &lt;Nguyen, Tung, 12/08/1955, 638 NVC Q5, 40000, Nam, 5&gt;</li>
+    </ul>
+
+    <h3>Đặc trưng 3: Giá trị trong bộ</h3>
+    <p>Mỗi giá trị trong một bộ:</p>
+    <ul>
+      <li>Hoặc là một giá trị nguyên tố</li>
+      <li>Hoặc là một giá trị rỗng (null)</li>
+    </ul>
+
+    <h3>Đặc trưng 4: Tính duy nhất</h3>
+    <p>Không có hai bộ nào trùng nhau.</p>
+
+    <h2>3. Ràng buộc (Constraints)</h2>
+
+    <h3>Khái niệm Ràng buộc</h3>
+    <p>
+      Ràng buộc (Constraint): Là những qui tắc, điều kiện cần được thỏa mãn
+      trong mọi thể hiện của CSDL quan hệ.
+    </p>
+    <ul>
+      <li>Ràng buộc được mô tả khi định nghĩa lược đồ quan hệ</li>
+      <li>Ràng buộc cần được kiểm tra khi các quan hệ có thay đổi</li>
+      <li>
+        Các loại: Ràng buộc miền, ràng buộc khóa, ràng buộc toàn vẹn thực thể,
+        ràng buộc toàn vẹn tham chiếu
+      </li>
+    </ul>
+
+    <h3>a. Ràng buộc miền</h3>
+    <p>Giá trị của bộ t tại thuộc tính A (t[A]) phải thuộc Dom(A).</p>
+
+    <h3>b. Ràng buộc khóa</h3>
+    <p>Giả sử có R(A₁,...Aₙ)</p>
+
+    <h4>Siêu khóa (Super Key)</h4>
+    <p>
+      ∀ t1 ≠ t2 ∈ r(R), tồn tại tập thuộc tính SK sao cho t1[SK] ≠ t2[SK], SK
+      gọi là siêu khóa
+    </p>
+    <p>Tức là: tập thuộc tính có thể phân biệt các bộ.</p>
+
+    <h4>Khóa (Key)</h4>
+    <p>K ⊆ R, K ≠ φ; K là khóa nếu thỏa đồng thời 2 điều kiện:</p>
+    <ul>
+      <li>K là một siêu khóa của R</li>
+      <li>∀ K' ⊂ K, K' ≠ K, K' không phải là siêu khóa của R</li>
+    </ul>
+    <p>Hay khóa là siêu khóa tối thiểu.</p>
+
+    <h4>Nhận xét về khóa:</h4>
+    <ul>
+      <li>Giá trị của khóa dùng để xác định một bộ trong quan hệ</li>
+      <li>
+        Khóa là một đặc trưng của lược đồ quan hệ, không phụ thuộc vào thể hiện
+        quan hệ
+      </li>
+      <li>
+        Khóa được xây dựng dựa vào ý nghĩa của một số thuộc tính trong quan hệ
+      </li>
+      <li>Lược đồ quan hệ có thể có nhiều khóa, gọi là khóa dự tuyển</li>
+    </ul>
+
+    <p>
+      <strong>Ràng buộc khóa:</strong> Giá trị Khóa phải duy nhất trên các bộ.
+    </p>
+
+    <h3>Khóa chính (Primary Key)</h3>
+    <p>Xét quan hệ: NHANVIEN(MANV, TENNV, HONV, NS, DCHI, GT, LUONG, PHG)</p>
+
+    <p>Có 2 khóa dự tuyển:</p>
+    <ul>
+      <li>MANV</li>
+      <li>HONV, TENNV, NS</li>
+    </ul>
+
+    <p>Khi cài đặt quan hệ:</p>
+    <ul>
+      <li>
+        Chọn một trong các khóa dự tuyển làm cơ sở để nhận biết các bộ (khóa
+        được chọn có ít thuộc tính nhất)
+      </li>
+      <li>Khóa được chọn gọi là khóa chính (PK - primary key)</li>
+    </ul>
+
+    <p>Ví dụ: NHANVIEN(<u>MANV</u>, TENNV, HONV, NS, DCHI, GT, LUONG, PHG)</p>
+
+    <h3>c. Ràng buộc toàn vẹn thực thể</h3>
+    <p>Khóa chính luôn phải có giá trị xác định (không được null).</p>
+
+    <h3>d. Ràng buộc tham chiếu</h3>
+    <p>
+      Nếu 1 bộ trong quan hệ R, tại thuộc tính A nhận một giá trị từ một thuộc
+      tính B của quan hệ S, ta gọi R tham chiếu đến S.
+    </p>
+
+    <p>Ví dụ minh họa:</p>
+    <p><strong>Quan hệ S (PHONGBAN):</strong></p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>TENPHG</th>
+          <th>MAPHG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nghien cuu</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Dieu hanh</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Quan ly</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Quan hệ R (NHANVIEN):</strong></p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>TENNV</th>
+          <th>HONV</th>
+          <th>NS</th>
+          <th>DCHI</th>
+          <th>GT</th>
+          <th>LUONG</th>
+          <th>PHG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tung</td>
+          <td>Nguyen</td>
+          <td>12/08/1955</td>
+          <td>638 NVC Q5</td>
+          <td>Nam</td>
+          <td>40000</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Hang</td>
+          <td>Bui</td>
+          <td>07/19/1968</td>
+          <td>332 NTH Q1</td>
+          <td>Nu</td>
+          <td>25000</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Nhu</td>
+          <td>Le</td>
+          <td>06/20/1951</td>
+          <td>291 HVH QPN</td>
+          <td>Nu</td>
+          <td>43000</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Hung</td>
+          <td>Nguyen</td>
+          <td>09/15/1962</td>
+          <td>Ba Ria VT</td>
+          <td>Nam</td>
+          <td>38000</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Nguyên tắc:</strong> Bộ được tham chiếu phải tồn tại trước.</p>
+
+    <h3>Khóa ngoài (Foreign Key)</h3>
+    <p>Xét 2 lược đồ R1 và R2</p>
+    <ul>
+      <li>
+        Gọi FK là tập thuộc tính (khác rỗng) của R1; PK là khóa chính của R2
+      </li>
+      <li>
+        FK là khóa ngoài (Foreign Key) của R1 khi:
+        <ul>
+          <li>Các thuộc tính trong R1.FK có cùng miền giá trị với R2.PK</li>
+          <li>
+            Giá trị tại FK của một bộ t1 ∈ R1 (t1[FK]):
+            <ul>
+              <li>
+                Hoặc bằng giá trị tại khóa chính của một bộ t2 ∈ R2 (t2[PK])
+              </li>
+              <li>Hoặc t1[FK] = φ (null)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>
+        Quan hệ tham chiếu: NHANVIEN(<u>MANV</u>, TENNV, HONV, NS, DCHI, GT,
+        LUONG, PHG)
+      </li>
+      <li>Quan hệ bị tham chiếu: PHONGBAN(TENPHG, <u>MAPHG</u>)</li>
+      <li>
+        PHG là khóa ngoài của NHANVIEN tham chiếu đến MAPHG (khóa chính) của
+        PHONGBAN
+      </li>
+    </ul>
+
+    <h4>Nhận xét về khóa ngoài:</h4>
+    <ul>
+      <li>
+        Trong một lược đồ quan hệ, một thuộc tính vừa có thể tham gia vào khóa
+        chính, vừa tham gia vào khóa ngoài
+      </li>
+      <li>
+        Khóa ngoài có thể tham chiếu đến khóa chính trên cùng 1 lược đồ quan hệ
+      </li>
+      <li>Có thể có nhiều khóa ngoài tham chiếu đến cùng một khóa chính</li>
+      <li>Ràng buộc tham chiếu = Ràng buộc khóa ngoài</li>
+    </ul>
+
+    <h3>Biểu diễn ràng buộc tham chiếu</h3>
+    <p>Sơ đồ các quan hệ và ràng buộc tham chiếu:</p>
+    <ul>
+      <li>
+        NHANVIEN(HONV, TENLOT, TENNV, MANV, NS, DCHI, GT, LUONG, MA_NQL, PHG)
+        <ul>
+          <li>PHG → PHONGBAN.MAPHG</li>
+          <li>MA_NQL → NHANVIEN.MANV</li>
+        </ul>
+      </li>
+      <li>
+        PHONGBAN(TENPHG, MAPHG, TRPHG, NG_NHANCHUC)
+        <ul>
+          <li>TRPHG → NHANVIEN.MANV</li>
+        </ul>
+      </li>
+      <li>
+        DIADIEM_PHG(MAPHG, DIADIEM)
+        <ul>
+          <li>MAPHG → PHONGBAN.MAPHG</li>
+        </ul>
+      </li>
+      <li>
+        DEAN(TENDA, MADA, DDIEM_DA, PHONG)
+        <ul>
+          <li>PHONG → PHONGBAN.MAPHG</li>
+        </ul>
+      </li>
+      <li>
+        PHANCONG(MA_NVIEN, SODA, THOIGIAN)
+        <ul>
+          <li>MA_NVIEN → NHANVIEN.MANV</li>
+          <li>SODA → DEAN.MADA</li>
+        </ul>
+      </li>
+      <li>
+        THANNHAN(MA_NVIEN, TENTN, NS, GT, QUANHE)
+        <ul>
+          <li>MA_NVIEN → NHANVIEN.MANV</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>4. Chuyển lược đồ ER sang lược đồ Quan hệ</h2>
+
+    <h3>Các qui tắc chuyển đổi</h3>
+    <p>Ánh xạ từ Lược đồ ER sang Lược đồ Quan hệ:</p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Lược đồ ER</th>
+          <th>Lược đồ QH</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Thực thể</td>
+          <td>Quan hệ</td>
+        </tr>
+        <tr>
+          <td>Thực thể yếu</td>
+          <td>Quan hệ (có khóa ngoài)</td>
+        </tr>
+        <tr>
+          <td>Thuộc tính đơn trị</td>
+          <td>Thuộc tính</td>
+        </tr>
+        <tr>
+          <td>Thuộc tính đa trị</td>
+          <td>Quan hệ mới</td>
+        </tr>
+        <tr>
+          <td>Thuộc tính khóa</td>
+          <td>Khóa</td>
+        </tr>
+        <tr>
+          <td>Liên kết 1:1</td>
+          <td>Khóa ngoài hoặc trộn quan hệ</td>
+        </tr>
+        <tr>
+          <td>Liên kết 1:n</td>
+          <td>Khóa ngoài</td>
+        </tr>
+        <tr>
+          <td>Liên kết n:m</td>
+          <td>Quan hệ mới với 2 khóa ngoài</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Qui tắc 1: Thực thể</h3>
+    <p>
+      Mỗi kiểu thực thể (trừ thực thể yếu) chuyển thành 1 quan hệ có cùng tên và
+      tập thuộc tính (trừ thuộc tính đa trị).
+    </p>
+
+    <p>Ví dụ từ sơ đồ ER:</p>
+    <ul>
+      <li>Thực thể NHANVIEN (MANV, TENNV, HONV, NS, DCHI, GT, LUONG)</li>
+      <li>Thực thể PHONGBAN (TENPHG, MAPHG)</li>
+      <li>Liên kết Lam_viec (1,n) - (1,1) giữa NHANVIEN và PHONGBAN</li>
+      <li>Liên kết La_truong_phong (0,1) - (1,1) giữa NHANVIEN và PHONGBAN</li>
+    </ul>
+
+    <p>Chuyển thành:</p>
+    <ul>
+      <li>PHONGBAN(TENPHG, MAPHG)</li>
+      <li>NHANVIEN(MANV, TENNV, HONV, NS, DCHI, GT, LUONG)</li>
+    </ul>
+
+    <h3>Qui tắc 2: Thực thể yếu</h3>
+    <p>Chuyển thành quan hệ:</p>
+    <ul>
+      <li>Có cùng tên với thực thể yếu</li>
+      <li>
+        Thêm vào thuộc tính khóa của quan hệ liên quan (thực thể xác định)
+      </li>
+      <li>Khóa: (khóa của thực thể xác định + khóa cục bộ)</li>
+    </ul>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>Thực thể NHANVIEN (MANV, TENNV, HONV, NS, DCHI, GT, LUONG)</li>
+      <li>Thực thể yếu THANNHAN (TENTN, GT, NS, QUANHE)</li>
+      <li>Liên kết Co_than_nhan (1,n) - (1,1)</li>
+    </ul>
+
+    <p>Chuyển thành:</p>
+    <ul>
+      <li>THANNHAN(<u>MANV</u>, <u>TENTN</u>, GT, NS, QUANHE)</li>
+    </ul>
+
+    <h3>Qui tắc 3a: Mối liên kết Một-Một (1:1)</h3>
+    <p>Có 2 cách xử lý:</p>
+    <ul>
+      <li>
+        Hoặc thêm vào quan hệ thứ nhất thuộc tính khóa của quan hệ thứ 2 làm
+        khóa ngoài, cùng các thuộc tính của liên kết
+      </li>
+      <li>Hoặc trộn 2 quan hệ trong trường hợp cả 2 đều tham gia toàn bộ</li>
+    </ul>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>NHANVIEN (MANV, TENNV, HONV, NS, DCHI, GT, LUONG)</li>
+      <li>PHONGBAN (TENPHG, MAPHG)</li>
+      <li>Liên kết La_truong_phong (0,1) - (1,1) với thuộc tính NG_NHANCHUC</li>
+    </ul>
+
+    <p>Chuyển thành:</p>
+    <ul>
+      <li>PHONGBAN(<u>MAPHG</u>, TENPHG, MANV, NG_NHANCHUC)</li>
+    </ul>
+
+    <h3>Qui tắc 3b: Mối liên kết Một-Nhiều (1:n)</h3>
+    <p>
+      Lấy khóa của quan hệ (phía) một. Thêm vào quan hệ (phía) nhiều (khóa
+      ngoài).
+    </p>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>NHANVIEN (MANV, TENNV, HONV, NS, DCHI, GT, LUONG)</li>
+      <li>PHONGBAN (TENPHG, MAPHG)</li>
+      <li>Liên kết Lam_viec (1,n) - (1,1)</li>
+    </ul>
+
+    <p>Chuyển thành:</p>
+    <ul>
+      <li>NHANVIEN(<u>MANV</u>, TENNV, HONV, NS, DCHI, GT, LUONG, MAPHG)</li>
+    </ul>
+
+    <h3>Qui tắc 3c: Mối liên kết Nhiều-Nhiều (n:m)</h3>
+    <p>Tạo một quan hệ mới:</p>
+    <ul>
+      <li>Tên quan hệ thể hiện tên của mối liên kết</li>
+      <li>
+        Thuộc tính là những thuộc tính khóa của các kiểu thực thể liên quan,
+        cộng thuộc tính liên kết
+      </li>
+      <li>Khóa chính là tổng hợp các khóa của các thực thể tham gia</li>
+    </ul>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>NHANVIEN (MANV, TENNV, HONV, NGSINH, DCHI, PHAI, LUONG)</li>
+      <li>DEAN (TENDA, MADA, DDIEM_DA)</li>
+      <li>Liên kết Phan_cong (1,n) - (1,n) với thuộc tính THOIGIAN</li>
+    </ul>
+
+    <p>Chuyển thành:</p>
+    <ul>
+      <li>PHANCONG(<u>MANV</u>, <u>MADA</u>, THOIGIAN)</li>
+    </ul>
+
+    <h3>Qui tắc 4: Thuộc tính đa trị</h3>
+    <p>Chuyển thành một quan hệ:</p>
+    <ul>
+      <li>Có cùng tên với thuộc tính đa trị</li>
+      <li>
+        Thuộc tính: gồm Thuộc tính đa trị, Thuộc tính khóa của liên kết (trở
+        thành khóa ngoài)
+      </li>
+      <li>Khóa: gồm thuộc tính là khóa ngoài và thuộc tính đa trị</li>
+    </ul>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>
+        NHANVIEN (MANV, TENNV, HONV, NS, DCHI, GT, LUONG) có thuộc tính đa trị
+        BANGCAP
+      </li>
+    </ul>
+
+    <p>Chuyển thành:</p>
+    <ul>
+      <li>NHANVIEN(<u>MANV</u>, TENNV, HONV, NS, DCHI, GT, LUONG)</li>
+      <li>BANGCAP(<u>MANV</u>, <u>BANGCAP</u>)</li>
+    </ul>
+
+    <h3>Qui tắc 5: Liên kết đa ngôi (n>2)</h3>
+    <p>Chuyển thành một quan hệ:</p>
+    <ul>
+      <li>Có cùng tên với tên mối liên kết đa ngôi</li>
+      <li>Thuộc tính: Gồm thuộc tính liên kết, các khóa liên kết</li>
+      <li>
+        Khóa chính là tổng hợp các khóa của tập các thực thể tham gia liên kết
+      </li>
+    </ul>
+
+    <p>Ví dụ:</p>
+    <ul>
+      <li>NHACUNGCAP (MANCC, ...)</li>
+      <li>DEAN (MADA, TENDA, ...)</li>
+      <li>THIETBI (MATB, ...)</li>
+      <li>Liên kết Cung_cap (3 ngôi) với thuộc tính SOLUONG</li>
+    </ul>
+
+    <p>Chuyển thành:</p>
+    <ul>
+      <li>NHACUNGCAP(MANCC, ...)</li>
+      <li>DEAN(MADA, ...)</li>
+      <li>THIETBI(MATB, ...)</li>
+      <li>CUNGCAP(<u>MANCC</u>, <u>MATB</u>, <u>MADA</u>, SOLUONG)</li>
+    </ul>
+
+    <h3>Tổng kết chuyển đổi</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Mô hình ER</th>
+          <th>Mô hình quan hệ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Loại thực thể</td>
+          <td>Quan hệ thực thể</td>
+        </tr>
+        <tr>
+          <td>Quan hệ 1:1, 1:N</td>
+          <td>Khóa ngoài</td>
+        </tr>
+        <tr>
+          <td>Quan hệ N:M</td>
+          <td>Quan hệ với 2 khóa ngoài</td>
+        </tr>
+        <tr>
+          <td>Quan hệ đa ngôi</td>
+          <td>Quan hệ với n khóa ngoài</td>
+        </tr>
+        <tr>
+          <td>Thuộc tính</td>
+          <td>Thuộc tính</td>
+        </tr>
+        <tr>
+          <td>Thuộc tính phức hợp</td>
+          <td>Tập các thuộc tính đơn</td>
+        </tr>
+        <tr>
+          <td>Thuộc tính đa trị</td>
+          <td>Quan hệ với khóa ngoài</td>
+        </tr>
+        <tr>
+          <td>Tập các giá trị</td>
+          <td>Miền giá trị</td>
+        </tr>
+        <tr>
+          <td>Thuộc tính khóa</td>
+          <td>Khóa chính (khóa dự tuyển)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Ví dụ 1: Quản lý thi tuyển sinh</h2>
+
+    <h3>Sơ đồ ER</h3>
+    <p>Các thực thể:</p>
+    <ul>
+      <li>THISINH (SBD, Ho, Dem, Ten, Ngaysinh)</li>
+      <li>NGANH (Mã, Tên, Môtả)</li>
+      <li>KHOITHI (Mã, Môtả)</li>
+      <li>TRUONG (Mã, Tên, Địa_chỉ)</li>
+      <li>MONTHI (Mã, Tên, Hình_thức, Thờigian)</li>
+      <li>PHONGTHI (Mã, Đ_Đ, SL)</li>
+      <li>CB_COTHI (Mã, Ho, Dem, Tên, Họtên)</li>
+    </ul>
+
+    <p>Các liên kết:</p>
+    <ul>
+      <li>THUOC: THISINH (1,1) - (1,30) PHONGTHI</li>
+      <li>ĐANGKI: THISINH (0,6) - (0,n) NGANH</li>
+      <li>DIEM: THISINH (0,6) - (0,n) MONTHI</li>
+      <li>THUOC: NGANH (1,n) - (1,1) KHOITHI</li>
+      <li>THUOC: NGANH (1,n) - (1,1) TRUONG</li>
+      <li>CO: KHOITHI (3,3) - (1,n) MONTHI</li>
+      <li>GSAT: CB_COTHI (0,1) - (0,n) PHONGTHI (vai trò giám sát)</li>
+      <li>COL: CB_COTHI (2,2) - (1,1) PHONGTHI (vai trò coi thi)</li>
+    </ul>
+
+    <h3>Chuyển các thực thể thành quan hệ</h3>
+    <ul>
+      <li>THISINH(SBD, Ho, Dem, Ten, Ngaysinh)</li>
+      <li>NGANH(Manganh, Ten, Mota)</li>
+      <li>KHOI(Ma, Mota)</li>
+      <li>TRUONG(Ma, Ten, Diachi)</li>
+      <li>MONTHI(Ma, Ten, Hinhthuc, Thoigian)</li>
+      <li>PHONG(Ma, D_D, Soluong)</li>
+      <li>CB_COITHI(Ma, Ho, Dem, Ten)</li>
+    </ul>
+
+    <h3>Chuyển liên kết 1:1, 1:n</h3>
+    <ul>
+      <li>THISINH(SBD, Ho, Dem, Ten, Ngaysinh, Phong)</li>
+      <li>NGANH(Manganh, Ten, Mota, Khoi, Truong)</li>
+      <li>KHOI(Ma, Mota)</li>
+      <li>TRUONG(Ma, Ten, Diachi)</li>
+      <li>MONTHI(Ma, Ten, Hinhthuc, Thoigian, Khoi)</li>
+      <li>PHONG(Ma, D_D, Soluong)</li>
+      <li>CB_COITHI(Ma, Ho, Dem, Ten, Phong, Giamsat)</li>
+    </ul>
+
+    <h3>Chuyển các liên kết n:m</h3>
+    <ul>
+      <li>THISINH(SBD, Ho, Dem, Ten, Ngaysinh, Phong)</li>
+      <li>NGANH(Manganh, Ten, Mota, Khoi, Truong)</li>
+      <li>KHOI(Ma, Mota)</li>
+      <li>TRUONG(Ma, Ten, Diachi)</li>
+      <li>MONTHI(Ma, Ten, Hinhthuc, Thoigian, Khoi)</li>
+      <li>PHONG(Ma, D_D, Soluong)</li>
+      <li>CB_COITHI(Ma, Ho, Dem, Ten, Phong, Giamsat)</li>
+      <li>TS_NGANH(SBD, Manganh)</li>
+      <li>TS_DIEM(SBD, Mamon, Diem)</li>
+    </ul>
+
+    <h2>Ví dụ 2: Quản lý dự án công ty</h2>
+
+    <h3>Sơ đồ ER</h3>
+    <p>Các thực thể:</p>
+    <ul>
+      <li>
+        NHÂNVIÊN (Mãsố, Họđệm, Tên, Ngàysinh, Giớitính, Địachỉ, Lương, Bằng cấp
+        - đa trị)
+      </li>
+      <li>ĐƠN VỊ (Mã số, Tên, Địađiểm, Ngày bắt đầu)</li>
+      <li>DỰÁN (Mãsố, Tên, Địađiểm)</li>
+      <li>CON (Họtên, Tên, Ngàysinh, Giớitính) - thực thể yếu</li>
+    </ul>
+
+    <p>Các liên kết:</p>
+    <ul>
+      <li>Làmviệccho: NHÂNVIÊN (0,N) - (1,1) ĐƠN VỊ</li>
+      <li>Quảnlý: NHÂNVIÊN (0,1) - (1,1) ĐƠN VỊ</li>
+      <li>Giám sát: NHÂNVIÊN (0,N) - (0,1) NHÂNVIÊN (đệ quy)</li>
+      <li>Có: NHÂNVIÊN (1,1) - (0,N) CON</li>
+      <li>Kiểm soát: ĐƠN VỊ (1,N) - (1,1) DỰÁN</li>
+      <li>Làm việc trên: NHÂNVIÊN (0,N) - (1,N) DỰÁN (với thuộc tính Sốgiờ)</li>
+    </ul>
+
+    <h2>Bài tập</h2>
+    <ol>
+      <li>
+        <strong>Bài tập 1:</strong> Chuyển lược đồ ER Quản lý thi tuyển sinh
+        sang lược đồ quan hệ (bài tập C2_1)
+      </li>
+      <li>
+        <strong>Bài tập 2:</strong> Chuyển lược đồ thực thể liên kết sang lược
+        đồ quan hệ cho bài tập chương 2 (TRƯỜNG và THƯ VIỆN)
+      </li>
+      <li>
+        <strong>Bài tập 3:</strong> Tìm hiểu cách chuyển đổi lược đồ thực thể
+        liên kết mở rộng (EER) sang lược đồ quan hệ (chương 9 - Fundamentals of
+        Database Systems)
+      </li>
+    </ol>
+
+    <!-- QA (comment, không hiển thị):
+       - Tổng số ký tự ước lượng: ~28000 ký tự
+       - Danh sách tiêu đề chính:
+         * H1: Chương 3: Mô hình dữ liệu quan hệ
+         * H2: Giới thiệu
+         * H2: Nội dung chính
+         * H2: 1. Các khái niệm cơ bản của mô hình quan hệ
+         * H3: 1.1 Quan hệ (Relation)
+         * H3: 1.2 Thuộc tính (Attribute)
+         * H3: 1.3 Miền giá trị (Domain)
+         * H3: 1.4 Bộ (Tuple)
+         * H3: 1.5 Lược đồ quan hệ (Relation Schema)
+         * H3: 1.6 Lược đồ CSDL (Database Schema)
+         * H3: Tóm tắt các ký hiệu thường sử dụng
+         * H2: 2. Các đặc trưng của quan hệ
+         * H2: 3. Ràng buộc (Constraints)
+         * H3: a. Ràng buộc miền
+         * H3: b. Ràng buộc khóa
+         * H3: Khóa chính (Primary Key)
+         * H3: c. Ràng buộc toàn vẹn thực thể
+         * H3: d. Ràng buộc tham chiếu
+         * H3: Khóa ngoài (Foreign Key)
+         * H2: 4. Chuyển lược đồ ER sang lược đồ Quan hệ
+         * H3: Qui tắc 1-5
+         * H2: Ví dụ 1: Quản lý thi tuyển sinh
+         * H2: Ví dụ 2: Quản lý dự án công ty
+         * H2: Bài tập
+       - Ghi chú OCR: Đã chuyển toàn bộ nội dung từ 43 trang slide bao gồm các bảng, sơ đồ ER (mô tả bằng text), công thức toán học (ký hiệu Unicode) -->
+  </body>
+</html>

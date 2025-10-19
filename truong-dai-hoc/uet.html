@@ -181,6 +181,166 @@
           console.error("Lỗi khi tạo breadcrumb từ schema:", e);
         }
       }
+
+      /**
+       * � HỆ THỐNG TÌM KIẾM MÔN HỌC - TỐI ƯU TỐC ĐỘ
+       * Cải tiến v2.0:
+       * - ⚡ Pre-normalize data (cache 1 lần)
+       * - ⚡ Cache DOM queries (tránh query lại)
+       * - ⚡ Debounce 150ms (nhanh hơn 50%)
+       * - ⚡ Early exit optimization
+       * - ✅ Hỗ trợ tiếng Việt có/không dấu
+       * - ✅ Không phân biệt hoa/thường
+       * - ✅ Tìm theo tên + mã môn
+       */
+
+      // ===== CACHE & OPTIMIZATION =====
+      const searchCache = {
+        input: null,
+        facultySections: [],
+        initialized: false,
+      };
+
+      // Hàm loại bỏ dấu tiếng Việt (tối ưu với cache)
+      const removeVietnameseTones = (() => {
+        const cache = new Map();
+        return function (str) {
+          if (cache.has(str)) return cache.get(str);
+          const normalized = str
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D");
+          cache.set(str, normalized);
+          return normalized;
+        };
+      })();
+
+      // Pre-normalize và cache dữ liệu môn học
+      function initializeSearchData() {
+        if (searchCache.initialized) return;
+
+        searchCache.input = document.getElementById("subjectSearchInput");
+        const facultyTitles = document.querySelectorAll(
+          ".subjects-list .container > h2.faculty-title"
+        );
+
+        facultyTitles.forEach((facultyTitle) => {
+          const nextEl = facultyTitle.nextElementSibling;
+          const subjectGrid = nextEl?.classList.contains("no-results-message")
+            ? nextEl.nextElementSibling
+            : nextEl;
+
+          const noResultsMsg = nextEl?.classList.contains("no-results-message")
+            ? nextEl
+            : null;
+
+          if (!subjectGrid?.classList.contains("subject-grid")) return;
+
+          const cards = Array.from(
+            subjectGrid.querySelectorAll(".subject-card")
+          );
+
+          // Pre-normalize tất cả dữ liệu 1 lần duy nhất
+          cards.forEach((card) => {
+            const h3 = card.querySelector("h3");
+            const code = card.querySelector(".subject-code");
+
+            if (h3 && code) {
+              // Lưu dữ liệu đã chuẩn hóa vào dataset
+              card.dataset.searchName = removeVietnameseTones(
+                h3.textContent.toLowerCase()
+              );
+              card.dataset.searchCode = code.textContent.toLowerCase();
+            }
+          });
+
+          searchCache.facultySections.push({
+            title: facultyTitle,
+            grid: subjectGrid,
+            noResultsMsg,
+            cards,
+          });
+        });
+
+        searchCache.initialized = true;
+        console.log(
+          "✅ Search data initialized:",
+          searchCache.facultySections.length,
+          "sections"
+        );
+      }
+
+      // Hàm tìm kiếm môn học (tối ưu cao)
+      function filterSubjects() {
+        // Early exit nếu chưa init
+        if (!searchCache.initialized) {
+          initializeSearchData();
+        }
+
+        const searchKeyword = removeVietnameseTones(
+          searchCache.input.value.trim().toLowerCase()
+        );
+        const isEmpty = searchKeyword === "";
+
+        // Duyệt qua các khoa (dùng dữ liệu đã cache)
+        searchCache.facultySections.forEach((section) => {
+          let visibleCount = 0;
+
+          // Tối ưu: dùng for loop thay vì forEach (nhanh hơn)
+          for (let i = 0; i < section.cards.length; i++) {
+            const card = section.cards[i];
+
+            // Đọc dữ liệu đã pre-normalize từ dataset (siêu nhanh)
+            const isMatch =
+              isEmpty ||
+              card.dataset.searchName.includes(searchKeyword) ||
+              card.dataset.searchCode.includes(searchKeyword);
+
+            // Batch update style
+            card.style.display = isMatch ? "" : "none";
+            if (isMatch) visibleCount++;
+          }
+
+          // Update UI
+          const showNoResults = visibleCount === 0 && !isEmpty;
+          if (section.noResultsMsg) {
+            section.noResultsMsg.style.display = showNoResults
+              ? "block"
+              : "none";
+          }
+          section.title.style.display = showNoResults ? "none" : "";
+        });
+      }
+
+      // Debounce tối ưu (giảm từ 300ms → 150ms)
+      let searchTimeout;
+      function debounceSearch() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterSubjects, 150);
+      }
+
+      // Khởi tạo tìm kiếm khi DOM đã load
+      document.addEventListener("DOMContentLoaded", function () {
+        // Khởi tạo cache ngay khi load
+        setTimeout(initializeSearchData, 100);
+
+        const searchInput = document.getElementById("subjectSearchInput");
+        if (searchInput) {
+          // Sử dụng passive listener để tăng hiệu năng scroll
+          searchInput.addEventListener("input", debounceSearch, {
+            passive: true,
+          });
+          searchInput.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+              clearTimeout(searchTimeout);
+              filterSubjects();
+            }
+          });
+
+          console.log("🔍 Search system ready (v2.0 - optimized)");
+        }
+      });
     </script>
   </body>
 </html>

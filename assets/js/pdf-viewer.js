@@ -190,7 +190,10 @@ class PDFViewer {
       this.activeRenderTasks[taskKey].cancel();
 
     const viewport = page.getViewport({ scale });
-    const ctx = canvas.getContext("2d", { alpha: false });
+    const ctx = canvas.getContext("2d", {
+      alpha: false,
+      willReadFrequently: true, // Optimize for frequent getImageData() calls
+    });
     canvas.width = Math.floor(viewport.width);
     canvas.height = Math.floor(viewport.height);
 

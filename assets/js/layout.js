@@ -12,7 +12,7 @@ async function initializeLayout() {
     (async () => {
       if (headerPlaceholder) {
         try {
-          const response = await fetch("/header.html");
+          const response = await fetch("/templates/header.html");
           const data = await response.text();
           headerPlaceholder.outerHTML = data;
           initializeHeaderFunctionality();
@@ -24,7 +24,7 @@ async function initializeLayout() {
     (async () => {
       if (footerPlaceholder) {
         try {
-          const response = await fetch("/footer.html");
+          const response = await fetch("/templates/footer.html");
           const data = await response.text();
           footerPlaceholder.innerHTML = data;
         } catch (error) {
@@ -43,7 +43,7 @@ function runPageSpecificScripts() {
     "breadcrumb-placeholder"
   );
   if (breadcrumbPlaceholder) {
-    fetch("/breadcrumb.html")
+    fetch("/templates/breadcrumb.html")
       .then((response) => response.text())
       .then((data) => {
         breadcrumbPlaceholder.innerHTML = data;

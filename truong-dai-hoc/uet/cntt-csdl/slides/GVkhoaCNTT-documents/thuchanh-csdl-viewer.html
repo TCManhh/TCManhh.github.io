@@ -3,36 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trình chiếu: Tài liệu Thực hành CSDL - StuShare</title>
-    <link rel="stylesheet" href="/style.css" />
+    <title>Tài liệu: Thực hành Cơ sở dữ liệu - StuShare</title>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link
+      rel="preconnect"
+      href="https://stushare-worker.kysirong2008.workers.dev"
+    />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+    </script>
   </head>
   <body class="has-fixed-breadcrumb">
     <div id="header-placeholder"></div>
-
     <div id="breadcrumb-placeholder"></div>
 
     <main>
       <section class="document-viewer-section">
-        <!-- Sử dụng cấu trúc HTML mới cho trình xem tài liệu A4 -->
-        <div class="document-a4-viewer-container">
-          <div class="document-a4-page-wrapper">
-            <iframe
-              src="https://drive.google.com/file/d/1aIa8CY9PU7Xi6ilOz86Jub7JSFkrlfE2/preview"
-              allow="autoplay"
-              allowfullscreen
-              title="Tài liệu Thực hành CSDL"
-            ></iframe>
+        <div
+          id="pdf-viewer"
+          data-pdf-url="https://stushare-worker.kysirong2008.workers.dev/?alias=uet-vnu-csdl-thuchanh"
+        >
+          <div class="protection-overlay"></div>
+          <div id="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p id="loading-text">
+              Đang tải tài liệu... <span id="loading-progress"></span>
+            </p>
+          </div>
+          <div id="canvas-container">
+            <canvas id="pdf-canvas-left"></canvas>
+            <canvas id="pdf-canvas-right"></canvas>
+          </div>
+          <div id="pdf-controls">
+            <button
+              id="prev-page"
+              class="btn btn-secondary"
+              title="Trang trước"
+            >
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <button
+              id="view-toggle-btn"
+              class="btn btn-secondary"
+              title="Chuyển chế độ xem"
+            >
+              <i class="fas fa-file-alt"></i>
+            </button>
+            <span id="page-indicator"
+              >Trang <span id="page-num"></span> / <span id="page-count"></span
+            ></span>
+            <button id="next-page" class="btn btn-secondary" title="Trang sau">
+              <i class="fas fa-arrow-right"></i>
+            </button>
           </div>
         </div>
       </section>
+      <div class="container">
+        <div id="author-respect-placeholder"></div>
+      </div>
     </main>
 
     <div id="footer-placeholder"></div>
 
     <script src="/assets/js/layout.js"></script>
+    <script src="/assets/js/pdf-viewer.js" defer></script>
   </body>
 </html>

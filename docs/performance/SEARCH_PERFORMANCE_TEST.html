@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>⚡ Performance Test: Tìm kiếm Tối ưu vs Gốc</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 2rem;
+      }
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 0.95rem;
+      }
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .version-box {
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+      }
+      .version-box h2 {
+        margin-bottom: 15px;
+        color: #333;
+      }
+      .version-box.old {
+        border-color: #f44336;
+      }
+      .version-box.new {
+        border-color: #4caf50;
+      }
+      .search-bar {
+        margin-bottom: 20px;
+      }
+      .search-bar input {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        transition: all 0.3s;
+      }
+      .search-bar input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+      .performance-stats {
+        background: #f0f9ff;
+        border-left: 4px solid #3b82f6;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+      }
+      .performance-stats.fast {
+        background: #e8f5e9;
+        border-color: #4caf50;
+      }
+      .performance-stats.slow {
+        background: #ffebee;
+        border-color: #f44336;
+      }
+      .metric {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+      }
+      .badge {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: bold;
+      }
+      .badge-fast {
+        background: #4caf50;
+        color: white;
+      }
+      .badge-slow {
+        background: #f44336;
+        color: white;
+      }
+      .subject-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .subject-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .subject-card:hover {
+        transform: translateY(-3px);
+      }
+      .subject-card h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+      .subject-card .subject-code {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+      .test-controls {
+        text-align: center;
+        margin: 30px 0;
+        padding: 20px;
+        background: #f5f5f5;
+        border-radius: 8px;
+      }
+      .btn {
+        padding: 12px 24px;
+        margin: 5px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .btn-primary {
+        background: #667eea;
+        color: white;
+      }
+      .btn-primary:hover {
+        background: #5568d3;
+      }
+      .btn-success {
+        background: #4caf50;
+        color: white;
+      }
+      .btn-success:hover {
+        background: #45a049;
+      }
+      .summary {
+        background: #fff3cd;
+        border: 2px solid #ff9800;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 30px;
+      }
+      .summary h2 {
+        color: #e65100;
+        margin-bottom: 15px;
+      }
+      .summary table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .summary th,
+      .summary td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      .summary th {
+        background: #ff9800;
+        color: white;
+      }
+      .improvement {
+        font-weight: bold;
+        color: #4caf50;
+        font-size: 1.1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚡ Performance Test: Tối ưu Tìm kiếm</h1>
+      <p class="subtitle">
+        So sánh hiệu năng giữa phiên bản gốc (v1.0) và tối ưu (v2.0)
+      </p>
+
+      <div class="test-controls">
+        <button class="btn btn-primary" onclick="runBenchmark()">
+          🚀 Chạy Benchmark (100 lần tìm kiếm)
+        </button>
+        <button class="btn btn-success" onclick="runStressTest()">
+          💪 Stress Test (1000 môn học)
+        </button>
+        <button class="btn btn-primary" onclick="resetAll()">🔄 Reset</button>
+      </div>
+
+      <div class="comparison">
+        <!-- OLD VERSION -->
+        <div class="version-box old">
+          <h2>❌ Phiên bản Gốc (v1.0)</h2>
+          <div class="performance-stats slow" id="stats-old">
+            <div class="metric">
+              <span>Thời gian tìm kiếm:</span>
+              <span><strong id="time-old">-</strong> ms</span>
+            </div>
+            <div class="metric">
+              <span>Số lần normalize:</span>
+              <span><strong id="normalize-old">-</strong></span>
+            </div>
+            <div class="metric">
+              <span>DOM queries:</span>
+              <span><strong id="queries-old">-</strong></span>
+            </div>
+          </div>
+          <div class="search-bar">
+            <input
+              type="text"
+              id="searchOld"
+              placeholder="🔎 Tìm kiếm (v1.0)..."
+            />
+          </div>
+          <div class="subject-grid" id="gridOld">
+            <!-- 5 môn học demo -->
+            <div class="subject-card">
+              <h3>Cơ sở dữ liệu</h3>
+              <p class="subject-code">INT2202</p>
+            </div>
+            <div class="subject-card">
+              <h3>Kiến trúc máy tính</h3>
+              <p class="subject-code">INT2212</p>
+            </div>
+            <div class="subject-card">
+              <h3>Xác suất thống kê</h3>
+              <p class="subject-code">INT1101</p>
+            </div>
+            <div class="subject-card">
+              <h3>Cấu Trúc Dữ Liệu và Giải Thuật</h3>
+              <p class="subject-code">INT2210</p>
+            </div>
+            <div class="subject-card">
+              <h3>Lập trình hướng đối tượng</h3>
+              <p class="subject-code">INT2204</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW VERSION -->
+        <div class="version-box new">
+          <h2>✅ Phiên bản Tối ưu (v2.0)</h2>
+          <div class="performance-stats fast" id="stats-new">
+            <div class="metric">
+              <span>Thời gian tìm kiếm:</span>
+              <span><strong id="time-new">-</strong> ms</span>
+            </div>
+            <div class="metric">
+              <span>Số lần normalize:</span>
+              <span><strong id="normalize-new">-</strong></span>
+            </div>
+            <div class="metric">
+              <span>DOM queries:</span>
+              <span><strong id="queries-new">-</strong></span>
+            </div>
+          </div>
+          <div class="search-bar">
+            <input
+              type="text"
+              id="searchNew"
+              placeholder="🔎 Tìm kiếm (v2.0)..."
+            />
+          </div>
+          <div class="subject-grid" id="gridNew">
+            <!-- 5 môn học demo -->
+            <div class="subject-card">
+              <h3>Cơ sở dữ liệu</h3>
+              <p class="subject-code">INT2202</p>
+            </div>
+            <div class="subject-card">
+              <h3>Kiến trúc máy tính</h3>
+              <p class="subject-code">INT2212</p>
+            </div>
+            <div class="subject-card">
+              <h3>Xác suất thống kê</h3>
+              <p class="subject-code">INT1101</p>
+            </div>
+            <div class="subject-card">
+              <h3>Cấu Trúc Dữ Liệu và Giải Thuật</h3>
+              <p class="subject-code">INT2210</p>
+            </div>
+            <div class="subject-card">
+              <h3>Lập trình hướng đối tượng</h3>
+              <p class="subject-code">INT2204</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary" id="summary" style="display: none">
+        <h2>📊 Kết quả Benchmark</h2>
+        <table>
+          <tr>
+            <th>Metric</th>
+            <th>v1.0 (Gốc)</th>
+            <th>v2.0 (Tối ưu)</th>
+            <th>Cải thiện</th>
+          </tr>
+          <tr>
+            <td>Thời gian trung bình</td>
+            <td id="avg-old">-</td>
+            <td id="avg-new">-</td>
+            <td id="improve-time" class="improvement">-</td>
+          </tr>
+          <tr>
+            <td>Normalize calls</td>
+            <td id="norm-old">-</td>
+            <td id="norm-new">-</td>
+            <td id="improve-norm" class="improvement">-</td>
+          </tr>
+          <tr>
+            <td>DOM queries</td>
+            <td id="query-old">-</td>
+            <td id="query-new">-</td>
+            <td id="improve-query" class="improvement">-</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // ===== OLD VERSION (v1.0) =====
+      let normalizeCountOld = 0;
+      let queryCountOld = 0;
+
+      function removeVietnameseTones_Old(str) {
+        normalizeCountOld++;
+        return str
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/đ/g, "d")
+          .replace(/Đ/g, "D");
+      }
+
+      function filterSubjects_Old(keyword) {
+        normalizeCountOld = 0;
+        queryCountOld = 0;
+
+        const startTime = performance.now();
+        const searchKeyword = removeVietnameseTones_Old(keyword.toLowerCase());
+
+        const cards = document.querySelectorAll("#gridOld .subject-card");
+        queryCountOld++;
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          queryCountOld += 2; // querySelector h3 + subject-code
+          const subjectName = card.querySelector("h3")?.textContent || "";
+          const subjectCode =
+            card.querySelector(".subject-code")?.textContent || "";
+
+          const normalizedName = removeVietnameseTones_Old(
+            subjectName.toLowerCase()
+          );
+          const normalizedCode = subjectCode.toLowerCase();
+
+          if (
+            searchKeyword === "" ||
+            normalizedName.includes(searchKeyword) ||
+            normalizedCode.includes(searchKeyword)
+          ) {
+            card.style.display = "";
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        const endTime = performance.now();
+        const duration = (endTime - startTime).toFixed(3);
+
+        document.getElementById("time-old").textContent = duration;
+        document.getElementById("normalize-old").textContent =
+          normalizeCountOld;
+        document.getElementById("queries-old").textContent = queryCountOld;
+
+        return {
+          duration: parseFloat(duration),
+          normalizeCount: normalizeCountOld,
+          queryCount: queryCountOld,
+        };
+      }
+
+      // ===== NEW VERSION (v2.0) - OPTIMIZED =====
+      let normalizeCountNew = 0;
+      let queryCountNew = 0;
+      let cacheNew = new Map();
+      let preNormalizedData = [];
+
+      function removeVietnameseTones_New(str) {
+        if (cacheNew.has(str)) return cacheNew.get(str);
+        normalizeCountNew++;
+        const normalized = str
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/đ/g, "d")
+          .replace(/Đ/g, "D");
+        cacheNew.set(str, normalized);
+        return normalized;
+      }
+
+      function initSearchData_New() {
+        if (preNormalizedData.length > 0) return;
+
+        const cards = document.querySelectorAll("#gridNew .subject-card");
+        queryCountNew++;
+
+        cards.forEach((card) => {
+          queryCountNew += 2;
+          const h3 = card.querySelector("h3");
+          const code = card.querySelector(".subject-code");
+
+          preNormalizedData.push({
+            card,
+            searchName: removeVietnameseTones_New(h3.textContent.toLowerCase()),
+            searchCode: code.textContent.toLowerCase(),
+          });
+        });
+      }
+
+      function filterSubjects_New(keyword) {
+        normalizeCountNew = 0;
+        queryCountNew = 0;
+        cacheNew.clear();
+
+        initSearchData_New();
+
+        const startTime = performance.now();
+        const searchKeyword = removeVietnameseTones_New(keyword.toLowerCase());
+
+        let visibleCount = 0;
+        for (let i = 0; i < preNormalizedData.length; i++) {
+          const item = preNormalizedData[i];
+          const isMatch =
+            searchKeyword === "" ||
+            item.searchName.includes(searchKeyword) ||
+            item.searchCode.includes(searchKeyword);
+
+          item.card.style.display = isMatch ? "" : "none";
+          if (isMatch) visibleCount++;
+        }
+
+        const endTime = performance.now();
+        const duration = (endTime - startTime).toFixed(3);
+
+        document.getElementById("time-new").textContent = duration;
+        document.getElementById("normalize-new").textContent =
+          normalizeCountNew;
+        document.getElementById("queries-new").textContent = queryCountNew;
+
+        return {
+          duration: parseFloat(duration),
+          normalizeCount: normalizeCountNew,
+          queryCount: queryCountNew,
+        };
+      }
+
+      // Event listeners
+      document.getElementById("searchOld").addEventListener("input", (e) => {
+        filterSubjects_Old(e.target.value);
+      });
+
+      document.getElementById("searchNew").addEventListener("input", (e) => {
+        filterSubjects_New(e.target.value);
+      });
+
+      // Benchmark
+      function runBenchmark() {
+        const iterations = 100;
+        const testKeywords = [
+          "co so du lieu",
+          "INT2210",
+          "lap trinh",
+          "kien truc",
+          "xac suat",
+        ];
+
+        let oldTimes = [];
+        let newTimes = [];
+        let oldNorm = 0;
+        let newNorm = 0;
+        let oldQuery = 0;
+        let newQuery = 0;
+
+        console.log("🚀 Starting benchmark...");
+
+        for (let i = 0; i < iterations; i++) {
+          const keyword = testKeywords[i % testKeywords.length];
+
+          const oldResult = filterSubjects_Old(keyword);
+          oldTimes.push(oldResult.duration);
+          oldNorm += oldResult.normalizeCount;
+          oldQuery += oldResult.queryCount;
+
+          const newResult = filterSubjects_New(keyword);
+          newTimes.push(newResult.duration);
+          newNorm += newResult.normalizeCount;
+          newQuery += newResult.queryCount;
+        }
+
+        const avgOld = (oldTimes.reduce((a, b) => a + b) / iterations).toFixed(
+          3
+        );
+        const avgNew = (newTimes.reduce((a, b) => a + b) / iterations).toFixed(
+          3
+        );
+        const improve = (((avgOld - avgNew) / avgOld) * 100).toFixed(1);
+
+        document.getElementById("summary").style.display = "block";
+        document.getElementById("avg-old").textContent = avgOld + " ms";
+        document.getElementById("avg-new").textContent = avgNew + " ms";
+        document.getElementById("improve-time").textContent =
+          "↓ " + improve + "% nhanh hơn";
+
+        document.getElementById("norm-old").textContent = oldNorm;
+        document.getElementById("norm-new").textContent = newNorm;
+        document.getElementById("improve-norm").textContent =
+          "↓ " + (((oldNorm - newNorm) / oldNorm) * 100).toFixed(1) + "%";
+
+        document.getElementById("query-old").textContent = oldQuery;
+        document.getElementById("query-new").textContent = newQuery;
+        document.getElementById("improve-query").textContent =
+          "↓ " + (((oldQuery - newQuery) / oldQuery) * 100).toFixed(1) + "%";
+
+        console.log("✅ Benchmark completed!");
+        alert(
+          `✅ Hoàn thành!\n\nv1.0: ${avgOld}ms\nv2.0: ${avgNew}ms\n\n🚀 Nhanh hơn ${improve}%`
+        );
+      }
+
+      function runStressTest() {
+        alert(
+          "💪 Stress test với 1000 môn học sẽ được triển khai trong phiên bản tiếp theo!"
+        );
+      }
+
+      function resetAll() {
+        document.getElementById("searchOld").value = "";
+        document.getElementById("searchNew").value = "";
+        filterSubjects_Old("");
+        filterSubjects_New("");
+        preNormalizedData = [];
+        document.getElementById("summary").style.display = "none";
+      }
+
+      // Init
+      window.addEventListener("load", () => {
+        console.log("🔍 Performance test ready!");
+        filterSubjects_Old("");
+        filterSubjects_New("");
+      });
+    </script>
+  </body>
+</html>

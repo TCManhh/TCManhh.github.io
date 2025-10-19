@@ -817,7 +817,7 @@ h3 {
 .subject-hero-icon {
   font-size: 4rem;
   color: var(--primary-color);
-  margin-left: 50px;
+  margin-left: 0px;
 }
 
 /* --- Features Section --- */
@@ -1344,7 +1344,7 @@ main {
     grid-template-columns: repeat(3, 1fr);
   }
   .university-hero-logo {
-    margin-left: 30px;
+    margin-left: 0px;
   }
 }
 
