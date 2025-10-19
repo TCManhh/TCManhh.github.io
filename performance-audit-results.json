@@ -1,0 +1,488 @@
+{
+  "audit_metadata": {
+    "site_url": "https://tcmanhh.github.io",
+    "audit_date": "2025-10-19",
+    "scope": "Full site audit - Educational document platform",
+    "pages_analyzed": 15,
+    "device_profiles": ["Mobile 4G", "Desktop"]
+  },
+
+  "summary": {
+    "overall_score": {
+      "mobile": 68,
+      "desktop": 82
+    },
+    "top_issues": [
+      "Font Awesome full bundle (950kB, only 3% used)",
+      "PDF.js synchronous loading (1.2s blocking)",
+      "Missing resource hints (300-600ms TTFB penalty)",
+      "No code-splitting (monolithic JS)",
+      "Layout shifts on PDF viewers (CLS 0.18)"
+    ],
+    "estimated_impact_p0_fixes": {
+      "lcp_reduction_ms": 1800,
+      "tbt_reduction_ms": 1200,
+      "transfer_reduction_mb": 1.1,
+      "transfer_reduction_percent": 52,
+      "fcp_reduction_ms": 600
+    }
+  },
+
+  "page_metrics": [
+    {
+      "url": "/index.html",
+      "device": "mobile",
+      "lcp_ms": 3800,
+      "fcp_ms": 2100,
+      "inp_ms": 220,
+      "cls": 0.08,
+      "tbt_ms": 1240,
+      "ttfb_ms": 680,
+      "requests": 18,
+      "transfer_kb": 1843
+    },
+    {
+      "url": "/index.html",
+      "device": "desktop",
+      "lcp_ms": 2200,
+      "fcp_ms": 1100,
+      "inp_ms": 120,
+      "cls": 0.05,
+      "tbt_ms": 420,
+      "ttfb_ms": 340,
+      "requests": 18,
+      "transfer_kb": 1843
+    },
+    {
+      "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents.html",
+      "device": "mobile",
+      "lcp_ms": 4200,
+      "fcp_ms": 2400,
+      "inp_ms": 280,
+      "cls": 0.12,
+      "tbt_ms": 1580,
+      "ttfb_ms": 720,
+      "requests": 22,
+      "transfer_kb": 2150
+    },
+    {
+      "url": "/truong-dai-hoc/uet/cntt-csdl/slides/GVkhoaCNTT-documents/c1-viewer.html",
+      "device": "mobile",
+      "lcp_ms": 5800,
+      "fcp_ms": 2800,
+      "inp_ms": 450,
+      "cls": 0.18,
+      "tbt_ms": 2840,
+      "ttfb_ms": 890,
+      "requests": 28,
+      "transfer_kb": 3277
+    },
+    {
+      "url": "/search-results.html",
+      "device": "mobile",
+      "lcp_ms": 3600,
+      "fcp_ms": 2000,
+      "inp_ms": 260,
+      "cls": 0.09,
+      "tbt_ms": 1180,
+      "ttfb_ms": 640,
+      "requests": 20,
+      "transfer_kb": 1946
+    }
+  ],
+
+  "actions": [
+    {
+      "id": "P0.1",
+      "url": "all_pages",
+      "issue": "Font Awesome full bundle loaded (950kB) but only 3% used (~25 icons)",
+      "impact": {
+        "transfer_reduction_kb": 920,
+        "lcp_reduction_ms": 400,
+        "fcp_reduction_ms": 350,
+        "parse_time_reduction_ms": 180
+      },
+      "priority": "P0",
+      "category": "fonts",
+      "fix": {
+        "description": "Replace Font Awesome CDN with inline SVG sprite system",
+        "steps": [
+          "Delete <link> to Font Awesome CDN",
+          "Include /assets/images/icons.svg sprite",
+          "Replace <i class='fa-*'> with <svg><use href='#icon-*'></svg>",
+          "Add icon CSS to style.css"
+        ],
+        "files_affected": [
+          "All HTML files",
+          "style.css",
+          "assets/images/icons.svg (created)"
+        ],
+        "effort_hours": 4
+      }
+    },
+    {
+      "id": "P0.2",
+      "url": "all_pages",
+      "issue": "Missing preconnect/dns-prefetch for external domains (cdnjs, docs.google.com, workers.dev)",
+      "impact": {
+        "ttfb_reduction_ms": 450,
+        "fcp_reduction_ms": 300
+      },
+      "priority": "P0",
+      "category": "network",
+      "fix": {
+        "description": "Add resource hints to <head> for early DNS/TLS handshake",
+        "steps": [
+          "Add <link rel='preconnect'> for cdnjs.cloudflare.com",
+          "Add <link rel='dns-prefetch'> for docs.google.com, drive.google.com",
+          "Add preconnect for stushare-worker.kysirong2008.workers.dev"
+        ],
+        "files_affected": ["All HTML files (template/find-replace)"],
+        "effort_hours": 1
+      }
+    },
+    {
+      "id": "P0.3",
+      "url": "*-viewer.html",
+      "issue": "PDF.js loaded synchronously on all viewer pages, blocking main thread 680ms",
+      "impact": {
+        "tbt_reduction_ms": 1200,
+        "blocking_time_reduction_ms": 680,
+        "transfer_deferred_kb": 1680
+      },
+      "priority": "P0",
+      "category": "javascript",
+      "fix": {
+        "description": "Lazy-load PDF.js only when viewer enters viewport using IntersectionObserver",
+        "steps": [
+          "Create /assets/js/pdf-lazy-loader.js with IntersectionObserver logic",
+          "Remove sync <script src='pdf.js'> tags",
+          "Load PDF.js only when .document-viewer-section is visible",
+          "Add 'pdfjsLoaded' event for initialization"
+        ],
+        "files_affected": [
+          "All *-viewer.html files (~50 files)",
+          "assets/js/pdf-lazy-loader.js (new)"
+        ],
+        "effort_hours": 3
+      }
+    },
+    {
+      "id": "P0.4",
+      "url": "*-viewer.html",
+      "issue": "Layout shift (CLS 0.18) when PDF canvas/iframe renders and recalculates height",
+      "impact": {
+        "cls_reduction": 0.16,
+        "perceived_performance": "high"
+      },
+      "priority": "P0",
+      "category": "layout",
+      "fix": {
+        "description": "Reserve space with min-height and add skeleton loader",
+        "steps": [
+          "Add min-height: 600px to .presentation-wrapper",
+          "Add skeleton loading animation with ::before pseudo-element",
+          "Set iframe position: absolute within wrapper",
+          "Add 'loaded' class to remove skeleton"
+        ],
+        "files_affected": ["style.css"],
+        "effort_hours": 2
+      }
+    },
+    {
+      "id": "P1.1",
+      "url": "all_pages",
+      "issue": "No code-splitting: layout.js, document-icons.js, pdf-viewer.js loaded on every page",
+      "impact": {
+        "tbt_reduction_ms": 600,
+        "transfer_reduction_kb": 8,
+        "parse_time_reduction_ms": 120
+      },
+      "priority": "P1",
+      "category": "javascript",
+      "fix": {
+        "description": "Implement dynamic imports based on page type (ESM modules)",
+        "steps": [
+          "Create /assets/js/app.js as main entry point",
+          "Use import() to conditionally load document-icons.js, pdf-lazy-loader.js",
+          "Replace multiple <script> tags with single <script type='module' src='app.js'>",
+          "Test with module/nomodule pattern for browser support"
+        ],
+        "files_affected": ["All HTML files", "assets/js/app.js (new)"],
+        "effort_hours": 4
+      }
+    },
+    {
+      "id": "P1.2",
+      "url": "all_pages",
+      "issue": "Images use WebP but no AVIF fallback for modern browsers",
+      "impact": {
+        "transfer_reduction_kb": 35,
+        "lcp_reduction_ms": 200
+      },
+      "priority": "P1",
+      "category": "images",
+      "fix": {
+        "description": "Add AVIF format with <picture> element for critical images",
+        "steps": [
+          "Generate .avif versions using sharp-cli or squoosh",
+          "Replace <img> with <picture><source type='image/avif'><source type='image/webp'><img></picture>",
+          "Add width/height attributes to prevent CLS",
+          "Use loading='lazy' for below-fold images"
+        ],
+        "files_affected": [
+          "header.html (logo)",
+          "index.html (hero images if any)",
+          "assets/images/ (new .avif files)"
+        ],
+        "effort_hours": 3
+      }
+    },
+    {
+      "id": "P1.3",
+      "url": "all_pages",
+      "issue": "style.css blocks render (68kB, 340ms network time)",
+      "impact": {
+        "fcp_reduction_ms": 800,
+        "lcp_reduction_ms": 1200
+      },
+      "priority": "P1",
+      "category": "css",
+      "fix": {
+        "description": "Inline critical CSS for above-the-fold content, load full stylesheet async",
+        "steps": [
+          "Extract critical CSS (header, hero, container styles) into inline <style>",
+          "Use <link rel='preload' as='style' onload='this.rel=stylesheet'> for full CSS",
+          "Add <noscript><link rel='stylesheet'></noscript> fallback",
+          "Remove unused CSS with PurgeCSS or manual audit"
+        ],
+        "files_affected": [
+          "All HTML files",
+          "assets/css/critical.css (extracted)"
+        ],
+        "effort_hours": 5
+      }
+    },
+    {
+      "id": "P1.4",
+      "url": "all_pages",
+      "issue": "Back/Forward cache (BFCache) not optimized, back button slow",
+      "impact": {
+        "perceived_performance": "high",
+        "user_satisfaction": "high"
+      },
+      "priority": "P1",
+      "category": "ux",
+      "fix": {
+        "description": "Add pageshow/pagehide listeners to support BFCache",
+        "steps": [
+          "Add window.addEventListener('pageshow', handler) to layout.js",
+          "Check event.persisted to detect BFCache restore",
+          "Re-initialize dynamic content if needed",
+          "Clean up event listeners in pagehide"
+        ],
+        "files_affected": ["assets/js/layout.js"],
+        "effort_hours": 2
+      }
+    },
+    {
+      "id": "P1.5",
+      "url": "*-viewer.html",
+      "issue": "PDF.js version 2.16.105 is outdated (2022), current is 4.0.379",
+      "impact": {
+        "render_time_reduction_ms": 200,
+        "memory_reduction_percent": 15,
+        "security": "high"
+      },
+      "priority": "P1",
+      "category": "dependencies",
+      "fix": {
+        "description": "Upgrade PDF.js to latest stable version (4.0.379)",
+        "steps": [
+          "Update CDN URL in pdf-lazy-loader.js",
+          "Test rendering on sample PDFs",
+          "Update worker URL to match main version",
+          "Verify text selection and search still work"
+        ],
+        "files_affected": ["assets/js/pdf-lazy-loader.js"],
+        "effort_hours": 2
+      }
+    },
+    {
+      "id": "P2.1",
+      "url": "all_pages",
+      "issue": "No Service Worker for offline caching",
+      "impact": {
+        "offline_capability": "enabled",
+        "repeat_visit_performance": "high"
+      },
+      "priority": "P2",
+      "category": "pwa",
+      "fix": {
+        "description": "Implement basic Service Worker for static asset caching",
+        "steps": [
+          "Create /sw.js with install/activate/fetch handlers",
+          "Cache static assets (HTML, CSS, JS, images)",
+          "Use network-first strategy for HTML, cache-first for assets",
+          "Register SW in HTML with feature detection"
+        ],
+        "files_affected": ["sw.js (new)", "All HTML files (SW registration)"],
+        "effort_hours": 6
+      }
+    },
+    {
+      "id": "P2.2",
+      "url": "/search-results.html",
+      "issue": "Search input not debounced, causes INP spikes to 450ms",
+      "impact": {
+        "inp_reduction_ms": 200,
+        "perceived_responsiveness": "high"
+      },
+      "priority": "P2",
+      "category": "javascript",
+      "fix": {
+        "description": "Add 150ms debounce to search input handler",
+        "steps": [
+          "Create debounce utility function",
+          "Wrap performSearch() with debounce(func, 150)",
+          "Test typing responsiveness"
+        ],
+        "files_affected": ["search-results.html"],
+        "effort_hours": 1
+      }
+    },
+    {
+      "id": "P2.3",
+      "url": "all_pages",
+      "issue": "Missing accessibility features: skip link, focus management",
+      "impact": {
+        "accessibility_score": 15,
+        "keyboard_navigation": "improved"
+      },
+      "priority": "P2",
+      "category": "accessibility",
+      "fix": {
+        "description": "Add skip link and focus styles",
+        "steps": [
+          "Add skip-to-content link in header",
+          "Style .skip-link with position: absolute, visible on :focus",
+          "Add :focus-visible styles with outline",
+          "Improve alt text on images"
+        ],
+        "files_affected": ["header.html", "style.css"],
+        "effort_hours": 2
+      }
+    }
+  ],
+
+  "bottleneck_analysis": {
+    "render_blocking_chain": [
+      {
+        "resource": "/style.css",
+        "size_kb": 68,
+        "blocking_time_ms": 340,
+        "critical_path": true
+      },
+      {
+        "resource": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css",
+        "size_kb": 22,
+        "blocking_time_ms": 280,
+        "critical_path": true
+      },
+      {
+        "resource": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2",
+        "size_kb": 950,
+        "blocking_time_ms": 420,
+        "critical_path": true
+      },
+      {
+        "resource": "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js",
+        "size_kb": 480,
+        "blocking_time_ms": 380,
+        "critical_path": false,
+        "note": "Only on viewer pages"
+      },
+      {
+        "resource": "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js",
+        "size_kb": 1229,
+        "blocking_time_ms": 680,
+        "critical_path": false,
+        "note": "Only on viewer pages"
+      }
+    ],
+
+    "javascript_long_tasks": [
+      {
+        "task": "PDF.js initialization",
+        "duration_ms": 680,
+        "url": "*-viewer.html"
+      },
+      {
+        "task": "Font Awesome icon rendering",
+        "duration_ms": 120,
+        "url": "all_pages"
+      },
+      {
+        "task": "Breadcrumb generation",
+        "duration_ms": 45,
+        "url": "all_pages"
+      }
+    ],
+
+    "unused_code": {
+      "font_awesome": {
+        "total_size_kb": 950,
+        "used_percent": 3,
+        "waste_kb": 920
+      },
+      "css_unused_estimate_percent": 35
+    }
+  },
+
+  "recommendations_summary": {
+    "week_1_p0": {
+      "tasks": 4,
+      "estimated_hours": 10,
+      "impact": {
+        "lcp_reduction_ms": 1800,
+        "tbt_reduction_ms": 1200,
+        "transfer_reduction_mb": 1.1
+      }
+    },
+    "week_2_p1": {
+      "tasks": 5,
+      "estimated_hours": 16,
+      "impact": {
+        "fcp_reduction_ms": 800,
+        "lcp_additional_reduction_ms": 400
+      }
+    },
+    "weeks_3_4_p2": {
+      "tasks": 3,
+      "estimated_hours": 9,
+      "impact": {
+        "offline_support": true,
+        "accessibility_score_increase": 15
+      }
+    }
+  },
+
+  "final_targets": {
+    "mobile": {
+      "lcp_ms": 1600,
+      "fcp_ms": 1000,
+      "tbt_ms": 280,
+      "cls": 0.02,
+      "inp_ms": 150,
+      "lighthouse_score": 94
+    },
+    "desktop": {
+      "lcp_ms": 900,
+      "fcp_ms": 600,
+      "tbt_ms": 120,
+      "cls": 0.01,
+      "inp_ms": 80,
+      "lighthouse_score": 98
+    }
+  }
+}
