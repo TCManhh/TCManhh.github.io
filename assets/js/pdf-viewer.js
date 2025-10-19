@@ -1,4 +1,4 @@
-// /assets/js/pdf-viewer.js (Phiên bản với hiệu ứng Cross-Fade mượt mà)
+// /assets/js/pdf-viewer.js (Phiên bản Class tối ưu)
 
 class PDFViewer {
   constructor(elementId) {
@@ -10,7 +10,6 @@ class PDFViewer {
     this.isSinglePageView = true;
     this.activeRenderTasks = { left: null, right: null };
     this.pageNum = this.getPageNumFromUrl();
-    this.isTransitioning = false;
 
     this.initDOM();
     if (this.url) {
@@ -22,6 +21,8 @@ class PDFViewer {
 
   initDOM() {
     this.loadingOverlay = document.getElementById("loading-overlay");
+    this.loadingProgress = document.getElementById("loading-progress");
+    // ✅ THÊM DÒNG NÀY
     this.canvasContainer = document.getElementById("canvas-container");
     this.pdfCanvasLeft = document.getElementById("pdf-canvas-left");
     this.pdfCanvasRight = document.getElementById("pdf-canvas-right");
@@ -51,8 +52,12 @@ class PDFViewer {
     this.viewToggleBtn.addEventListener("click", () => this.onToggleView());
     window.addEventListener(
       "resize",
-      this.debounce(() => this.renderCurrentPageContent(), 250)
+      this.debounce(() => this.renderCurrentView(), 250)
     );
+
+    this.viewerElement.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+    });
   }
 
   getPageNumFromUrl() {
@@ -64,89 +69,49 @@ class PDFViewer {
     return 1;
   }
 
-  // ✅ HÀM MỚI CỐT LÕI: Vẽ trước trang vào một canvas ẩn
-  async preparePage(pageNumber, isLeft) {
-    if (!this.pdfDoc || pageNumber < 1 || pageNumber > this.pdfDoc.numPages) {
-      return null; // Trả về null nếu trang không hợp lệ
-    }
-    const page = await this.pdfDoc.getPage(pageNumber);
-    const scale = this.isSinglePageView
-      ? this.viewerElement.clientWidth / page.getViewport({ scale: 1 }).width
-      : this.viewerElement.clientWidth /
-        2 /
-        page.getViewport({ scale: 1 }).width;
-
-    const viewport = page.getViewport({ scale });
-    const offscreenCanvas = document.createElement("canvas");
-    const offscreenCtx = offscreenCanvas.getContext("2d");
-    offscreenCanvas.width = viewport.width;
-    offscreenCanvas.height = viewport.height;
-
-    const renderContext = { canvasContext: offscreenCtx, viewport };
-    await page.render(renderContext).promise;
-    return offscreenCanvas; // Trả về canvas đã được vẽ
-  }
-
-  // ✅ HÀM MỚI: Cập nhật giao diện và URL
-  updateUI(newPageNum) {
-    this.pageNum = newPageNum;
-    this.pageNumSpan.textContent = this.isSinglePageView
-      ? this.pageNum
-      : `${this.pageNum}-${this.pageNum + 1}`;
+  updateUrlHash() {
     window.history.replaceState(null, "", `#page=${this.pageNum}`);
   }
 
-  // ✅ HÀM MỚI: Logic chuyển trang mượt mà
-  async transitionToPage(newPageNum) {
-    if (this.isTransitioning || !this.pdfDoc) return;
-    this.isTransitioning = true;
+  // ✅ HÀM NÀY ĐÃ ĐƯỢC CẬP NHẬT HOÀN TOÀN
+  async renderCurrentView() {
+    if (!this.pdfDoc || !this.canvasContainer) return;
 
-    // 1. Vẽ trước các trang cần hiển thị vào canvas ẩn
-    const pagesToPrepare = [];
-    if (this.isSinglePageView) {
-      pagesToPrepare.push(this.preparePage(newPageNum, true));
-    } else {
-      const leftPage = newPageNum % 2 !== 0 ? newPageNum : newPageNum - 1;
-      pagesToPrepare.push(this.preparePage(leftPage, true));
-      pagesToPrepare.push(this.preparePage(leftPage + 1, false));
-    }
-    const preparedCanvases = await Promise.all(pagesToPrepare);
-
-    // 2. Làm mờ trang cũ
+    // 1. Bắt đầu hiệu ứng: Làm mờ container
     this.canvasContainer.classList.add("pdf-page-transitioning");
+
+    // 2. Chờ một chút để hiệu ứng fade-out kịp diễn ra
     await new Promise((resolve) => setTimeout(resolve, 150));
 
-    // 3. Cập nhật UI và "tráo đổi" nội dung canvas
-    this.updateUI(newPageNum);
-    const leftCtx = this.pdfCanvasLeft.getContext("2d");
-    this.pdfCanvasLeft.width = preparedCanvases[0]?.width || 1;
-    this.pdfCanvasLeft.height = preparedCanvases[0]?.height || 1;
-    if (preparedCanvases[0]) leftCtx.drawImage(preparedCanvases[0], 0, 0);
-
-    const rightCtx = this.pdfCanvasRight.getContext("2d");
-    this.pdfCanvasRight.style.display = preparedCanvases[1] ? "block" : "none";
-    if (preparedCanvases[1]) {
-      this.pdfCanvasRight.width = preparedCanvases[1].width;
-      this.pdfCanvasRight.height = preparedCanvases[1].height;
-      rightCtx.drawImage(preparedCanvases[1], 0, 0);
+    // 3. Render trang mới (khi container đang trong suốt)
+    if (this.isSinglePageView) {
+      this.pageNum = Math.min(Math.max(1, this.pageNum), this.pdfDoc.numPages);
+      this.pageNumSpan.textContent = this.pageNum;
+      await this.renderPageDirectly(this.pageNum, this.pdfCanvasLeft, "left");
+      this.renderPageDirectly(0, this.pdfCanvasRight, "right"); // Vẫn gọi để ẩn đi
+    } else {
+      let left = this.pageNum % 2 !== 0 ? this.pageNum : this.pageNum - 1;
+      if (left < 1) left = 1;
+      const right = left + 1;
+      this.pageNumSpan.textContent =
+        right <= this.pdfDoc.numPages ? `${left}-${right}` : `${left}`;
+      // Render song song để tăng tốc
+      await Promise.all([
+        this.renderPageDirectly(left, this.pdfCanvasLeft, "left"),
+        this.renderPageDirectly(right, this.pdfCanvasRight, "right"),
+      ]);
     }
 
-    // 4. Làm hiện trang mới
+    // 4. Cập nhật URL và hiển thị lại container với nội dung mới
+    this.updateUrlHash();
     this.canvasContainer.classList.remove("pdf-page-transitioning");
-    this.isTransitioning = false;
-  }
-
-  // ✅ HÀM ĐƯỢC RÚT GỌN: Chỉ dùng để render lần đầu hoặc khi resize
-  async renderCurrentPageContent() {
-    if (!this.pdfDoc) return;
-    await this.transitionToPage(this.pageNum);
   }
 
   onPrevPage() {
     if (this.pageNum <= 1) return;
     const jump = this.isSinglePageView ? 1 : 2;
-    const newPage = Math.max(1, this.pageNum - jump);
-    this.transitionToPage(newPage);
+    this.pageNum = Math.max(1, this.pageNum - jump);
+    this.renderCurrentView();
   }
 
   onNextPage() {
@@ -154,13 +119,14 @@ class PDFViewer {
     if (this.isSinglePageView && this.pageNum >= this.pdfDoc.numPages) return;
     if (!this.isSinglePageView && this.pageNum + 1 >= this.pdfDoc.numPages)
       return;
+
     const jump = this.isSinglePageView ? 1 : 2;
-    const newPage = Math.min(this.pdfDoc.numPages, this.pageNum + jump);
-    this.transitionToPage(newPage);
+    this.pageNum = Math.min(this.pdfDoc.numPages, this.pageNum + jump);
+    this.renderCurrentView();
   }
 
   onToggleView() {
-    if (!this.pdfDoc || this.isTransitioning) return;
+    if (!this.pdfDoc) return;
     this.isSinglePageView = !this.isSinglePageView;
     this.viewerElement.classList.toggle(
       "single-page-view",
@@ -172,10 +138,8 @@ class PDFViewer {
     this.viewToggleBtn.title = this.isSinglePageView
       ? "Xem hai trang"
       : "Xem một trang";
-    if (!this.isSinglePageView && this.pageNum % 2 === 0) {
-      this.pageNum = Math.max(1, this.pageNum - 1);
-    }
-    this.renderCurrentPageContent();
+    if (!this.isSinglePageView && this.pageNum % 2 === 0) this.pageNum -= 1;
+    this.renderCurrentView();
   }
 
   loadDocument() {
@@ -185,7 +149,9 @@ class PDFViewer {
         this.loadingOverlay.classList.add("hidden");
         this.pdfDoc = doc;
         this.pageCountSpan.textContent = doc.numPages;
+
         if (this.pageNum > doc.numPages) this.pageNum = 1;
+
         this.viewerElement.classList.toggle(
           "single-page-view",
           this.isSinglePageView
@@ -196,13 +162,82 @@ class PDFViewer {
         this.viewToggleBtn.title = this.isSinglePageView
           ? "Xem hai trang"
           : "Xem một trang";
-        this.renderCurrentPageContent();
+        // Render lần đầu không cần hiệu ứng
+        const originalRender = async () => {
+          if (this.isSinglePageView) {
+            this.pageNumSpan.textContent = this.pageNum;
+            await this.renderPageDirectly(
+              this.pageNum,
+              this.pdfCanvasLeft,
+              "left"
+            );
+          } else {
+            let left = this.pageNum % 2 !== 0 ? this.pageNum : this.pageNum - 1;
+            if (left < 1) left = 1;
+            const right = left + 1;
+            this.pageNumSpan.textContent =
+              right <= this.pdfDoc.numPages ? `${left}-${right}` : `${left}`;
+            await Promise.all([
+              this.renderPageDirectly(left, this.pdfCanvasLeft, "left"),
+              this.renderPageDirectly(right, this.pdfCanvasRight, "right"),
+            ]);
+          }
+          this.updateUrlHash();
+        };
+        originalRender();
       })
       .catch((err) => {
         console.error("Lỗi nghiêm trọng khi tải PDF:", err);
         this.loadingOverlay.style.display = "none";
         this.viewerElement.innerHTML = `<div class="error-message">Không thể tải được file PDF. Vui lòng thử lại sau.</div>`;
       });
+  }
+
+  async renderToCanvas(page, scale, canvas, taskKey) {
+    if (this.activeRenderTasks[taskKey])
+      this.activeRenderTasks[taskKey].cancel();
+    const viewport = page.getViewport({ scale });
+    const ctx = canvas.getContext("2d", { alpha: false });
+    canvas.width = Math.floor(viewport.width);
+    canvas.height = Math.floor(viewport.height);
+    const renderContext = { canvasContext: ctx, viewport };
+    const renderTask = page.render(renderContext);
+    this.activeRenderTasks[taskKey] = renderTask;
+    try {
+      await renderTask.promise;
+    } catch (err) {
+      if (err.name !== "RenderingCancelledException")
+        console.error(`Lỗi renderToCanvas cho [${taskKey}]:`, err);
+    } finally {
+      this.activeRenderTasks[taskKey] = null;
+    }
+  }
+
+  currentScales() {
+    const containerWidth = Math.max(320, this.viewerElement.clientWidth);
+    const baseScale = this.isSinglePageView
+      ? containerWidth / 900
+      : containerWidth / 2 / 900;
+    return { full: Math.min(baseScale * 3.0, 4.0) };
+  }
+
+  async renderPageDirectly(pageIndex, canvas, taskKey) {
+    if (!this.pdfDoc || pageIndex < 1 || pageIndex > this.pdfDoc.numPages) {
+      if (this.activeRenderTasks[taskKey])
+        this.activeRenderTasks[taskKey].cancel();
+      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height); // Xóa canvas
+      canvas.style.visibility = "hidden";
+      return;
+    }
+    const page = await this.pdfDoc.getPage(pageIndex);
+    const scales = this.currentScales();
+    const tempCanvas = document.createElement("canvas");
+    await this.renderToCanvas(page, scales.full, tempCanvas, `${taskKey}-temp`);
+    const mainCtx = canvas.getContext("2d");
+    canvas.width = tempCanvas.width;
+    canvas.height = tempCanvas.height;
+    mainCtx.drawImage(tempCanvas, 0, 0);
+    canvas.style.visibility = "visible";
   }
 }
 

@@ -1677,6 +1677,18 @@ main {
   padding: 6px 12px;
 }
 
+.protection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* z-index phải cao hơn canvas nhưng thấp hơn các nút điều khiển */
+  z-index: 5;
+  background-color: transparent; /* Hoàn toàn trong suốt */
+  cursor: default; /* Giữ con trỏ chuột mặc định */
+}
+
 /* ===================================================================
    10. LOADING OVERLAY
    =================================================================== */
