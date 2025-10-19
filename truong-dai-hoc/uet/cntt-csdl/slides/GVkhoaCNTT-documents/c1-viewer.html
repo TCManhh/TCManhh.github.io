@@ -4,77 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slide: C1 Mở đầu - Cơ sở dữ liệu - StuShare</title>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link
+      rel="preconnect"
+      href="https://stushare-worker.kysirong2008.workers.dev"
+    />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+    <link rel="stylesheet" href="/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script>
       pdfjsLib.GlobalWorkerOptions.workerSrc =
         "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
     </script>
-    <link rel="stylesheet" href="/style.css" />
-    <style>
-      #download,
-      #print {
-        display: none !important;
-      }
-      #stushare-logo {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        z-index: 1000;
-        display: flex;
-        gap: 6px;
-        font-weight: 600;
-        background: rgba(255, 255, 255, 0.7);
-        padding: 6px 10px;
-        border-radius: 10px;
-        backdrop-filter: blur(5px);
-      }
-      #stushare-logo img {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
-      }
-      #doc-title-overlay {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        background: rgba(255, 255, 255, 0.75);
-        padding: 6px 12px;
-        border-radius: 10px;
-        font-size: 15px;
-        font-weight: 500;
-        backdrop-filter: blur(5px);
-        z-index: 1000;
-      }
-    </style>
   </head>
   <body class="has-fixed-breadcrumb">
-    <div id="stushare-logo">
-      <img src="/assets/images/logo_vuong.webp" alt="StuShare Logo" />
-      <span>StuShare</span>
-    </div>
-    <div id="doc-title-overlay">C1 - Mở đầu Cơ sở dữ liệu</div>
     <div id="header-placeholder"></div>
     <div id="breadcrumb-placeholder"></div>
+
     <main>
       <section class="document-viewer-section">
         <div
           id="pdf-viewer"
-          data-pdf-url="https://stushare-worker.kysirong2008.workers.dev/?id=14j6CJgP9HFdlT9hrTsUnnGfiRlSYThCk"
+          data-pdf-url="https://stushare-worker.kysirong2008.workers.dev/?alias=uet-vnu-csdl-c1"
         >
           <div id="loading-overlay">
             <div class="loading-spinner"></div>
-            <p id="loading-text">Đang tải tài liệu...</p>
+            <p id="loading-text">
+              Đang tải tài liệu... <span id="loading-progress"></span>
+            </p>
           </div>
           <div id="canvas-container">
             <canvas id="pdf-canvas-left"></canvas>
             <canvas id="pdf-canvas-right"></canvas>
           </div>
           <div id="pdf-controls">
-            <button id="prev-page" class="btn btn-secondary">
+            <button
+              id="prev-page"
+              class="btn btn-secondary"
+              title="Trang trước"
+            >
               <i class="fas fa-arrow-left"></i>
             </button>
             <button
@@ -87,7 +60,7 @@
             <span id="page-indicator"
               >Trang <span id="page-num"></span> / <span id="page-count"></span
             ></span>
-            <button id="next-page" class="btn btn-secondary">
+            <button id="next-page" class="btn btn-secondary" title="Trang sau">
               <i class="fas fa-arrow-right"></i>
             </button>
           </div>
@@ -95,20 +68,12 @@
       </section>
       <div class="container">
         <div id="author-respect-placeholder"></div>
-        <div id="comments-placeholder"></div>
       </div>
     </main>
+
     <div id="footer-placeholder"></div>
+
     <script src="/assets/js/layout.js"></script>
     <script src="/assets/js/pdf-viewer.js" defer></script>
-    <script>
-      const viewerArea = document.getElementById("pdf-viewer");
-      if (viewerArea)
-        viewerArea.addEventListener("contextmenu", (e) => e.preventDefault());
-      const titleOverlay = document.getElementById("doc-title-overlay");
-      titleOverlay.textContent = (
-        document.title || "Tài liệu StuShare"
-      ).replace(" - StuShare", "");
-    </script>
   </body>
 </html>
